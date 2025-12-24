@@ -70,3 +70,19 @@ index.html          - Main HTML structure
 - Improve RYM scraping reliability
 - Add rate limiting and respectful scraping delays
 - Automatic background sync when track changes on Apple Music
+
+## Recent Updates
+- **Database-First Sync**: All sync operations now check local SQLite first, then Supabase, then fall back to search
+- **Immediate UI Updates**: Cached RYM data is immediately broadcast to Apple Music UI when found in database
+- **Rate Limiting**: 2-second minimum delay between RYM page loads to prevent automation detection
+  - All RYM navigation now goes through `navigate_to_rym_with_rate_limit()` helper
+  - Tracks last navigation timestamp to enforce delays
+- **Lazy RYM Loading**: RYM window starts with `about:blank` and only loads RYM homepage when user first switches to RYM tab
+- **Comprehensive Logging**: All database operations, cache hits/misses, and sync steps are logged with prefixes:
+  - `RYM-SYNC:` - Sync to RYM operations
+  - `RYM-GET-RATING:` - Rating retrieval operations
+  - `RYM-SAVE-RATING:` - Rating save operations
+  - `RYM-DATABASE:` - Database operations
+  - `RYM-SUPABASE:` - Supabase operations
+  - `RYM-RATE-LIMIT:` - Rate limiting actions
+  - `RYM-INIT:` - Window initialization

@@ -1,0 +1,393 @@
+<!-- Source URL: https://rateyourmusic.com/submit_media_link?object=release&assoc_id=1134702 -->
+<body id="page_body" class="">
+
+            <script>
+               window.themes = ['light', 'eve', 'night', 'lightgray', 'darkgray', 'pink', 'classic'];
+               window.themes_label = ['Light', 'Evening', 'Night', 'Light gray', 'Dark gray', 'Pink', 'Classic'];
+            </script><div id="tauri-toast"></div><div id="tauri-tabs"><button class="tauri-tab-btn">Music</button><button class="tauri-tab-btn active">RYM</button></div>
+          
+      <script>
+         if ( window.localStorage['size_mode'] ) {
+            document.body.parentElement.className += ' size_mode_' + window.localStorage['size_mode'];
+         }
+
+         if ( !window.localStorage['theme'] && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ) {
+            document.body.parentElement.className += ' theme_eve';
+         } else if ( !window.localStorage['theme'] || window.localStorage['theme'] === 'day') {
+            document.body.parentElement.className += ' theme_light';
+         } else {
+            if ( -1 != window.themes.indexOf(window.localStorage['theme']) ) {
+               document.body.parentElement.className += ' theme_' + window.localStorage['theme'];
+            } else {
+               document.body.parentElement.className += ' theme_light';
+            }
+         }
+
+         if ( window.matchMedia ) {
+
+             var listener = window.matchMedia('(prefers-color-scheme: dark)').addEventListener;
+
+             if ( listener ) {
+                listener('change', e => {
+                  updateTheme();
+                });               
+             }
+         }
+      </script>
+      <div id="top" class="breadcrumb_section_marker anchor"></div><script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                window.dom_loaded = true;
+      
+             console.log('DOM loaded');
+             if ( typeof (_adjustFillerColumns) !== 'undefined' ) {
+                _adjustFillerColumns() 
+             }
+
+             setTimeout(function () { 
+               if ( typeof (_closeAllStickyAds) !== 'undefined' ) {
+                  _closeAllStickyAds() 
+               }
+
+             }, 5000);
+         
+  
+         });
+      
+            rymQ(function() { updateStyleThemeLabels() });
+         </script>
+      
+<header id="page_header" data-tauri-drag="" style="cursor: default; display: flex; height: 54px;">
+<div class="header_inner logged_in" data-tauri-drag="" style="cursor: default;">
+
+
+
+   <div onclick="RYMheader.onClickBars()" id="header_icon_link_bars" class="header_icon_link" data-tauri-drag="" style="cursor: default;">
+      <i class="fa fa-bars"></i>
+      <span class="show-for-small">
+      </span>
+   <div id="header_extended_section" class="header_extended_section header_extended_more_menu" data-tauri-drag="" style="cursor: default;">
+            <a href="/~mattmurphy" class="header_item" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+               Profile
+            </a>
+
+            <a href="/collection/mattmurphy/" class="header_item" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+              Music Collection
+            </a>
+
+            <a href="/recommendations/mattmurphy/music/" class="header_item" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+             Recommendations
+                   <div class="badge_count_bubble messages">
+                      <span class="profile_num_messages" style="">New</span>
+                   </div>
+            </a>
+
+            <a href="/film_collection/mattmurphy/" class="header_item" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+              Film Collection
+            </a>
+            <a href="/list/mattmurphy/" class="header_item" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+              Lists
+            </a>
+            <br>
+            <a href="/messages/inbox" class="header_item" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+              Messaging
+            </a>
+            <a href="/account/mentions" class="header_item" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+              Mentions
+            </a>
+
+            <a href="/account/preferences" class="header_item" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+               Settings
+            </a>
+
+            <a href="/submissions/" class="header_item" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+               Submissions
+            </a>
+
+            <div class="header_items_spillover" data-tauri-drag="" style="cursor: default;">
+
+
+
+
+
+            </div>
+
+
+           <div class="header_theme_buttons" data-tauri-drag="" style="cursor: default;">
+    
+                 <div onclick="switchSizeMode(event);return false;" class="header_theme_button" data-tauri-drag="" style="cursor: default;">
+                    <div class="header_theme_button_label" data-tauri-drag="" style="cursor: default;">Text</div>
+                    <div class="header_theme_button_mode" id="page_frame_size_mode_switch" data-tauri-drag="" style="cursor: default;">Aa</div>
+                 </div>
+
+                 <div onclick="switchTheme(event);return false;" class="header_theme_button" data-tauri-drag="" style="cursor: default;">
+                    <div class="header_theme_button_label" data-tauri-drag="" style="cursor: default;">Theme</div>
+                    <div class="header_theme_button_mode" id="page_frame_theme_switch" data-tauri-drag="" style="cursor: default;">Light</div>
+                 </div>
+
+                 <div class="clearfix"></div>
+
+           </div>
+
+
+            
+           <span onclick="if ( confirm('Are you sure you want to log out?') ) { window.location = '/account/logout'; }" class="header_item" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+              Log out
+           </span>
+
+        </div>
+     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="header_profile" data-tauri-drag="" style="cursor: default;">
+       <div class="header_profile_logged_in" data-tauri-drag="" style="cursor: default;">
+           <a href="/~mattmurphy" title="Your profile page" class="header_profile_main" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+              <span id="header_user_img" class="header_user_img" style="background-image: url(&quot;//e.snmc.io/i/75/s/d4a84f700e16e0d752ef8835cf87c96c/12062443&quot;); cursor: default;" data-tauri-drag=""></span>
+              <span id="header_profile_username" class="header_profile_link user header_item" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">mattmurphy</span>
+           </a>
+       </div>
+
+</div>
+
+
+<div class="header_logo" data-tauri-drag="" style="cursor: default;">
+  <a class="main header_item sonemic" href="/" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+     <div class="logo_header" data-tauri-drag="" style="cursor: default;"></div>
+     <span class="logo_name">RYM</span>
+  </a>
+
+</div>
+
+
+
+<div class="header_links" data-tauri-drag="" style="cursor: default;">
+  <div class="header_links_inner" data-tauri-drag="" style="cursor: default;">
+      <div class="divider"></div>
+      <a class="header_item" href="/new-music/" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">new music</a>
+      <a class="header_item" href="/genres/" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">genres</a>
+      <div class="header_charts" data-tauri-drag="" style="cursor: default;">
+      <a class="header_charts header_item" href="/charts/" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">charts</a>
+      </div>
+      <a class="header_item" href="/lists/" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">lists</a>
+         <a class="header_item" href="https://rym.fm/" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">forums</a>
+
+
+
+
+
+         <a class="header_item has_tip" data-tiptip="Thank you for being a subscriber!" href="/subscribe/" style="cursor: default;" data-tauri-drag="" data-tauri-no-drag="">
+            <span class="subscribe_label_fundraiser" style="font-size:0.8em;font-weight:bold;"><i class="fa fa-check-circle"></i></span>
+            
+         </a>         
+
+      
+
+      <div class="divider"></div>
+    </div>
+  </div>
+  <div class="header_search" data-tauri-drag="" style="cursor: default;">
+  <div id="ui_search_frame_outer_main_search" class="ui_search_frame_outer"> <div id="ui_search_frame_main_search" class="ui_search_frame"> <div onclick="rymQ(function() {RYMsearch.onClickClose(event, 'main_search');})" class="ui_search_close"> <div class="ui_search_close_bar"> <i class="fa fa-times"></i> Close</div> <div id="ui_search_context_indicator_main_search" class="ui_search_context_indicator"> <div id="ui_search_context_indicator_inner_main_search" class="ui_search_context_indicator_inner"></div> </div> </div> <div class="ui_search_clear"></div> <div class="ui_search_frame_inner"> <div id="ui_search_main_search" class="ui_search" data-default-scope="music" data-callback="" data-callback-id="" data-tauri-no-drag=""> <i style="cursor:pointer" onclick="RYMsearch.redirSearch(event, 'main_search');" id="ui_search_icon_main_search" class="fa fa-search ui_search_icon"></i> <i id="ui_clear_icon_main_search" onclick="rymQ(function() {RYMsearch.onClickClearSearch(event, 'main_search');})" class="fa fa-times-circle ui_clear_icon"></i>
+
+
+   <form onsubmit="event.preventDefault(); RYMsearch.redirSearch(event, 'main_search');">
+   <input autocomplete="off" aria-label="Search" value="" id="ui_search_input_main_search" placeholder="Search..." class="ui_search_input" onfocus="rymQ(function() {RYMsearch.onFocus(event, 'main_search')})" onblur="rymQ(function() {RYMsearch.onBlur(event, 'main_search')})" onkeydown="rymQ(function() {RYMsearch.onKeyDown(event, 'main_search')})" oninput="rymQ(function() {RYMsearch.onInput(event, 'main_search')})" data-tauri-no-drag="">
+   </form> </div> <div class="ui_search_rest"> <div class="ui_search_type"> <div id="ui_search_debug_main_search" class="ui_search_debug"></div> <span class="ui_search_object_label">Search:</span> <span id="ui_search_scope_selector_main_search" class="ui_search_object_selector"> <input type="hidden" name="ui_search_scope_main_search" id="ui_search_scope_main_search" value="music" data-tauri-no-drag=""> <span id="ui_search_scope_selector_music_main_search" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'music');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_music selected"> Music
+  </span> <span id="ui_search_scope_selector_film_main_search" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'film');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_film"> Film
+  </span> <span id="ui_search_scope_selector_games_main_search" style="display:none" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'games');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_games"> Games
+  </span> </span> <span class="ui_search_object_label">for:</span> <span id="ui_search_object_select_frame_main_search" class="ui_search_object_select_frame selected"> <select onchange="rymQ(function() {RYMsearch.onChangeObject(event, 'main_search')})" id="ui_search_object_select_main_search" class="ui_search_object_select"> </select> </span>  </div> <div id="ui_search_info_frame_main_search" class="ui_search_info_frame"> </div> <div id="ui_search_results_frame_main_search" class="ui_search_results_frame"> <div id="ui_search_results_main_search" class="ui_search_results"> </div> </div> </div> </div> </div>
+  </div>
+
+</div>   
+
+
+
+
+</div>
+
+</header>
+
+
+<div class="header_error" onclick="$(this).fadeOut();" id="header_error" data-tauri-drag="" style="cursor: default;">
+   <div class="header_error_close" data-tauri-drag="" style="cursor: default;"><i class="fa fa-times-circle"></i></div>
+   <div id="header_error_text" data-tauri-drag="" style="cursor: default;"></div>
+</div>
+
+<div class="header_message" onclick="$(this).fadeOut();" id="header_message" data-tauri-drag="" style="cursor: default;">
+   <div class="header_message_close" data-tauri-drag="" style="cursor: default;"><i class="fa fa-times-circle"></i></div>
+   <div id="header_message_text" data-tauri-drag="" style="cursor: default;"></div>
+</div>
+
+<div id="mobile_header_menu" class="mobile_header_menu has_forum_link" data-tauri-drag="" style="cursor: default;"><a href="/new-music/" class="mobile_header_menu_item mobile_header_menu_item_new_music" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+      <span>New Music</span>
+</a><a href="/genres/" class="mobile_header_menu_item mobile_header_menu_item_genres" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+      <span>Genres</span>
+</a><a href="/charts/" class="mobile_header_menu_item mobile_header_menu_item_charts" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+      <span>Charts</span>
+</a><a href="/lists/" class="mobile_header_menu_item mobile_header_menu_item_lists" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+   <span>Lists</span> 
+</a><a href="https://rym.fm/" class="mobile_header_menu_item mobile_header_menu_item_community" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+   <span>Forums</span>
+</a></div>
+        
+
+            <div id="content_wrapper_outer" class="content_wrapper_outer">
+            <div id="content_wrapper" class="content_wrapper">
+            <div id="content_cover"></div>
+            <div id="content">
+            <div id="precontent" class="precontent"></div>
+
+         
+         <div id="total_cover"></div>
+         <div id="content_total_cover"></div>          
+      
+         <style>
+            #end_of_year_banner {
+
+               background:var(--mono-f);
+               border-radius:5px;
+               max-width:50em;
+               text-align:center;
+               margin:0 auto;
+               padding:0.6em 3em;
+               border-radius:5px;
+               border:2px solid var(--gen-blue-dark);
+               color:var(--mono-0);
+               position:relative;
+               font-size:1.1em;
+            }
+
+         </style>
+      
+
+         <script>
+              try {
+                new Function('import("")');
+              } catch (err) {
+                document.write('<div class=note style="margin-bottom:1em;"><b>Note:</b> Not all scripts could be loaded. You may need to upgrade to a newer browser version in order to use this site.</div>');
+              }
+         </script>
+      
+   <style>
+      ul.trackselector {
+         list-style-type:none;
+         border:1px solid var(--mono-d);
+         background:var(--mono-f);
+         color:var(--mono-5);
+      }
+
+      ul.trackselector li {
+         padding:0.4em;
+         padding-left:1em;
+         padding-right:1em;
+         border-bottom:1px solid var(--mono-d);
+         cursor:pointer;
+      }
+
+
+      ul.trackselector li:hover {
+         background:var(--gen-bg-yellow);
+      }
+
+      ul.trackselector li:last-child {
+         border:none;
+      }
+      #media_link_list input[type="button"] {
+         margin:0.15em;
+         font-size:1em;
+      }
+
+      .selected {
+         background:var(--gen-bg-yellow);
+         font-weight:bold;
+         color:var(--text-primary);
+      }
+
+
+      .tracknum {
+         display:inline-block;
+         width:2em;
+         border-right:1px solid var(--mono-c);
+         margin-right:0.5em;
+      }
+
+      .duration {
+         font-size:0.8em;
+         color:var(--mono-6);
+      }
+
+   </style>
+<h3>Submit media link</h3><div class="note" style="padding: 1em; margin-top: 0.5em;"><span style="font-size: large; color: #00f;"><i class="fa fa-info-circle"></i></span> &nbsp; You can use <a href="/misc/media_link_you_know">this page</a> to check which releases you've rated/cataloged could still benefit from submitting media links.</div><div class="row"><div class="large-4 columns" style="margin-top: 1em; border: 1px solid var(--mono-e); padding: 1em;">The following streaming services are currently supported:
+
+<ul style="margin: 1em; margin-left: 2em;"><li style="margin:0.5em;"><a href="https://www.apple.com/apple-music/" target="_blank">Apple Music</a></li><li style="margin:0.5em;"><a href="https://bandcamp.com" target="_blank">Bandcamp</a></li><li style="margin:0.5em;"><a href="https://www.deezer.com" target="_blank">Deezer</a></li><li style="margin:0.5em;"><a href="https://www.qobuz.com" target="_blank">Qobuz</a></li><li style="margin:0.5em;"><a href="https://soundcloud.com/" target="_blank">SoundCloud</a></li><li style="margin:0.5em;"><a href="https://www.spotify.com" target="_blank">Spotify</a></li><li style="margin:0.5em;"><a href="https://tidal.com" target="_blank">Tidal</a></li><li style="margin:0.5em;"><a href="https://www.youtube.com" target="_blank">YouTube</a></li>
+</ul>
+
+To link this release to a stream available on one of these services, copy/paste the URL or HTML embed code. For Spotify you can also use the "spotify:album:&lt;XXX&gt;" shortcut code.<br><br><br>
+
+<b>Locations</b><br>
+In order to submit a streaming link (or vote on others' links) you must set your geographical/store location for that service first. Your current settings are: <br><br><br>
+<table>
+   <tbody><tr>
+      <th style="background-color: var(--mono-c); padding: 0.5em; text-align: left;">Service</th>
+      <th style="background-color: var(--mono-c); padding: 0.5em; text-align: left;">Your location</th>
+   </tr><tr>
+       <td><b>Apple Music</b></td>
+       <td>Canada</td>
+    </tr><tr>
+       <td><b>Bandcamp</b></td>
+       <td>Canada</td>
+    </tr><tr>
+       <td><b>Deezer</b></td>
+       <td><span style="color: var(--mono-a); font-style: italic;">&lt;not set&gt;</span></td>
+    </tr><tr>
+       <td><b>Qobuz</b></td>
+       <td><span style="color: var(--mono-a); font-style: italic;">&lt;not set&gt;</span></td>
+    </tr><tr>
+       <td><b>SoundCloud</b></td>
+       <td>Canada</td>
+    </tr><tr>
+       <td><b>Spotify</b></td>
+       <td>Canada</td>
+    </tr><tr>
+       <td><b>Tidal</b></td>
+       <td><span style="color: var(--mono-a); font-style: italic;">&lt;not set&gt;</span></td>
+    </tr><tr>
+       <td><b>YouTube</b></td>
+       <td>Canada</td>
+    </tr>
+
+</tbody></table>
+<br>
+You can set or change your streaming service locations in <a href="/account/preferences#streaming_locations">your account preferences</a>.
+<br><br>
+<div style="font-size: large; font-weight: bold; margin-bottom: 0.5em; margin-top: 0.5em;">Rules</div>
+
+<ul style="margin-left: 2em;">
+   <li style="margin:0.5em;">Only submit media which is officially sanctioned by the Artist, Label, and/or copyright holders. Do not submit links to leaks, unofficial uploads or similar. </li>
+</ul></div><div class="large-8 columns" style="margin-top: 1em; padding: 0.5em;"><div style="margin-bottom:1.5em; border-bottom: 1px solid var(--mono-e);"><div style="float:left; margin: 0.5em; margin-top: 0px;"><img id="img_l_1134702" style="width:150px;" src="//e.snmc.io/i/150/s/018fa4f7b19758b6720efc92644f84bd/5688728"></div><div style="font-size: x-large; float:left; margin-left:0.5em;"><a title="[Artist224941]" href="/artist/vampire-weekend" class="artist">Vampire Weekend</a><br><a title="[Album1134702]" href="/release/album/vampire-weekend/vampire-weekend/" class="album">Vampire Weekend</a></div>
+            <script>
+
+               function selectTrack(track) {
+                  
+                  track = track || '';
+
+                  $('#submit_response_msg').fadeOut(150);
+                  $('#form_track').val(track);                  
+                  $('#media_link_list').html('<img src="/images/loading.gif">');
+                  $('.trackselect_btn').removeClass('selected');
+                  rym.request.post('RefreshMediaLinkList', { object: 'release', assoc_id: 1134702, track: track }, null, 'script');
+                  $('#trackselect_btn_' + track).addClass('selected');
+               }
+
+            </script></div></div></div></div></div></div></body>

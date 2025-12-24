@@ -23,8 +23,28 @@ pub struct SupabaseClient {
 
 impl SupabaseClient {
     pub fn from_env() -> Option<Self> {
-        let url = env::var("SUPABASE_URL").ok()?;
-        let key = env::var("SUPABASE_ANON_KEY").ok()?;
+        let url = match env::var("SUPABASE_URL") {
+            Ok(val) => {
+                println!("RYM-SUPABASE: Found SUPABASE_URL");
+                val
+            },
+            Err(_) => {
+                println!("RYM-SUPABASE: ❌ Missing SUPABASE_URL environment variable");
+                return None;
+            }
+        };
+
+        let key = match env::var("SUPABASE_ANON_KEY") {
+            Ok(val) => {
+                println!("RYM-SUPABASE: Found SUPABASE_ANON_KEY");
+                val
+            },
+            Err(_) => {
+                println!("RYM-SUPABASE: ❌ Missing SUPABASE_ANON_KEY environment variable");
+                return None;
+            }
+        };
+
         Some(Self {
             url,
             key,

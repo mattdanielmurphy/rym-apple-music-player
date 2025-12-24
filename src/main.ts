@@ -44,6 +44,16 @@ function displayRating(data: { rym_rating: number; rating_count: number; rym_url
 	if (loadingEl) loadingEl.style.display = "none"
 	if (containerEl) containerEl.style.display = "block"
 
+	if (data.rym_url === "NO_MATCH") {
+		if (scoreEl) scoreEl.textContent = "-"
+		if (countEl) countEl.textContent = "No Match Found"
+		if (linkEl) {
+			linkEl.href = "#"
+			linkEl.textContent = ""
+		}
+		return
+	}
+
 	if (scoreEl) scoreEl.textContent = data.rym_rating.toFixed(2)
 	if (countEl) countEl.textContent = `${data.rating_count.toLocaleString()} ratings`
 	if (linkEl) {
