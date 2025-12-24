@@ -1,0 +1,605 @@
+<!-- Source URL: https://rateyourmusic.com/charts/ -->
+<body id="page_body" class="setting_view_mode_mobile__compact setting_view_mode_desktop__standard">
+	<script>
+		window.themes = ["light", "eve", "night", "lightgray", "darkgray", "pink", "classic"]
+		window.themes_label = ["Light", "Evening", "Night", "Light gray", "Dark gray", "Pink", "Classic"]
+	</script>
+	<div id="tauri-toast"></div>
+	<div id="tauri-tabs"><button class="tauri-tab-btn">Music</button><button class="tauri-tab-btn active">RYM</button></div>
+
+	<script>
+		if (window.localStorage["size_mode"]) {
+			document.body.parentElement.className += " size_mode_" + window.localStorage["size_mode"]
+		}
+
+		if (!window.localStorage["theme"] && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			document.body.parentElement.className += " theme_eve"
+		} else if (!window.localStorage["theme"] || window.localStorage["theme"] === "day") {
+			document.body.parentElement.className += " theme_light"
+		} else {
+			if (-1 != window.themes.indexOf(window.localStorage["theme"])) {
+				document.body.parentElement.className += " theme_" + window.localStorage["theme"]
+			} else {
+				document.body.parentElement.className += " theme_light"
+			}
+		}
+
+		if (window.matchMedia) {
+			var listener = window.matchMedia("(prefers-color-scheme: dark)").addEventListener
+
+			if (listener) {
+				listener("change", (e) => {
+					updateTheme()
+				})
+			}
+		}
+	</script>
+	<div id="top" class="breadcrumb_section_marker anchor"></div>
+	<script>
+		window.addEventListener("DOMContentLoaded", (event) => {
+			window.dom_loaded = true
+
+			console.log("DOM loaded")
+			if (typeof _adjustFillerColumns !== "undefined") {
+				_adjustFillerColumns()
+			}
+
+			setTimeout(function () {
+				if (typeof _closeAllStickyAds !== "undefined") {
+					_closeAllStickyAds()
+				}
+			}, 5000)
+		})
+
+		rymQ(function () {
+			updateStyleThemeLabels()
+		})
+	</script>
+
+	<header id="page_header">
+		<div class="header_inner logged_in">
+			<div onclick="RYMheader.onClickBars()" id="header_icon_link_bars" class="header_icon_link">
+				<i class="fa fa-bars"></i>
+				<span class="show-for-small"> </span>
+				<div id="header_extended_section" class="header_extended_section header_extended_more_menu">
+					<a href="/~mattmurphy" class="header_item"> Profile </a>
+
+					<a href="/collection/mattmurphy/" class="header_item"> Music Collection </a>
+
+					<a href="/recommendations/mattmurphy/music/" class="header_item">
+						Recommendations
+						<div class="badge_count_bubble messages">
+							<span class="profile_num_messages" style="">New</span>
+						</div>
+					</a>
+
+					<a href="/film_collection/mattmurphy/" class="header_item"> Film Collection </a>
+					<a href="/list/mattmurphy/" class="header_item"> Lists </a>
+					<br />
+					<a href="/messages/inbox" class="header_item"> Messaging </a>
+					<a href="/account/mentions" class="header_item"> Mentions </a>
+
+					<a href="/account/preferences" class="header_item"> Settings </a>
+
+					<a href="/submissions/" class="header_item"> Submissions </a>
+
+					<div class="header_items_spillover"></div>
+
+					<div class="header_theme_buttons">
+						<div onclick="switchSizeMode(event);return false;" class="header_theme_button">
+							<div class="header_theme_button_label">Text</div>
+							<div class="header_theme_button_mode" id="page_frame_size_mode_switch">Aa</div>
+						</div>
+
+						<div onclick="switchTheme(event);return false;" class="header_theme_button">
+							<div class="header_theme_button_label">Theme</div>
+							<div class="header_theme_button_mode" id="page_frame_theme_switch">Light</div>
+						</div>
+
+						<div class="clearfix"></div>
+					</div>
+
+					<span onclick="if ( confirm('Are you sure you want to log out?') ) { window.location = '/account/logout'; }" class="header_item"> Log out </span>
+				</div>
+			</div>
+
+			<div class="header_profile">
+				<div class="header_profile_logged_in">
+					<a href="/~mattmurphy" title="Your profile page" class="header_profile_main">
+						<span id="header_user_img" class="header_user_img" style="background-image: url('//e.snmc.io/i/75/s/d4a84f700e16e0d752ef8835cf87c96c/12062443')"></span>
+						<span id="header_profile_username" class="header_profile_link user header_item">mattmurphy</span>
+					</a>
+				</div>
+			</div>
+
+			<div class="header_logo">
+				<a class="main header_item sonemic" href="/">
+					<div class="logo_header"></div>
+					<span class="logo_name">RYM</span>
+				</a>
+			</div>
+
+			<div class="header_links">
+				<div class="header_links_inner">
+					<div class="divider"></div>
+					<a class="header_item" href="/new-music/">new music</a>
+					<a class="header_item" href="/genres/">genres</a>
+					<div class="header_charts">
+						<a class="header_charts header_item" href="/charts/">charts</a>
+					</div>
+					<a class="header_item" href="/lists/">lists</a>
+					<a class="header_item" href="https://rym.fm/">forums</a>
+
+					<a class="header_item has_tip" data-tiptip="Thank you for being a subscriber!" href="/subscribe/" style="xline-height: 1.9">
+						<span class="subscribe_label_fundraiser" style="font-size: 0.8em; font-weight: bold"><i class="fa fa-check-circle"></i></span>
+					</a>
+
+					<div class="divider"></div>
+				</div>
+			</div>
+			<div class="header_search">
+				<div id="ui_search_frame_outer_main_search" class="ui_search_frame_outer">
+					<div id="ui_search_frame_main_search" class="ui_search_frame">
+						<div onclick="rymQ(function() {RYMsearch.onClickClose(event, 'main_search');})" class="ui_search_close">
+							<div class="ui_search_close_bar"><i class="fa fa-times"></i> Close</div>
+							<div id="ui_search_context_indicator_main_search" class="ui_search_context_indicator">
+								<div id="ui_search_context_indicator_inner_main_search" class="ui_search_context_indicator_inner"></div>
+							</div>
+						</div>
+						<div class="ui_search_clear"></div>
+						<div class="ui_search_frame_inner">
+							<div id="ui_search_main_search" class="ui_search" data-default-scope="music" data-callback="" data-callback-id="">
+								<i style="cursor: pointer" onclick="RYMsearch.redirSearch(event, 'main_search');" id="ui_search_icon_main_search" class="fa fa-search ui_search_icon"></i>
+								<i id="ui_clear_icon_main_search" onclick="rymQ(function() {RYMsearch.onClickClearSearch(event, 'main_search');})" class="fa fa-times-circle ui_clear_icon"></i>
+
+								<form onsubmit="event.preventDefault(); RYMsearch.redirSearch(event, 'main_search');">
+									<input
+										autocomplete="off"
+										aria-label="Search"
+										value=""
+										id="ui_search_input_main_search"
+										placeholder="Search..."
+										class="ui_search_input"
+										onfocus="rymQ(function() {RYMsearch.onFocus(event, 'main_search')})"
+										onblur="rymQ(function() {RYMsearch.onBlur(event, 'main_search')})"
+										onkeydown="rymQ(function() {RYMsearch.onKeyDown(event, 'main_search')})"
+										oninput="rymQ(function() {RYMsearch.onInput(event, 'main_search')})"
+									/>
+								</form>
+							</div>
+							<div class="ui_search_rest">
+								<div class="ui_search_type">
+									<div id="ui_search_debug_main_search" class="ui_search_debug"></div>
+									<span class="ui_search_object_label">Search:</span>
+									<span id="ui_search_scope_selector_main_search" class="ui_search_object_selector">
+										<input type="hidden" name="ui_search_scope_main_search" id="ui_search_scope_main_search" value="music" />
+										<span
+											id="ui_search_scope_selector_music_main_search"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'music');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_music selected"
+										>
+											Music
+										</span>
+										<span
+											id="ui_search_scope_selector_film_main_search"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'film');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_film"
+										>
+											Film
+										</span>
+										<span
+											id="ui_search_scope_selector_games_main_search"
+											style="display: none"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'games');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_games"
+										>
+											Games
+										</span>
+									</span>
+									<span class="ui_search_object_label">for:</span>
+									<span id="ui_search_object_select_frame_main_search" class="ui_search_object_select_frame selected">
+										<select onchange="rymQ(function() {RYMsearch.onChangeObject(event, 'main_search')})" id="ui_search_object_select_main_search" class="ui_search_object_select"></select>
+									</span>
+								</div>
+								<div id="ui_search_info_frame_main_search" class="ui_search_info_frame"></div>
+								<div id="ui_search_results_frame_main_search" class="ui_search_results_frame"><div id="ui_search_results_main_search" class="ui_search_results"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="header_error" onclick="$(this).fadeOut();" id="header_error">
+		<div class="header_error_close"><i class="fa fa-times-circle"></i></div>
+		<div id="header_error_text"></div>
+	</div>
+
+	<div class="header_message" onclick="$(this).fadeOut();" id="header_message">
+		<div class="header_message_close"><i class="fa fa-times-circle"></i></div>
+		<div id="header_message_text"></div>
+	</div>
+
+	<div id="mobile_header_menu" class="mobile_header_menu has_forum_link">
+		<a href="/new-music/" class="mobile_header_menu_item mobile_header_menu_item_new_music">
+			<span>New Music</span> </a
+		><a href="/genres/" class="mobile_header_menu_item mobile_header_menu_item_genres">
+			<span>Genres</span> </a
+		><a href="/charts/" class="mobile_header_menu_item mobile_header_menu_item_charts">
+			<span>Charts</span> </a
+		><a href="/lists/" class="mobile_header_menu_item mobile_header_menu_item_lists">
+			<span>Lists</span> </a
+		><a href="https://rym.fm/" class="mobile_header_menu_item mobile_header_menu_item_community">
+			<span>Forums</span>
+		</a>
+	</div>
+
+	<div id="ui_section_nav" class="ui_section_nav">
+		<div id="ui_section_nav_page_charts_section_charts" class="ui_section_nav_section active" onclick="ui.section_nav.goToSection('page_charts_section_charts');">
+			<div class="ui_section_nav_title">Current chart</div>
+		</div>
+		<div id="ui_section_nav_page_charts_section_settings" class="ui_section_nav_section" onclick="ui.section_nav.goToSection('page_charts_section_settings');">
+			<div class="ui_section_nav_title">Add filters</div>
+		</div>
+		<div id="ui_section_nav_page_charts_section_saved_charts" class="ui_section_nav_section" onclick="ui.section_nav.goToSection('page_charts_section_saved_charts');">
+			<div class="ui_section_nav_title">Saved charts</div>
+		</div>
+		<div id="ui_section_nav_page_charts_section_mini_charts_soundtrack" class="ui_section_nav_section" onclick="ui.section_nav.goToSection('page_charts_section_mini_charts_soundtrack');">
+			<div class="ui_section_nav_title">Soundtracks</div>
+		</div>
+		<div id="ui_section_nav_page_charts_section_mini_charts_live" class="ui_section_nav_section" onclick="ui.section_nav.goToSection('page_charts_section_mini_charts_live');">
+			<div class="ui_section_nav_title">Live</div>
+		</div>
+		<div id="ui_section_nav_page_charts_section_mini_charts_archival" class="ui_section_nav_section" onclick="ui.section_nav.goToSection('page_charts_section_mini_charts_archival');">
+			<div class="ui_section_nav_title">Archival</div>
+		</div>
+	</div>
+
+	<div id="content_wrapper_outer" class="content_wrapper_outer">
+		<div id="content_wrapper" class="content_wrapper">
+			<div id="content_cover"></div>
+			<div id="content">
+				<div id="precontent" class="precontent"></div>
+
+				<div id="total_cover"></div>
+				<div id="content_total_cover"></div>
+
+				<style>
+					#end_of_year_banner {
+						background: var(--mono-f);
+						border-radius: 5px;
+						max-width: 50em;
+						text-align: center;
+						margin: 0 auto;
+						padding: 0.6em 3em;
+						border-radius: 5px;
+						border: 2px solid var(--gen-blue-dark);
+						color: var(--mono-0);
+						position: relative;
+						font-size: 1.1em;
+					}
+				</style>
+
+				<script>
+					try {
+						new Function('import("")')
+					} catch (err) {
+						document.write(
+							'<div class=note style="margin-bottom:1em;"><b>Note:</b> Not all scripts could be loaded. You may need to upgrade to a newer browser version in order to use this site.</div>'
+						)
+					}
+				</script>
+				<sections id="page_sections_charts"
+					><section id="page_charts_section_scope_share" class="page_section page_charts_section">
+						<div class="page_charts_section_scope_share_inner">
+							<div class="page_charts_section_scope">
+								<a class="page_charts_section_scope_item selected"> Albums </a>
+
+								<a href="/charts/top/song/all-time/" class="page_charts_section_scope_item"> Songs </a>
+
+								<a href="/charts/top/film/all-time/" class="page_charts_section_scope_item"> Films </a>
+
+								<a href="https://glitchwave.com/charts/" class="page_charts_section_scope_item"> Games </a>
+							</div>
+
+							<div class="page_section_share">
+								<div class="page_section_share_box_frame">
+									<a onclick="page.section.share.onClickShare(event)" class="btn shortcut_link_btn"><i class="fa fa-share"></i> <span class="shortcut_link_btn_label">Share</span></a>
+
+									<div id="page_section_share_box" class="page_section_share_box">
+										<a aria-label="Share on Facebook" href="https://www.facebook.com/sharer.php?u=https://rateyourmusic.com/charts/top/album/2025/" target="_blank" rel="nofollow noopener">
+											<div class="page_section_share_method">
+												<i class="fab fa-facebook"></i>
+												<div>Share on Facebook</div>
+											</div>
+										</a>
+
+										<a
+											aria-label="Share on Twitter"
+											href="https://twitter.com/share?url=https://rateyourmusic.com/charts/top/album/2025/&amp;text=Top albums of 2025&amp;hashtags=sonemic"
+											target="_blank"
+											rel="nofollow noopener"
+										>
+											<div class="page_section_share_method">
+												<i class="fab fa-twitter"></i>
+												<div>Share on Twitter</div>
+											</div>
+										</a>
+
+										<a
+											aria-label="Share on Whatsapp"
+											class="show-for-small"
+											href="https://api.whatsapp.com/send?text=Top albums of 2025 https://rateyourmusic.com/charts/top/album/2025/"
+											target="_blank"
+											rel="nofollow noopener"
+										>
+											<div class="page_section_share_method">
+												<i class="fab fa-whatsapp-square"></i>
+												<div>Send on Whatsapp</div>
+											</div>
+										</a>
+
+										<a
+											aria-label="Share on Reddit"
+											href="https://reddit.com/submit?url=https://rateyourmusic.com/charts/top/album/2025/&amp;title=Top albums of 2025"
+											target="_blank"
+											rel="nofollow noopener"
+										>
+											<div class="page_section_share_method">
+												<i class="fab fa-reddit"></i>
+												<div>Post on Reddit</div>
+											</div>
+										</a>
+
+										<a
+											class="show-for-small"
+											onclick="      
+
+                     if (navigator.share) {
+                       navigator.share({
+                         title: 'Top albums of 2025',
+                         text: 'Top albums of 2025',
+                         url: 'https://rateyourmusic.com/charts/top/album/2025/',
+                       })
+                         .then(() => console.log('Successful share'))
+                         .catch((error) => console.log('Error sharing', error));
+                     }
+
+                  "
+										>
+											<div class="page_section_share_method">
+												<i class="fa fa-ellipsis-h"></i>
+												<div>More</div>
+											</div>
+										</a>
+
+										<div aria-label="Copy URL of page" class="page_section_share_method_labeled divider">
+											<div class="page_section_share_method">
+												<i class="fa fa-link"></i>
+												<div>
+													<input readonly="readonly" aria-label="URL" onclick="page.section.share.onClickCopyUrl(this)" value="https://rateyourmusic.com/charts/top/album/2025/" />
+													<div class="page_section_share_method_label">Link to this page outside of RYM</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="page_section_share_copied">Copied!</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<group id="page_charts_group_main_left"
+						><section id="page_charts_section_header" class="page_section page_charts_section">
+							<div class="page_charts_section_charts_header_main">
+								<div class="page_charts_section_charts_header_chart_name_criteria">
+									<h1 id="page_charts_section_charts_header_chart_name">Top albums of 2025</h1>
+								</div>
+
+								<div id="page_charts_section_charts_save_actions" class="page_charts_section_charts_save_actions">
+									<a
+										aria-label="Set as default chart."
+										onclick="page.charts.toggleHome('release')"
+										data-tiptip="
+      Set as default chart."
+										id="page_charts_section_charts_actions_set_home"
+										class="page_charts_section_charts_save_action has_tip"
+									>
+										<i class="disabled fal fa-home-alt"></i>
+										<i class="enabled fa fa-home-alt"></i>
+									</a>
+
+									<a
+										aria-label="Save chart"
+										onclick="page.charts.toggleChartSave('release', '')"
+										data-tiptip="Save chart"
+										id="page_charts_section_charts_actions_save"
+										data-saved-chart-id=""
+										class="page_charts_section_charts_save_action has_tip"
+									>
+										<i class="disabled fal fa-bookmark"></i>
+										<i class="enabled fa fa-bookmark"></i>
+									</a>
+								</div>
+							</div>
+
+							<div class="page_charts_common_charts">
+								<a class="ui_button btn_page_charts_common_charts" href="/charts/top/album/all-time/">All time</a>
+
+								<a class="ui_button btn_page_charts_common_charts" href="/charts/top/album/2025/">2025</a>
+
+								<a class="ui_button btn_page_charts_common_charts" href="/charts/top/album/2024/">2024</a>
+
+								<a class="ui_button btn_page_charts_common_charts" href="/charts/top/album/2023/">2023</a>
+
+								<a class="ui_button btn_page_charts_common_charts" href="/charts/top/album/2022/">2022</a>
+
+								<a class="ui_button btn_page_charts_common_charts" href="/charts/top/album/2020s/">2020s</a>
+
+								<a class="ui_button btn_page_charts_common_charts" href="/charts/top/album/2010s/">2010s</a>
+
+								<a class="ui_button btn_page_charts_common_charts" href="/charts/top/album/2000s/">2000s</a>
+
+								<a class="ui_button btn_page_charts_common_charts" href="/charts/top/album/1990s/">1990s</a>
+
+								<a class="ui_button btn_page_charts_common_charts" href="/charts/top/album/1980s/">1980s</a>
+
+								<a class="ui_button btn_page_charts_common_charts" href="/charts/top/album/1970s/">1970s</a>
+
+								<a class="ui_button btn_page_charts_common_charts" href="/charts/top/album/1960s/">1960s</a>
+
+								<a class="ui_button btn_page_charts_common_charts" href="/charts/top/album/1950s/">1950s</a>
+							</div>
+
+							<div class="page_charts_section_charts_nav_view">
+								<div class="page_charts_section_charts_nav_view_mode">
+									<div class="page_charts_section_charts_nav_view_mode_desktop">
+										<a aria-label="Switch to compact view" onclick="page.charts.setView('release', 'desktop', 'compact');" class="page_charts_view_mode view_mode_desktop_compact">
+											<img class="inactive icon-display-compact-inactive" />
+											<img class="active icon-display-compact-active" />
+										</a>
+
+										<a aria-label="Switch to standard view" onclick="page.charts.setView('release', 'desktop', 'standard');" class="page_charts_view_mode view_mode_desktop_standard">
+											<img class="inactive icon-display-standard-inactive" />
+											<img class="active icon-display-standard-active" />
+										</a>
+
+										<a aria-label="Switch to gallery view" onclick="page.charts.setView('release', 'desktop', 'gallery');" class="page_charts_view_mode view_mode_desktop_gallery">
+											<img class="inactive icon-display-gallery-inactive" />
+											<img class="active icon-display-gallery-active" />
+										</a>
+									</div>
+
+									<div class="page_charts_section_charts_nav_view_mode_mobile">
+										<a aria-label="Switch to compact view" onclick="page.charts.setView('release', 'mobile', 'compact');" class="page_charts_view_mode view_mode_mobile_compact">
+											<img class="inactive icon-display-compact-inactive" />
+											<img class="active icon-display-compact-active" />
+										</a>
+
+										<a aria-label="Switch to standard view" onclick="page.charts.setView('release', 'mobile', 'standard');" class="page_charts_view_mode view_mode_mobile_standard">
+											<img class="inactive icon-display-standard-inactive" />
+											<img class="active icon-display-standard-active" />
+										</a>
+
+										<a aria-label="Switch to card view" onclick="page.charts.setView('release', 'mobile', 'card');" class="page_charts_view_mode view_mode_mobile_card">
+											<img class="inactive icon-display-card-inactive" />
+											<img class="active icon-display-card-active" />
+										</a>
+
+										<a aria-label="Switch to gallery view" onclick="page.charts.setView('release', 'mobile', 'gallery');" class="page_charts_view_mode view_mode_mobile_gallery">
+											<img class="inactive icon-display-gallery-inactive" />
+											<img class="active icon-display-gallery-active" />
+										</a>
+									</div>
+								</div>
+
+								<div class="page_charts_section_charts_legend_date">
+									<div class="page_charts_section_charts_version_selector">
+										<a href="/charts/top/album/2025/" class="selected">Weekly: 16 Dec</a>
+										<a href="/subscribe/" class="disabled has_tip" data-tiptip="Subscribe at the Select level to access daily charts">Daily: 22 Dec</a>
+									</div>
+								</div>
+
+								<div class="page_charts_section_charts_pagination_settings_frame">
+									<div class="page_charts_section_charts_settings">
+										<button onclick="page.charts.onClickSettings()" class="ui_button_text page_charts_section_charts_settings_btn"><i class="fa fa-cog"></i></button>
+									</div>
+
+									<div class="page_charts_section_charts_nav_view_navigation">
+										<div
+											class="ui_pagination"
+											id="ui_pagination_page_charts_navigation_top"
+											data-sync-id=""
+											data-options='{
+  "id": "page_charts_navigation_top",
+  "mode": "static",
+  "number_button_expand_placement": "center",
+  "num_page_buttons": 12,
+  "show_number_buttons": true,
+  "next_mode": "always",
+  "prev_mode": "always",
+  "next_label": "Next",
+  "prev_label": "Prev",
+  "url_template": "/charts/top/album/2025/{{page}}/",
+  "url_first_page": "/charts/top/album/2025/",
+  "page_component": "charts.navigation",
+  "callback_component": "charts",
+  "first_unread_url": "",
+  "sync_id": ""
+}'
+											data-page-component="charts.navigation"
+											data-metadata=""
+											data-callback-component="charts"
+											data-num-pages="15"
+										>
+											<div class="ui_pagination_btn ui_pagination_prev disabled" aria-disabled="true"><i class="fa fa-step-backward"></i> <span class="ui_pagination_prev_label">Prev</span></div>
+
+											<span class="ui_pagination_pages" id="ui_pagination_pages_page_charts_navigation_top">
+												<span class="ui_pagination_btn ui_pagination_number selected" title="Go to page 1"> 1 </span>
+												<a href="/charts/top/album/2025/2/" onclick="return RYMpagination.callback(this, event, 'number')" class="ui_pagination_btn ui_pagination_number" title="Go to page 2"> 2 </a>
+												<a onclick="RYMpagination.openPageChooser('page_charts_navigation_top');" class="ui_pagination_btn ui_pagination_number"> ... </a>
+												<a href="/charts/top/album/2025/15/" onclick="return RYMpagination.callback(this, event, 'number')" class="ui_pagination_btn ui_pagination_number" title="Go to page 15">
+													15
+												</a>
+											</span>
+
+											<a href="/charts/top/album/2025/2/" onclick="return RYMpagination.callback(this, event, 'next')" class="ui_pagination_btn ui_pagination_next" title="Next page">
+												<span class="ui_pagination_next_label">Next</span> <i class="fa fa-step-forward"></i>
+											</a>
+
+											<div id="ui_pagination_page_chooser_frame_page_charts_navigation_top" class="ui_pagination_page_chooser_frame">
+												<div id="ui_pagination_page_chooser_page_charts_navigation_top" class="ui_pagination_page_chooser"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<img alt="" class="preload icon-display-compact-inactive" />
+							<img alt="" class="preload icon-display-standard-inactive" />
+							<img alt="" class="preload icon-display-mini-inactive" />
+							<img alt="" class="preload icon-display-card-inactive" />
+							<img alt="" class="preload icon-display-gallery-inactive" />
+
+							<img alt="" class="preload icon-display-compact-active" />
+							<img alt="" class="preload icon-display-standard-active" />
+							<img alt="" class="preload icon-display-mini-active" />
+							<img alt="" class="preload icon-display-card-active" />
+							<img alt="" class="preload icon-display-gallery-active" />
+
+							<div class="page_charts_section_charts_legend">
+								<script>
+									rymQ(() => {
+										window.chartSettings = {
+											view_mode_release_desktop: "standard",
+											view_mode_release_mobile: "compact",
+											view_mode_film_desktop: "standard",
+											view_mode_film_mobile: "card",
+											view_mode_game_desktop: "standard",
+											view_mode_game_mobile: "card",
+											view_mode_song_desktop: "compact",
+											view_mode_song_mobile: "compact",
+											expand_chart_builder: true,
+											expand_saved_charts: true,
+											expand_mini_chart_soundtracks: true,
+											expand_mini_chart_live: true,
+											expand_mini_chart_archival: true,
+											show_media_links: false,
+											show_chart_movement: false,
+											genre_display: "none",
+											show_descriptors: false,
+											items_per_page: 100,
+											playlist_num_results: 40,
+											playlist_create_order: "in_order",
+										}
+									})
+								</script>
+							</div>
+						</section></group
+					></sections
+				>
+			</div>
+		</div>
+	</div>
+</body>

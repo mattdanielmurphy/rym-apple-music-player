@@ -1,0 +1,978 @@
+<!-- Source URL: https://rateyourmusic.com/genre/slushwave/ -->
+<body id="page_body" class="">
+	<script>
+		window.themes = ["light", "eve", "night", "lightgray", "darkgray", "pink", "classic"]
+		window.themes_label = ["Light", "Evening", "Night", "Light gray", "Dark gray", "Pink", "Classic"]
+	</script>
+	<div id="tauri-toast"></div>
+	<div id="tauri-tabs"><button class="tauri-tab-btn">Music</button><button class="tauri-tab-btn active">RYM</button></div>
+
+	<script>
+		if (window.localStorage["size_mode"]) {
+			document.body.parentElement.className += " size_mode_" + window.localStorage["size_mode"]
+		}
+
+		if (!window.localStorage["theme"] && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			document.body.parentElement.className += " theme_eve"
+		} else if (!window.localStorage["theme"] || window.localStorage["theme"] === "day") {
+			document.body.parentElement.className += " theme_light"
+		} else {
+			if (-1 != window.themes.indexOf(window.localStorage["theme"])) {
+				document.body.parentElement.className += " theme_" + window.localStorage["theme"]
+			} else {
+				document.body.parentElement.className += " theme_light"
+			}
+		}
+
+		if (window.matchMedia) {
+			var listener = window.matchMedia("(prefers-color-scheme: dark)").addEventListener
+
+			if (listener) {
+				listener("change", (e) => {
+					updateTheme()
+				})
+			}
+		}
+	</script>
+	<div id="top" class="breadcrumb_section_marker anchor"></div>
+	<script>
+		window.addEventListener("DOMContentLoaded", (event) => {
+			window.dom_loaded = true
+
+			console.log("DOM loaded")
+			if (typeof _adjustFillerColumns !== "undefined") {
+				_adjustFillerColumns()
+			}
+
+			setTimeout(function () {
+				if (typeof _closeAllStickyAds !== "undefined") {
+					_closeAllStickyAds()
+				}
+			}, 5000)
+		})
+		console.log("Enabling connatix testcase B")
+		rymQ(function () {
+			updateStyleThemeLabels()
+		})
+	</script>
+
+	<header id="page_header">
+		<div class="header_inner logged_in">
+			<div onclick="RYMheader.onClickBars()" id="header_icon_link_bars" class="header_icon_link">
+				<i class="fa fa-bars"></i>
+				<span class="show-for-small"> </span>
+				<div id="header_extended_section" class="header_extended_section header_extended_more_menu">
+					<a href="/~mattmurphy" class="header_item"> Profile </a>
+
+					<a href="/collection/mattmurphy/" class="header_item"> Music Collection </a>
+
+					<a href="/recommendations/mattmurphy/music/" class="header_item">
+						Recommendations
+						<div class="badge_count_bubble messages">
+							<span class="profile_num_messages" style="">New</span>
+						</div>
+					</a>
+
+					<a href="/film_collection/mattmurphy/" class="header_item"> Film Collection </a>
+					<a href="/list/mattmurphy/" class="header_item"> Lists </a>
+					<br />
+					<a href="/messages/inbox" class="header_item"> Messaging </a>
+					<a href="/account/mentions" class="header_item"> Mentions </a>
+
+					<a href="/account/preferences" class="header_item"> Settings </a>
+
+					<a href="/submissions/" class="header_item"> Submissions </a>
+
+					<div class="header_items_spillover"></div>
+
+					<div class="header_theme_buttons">
+						<div onclick="switchSizeMode(event);return false;" class="header_theme_button">
+							<div class="header_theme_button_label">Text</div>
+							<div class="header_theme_button_mode" id="page_frame_size_mode_switch">Aa</div>
+						</div>
+
+						<div onclick="switchTheme(event);return false;" class="header_theme_button">
+							<div class="header_theme_button_label">Theme</div>
+							<div class="header_theme_button_mode" id="page_frame_theme_switch">Light</div>
+						</div>
+
+						<div class="clearfix"></div>
+					</div>
+
+					<span onclick="if ( confirm('Are you sure you want to log out?') ) { window.location = '/account/logout'; }" class="header_item"> Log out </span>
+				</div>
+			</div>
+
+			<div class="header_profile">
+				<div class="header_profile_logged_in">
+					<a href="/~mattmurphy" title="Your profile page" class="header_profile_main">
+						<span id="header_user_img" class="header_user_img" style="background-image: url('//e.snmc.io/i/75/s/d4a84f700e16e0d752ef8835cf87c96c/12062443')"></span>
+						<span id="header_profile_username" class="header_profile_link user header_item">mattmurphy</span>
+					</a>
+				</div>
+			</div>
+
+			<div class="header_logo">
+				<a class="main header_item sonemic" href="/">
+					<div class="logo_header"></div>
+					<span class="logo_name">RYM</span>
+				</a>
+			</div>
+
+			<div class="header_links">
+				<div class="header_links_inner">
+					<div class="divider"></div>
+					<a class="header_item" href="/new-music/">new music</a>
+					<a class="header_item" href="/genres/">genres</a>
+					<div class="header_charts">
+						<a class="header_charts header_item" href="/charts/">charts</a>
+					</div>
+					<a class="header_item" href="/lists/">lists</a>
+					<a class="header_item" href="https://rym.fm/">forums</a>
+
+					<a class="header_item has_tip" data-tiptip="Thank you for being a subscriber!" href="/subscribe/" style="xline-height: 1.9">
+						<span class="subscribe_label_fundraiser" style="font-size: 0.8em; font-weight: bold"><i class="fa fa-check-circle"></i></span>
+					</a>
+
+					<div class="divider"></div>
+				</div>
+			</div>
+			<div class="header_search">
+				<div id="ui_search_frame_outer_main_search" class="ui_search_frame_outer">
+					<div id="ui_search_frame_main_search" class="ui_search_frame">
+						<div onclick="rymQ(function() {RYMsearch.onClickClose(event, 'main_search');})" class="ui_search_close">
+							<div class="ui_search_close_bar"><i class="fa fa-times"></i> Close</div>
+							<div id="ui_search_context_indicator_main_search" class="ui_search_context_indicator">
+								<div id="ui_search_context_indicator_inner_main_search" class="ui_search_context_indicator_inner"></div>
+							</div>
+						</div>
+						<div class="ui_search_clear"></div>
+						<div class="ui_search_frame_inner">
+							<div id="ui_search_main_search" class="ui_search" data-default-scope="music" data-callback="" data-callback-id="">
+								<i style="cursor: pointer" onclick="RYMsearch.redirSearch(event, 'main_search');" id="ui_search_icon_main_search" class="fa fa-search ui_search_icon"></i>
+								<i id="ui_clear_icon_main_search" onclick="rymQ(function() {RYMsearch.onClickClearSearch(event, 'main_search');})" class="fa fa-times-circle ui_clear_icon"></i>
+
+								<form onsubmit="event.preventDefault(); RYMsearch.redirSearch(event, 'main_search');">
+									<input
+										autocomplete="off"
+										aria-label="Search"
+										value=""
+										id="ui_search_input_main_search"
+										placeholder="Search..."
+										class="ui_search_input"
+										onfocus="rymQ(function() {RYMsearch.onFocus(event, 'main_search')})"
+										onblur="rymQ(function() {RYMsearch.onBlur(event, 'main_search')})"
+										onkeydown="rymQ(function() {RYMsearch.onKeyDown(event, 'main_search')})"
+										oninput="rymQ(function() {RYMsearch.onInput(event, 'main_search')})"
+									/>
+								</form>
+							</div>
+							<div class="ui_search_rest">
+								<div class="ui_search_type">
+									<div id="ui_search_debug_main_search" class="ui_search_debug"></div>
+									<span class="ui_search_object_label">Search:</span>
+									<span id="ui_search_scope_selector_main_search" class="ui_search_object_selector">
+										<input type="hidden" name="ui_search_scope_main_search" id="ui_search_scope_main_search" value="music" />
+										<span
+											id="ui_search_scope_selector_music_main_search"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'music');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_music selected"
+										>
+											Music
+										</span>
+										<span
+											id="ui_search_scope_selector_film_main_search"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'film');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_film"
+										>
+											Film
+										</span>
+										<span
+											id="ui_search_scope_selector_games_main_search"
+											style="display: none"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'games');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_games"
+										>
+											Games
+										</span>
+									</span>
+									<span class="ui_search_object_label">for:</span>
+									<span id="ui_search_object_select_frame_main_search" class="ui_search_object_select_frame selected">
+										<select onchange="rymQ(function() {RYMsearch.onChangeObject(event, 'main_search')})" id="ui_search_object_select_main_search" class="ui_search_object_select"></select>
+									</span>
+								</div>
+								<div id="ui_search_info_frame_main_search" class="ui_search_info_frame"></div>
+								<div id="ui_search_results_frame_main_search" class="ui_search_results_frame"><div id="ui_search_results_main_search" class="ui_search_results"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="header_error" onclick="$(this).fadeOut();" id="header_error">
+		<div class="header_error_close"><i class="fa fa-times-circle"></i></div>
+		<div id="header_error_text"></div>
+	</div>
+
+	<div class="header_message" onclick="$(this).fadeOut();" id="header_message">
+		<div class="header_message_close"><i class="fa fa-times-circle"></i></div>
+		<div id="header_message_text"></div>
+	</div>
+
+	<div id="mobile_header_menu" class="mobile_header_menu has_forum_link">
+		<a href="/new-music/" class="mobile_header_menu_item mobile_header_menu_item_new_music">
+			<span>New Music</span> </a
+		><a href="/genres/" class="mobile_header_menu_item mobile_header_menu_item_genres">
+			<span>Genres</span> </a
+		><a href="/charts/" class="mobile_header_menu_item mobile_header_menu_item_charts">
+			<span>Charts</span> </a
+		><a href="/lists/" class="mobile_header_menu_item mobile_header_menu_item_lists">
+			<span>Lists</span> </a
+		><a href="https://rym.fm/" class="mobile_header_menu_item mobile_header_menu_item_community">
+			<span>Forums</span>
+		</a>
+	</div>
+
+	<div id="content_wrapper_outer" class="content_wrapper_outer">
+		<div id="content_wrapper" class="content_wrapper">
+			<div id="content_cover"></div>
+			<div id="content">
+				<div id="precontent" class="precontent"></div>
+
+				<div id="total_cover"></div>
+				<div id="content_total_cover"></div>
+
+				<style>
+					#end_of_year_banner {
+						background: var(--mono-f);
+						border-radius: 5px;
+						max-width: 50em;
+						text-align: center;
+						margin: 0 auto;
+						padding: 0.6em 3em;
+						border-radius: 5px;
+						border: 2px solid var(--gen-blue-dark);
+						color: var(--mono-0);
+						position: relative;
+						font-size: 1.1em;
+					}
+				</style>
+
+				<script>
+					try {
+						new Function('import("")')
+					} catch (err) {
+						document.write(
+							'<div class=note style="margin-bottom:1em;"><b>Note:</b> Not all scripts could be loaded. You may need to upgrade to a newer browser version in order to use this site.</div>'
+						)
+					}
+				</script>
+				<sections id="page_sections_genre"
+					><section id="page_genre_section_breadcrumb" class="page_section page_genre_section">
+						<div class="ui_breadcrumb_frame">
+							<ol id="page_genre_breadcrumb" class="ui_breadcrumb">
+								<li id="ui_breadcrumb_item_page_genre_breadcrumb" class="ui_breadcrumb_item ui_breadcrumb_item_main relationship_ has_url has_icon">
+									<a class="ui_breadcrumb_link" href="/genres/">
+										<i class="fa fa-caret-left ui_breadcrumb_icon"></i>
+
+										All genres
+									</a>
+								</li>
+								<li id="ui_breadcrumb_item_page_genre_breadcrumb" class="ui_breadcrumb_item ui_breadcrumb_item_main relationship_parent has_url">
+									<a class="ui_breadcrumb_link" href="/genre/vaporwave/"> Vaporwave </a>
+								</li>
+								<li id="ui_breadcrumb_item_page_genre_breadcrumb" class="ui_breadcrumb_item ui_breadcrumb_item_main relationship_">
+									<span> Slushwave </span>
+								</li>
+							</ol>
+							<div class="clearfix"></div>
+						</div>
+					</section>
+					<section id="page_genre_section_share" class="page_section page_genre_section">
+						<div class="page_section_share">
+							<div class="page_section_share_box_frame">
+								<a onclick="page.section.share.onClickShare(event)" class="btn shortcut_link_btn"><i class="fa fa-share"></i> <span class="shortcut_link_btn_label">Share</span></a>
+
+								<div id="page_section_share_box" class="page_section_share_box">
+									<a aria-label="Share on Facebook" href="https://www.facebook.com/sharer.php?u=https://rateyourmusic.com/genre/slushwave/" target="_blank" rel="nofollow noopener">
+										<div class="page_section_share_method">
+											<i class="fab fa-facebook"></i>
+											<div>Share on Facebook</div>
+										</div>
+									</a>
+
+									<a
+										aria-label="Share on Twitter"
+										href="https://twitter.com/share?url=https://rateyourmusic.com/genre/slushwave/&amp;text=Slushwave - Music genre&amp;hashtags=sonemic"
+										target="_blank"
+										rel="nofollow noopener"
+									>
+										<div class="page_section_share_method">
+											<i class="fab fa-twitter"></i>
+											<div>Share on Twitter</div>
+										</div>
+									</a>
+
+									<a
+										aria-label="Share on Whatsapp"
+										class="show-for-small"
+										href="https://api.whatsapp.com/send?text=Slushwave - Music genre https://rateyourmusic.com/genre/slushwave/"
+										target="_blank"
+										rel="nofollow noopener"
+									>
+										<div class="page_section_share_method">
+											<i class="fab fa-whatsapp-square"></i>
+											<div>Send on Whatsapp</div>
+										</div>
+									</a>
+
+									<a
+										aria-label="Share on Reddit"
+										href="https://reddit.com/submit?url=https://rateyourmusic.com/genre/slushwave/&amp;title=Slushwave - Music genre"
+										target="_blank"
+										rel="nofollow noopener"
+									>
+										<div class="page_section_share_method">
+											<i class="fab fa-reddit"></i>
+											<div>Post on Reddit</div>
+										</div>
+									</a>
+
+									<a
+										class="show-for-small"
+										onclick="      
+
+               if (navigator.share) {
+                 navigator.share({
+                   title: 'Slushwave - Music genre',
+                   text: 'Slushwave - Music genre',
+                   url: 'https://rateyourmusic.com/genre/slushwave/',
+                 })
+                   .then(() => console.log('Successful share'))
+                   .catch((error) => console.log('Error sharing', error));
+               }
+
+            "
+									>
+										<div class="page_section_share_method">
+											<i class="fa fa-ellipsis-h"></i>
+											<div>More</div>
+										</div>
+									</a>
+
+									<div aria-label="Copy URL of page" class="page_section_share_method_labeled divider">
+										<div class="page_section_share_method">
+											<i class="fa fa-link"></i>
+											<div>
+												<input readonly="readonly" aria-label="URL" onclick="page.section.share.onClickCopyUrl(this)" value="https://rateyourmusic.com/genre/slushwave/" />
+												<div class="page_section_share_method_label">Link to this page outside of RYM</div>
+											</div>
+										</div>
+									</div>
+
+									<div aria-label="Copy RYM shortcut of page" class="page_section_share_method_labeled">
+										<div class="page_section_share_method">
+											<i class="far fa-copy"></i>
+											<div>
+												<input readonly="readonly" aria-label="RYM Shortcut" onclick="page.section.share.onClickCopyShortcut(this)" value="[Genre55669]" />
+												<div class="page_section_share_method_label">Use this shortcut to make a link within RYM</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="page_section_share_copied">Copied!</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section id="page_genre_section_name" class="page_section page_genre_section">
+						<h1>Slushwave</h1>
+
+						<div class="page_genre_akas">
+							<span>
+								<b>AKA</b>:
+								<bdi class="comma_separated">Phaserwave</bdi>
+								<bdi class="comma_separated">Dreamtone</bdi>
+							</span>
+
+							• 1,203 releases
+						</div>
+
+						<div class="page_genre_description">
+							<span id="page_genre_description_short" class="page_genre_description_short">
+								<span class="rendered_text"
+									>Utilizes a distinct form of sample manipulation to create a “slushy” sound, usually sequenced in soft <a class="genre" href="/genre/ambient/">Ambient</a>-based soundscapes.</span
+								>
+								<br />
+								<a onclick="page.genre.onClickExpandDescription()" class="page_genre_description_full_btn">Read more</a>
+							</span>
+
+							<span id="page_genre_description_full" class="page_genre_description_full" style="display: none"
+								><span class="rendered_text"
+									>Slushwave is a subgenre of <a class="genre" href="/genre/vaporwave/">Vaporwave</a>, which distinguishes itself by its strong reliance on heavy sample manipulation to deliver a
+									hypnagogic, thick sound distinctive to the style. The genre specializes in creating softly looping <a class="genre" href="/genre/ambient/">Ambient</a>-based soundscapes through
+									repetitive sequencing of its sample material, emphasizing dreamy atmospheres along with a characteristic “slushy” manipulation of sound, which is typically achieved through the
+									multi-layering utilization of effects such as reverbs, delays, flangers, filters and especially phasers (hence the less frequently used term <i>phaserwave</i>). The sample material
+									itself is often sourced from, but not limited to, similar genre origins as vaporwave typically draws from, but with a heavier focus laid upon East Asian genres such as
+									<a class="genre" href="/genre/city-pop/">City Pop</a>, <a class="genre" href="/genre/c-pop/">C-Pop</a> or <a class="genre" href="/genre/j-pop/">J-Pop</a>. Though slushwave primarily
+									originated from purely sample-based compositions, in recent years artists have begun creating entirely original slushwave by sampling self-written material.<br /><br />Thematically,
+									slushwave mostly sets itself apart from most of the established aesthetics of vaporwave, such as consumerism, corporate clichés or 1980s and 1990s nostalgia, and instead
+									predominantly tries to evoke ideas of love, longing, melancholy and dreams, which go along with the lush and ambient nature of the music. Releases are often presented with minimal
+									artwork like untreated stills of old visual media, such as movies or commercials, and titled using non-Latin alphabets, further mystifying the listening experience.<br /><br />While
+									the concept of an ambient approach towards vaporwave had been circulating the scene since the genre's inception, namely in releases such as
+									<i><a href="/release/album/internet-club/redefining-the-workplace/" class="album">REDEFINING THE WORKPLACE</a></i> or
+									<i><a href="/release/album/lindsheaven-virtual-plaza/transversal-worldwide-shopping/" class="album">Transversal Worldwide Shopping</a></i
+									>, the term "slushwave" was only later coined by <a href="/artist/t-e-l-e-p-a-t-h-テレパシー能力者" class="artist">t e l e p a t h テレパシー能力者</a> in 2013. It was subsequently
+									popularized in the following years, mainly through popular releases under t e l e p a t h's own aliases and collaborations, but also through the works of a handful of producers who
+									adopted the genre very early on, such as <a href="/artist/mindspring-memories" class="artist">MindSpring Memories</a>,
+									<a href="/artist/g-a-t-e-w-a-y-ゲートウェイ" class="artist">G a t e w a y ゲートウェイ</a>, <a href="/artist/vav-31" class="artist">VAV-31</a> and
+									<a href="/artist/humanightmare" class="artist">HUMANIGHTMARE</a>. These further evolved the genre's sound and helped establish slushwave into a solidified subgenre of vaporwave. In
+									2019 the genre would see a significant growth in popularity, as new directions and possibilities for the genre were brought up by
+									<a href="/artist/desert-sand-feels-warm-at-night" class="artist">desert sand feels warm at night</a>'s well-recieved introduction of a sample-free approach to its creation. This
+									sparked a rise of new producers taking up the genre, as well as a general larger presence of the genre within online communities.<br /><br />Often, slushwave is confused for
+									<a class="genre" href="/genre/dreampunk/">Dreampunk</a>, due to their similar ideas of ambient-focused soundscapes under the broad umbrella of
+									<a class="genre" href="/genre/vapor/">Vapor</a>. However, dreampunk is defined by its use of <a class="genre" href="/genre/field-recordings/">Field Recordings</a> and strong
+									<a class="genre" href="/genre/progressive-electronic/">Progressive Electronic</a> influences, and often puts much less of a focus on sampled material. Dreampunk also exhibits a more
+									cinematic mood, and utilizes visuals of <a class="genre" href="/genre/cyberpunk/">Cyberpunk</a> and urban environments. These characteristics set it apart from slushwave's layered
+									production, hypnagogic atmosphere, minimalistic artwork, and firm grounding in the sound of vaporwave, including its strong dependence on samples.</span
+								></span
+							>
+						</div>
+					</section>
+					<section id="page_genre_section_page_nav" class="page_section page_genre_section">
+						<div class="ui_page_nav_frame">
+							<ul id="page_genre_page_nav" class="ui_page_nav">
+								<li>Top</li>
+								<li>Charts</li>
+								<li>Comments</li>
+								<li>Discography</li>
+							</ul>
+						</div>
+					</section>
+					<section id="page_genre_section_charts" class="page_section page_genre_section">
+						<div class="page_section_charts">
+							<div class="page_section_charts_header">
+								<h2>Top-ranked albums</h2>
+								<div><a href="/charts/top/album/all-time/g:slushwave/" class="ui_button">See full chart</a></div>
+							</div>
+
+							<div id="page_section_charts_carousel_frame" class="page_section_charts_carousel_frame">
+								<div onclick="page.section.charts.onClickCarousel('left')" id="page_section_charts_carousel_nav_left" class="page_section_charts_carousel_nav nav_left">
+									<i class="fa fa-chevron-left"></i>
+								</div>
+
+								<ul id="page_section_charts_carousel" class="page_section_charts_carousel hide-scrollbar">
+									<li id="page_section_charts_carousel_item_1" class="page_section_charts_carousel_item">
+										<div class="page_section_charts_carousel_image_frame">
+											<a href="/release/album/t-e-l-e-p-a-t-h-テレパシー能力者/星間性交/">
+												<picture class="">
+													<source
+														type="image/webp"
+														srcset="
+															//e.snmc.io/i/600/w/265d9543e5f1b79d9c0e2ae532faf56f/11205857/t%20e%20l%20e%20p%20a%20t%20h%20%E3%83%86%E3%83%AC%E3%83%91%E3%82%B7%E3%83%BC%E8%83%BD%E5%8A%9B%E8%80%85%20-%20%E6%98%9F%E9%96%93%E6%80%A7%E4%BA%A4%20%5BInterstellar%20Intercourse%5D%2C%20Cover%20art.webp 2x,
+															//e.snmc.io/i/300/w/06199fc0977c4b768aa2a37aa6967de5/11205857/t%20e%20l%20e%20p%20a%20t%20h%20%E3%83%86%E3%83%AC%E3%83%91%E3%82%B7%E3%83%BC%E8%83%BD%E5%8A%9B%E8%80%85%20-%20%E6%98%9F%E9%96%93%E6%80%A7%E4%BA%A4%20%5BInterstellar%20Intercourse%5D%2C%20Cover%20art.webp 1x
+														"
+													/>
+
+													<source
+														type="image/jpeg"
+														srcset="
+															//e.snmc.io/i/600/s/265d9543e5f1b79d9c0e2ae532faf56f/11205857/t%20e%20l%20e%20p%20a%20t%20h%20%E3%83%86%E3%83%AC%E3%83%91%E3%82%B7%E3%83%BC%E8%83%BD%E5%8A%9B%E8%80%85%20-%20%E6%98%9F%E9%96%93%E6%80%A7%E4%BA%A4%20%5BInterstellar%20Intercourse%5D%2C%20Cover%20art.jpeg 2x,
+															//e.snmc.io/i/300/s/06199fc0977c4b768aa2a37aa6967de5/11205857/t%20e%20l%20e%20p%20a%20t%20h%20%E3%83%86%E3%83%AC%E3%83%91%E3%82%B7%E3%83%BC%E8%83%BD%E5%8A%9B%E8%80%85%20-%20%E6%98%9F%E9%96%93%E6%80%A7%E4%BA%A4%20%5BInterstellar%20Intercourse%5D%2C%20Cover%20art.jpeg 1x
+														"
+													/>
+													<img
+														crossorigin="Anonymous"
+														style="aspect-ratio: 1000 / 1000; background: linear-gradient(45deg, #0e0e12, #aab1cc, #3d599a, #303a69, #646681)"
+														src="//e.snmc.io/i/300/s/06199fc0977c4b768aa2a37aa6967de5/11205857/t%20e%20l%20e%20p%20a%20t%20h%20%E3%83%86%E3%83%AC%E3%83%91%E3%82%B7%E3%83%BC%E8%83%BD%E5%8A%9B%E8%80%85%20-%20%E6%98%9F%E9%96%93%E6%80%A7%E4%BA%A4%20%5BInterstellar%20Intercourse%5D%2C%20Cover%20art.jpeg"
+														alt="t e l e p a t h テレパシー能力者 - 星間性交 [Interstellar Intercourse], Cover art"
+													/>
+												</picture>
+											</a>
+										</div>
+
+										<div class="page_section_charts_carousel_info">
+											<div class="page_section_charts_carousel_number">#1</div>
+
+											<div class="page_section_charts_carousel_title">
+												<a href="/release/album/t-e-l-e-p-a-t-h-テレパシー能力者/星間性交/" class="release">星間性交</a>
+												<div>
+													<a class="artist" href="/artist/t-e-l-e-p-a-t-h-テレパシー能力者">
+														<span class="ui_name_locale">
+															<span class="ui_name_locale_original">t e l e p a t h テレパシー能力者</span>
+														</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li id="page_section_charts_carousel_item_2" class="page_section_charts_carousel_item">
+										<div class="page_section_charts_carousel_image_frame">
+											<a href="/release/album/虚拟梦想广场/无限渴望/">
+												<picture class="">
+													<source
+														type="image/webp"
+														srcset="
+															//e.snmc.io/i/600/w/5db775967353708e761e435bf116ecc6/12267053/%E8%99%9A%E6%8B%9F%E6%A2%A6%E6%83%B3%E5%B9%BF%E5%9C%BA%20-%20%E6%97%A0%E9%99%90%E6%B8%B4%E6%9C%9B%20%5BWuxian%20kewang%5D%2C%20Cover%20art.webp 2x,
+															//e.snmc.io/i/300/w/b8f0f10f4a508811ef1ef980c9eb61ee/12267053/%E8%99%9A%E6%8B%9F%E6%A2%A6%E6%83%B3%E5%B9%BF%E5%9C%BA%20-%20%E6%97%A0%E9%99%90%E6%B8%B4%E6%9C%9B%20%5BWuxian%20kewang%5D%2C%20Cover%20art.webp 1x
+														"
+													/>
+
+													<source
+														type="image/jpeg"
+														srcset="
+															//e.snmc.io/i/600/s/5db775967353708e761e435bf116ecc6/12267053/%E8%99%9A%E6%8B%9F%E6%A2%A6%E6%83%B3%E5%B9%BF%E5%9C%BA%20-%20%E6%97%A0%E9%99%90%E6%B8%B4%E6%9C%9B%20%5BWuxian%20kewang%5D%2C%20Cover%20art.jpeg 2x,
+															//e.snmc.io/i/300/s/b8f0f10f4a508811ef1ef980c9eb61ee/12267053/%E8%99%9A%E6%8B%9F%E6%A2%A6%E6%83%B3%E5%B9%BF%E5%9C%BA%20-%20%E6%97%A0%E9%99%90%E6%B8%B4%E6%9C%9B%20%5BWuxian%20kewang%5D%2C%20Cover%20art.jpeg 1x
+														"
+													/>
+													<img
+														crossorigin="Anonymous"
+														style="aspect-ratio: 1000 / 1000; background: linear-gradient(45deg, #840f0b, #06040b, #530c0a, #a82114, #2c0e0b)"
+														src="//e.snmc.io/i/300/s/b8f0f10f4a508811ef1ef980c9eb61ee/12267053/%E8%99%9A%E6%8B%9F%E6%A2%A6%E6%83%B3%E5%B9%BF%E5%9C%BA%20-%20%E6%97%A0%E9%99%90%E6%B8%B4%E6%9C%9B%20%5BWuxian%20kewang%5D%2C%20Cover%20art.jpeg"
+														alt="虚拟梦想广场 - 无限渴望 [Wuxian kewang], Cover art"
+													/>
+												</picture>
+											</a>
+										</div>
+
+										<div class="page_section_charts_carousel_info">
+											<div class="page_section_charts_carousel_number">#2</div>
+
+											<div class="page_section_charts_carousel_title">
+												<a href="/release/album/虚拟梦想广场/无限渴望/" class="release">无限渴望</a>
+												<div>
+													<a class="artist" href="/artist/仮想夢プラザ">
+														<span class="ui_name_locale">虚拟梦想广场</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li id="page_section_charts_carousel_item_3" class="page_section_charts_carousel_item">
+										<div class="page_section_charts_carousel_image_frame">
+											<a href="/release/album/desert-sand-feels-warm-at-night/夢の砂漠/">
+												<picture class="">
+													<source
+														type="image/webp"
+														srcset="
+															//e.snmc.io/i/600/w/5e673561cad201934ed2ecd2f7185169/12271051/desert%20sand%20feels%20warm%20at%20night%20-%20%E5%A4%A2%E3%81%AE%E7%A0%82%E6%BC%A0%20%5BDream%20Desert%5D%2C%20Cover%20art.webp 2x,
+															//e.snmc.io/i/300/w/38dfaef7c6692f00e3836bf844cc62eb/12271051/desert%20sand%20feels%20warm%20at%20night%20-%20%E5%A4%A2%E3%81%AE%E7%A0%82%E6%BC%A0%20%5BDream%20Desert%5D%2C%20Cover%20art.webp 1x
+														"
+													/>
+
+													<source
+														type="image/jpeg"
+														srcset="
+															//e.snmc.io/i/600/s/5e673561cad201934ed2ecd2f7185169/12271051/desert%20sand%20feels%20warm%20at%20night%20-%20%E5%A4%A2%E3%81%AE%E7%A0%82%E6%BC%A0%20%5BDream%20Desert%5D%2C%20Cover%20art.jpeg 2x,
+															//e.snmc.io/i/300/s/38dfaef7c6692f00e3836bf844cc62eb/12271051/desert%20sand%20feels%20warm%20at%20night%20-%20%E5%A4%A2%E3%81%AE%E7%A0%82%E6%BC%A0%20%5BDream%20Desert%5D%2C%20Cover%20art.jpeg 1x
+														"
+													/>
+													<img
+														crossorigin="Anonymous"
+														style="aspect-ratio: 1200 / 1200; background: linear-gradient(45deg, #060504, #8c500d, #4c2b0c, #291609, #604715)"
+														src="//e.snmc.io/i/300/s/38dfaef7c6692f00e3836bf844cc62eb/12271051/desert%20sand%20feels%20warm%20at%20night%20-%20%E5%A4%A2%E3%81%AE%E7%A0%82%E6%BC%A0%20%5BDream%20Desert%5D%2C%20Cover%20art.jpeg"
+														alt="desert sand feels warm at night - 夢の砂漠 [Dream Desert], Cover art"
+													/>
+												</picture>
+											</a>
+										</div>
+
+										<div class="page_section_charts_carousel_info">
+											<div class="page_section_charts_carousel_number">#3</div>
+
+											<div class="page_section_charts_carousel_title">
+												<a href="/release/album/desert-sand-feels-warm-at-night/夢の砂漠/" class="release">夢の砂漠</a>
+												<div>
+													<a class="artist" href="/artist/desert-sand-feels-warm-at-night">
+														<span class="ui_name_locale">
+															<span class="ui_name_locale_original">desert sand feels warm at night</span>
+														</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li id="page_section_charts_carousel_item_4" class="page_section_charts_carousel_item">
+										<div class="page_section_charts_carousel_image_frame">
+											<a href="/release/album/泰合志恒/神秘的情人/">
+												<picture class="">
+													<source
+														type="image/webp"
+														srcset="
+															//e.snmc.io/i/600/w/698f17330b075b1025dc839532141ac6/5698907/%E6%B3%B0%E5%90%88%E5%BF%97%E6%81%92%20%5BTaihe%20Zhiheng%5D%20-%20%E7%A5%9E%E7%A7%98%E7%9A%84%E6%83%85%E4%BA%BA%20%5BMysterious%20Lover%5D%2C%20Cover%20art.webp 2x,
+															//e.snmc.io/i/300/w/a431a938840dfccd6b8d9035efb86145/5698907/%E6%B3%B0%E5%90%88%E5%BF%97%E6%81%92%20%5BTaihe%20Zhiheng%5D%20-%20%E7%A5%9E%E7%A7%98%E7%9A%84%E6%83%85%E4%BA%BA%20%5BMysterious%20Lover%5D%2C%20Cover%20art.webp 1x
+														"
+													/>
+
+													<source
+														type="image/jpeg"
+														srcset="
+															//e.snmc.io/i/600/s/698f17330b075b1025dc839532141ac6/5698907/%E6%B3%B0%E5%90%88%E5%BF%97%E6%81%92%20%5BTaihe%20Zhiheng%5D%20-%20%E7%A5%9E%E7%A7%98%E7%9A%84%E6%83%85%E4%BA%BA%20%5BMysterious%20Lover%5D%2C%20Cover%20art.jpeg 2x,
+															//e.snmc.io/i/300/s/a431a938840dfccd6b8d9035efb86145/5698907/%E6%B3%B0%E5%90%88%E5%BF%97%E6%81%92%20%5BTaihe%20Zhiheng%5D%20-%20%E7%A5%9E%E7%A7%98%E7%9A%84%E6%83%85%E4%BA%BA%20%5BMysterious%20Lover%5D%2C%20Cover%20art.jpeg 1x
+														"
+													/>
+													<img
+														crossorigin="Anonymous"
+														style="aspect-ratio: 1000 / 1000; background: linear-gradient(45deg, #47a6ba, #134254, #c5cfc6, #9f9c95, #846b66)"
+														src="//e.snmc.io/i/300/s/a431a938840dfccd6b8d9035efb86145/5698907/%E6%B3%B0%E5%90%88%E5%BF%97%E6%81%92%20%5BTaihe%20Zhiheng%5D%20-%20%E7%A5%9E%E7%A7%98%E7%9A%84%E6%83%85%E4%BA%BA%20%5BMysterious%20Lover%5D%2C%20Cover%20art.jpeg"
+														alt="泰合志恒 [Taihe Zhiheng] - 神秘的情人 [Mysterious Lover], Cover art"
+													/>
+												</picture>
+											</a>
+										</div>
+
+										<div class="page_section_charts_carousel_info">
+											<div class="page_section_charts_carousel_number">#4</div>
+
+											<div class="page_section_charts_carousel_title">
+												<a href="/release/album/泰合志恒/神秘的情人/" class="release">神秘的情人</a>
+												<div>
+													<a class="artist" href="/artist/泰合志恒">
+														<span class="ui_name_locale has_locale_name">
+															<span class="ui_name_locale_language"> Taihe Zhiheng</span>
+															<span class="ui_name_locale_original">泰合志恒</span>
+														</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li id="page_section_charts_carousel_item_5" class="page_section_charts_carousel_item">
+										<div class="page_section_charts_carousel_image_frame">
+											<a href="/release/album/mindspring-memories/the-binary-ocean/">
+												<picture class="">
+													<source
+														type="image/webp"
+														srcset="
+															//e.snmc.io/i/600/w/d541c8e75ee7275a6d3a09c41094f58d/6630988/MindSpring%20Memories%20-%20The%20Binary%20Ocean%2C%20Cover%20art.webp 2x,
+															//e.snmc.io/i/300/w/b2df432d3903a1308bb90b7c97bd35a2/6630988/MindSpring%20Memories%20-%20The%20Binary%20Ocean%2C%20Cover%20art.webp 1x
+														"
+													/>
+
+													<source
+														type="image/jpeg"
+														srcset="
+															//e.snmc.io/i/600/s/d541c8e75ee7275a6d3a09c41094f58d/6630988/MindSpring%20Memories%20-%20The%20Binary%20Ocean%2C%20Cover%20art.jpeg 2x,
+															//e.snmc.io/i/300/s/b2df432d3903a1308bb90b7c97bd35a2/6630988/MindSpring%20Memories%20-%20The%20Binary%20Ocean%2C%20Cover%20art.jpeg 1x
+														"
+													/>
+													<img
+														crossorigin="Anonymous"
+														style="aspect-ratio: 1200 / 1200; background: linear-gradient(45deg, #2d5593, #1f4293, #14226b, #546f8a, #8197af)"
+														src="//e.snmc.io/i/300/s/b2df432d3903a1308bb90b7c97bd35a2/6630988/MindSpring%20Memories%20-%20The%20Binary%20Ocean%2C%20Cover%20art.jpeg"
+														alt="MindSpring Memories - The Binary Ocean, Cover art"
+													/>
+												</picture>
+											</a>
+										</div>
+
+										<div class="page_section_charts_carousel_info">
+											<div class="page_section_charts_carousel_number">#5</div>
+
+											<div class="page_section_charts_carousel_title">
+												<a href="/release/album/mindspring-memories/the-binary-ocean/" class="release">The Binary Ocean</a>
+												<div>
+													<a class="artist" href="/artist/mindspring-memories">
+														<span class="ui_name_locale">
+															<span class="ui_name_locale_original">MindSpring Memories</span>
+														</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li id="page_section_charts_carousel_item_6" class="page_section_charts_carousel_item">
+										<div class="page_section_charts_carousel_image_frame">
+											<a href="/release/album/トリニティー無限大/二二二七/">
+												<picture class="lazyload">
+													<source
+														type="image/webp"
+														data-srcset="
+                                          //e.snmc.io/i/600/w/2b6609c5b843c3c34709dd657bbed3b8/5866356/%E3%83%88%E3%83%AA%E3%83%8B%E3%83%86%E3%82%A3%E3%83%BC%E7%84%A1%E9%99%90%E5%A4%A7%20%5BTrinity%20Infinity%5D%20-%20%E4%BA%8C%E4%BA%8C%E4%BA%8C%E4%B8%83%20%5B2227%5D%2C%20Cover%20art.webp 2x,
+                                          //e.snmc.io/i/300/w/3a2ef5c18ff0de0fd413260cd395797f/5866356/%E3%83%88%E3%83%AA%E3%83%8B%E3%83%86%E3%82%A3%E3%83%BC%E7%84%A1%E9%99%90%E5%A4%A7%20%5BTrinity%20Infinity%5D%20-%20%E4%BA%8C%E4%BA%8C%E4%BA%8C%E4%B8%83%20%5B2227%5D%2C%20Cover%20art.webp 1x
+                                       "
+													/>
+
+													<source
+														type="image/jpeg"
+														data-srcset="
+                                          //e.snmc.io/i/600/s/2b6609c5b843c3c34709dd657bbed3b8/5866356/%E3%83%88%E3%83%AA%E3%83%8B%E3%83%86%E3%82%A3%E3%83%BC%E7%84%A1%E9%99%90%E5%A4%A7%20%5BTrinity%20Infinity%5D%20-%20%E4%BA%8C%E4%BA%8C%E4%BA%8C%E4%B8%83%20%5B2227%5D%2C%20Cover%20art.jpeg 2x,
+                                          //e.snmc.io/i/300/s/3a2ef5c18ff0de0fd413260cd395797f/5866356/%E3%83%88%E3%83%AA%E3%83%8B%E3%83%86%E3%82%A3%E3%83%BC%E7%84%A1%E9%99%90%E5%A4%A7%20%5BTrinity%20Infinity%5D%20-%20%E4%BA%8C%E4%BA%8C%E4%BA%8C%E4%B8%83%20%5B2227%5D%2C%20Cover%20art.jpeg 1x
+                                       "
+													/>
+													<img
+														class="ui_image_img"
+														crossorigin="Anonymous"
+														data-class="image_loaded"
+														data-load-count="0"
+														onload="this.dataset.loadCount = parseInt(this.dataset.loadCount)+1; if ( parseInt(this.dataset.loadCount) == 2) { this.parentNode.classList.add(this.dataset.class)}"
+														src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+														style="aspect-ratio: 1000 / 1000"
+														data-src="//e.snmc.io/i/300/s/3a2ef5c18ff0de0fd413260cd395797f/5866356/%E3%83%88%E3%83%AA%E3%83%8B%E3%83%86%E3%82%A3%E3%83%BC%E7%84%A1%E9%99%90%E5%A4%A7%20%5BTrinity%20Infinity%5D%20-%20%E4%BA%8C%E4%BA%8C%E4%BA%8C%E4%B8%83%20%5B2227%5D%2C%20Cover%20art.jpeg"
+														alt="トリニティー無限大 [Trinity Infinity] - 二二二七 [2227], Cover art"
+													/>
+
+													<div class="ui_image_background" style="background: linear-gradient(45deg, #000229, #171d4d, #050618, #06071b, #36409f)"></div>
+												</picture>
+											</a>
+										</div>
+
+										<div class="page_section_charts_carousel_info">
+											<div class="page_section_charts_carousel_number">#6</div>
+
+											<div class="page_section_charts_carousel_title">
+												<a href="/release/album/トリニティー無限大/二二二七/" class="release">二二二七</a>
+												<div>
+													<a class="artist" href="/artist/トリニティー無限大">
+														<span class="ui_name_locale has_locale_name">
+															<span class="ui_name_locale_language"> Trinity Infinity</span>
+															<span class="ui_name_locale_original">トリニティー無限大</span>
+														</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li id="page_section_charts_carousel_item_7" class="page_section_charts_carousel_item">
+										<div class="page_section_charts_carousel_image_frame">
+											<a href="/release/album/テレヴァペ/永/">
+												<picture class="lazyload">
+													<source
+														type="image/webp"
+														data-srcset="
+                                          //e.snmc.io/i/600/w/a0fe8d464c2bd3042e78a6f0d524fc08/7398267/%E3%83%86%E3%83%AC%E3%83%B4%E3%82%A1%E3%83%9A%20%5BTelevape%5D%20-%20%E6%B0%B8%20%5BEternity%5D%2C%20Cover%20art.webp 2x,
+                                          //e.snmc.io/i/300/w/853c32340e00fd10583840f7da6eec89/7398267/%E3%83%86%E3%83%AC%E3%83%B4%E3%82%A1%E3%83%9A%20%5BTelevape%5D%20-%20%E6%B0%B8%20%5BEternity%5D%2C%20Cover%20art.webp 1x
+                                       "
+													/>
+
+													<source
+														type="image/jpeg"
+														data-srcset="
+                                          //e.snmc.io/i/600/s/a0fe8d464c2bd3042e78a6f0d524fc08/7398267/%E3%83%86%E3%83%AC%E3%83%B4%E3%82%A1%E3%83%9A%20%5BTelevape%5D%20-%20%E6%B0%B8%20%5BEternity%5D%2C%20Cover%20art.jpeg 2x,
+                                          //e.snmc.io/i/300/s/853c32340e00fd10583840f7da6eec89/7398267/%E3%83%86%E3%83%AC%E3%83%B4%E3%82%A1%E3%83%9A%20%5BTelevape%5D%20-%20%E6%B0%B8%20%5BEternity%5D%2C%20Cover%20art.jpeg 1x
+                                       "
+													/>
+													<img
+														class="ui_image_img"
+														crossorigin="Anonymous"
+														data-class="image_loaded"
+														data-load-count="0"
+														onload="this.dataset.loadCount = parseInt(this.dataset.loadCount)+1; if ( parseInt(this.dataset.loadCount) == 2) { this.parentNode.classList.add(this.dataset.class)}"
+														src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+														style="aspect-ratio: 642 / 1018"
+														data-src="//e.snmc.io/i/300/s/853c32340e00fd10583840f7da6eec89/7398267/%E3%83%86%E3%83%AC%E3%83%B4%E3%82%A1%E3%83%9A%20%5BTelevape%5D%20-%20%E6%B0%B8%20%5BEternity%5D%2C%20Cover%20art.jpeg"
+														alt="テレヴァペ [Televape] - 永 [Eternity], Cover art"
+													/>
+
+													<div class="ui_image_background" style="background: linear-gradient(45deg, #eb8c94, #d35e6e, #f5a7a5, #a4877f, #6d7781)"></div>
+												</picture>
+											</a>
+										</div>
+
+										<div class="page_section_charts_carousel_info">
+											<div class="page_section_charts_carousel_number">#7</div>
+
+											<div class="page_section_charts_carousel_title">
+												<a href="/release/album/テレヴァペ/永/" class="release">永</a>
+												<div>
+													<a class="artist" href="/artist/テレヴァペ-1">
+														<span class="ui_name_locale has_locale_name">
+															<span class="ui_name_locale_language"> Televape</span>
+															<span class="ui_name_locale_original">テレヴァペ</span>
+														</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li id="page_section_charts_carousel_item_8" class="page_section_charts_carousel_item">
+										<div class="page_section_charts_carousel_image_frame">
+											<a href="/release/album/lindsheaven-virtual-plaza/超越愛/">
+												<picture class="lazyload">
+													<source
+														type="image/webp"
+														data-srcset="
+                                          //e.snmc.io/i/600/w/2de129528ee81a50f5fa79ba79df60db/7003897/Lindsheaven%20Virtual%20Plaza%20-%20%E8%B6%85%E8%B6%8A%E6%84%9B%20%5BChy%C5%8D%20etsu%20ai%5D%2C%20Cover%20art.webp 2x,
+                                          //e.snmc.io/i/300/w/90f6b605f4dd92b262e147e0997d4de3/7003897/Lindsheaven%20Virtual%20Plaza%20-%20%E8%B6%85%E8%B6%8A%E6%84%9B%20%5BChy%C5%8D%20etsu%20ai%5D%2C%20Cover%20art.webp 1x
+                                       "
+													/>
+
+													<source
+														type="image/jpeg"
+														data-srcset="
+                                          //e.snmc.io/i/600/s/2de129528ee81a50f5fa79ba79df60db/7003897/Lindsheaven%20Virtual%20Plaza%20-%20%E8%B6%85%E8%B6%8A%E6%84%9B%20%5BChy%C5%8D%20etsu%20ai%5D%2C%20Cover%20art.jpeg 2x,
+                                          //e.snmc.io/i/300/s/90f6b605f4dd92b262e147e0997d4de3/7003897/Lindsheaven%20Virtual%20Plaza%20-%20%E8%B6%85%E8%B6%8A%E6%84%9B%20%5BChy%C5%8D%20etsu%20ai%5D%2C%20Cover%20art.jpeg 1x
+                                       "
+													/>
+													<img
+														class="ui_image_img"
+														crossorigin="Anonymous"
+														data-class="image_loaded"
+														data-load-count="0"
+														onload="this.dataset.loadCount = parseInt(this.dataset.loadCount)+1; if ( parseInt(this.dataset.loadCount) == 2) { this.parentNode.classList.add(this.dataset.class)}"
+														src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+														style="aspect-ratio: 1200 / 1200"
+														data-src="//e.snmc.io/i/300/s/90f6b605f4dd92b262e147e0997d4de3/7003897/Lindsheaven%20Virtual%20Plaza%20-%20%E8%B6%85%E8%B6%8A%E6%84%9B%20%5BChy%C5%8D%20etsu%20ai%5D%2C%20Cover%20art.jpeg"
+														alt="Lindsheaven Virtual Plaza - 超越愛 [Chyō etsu ai], Cover art"
+													/>
+
+													<div class="ui_image_background" style="background: linear-gradient(45deg, #353c34, #8a999c, #26292e, #687878, #5e6166)"></div>
+												</picture>
+											</a>
+										</div>
+
+										<div class="page_section_charts_carousel_info">
+											<div class="page_section_charts_carousel_number">#8</div>
+
+											<div class="page_section_charts_carousel_title">
+												<a href="/release/album/lindsheaven-virtual-plaza/超越愛/" class="release">超越愛</a>
+												<div>
+													<a class="artist" href="/artist/lindsheaven-virtual-plaza">
+														<span class="ui_name_locale">
+															<span class="ui_name_locale_original">Lindsheaven Virtual Plaza</span>
+														</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li id="page_section_charts_carousel_item_9" class="page_section_charts_carousel_item">
+										<div class="page_section_charts_carousel_image_frame">
+											<a href="/release/album/信仰-地球/新しいエデンジャングル/">
+												<picture class="lazyload">
+													<source
+														type="image/webp"
+														data-srcset="
+                                          //e.snmc.io/i/600/w/7b8ed1eb3f5b1c844852e28a21104740/5486449/%E4%BF%A1%E4%BB%B0%20%5BShinkou%5D%20%2F%20%E5%9C%B0%E7%90%83%20%5BChikyuu%5D%20-%20%E6%96%B0%E3%81%97%E3%81%84%E3%82%A8%E3%83%87%E3%83%B3%E3%82%B8%E3%83%A3%E3%83%B3%E3%82%B0%E3%83%AB%2C%20Cover%20art.webp 2x,
+                                          //e.snmc.io/i/300/w/a619e2628d0e8a4e10118cac1fb18343/5486449/%E4%BF%A1%E4%BB%B0%20%5BShinkou%5D%20%2F%20%E5%9C%B0%E7%90%83%20%5BChikyuu%5D%20-%20%E6%96%B0%E3%81%97%E3%81%84%E3%82%A8%E3%83%87%E3%83%B3%E3%82%B8%E3%83%A3%E3%83%B3%E3%82%B0%E3%83%AB%2C%20Cover%20art.webp 1x
+                                       "
+													/>
+
+													<source
+														type="image/jpeg"
+														data-srcset="
+                                          //e.snmc.io/i/600/s/7b8ed1eb3f5b1c844852e28a21104740/5486449/%E4%BF%A1%E4%BB%B0%20%5BShinkou%5D%20%2F%20%E5%9C%B0%E7%90%83%20%5BChikyuu%5D%20-%20%E6%96%B0%E3%81%97%E3%81%84%E3%82%A8%E3%83%87%E3%83%B3%E3%82%B8%E3%83%A3%E3%83%B3%E3%82%B0%E3%83%AB%2C%20Cover%20art.jpeg 2x,
+                                          //e.snmc.io/i/300/s/a619e2628d0e8a4e10118cac1fb18343/5486449/%E4%BF%A1%E4%BB%B0%20%5BShinkou%5D%20%2F%20%E5%9C%B0%E7%90%83%20%5BChikyuu%5D%20-%20%E6%96%B0%E3%81%97%E3%81%84%E3%82%A8%E3%83%87%E3%83%B3%E3%82%B8%E3%83%A3%E3%83%B3%E3%82%B0%E3%83%AB%2C%20Cover%20art.jpeg 1x
+                                       "
+													/>
+													<img
+														class="ui_image_img"
+														crossorigin="Anonymous"
+														data-class="image_loaded"
+														data-load-count="0"
+														onload="this.dataset.loadCount = parseInt(this.dataset.loadCount)+1; if ( parseInt(this.dataset.loadCount) == 2) { this.parentNode.classList.add(this.dataset.class)}"
+														src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+														style="aspect-ratio: 1000 / 1000"
+														data-src="//e.snmc.io/i/300/s/a619e2628d0e8a4e10118cac1fb18343/5486449/%E4%BF%A1%E4%BB%B0%20%5BShinkou%5D%20%2F%20%E5%9C%B0%E7%90%83%20%5BChikyuu%5D%20-%20%E6%96%B0%E3%81%97%E3%81%84%E3%82%A8%E3%83%87%E3%83%B3%E3%82%B8%E3%83%A3%E3%83%B3%E3%82%B0%E3%83%AB%2C%20Cover%20art.jpeg"
+														alt="信仰 [Shinkou] / 地球 [Chikyuu] - 新しいエデンジャングル, Cover art"
+													/>
+
+													<div class="ui_image_background" style="background: linear-gradient(45deg, #d3e6f4, #a6b7c7, #638dbf, #3370b1, #000000)"></div>
+												</picture>
+											</a>
+										</div>
+
+										<div class="page_section_charts_carousel_info">
+											<div class="page_section_charts_carousel_number">#9</div>
+
+											<div class="page_section_charts_carousel_title">
+												<a href="/release/album/信仰-地球/新しいエデンジャングル/" class="release">新しいエデンジャングル</a>
+												<div>
+													<a class="artist" href="/artist/信仰">
+														<span class="ui_name_locale has_locale_name">
+															<span class="ui_name_locale_language"> Shinkou</span>
+															<span class="ui_name_locale_original">信仰</span> /
+														</span>
+													</a>
+													<a class="artist" href="/artist/地球">
+														<span class="ui_name_locale has_locale_name">
+															<span class="ui_name_locale_language"> Chikyuu</span>
+															<span class="ui_name_locale_original">地球</span>
+														</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</li>
+
+									<li id="page_section_charts_carousel_item_10" class="page_section_charts_carousel_item">
+										<div class="page_section_charts_carousel_image_frame">
+											<a href="/release/album/دل/ستاره-دار/">
+												<picture class="lazyload">
+													<source
+														type="image/webp"
+														data-srcset="
+                                          //e.snmc.io/i/600/w/697afadf78f5bdc3f3a6898671363927/7284293/%D8%AF%D9%84%20%5BDel%5D%20-%20%D8%B3%D8%AA%D8%A7%D8%B1%D9%87%20%D8%AF%D8%A7%D8%B1%2C%20Cover%20art.webp 2x,
+                                          //e.snmc.io/i/300/w/51a952dd6f1328fd9d276393997b61a1/7284293/%D8%AF%D9%84%20%5BDel%5D%20-%20%D8%B3%D8%AA%D8%A7%D8%B1%D9%87%20%D8%AF%D8%A7%D8%B1%2C%20Cover%20art.webp 1x
+                                       "
+													/>
+
+													<source
+														type="image/jpeg"
+														data-srcset="
+                                          //e.snmc.io/i/600/s/697afadf78f5bdc3f3a6898671363927/7284293/%D8%AF%D9%84%20%5BDel%5D%20-%20%D8%B3%D8%AA%D8%A7%D8%B1%D9%87%20%D8%AF%D8%A7%D8%B1%2C%20Cover%20art.jpeg 2x,
+                                          //e.snmc.io/i/300/s/51a952dd6f1328fd9d276393997b61a1/7284293/%D8%AF%D9%84%20%5BDel%5D%20-%20%D8%B3%D8%AA%D8%A7%D8%B1%D9%87%20%D8%AF%D8%A7%D8%B1%2C%20Cover%20art.jpeg 1x
+                                       "
+													/>
+													<img
+														class="ui_image_img"
+														crossorigin="Anonymous"
+														data-class="image_loaded"
+														data-load-count="0"
+														onload="this.dataset.loadCount = parseInt(this.dataset.loadCount)+1; if ( parseInt(this.dataset.loadCount) == 2) { this.parentNode.classList.add(this.dataset.class)}"
+														src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+														style="aspect-ratio: 2400 / 2366"
+														data-src="//e.snmc.io/i/300/s/51a952dd6f1328fd9d276393997b61a1/7284293/%D8%AF%D9%84%20%5BDel%5D%20-%20%D8%B3%D8%AA%D8%A7%D8%B1%D9%87%20%D8%AF%D8%A7%D8%B1%2C%20Cover%20art.jpeg"
+														alt="دل [Del] - ستاره دار, Cover art"
+													/>
+
+													<div class="ui_image_background" style="background: linear-gradient(45deg, #696246, #353732, #ccd4d7, #aaa19c, #d5e5e5)"></div>
+												</picture>
+											</a>
+										</div>
+
+										<div class="page_section_charts_carousel_info">
+											<div class="page_section_charts_carousel_number">#10</div>
+
+											<div class="page_section_charts_carousel_title">
+												<a href="/release/album/دل/ستاره-دار/" class="release">ستاره دار</a>
+												<div>
+													<a class="artist" href="/artist/دل">
+														<span class="ui_name_locale has_locale_name">
+															<span class="ui_name_locale_language"> Del</span>
+															<span class="ui_name_locale_original">دل</span>
+														</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+
+								<div onclick="page.section.charts.onClickCarousel('right')" id="page_section_charts_carousel_nav_right" class="page_section_charts_carousel_nav nav_right">
+									<i class="fa fa-chevron-right"></i>
+								</div>
+							</div>
+						</div>
+
+						<script>
+							rymQ(() => {
+								page.section.charts.initCarousel()
+							})
+						</script>
+					</section></sections
+				>
+			</div>
+		</div>
+	</div>
+</body>

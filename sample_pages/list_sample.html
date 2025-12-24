@@ -1,0 +1,439 @@
+<!-- Source URL: https://rateyourmusic.com/list/MarilynRoxie/rym25/ -->
+<body id="page_body" class="">
+	<script>
+		window.themes = ["light", "eve", "night", "lightgray", "darkgray", "pink", "classic"]
+		window.themes_label = ["Light", "Evening", "Night", "Light gray", "Dark gray", "Pink", "Classic"]
+	</script>
+	<div id="tauri-toast"></div>
+	<div id="tauri-tabs"><button class="tauri-tab-btn">Music</button><button class="tauri-tab-btn active">RYM</button></div>
+
+	<script>
+		if (window.localStorage["size_mode"]) {
+			document.body.parentElement.className += " size_mode_" + window.localStorage["size_mode"]
+		}
+
+		if (!window.localStorage["theme"] && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			document.body.parentElement.className += " theme_eve"
+		} else if (!window.localStorage["theme"] || window.localStorage["theme"] === "day") {
+			document.body.parentElement.className += " theme_light"
+		} else {
+			if (-1 != window.themes.indexOf(window.localStorage["theme"])) {
+				document.body.parentElement.className += " theme_" + window.localStorage["theme"]
+			} else {
+				document.body.parentElement.className += " theme_light"
+			}
+		}
+
+		if (window.matchMedia) {
+			var listener = window.matchMedia("(prefers-color-scheme: dark)").addEventListener
+
+			if (listener) {
+				listener("change", (e) => {
+					updateTheme()
+				})
+			}
+		}
+	</script>
+	<div id="top" class="breadcrumb_section_marker anchor"></div>
+	<script>
+		window.addEventListener("DOMContentLoaded", (event) => {
+			window.dom_loaded = true
+
+			console.log("DOM loaded")
+			if (typeof _adjustFillerColumns !== "undefined") {
+				_adjustFillerColumns()
+			}
+
+			setTimeout(function () {
+				if (typeof _closeAllStickyAds !== "undefined") {
+					_closeAllStickyAds()
+				}
+			}, 5000)
+		})
+		console.log("Enabling connatix testcase B")
+		rymQ(function () {
+			updateStyleThemeLabels()
+		})
+	</script>
+
+	<header id="page_header">
+		<div class="header_inner logged_in">
+			<div onclick="RYMheader.onClickBars()" id="header_icon_link_bars" class="header_icon_link">
+				<i class="fa fa-bars"></i>
+				<span class="show-for-small"> </span>
+				<div id="header_extended_section" class="header_extended_section header_extended_more_menu">
+					<a href="/~mattmurphy" class="header_item"> Profile </a>
+
+					<a href="/collection/mattmurphy/" class="header_item"> Music Collection </a>
+
+					<a href="/recommendations/mattmurphy/music/" class="header_item">
+						Recommendations
+						<div class="badge_count_bubble messages">
+							<span class="profile_num_messages" style="">New</span>
+						</div>
+					</a>
+
+					<a href="/film_collection/mattmurphy/" class="header_item"> Film Collection </a>
+					<a href="/list/mattmurphy/" class="header_item"> Lists </a>
+					<br />
+					<a href="/messages/inbox" class="header_item"> Messaging </a>
+					<a href="/account/mentions" class="header_item"> Mentions </a>
+
+					<a href="/account/preferences" class="header_item"> Settings </a>
+
+					<a href="/submissions/" class="header_item"> Submissions </a>
+
+					<div class="header_items_spillover"></div>
+
+					<div class="header_theme_buttons">
+						<div onclick="switchSizeMode(event);return false;" class="header_theme_button">
+							<div class="header_theme_button_label">Text</div>
+							<div class="header_theme_button_mode" id="page_frame_size_mode_switch">Aa</div>
+						</div>
+
+						<div onclick="switchTheme(event);return false;" class="header_theme_button">
+							<div class="header_theme_button_label">Theme</div>
+							<div class="header_theme_button_mode" id="page_frame_theme_switch">Light</div>
+						</div>
+
+						<div class="clearfix"></div>
+					</div>
+
+					<span onclick="if ( confirm('Are you sure you want to log out?') ) { window.location = '/account/logout'; }" class="header_item"> Log out </span>
+				</div>
+			</div>
+
+			<div class="header_profile">
+				<div class="header_profile_logged_in">
+					<a href="/~mattmurphy" title="Your profile page" class="header_profile_main">
+						<span id="header_user_img" class="header_user_img" style="background-image: url('//e.snmc.io/i/75/s/d4a84f700e16e0d752ef8835cf87c96c/12062443')"></span>
+						<span id="header_profile_username" class="header_profile_link user header_item">mattmurphy</span>
+					</a>
+				</div>
+			</div>
+
+			<div class="header_logo">
+				<a class="main header_item sonemic" href="/">
+					<div class="logo_header"></div>
+					<span class="logo_name">RYM</span>
+				</a>
+			</div>
+
+			<div class="header_links">
+				<div class="header_links_inner">
+					<div class="divider"></div>
+					<a class="header_item" href="/new-music/">new music</a>
+					<a class="header_item" href="/genres/">genres</a>
+					<div class="header_charts">
+						<a class="header_charts header_item" href="/charts/">charts</a>
+					</div>
+					<a class="header_item" href="/lists/">lists</a>
+					<a class="header_item" href="https://rym.fm/">forums</a>
+
+					<a class="header_item has_tip" data-tiptip="Thank you for being a subscriber!" href="/subscribe/" style="xline-height: 1.9">
+						<span class="subscribe_label_fundraiser" style="font-size: 0.8em; font-weight: bold"><i class="fa fa-check-circle"></i></span>
+					</a>
+
+					<div class="divider"></div>
+				</div>
+			</div>
+			<div class="header_search">
+				<div id="ui_search_frame_outer_main_search" class="ui_search_frame_outer">
+					<div id="ui_search_frame_main_search" class="ui_search_frame">
+						<div onclick="rymQ(function() {RYMsearch.onClickClose(event, 'main_search');})" class="ui_search_close">
+							<div class="ui_search_close_bar"><i class="fa fa-times"></i> Close</div>
+							<div id="ui_search_context_indicator_main_search" class="ui_search_context_indicator">
+								<div id="ui_search_context_indicator_inner_main_search" class="ui_search_context_indicator_inner"></div>
+							</div>
+						</div>
+						<div class="ui_search_clear"></div>
+						<div class="ui_search_frame_inner">
+							<div id="ui_search_main_search" class="ui_search" data-default-scope="music" data-callback="" data-callback-id="">
+								<i style="cursor: pointer" onclick="RYMsearch.redirSearch(event, 'main_search');" id="ui_search_icon_main_search" class="fa fa-search ui_search_icon"></i>
+								<i id="ui_clear_icon_main_search" onclick="rymQ(function() {RYMsearch.onClickClearSearch(event, 'main_search');})" class="fa fa-times-circle ui_clear_icon"></i>
+
+								<form onsubmit="event.preventDefault(); RYMsearch.redirSearch(event, 'main_search');">
+									<input
+										autocomplete="off"
+										aria-label="Search"
+										value=""
+										id="ui_search_input_main_search"
+										placeholder="Search..."
+										class="ui_search_input"
+										onfocus="rymQ(function() {RYMsearch.onFocus(event, 'main_search')})"
+										onblur="rymQ(function() {RYMsearch.onBlur(event, 'main_search')})"
+										onkeydown="rymQ(function() {RYMsearch.onKeyDown(event, 'main_search')})"
+										oninput="rymQ(function() {RYMsearch.onInput(event, 'main_search')})"
+									/>
+								</form>
+							</div>
+							<div class="ui_search_rest">
+								<div class="ui_search_type">
+									<div id="ui_search_debug_main_search" class="ui_search_debug"></div>
+									<span class="ui_search_object_label">Search:</span>
+									<span id="ui_search_scope_selector_main_search" class="ui_search_object_selector">
+										<input type="hidden" name="ui_search_scope_main_search" id="ui_search_scope_main_search" value="music" />
+										<span
+											id="ui_search_scope_selector_music_main_search"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'music');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_music selected"
+										>
+											Music
+										</span>
+										<span
+											id="ui_search_scope_selector_film_main_search"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'film');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_film"
+										>
+											Film
+										</span>
+										<span
+											id="ui_search_scope_selector_games_main_search"
+											style="display: none"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'games');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_games"
+										>
+											Games
+										</span>
+									</span>
+									<span class="ui_search_object_label">for:</span>
+									<span id="ui_search_object_select_frame_main_search" class="ui_search_object_select_frame selected">
+										<select onchange="rymQ(function() {RYMsearch.onChangeObject(event, 'main_search')})" id="ui_search_object_select_main_search" class="ui_search_object_select"></select>
+									</span>
+								</div>
+								<div id="ui_search_info_frame_main_search" class="ui_search_info_frame"></div>
+								<div id="ui_search_results_frame_main_search" class="ui_search_results_frame"><div id="ui_search_results_main_search" class="ui_search_results"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="header_error" onclick="$(this).fadeOut();" id="header_error">
+		<div class="header_error_close"><i class="fa fa-times-circle"></i></div>
+		<div id="header_error_text"></div>
+	</div>
+
+	<div class="header_message" onclick="$(this).fadeOut();" id="header_message">
+		<div class="header_message_close"><i class="fa fa-times-circle"></i></div>
+		<div id="header_message_text"></div>
+	</div>
+
+	<div id="mobile_header_menu" class="mobile_header_menu has_forum_link">
+		<a href="/new-music/" class="mobile_header_menu_item mobile_header_menu_item_new_music">
+			<span>New Music</span> </a
+		><a href="/genres/" class="mobile_header_menu_item mobile_header_menu_item_genres">
+			<span>Genres</span> </a
+		><a href="/charts/" class="mobile_header_menu_item mobile_header_menu_item_charts">
+			<span>Charts</span> </a
+		><a href="/lists/" class="mobile_header_menu_item mobile_header_menu_item_lists">
+			<span>Lists</span> </a
+		><a href="https://rym.fm/" class="mobile_header_menu_item mobile_header_menu_item_community">
+			<span>Forums</span>
+		</a>
+	</div>
+
+	<div id="content_wrapper_outer" class="content_wrapper_outer">
+		<div id="content_wrapper" class="content_wrapper">
+			<div id="content_cover"></div>
+			<div id="content">
+				<div id="precontent" class="precontent"></div>
+
+				<div id="total_cover"></div>
+				<div id="content_total_cover"></div>
+
+				<style>
+					#end_of_year_banner {
+						background: var(--mono-f);
+						border-radius: 5px;
+						max-width: 50em;
+						text-align: center;
+						margin: 0 auto;
+						padding: 0.6em 3em;
+						border-radius: 5px;
+						border: 2px solid var(--gen-blue-dark);
+						color: var(--mono-0);
+						position: relative;
+						font-size: 1.1em;
+					}
+				</style>
+
+				<script>
+					try {
+						new Function('import("")')
+					} catch (err) {
+						document.write(
+							'<div class=note style="margin-bottom:1em;"><b>Note:</b> Not all scripts could be loaded. You may need to upgrade to a newer browser version in order to use this site.</div>'
+						)
+					}
+				</script>
+				<!-- items on this page: 25 --><style>
+					@media only screen and (max-width: 48.1em) {
+						body {
+							background: var(--mono-f);
+						}
+						#content {
+							padding: 0;
+							padding-top: 1em;
+							background: var(--mono-f);
+						}
+					}</style
+				><style>
+					.list_art img,
+					.list_art picture {
+						width: 100%;
+						max-width: 150px;
+					}
+					h3.list_song_artists {
+						font-size: 1.4em;
+						font-weight: normal;
+					}
+
+					.list_song_title_date {
+						font-size: 0.7em;
+						font-weight: normal;
+						margin-left: 0.25em;
+					}</style
+				><link rel="canonical" href="https://rateyourmusic.com/list/MarilynRoxie/rym25/" />
+
+				<style>
+					.navspan {
+						font-size: 0.9em;
+						font-weight: normal;
+						color: var(--mono-9);
+					}
+					a.navlinknext,
+					a.navlinknext:active,
+					a.navlinknext:hover,
+					a.navlinknext:visited,
+					a.navlinknum,
+					a.navlinknum:active,
+					a.navlinknum:hover,
+					a.navlinknum:visited,
+					a.navlinkprev,
+					a.navlinkprev:active,
+					a.navlinkprev:hover,
+					a.navlinkprev:visited {
+						color: var(--gen-blue-med);
+						text-decoration: none;
+					}
+				</style>
+
+				<div id="searchsuggestions" style="visibility: hidden; position: absolute"></div>
+
+				<script type="text/javascript">
+					var token = "LwAd4aIllOQQpjQKLATQyUYIViIiEwP7MJdDE8TDznicyUm5WxL1WNE96DUGXgOC1513469849444945"
+					var currentId = 1533884
+
+					function doFlag(assoc_id, type, flag, polarity) {
+						hideflag()
+						did("flagimg_" + assoc_id + "_" + type).src = "//e.snmc.io/2.5/img/images/loading.gif"
+						sendRequest("FlagItem|" + token + "|" + assoc_id + "|" + type + "|" + flag + "|" + polarity)
+					}
+
+					var flagAssocId = 0
+					var flagType = "s"
+					var currentFlag = ""
+
+					function flagItem(assoc_id, type, event) {
+						if (did("flag_" + assoc_id + "_" + type).className != "flag0") {
+							doFlag(assoc_id, flagType, "", 0)
+							return
+						}
+
+						var fl = document.getElementById("flag")
+
+						var pageX, pageY
+
+						if (event.pageX) {
+							pageX = event.pageX
+						} else {
+							pageX = event.clientX + document.documentElement.scrollLeft
+						}
+						if (event.pageY) {
+							pageY = event.pageY
+						} else {
+							pageY = event.clientY + document.documentElement.scrollTop
+						}
+
+						fl.style.top = pageY + "px"
+						fl.style.left = pageX + "px"
+						fl.style.visibility = "visible"
+						flagAssocId = assoc_id
+					}
+
+					function hideflag() {
+						document.getElementById("flag").style.visibility = "hidden"
+					}
+				</script>
+
+				<link id="css-ui-breadcrumb-frame" rel="stylesheet" href="//e.snmc.io/dist/css/ui/breadcrumb-frame.css?v=6bbc39e2-5fe4-4e55-9766-39ea31fc51e1" type="text/css" /><link
+					id="css-ui-breadcrumb-style"
+					rel="stylesheet"
+					href="//e.snmc.io/dist/css/ui/breadcrumb-style.css?v=6bbc39e2-5fe4-4e55-9766-39ea31fc51e1"
+					type="text/css"
+				/>
+				<div style="margin-bottom: 1em">
+					<div class="ui_breadcrumb_frame">
+						<ol id="page_breadcrumb" class="ui_breadcrumb">
+							<li id="ui_breadcrumb_item_page_breadcrumb" class="ui_breadcrumb_item ui_breadcrumb_item_main relationship_ has_url">
+								<a class="ui_breadcrumb_link" href="/~MarilynRoxie"> MarilynRoxie </a>
+							</li>
+							<li id="ui_breadcrumb_item_page_breadcrumb" class="ui_breadcrumb_item ui_breadcrumb_item_main relationship_ has_url">
+								<a class="ui_breadcrumb_link" href="/list/MarilynRoxie"> lists </a>
+							</li>
+						</ol>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="clear"></div>
+
+				<div class="clear"></div>
+				<div class="row" style="border: 1px solid var(--mono-e); background: var(--mono-f8)">
+					<div class="large-8 columns" style="padding: 1.5em">
+						<h1 style="font-size: 2.1em">RYM25</h1>
+
+						<p style="font-size: 1.6em">A list by <a class="user" href="/~MarilynRoxie">MarilynRoxie</a></p>
+						<p>
+							Categories: <span class="rendered_text"><a title="[Descriptor64423]" class="genre" href="/list_classifier/RYM25/">RYM25</a></span>
+						</p>
+						<p style="color: var(--mono-6)">
+							[List1533884] |
+							<a class="fav0" title="add/remove favorite" id="link_1533884_s_f" href="javascript:void(0);" onclick="javascript:toggleFav('1533884', 's', 'f');"
+								><img id="fav_1533884_s_f" alt="heart" src="//e.snmc.io/2.5/img/images/hearte.gif" width="18" height="18" /></a
+							><a class="fav1 subtext" href="/favorited/1533884_s_f"><span id="favtext_1533884_s_f" class="smallgray">+21</span></a>
+						</p>
+						<div style="float: left; padding-right: 15px; padding-bottom: 15px">
+							<img id="img_s_1533884" src="//e.snmc.io/i/300/s/9d096931d593b6c2e7651d75bb24522a/14064021" width="300" style="aspect-ratio: 300 / 225" alt="" title="" border="0" /><br /><span
+								style="font-size: 9px"
+							></span>
+						</div>
+						<span class="rendered_text"
+							>We have just launched our <a rel="nofollow noopener" target="_blank" href="https://rateyourmusic.com/giveaway-2025/">Best of 2025</a> giveaway.<br /><br /><b
+								>To celebrate 25 years of RYM, we are giving out 25 of the best albums of 2025 to our users and 1 grand prize of a pair of Sony WH-1000XM6 headphones, and a runner-up prize of a $100
+								Bandcamp gift card!<br /><br />There are nine ways to enter - check them out
+								<a rel="nofollow noopener" target="_blank" href="https://rateyourmusic.com/giveaway-2025/">here</a>.<br /><br />One of the entry methods is to create a RYM list of your favorite songs
+								from 2001-2025, like the one you're reading now.<br /><br /><a rel="nofollow noopener" target="_blank" href="https://rateyourmusic.com/giveaway-2025/#rym25"
+									>Click here to read the instructions for how to create a valid list for this type of entry</a
+								>.</b
+							><br /><br />Visit <a rel="nofollow noopener" target="_blank" href="https://rateyourmusic.com/list_classifier/RYM25/">the list classifier page</a> to see the community's picks!<br /><br /><a
+								rel="nofollow noopener"
+								target="_blank"
+								href="https://open.spotify.com/playlist/5GHh3H7L793QpDsBJzORZH"
+								>Spotify Playlist</a
+							>
+							| Photo from The Temple Of Bellona at Kew Gardens</span
+						>
+					</div>
+					<div class="large-4 columns" style="padding: 1.5em">
+						<h5><img id="loading" src="//e.snmc.io/2.5/img/images/blank.png" /> Comments</h5>
+
+						<script src="//e.snmc.io/dist/js/legacy/basereq.js?v=6bbc39e2-5fe4-4e55-9766-39ea31fc51e1"></script>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>RYM Apple Music Player</title>
+		<script type="module" src="/src/main.ts" defer></script>
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				background-color: #000;
+				overflow: hidden;
+				width: 100vw;
+				height: 100vh;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="app">
+			<div id="music-panel">
+				<!-- Apple Music Player will be loaded here -->
+				<iframe id="apple-music-iframe" src="https://music.apple.com" style="width: 100%; height: 100%; border: none" allow="autoplay; encrypted-media; fullscreen"></iframe>
+			</div>
+			<div id="rym-panel">
+				<div class="album-info">
+					<div id="current-artist" class="artist-name">No artist detected</div>
+					<div id="current-album" class="album-title">No album detected</div>
+				</div>
+
+				<div id="manual-search" style="margin-top: 10px; display: flex; gap: 5px">
+					<input type="text" id="manual-artist" placeholder="Artist" style="flex: 1; background: #333; border: 1px solid #444; color: white; padding: 5px; font-size: 0.8em; border-radius: 4px" />
+					<input type="text" id="manual-album" placeholder="Album" style="flex: 1; background: #333; border: 1px solid #444; color: white; padding: 5px; font-size: 0.8em; border-radius: 4px" />
+					<button id="btn-search" style="background: #c33; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8em">Search</button>
+				</div>
+
+				<div id="rating-container" style="display: none">
+					<div class="rating-badge">
+						<span class="rating-value" id="rym-score">0.00</span>
+						<span class="rating-count" id="rym-count">0 ratings</span>
+					</div>
+					<div style="margin-top: 10px; font-size: 0.8em; text-align: center">
+						<a id="rym-link" href="#" target="_blank" style="color: #c33">View on RYM</a>
+					</div>
+				</div>
+				<div id="loading-status" style="display: none; text-align: center; color: #aaa">Searching RYM...</div>
+				<div id="cache-info" style="margin-top: auto; font-size: 0.8em; color: #555">Cache status: Ready</div>
+			</div>
+		</div>
+		<script src="https://js-cdn.music.apple.com/musickit/v3/musickit.js"></script>
+	</body>
+</html>

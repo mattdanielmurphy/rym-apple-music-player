@@ -1,0 +1,31 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": [
+    "music",
+    "rym"
+  ],
+  "permissions": [
+    "core:default",
+    "opener:default",
+    "core:event:default",
+    "core:webview:default",
+    "allow-show-music",
+    "allow-show-rym",
+    "allow-sync-to-rym",
+    "allow-save-sample-html",
+    "allow-set-pending-music-url",
+    "allow-navigation",
+    "allow-rating",
+    "allow-start-drag",
+    "core:window:allow-start-dragging"
+  ],
+  "remote": {
+    "urls": [
+      "https://music.apple.com/*",
+      "https://rateyourmusic.com/*",
+      "https://*.rateyourmusic.com/*"
+    ]
+  }
+}

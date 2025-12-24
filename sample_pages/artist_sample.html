@@ -1,0 +1,329 @@
+<!-- Source URL: https://rateyourmusic.com/artist/deafheaven -->
+<body id="page_body" class="has_background_image " style="background-image:url('//e.snmc.io/i/25/s/cfd16e63fda1a72e022eec57c3a242a1/10091008'); background-size:cover;">
+
+            <script>
+               window.themes = ['light', 'eve', 'night', 'lightgray', 'darkgray', 'pink', 'classic'];
+               window.themes_label = ['Light', 'Evening', 'Night', 'Light gray', 'Dark gray', 'Pink', 'Classic'];
+            </script><div id="tauri-toast"></div><div id="tauri-tabs"><button class="tauri-tab-btn">Music</button><button class="tauri-tab-btn active">RYM</button></div>
+          
+      <script>
+         if ( window.localStorage['size_mode'] ) {
+            document.body.parentElement.className += ' size_mode_' + window.localStorage['size_mode'];
+         }
+
+         if ( !window.localStorage['theme'] && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ) {
+            document.body.parentElement.className += ' theme_eve';
+         } else if ( !window.localStorage['theme'] || window.localStorage['theme'] === 'day') {
+            document.body.parentElement.className += ' theme_light';
+         } else {
+            if ( -1 != window.themes.indexOf(window.localStorage['theme']) ) {
+               document.body.parentElement.className += ' theme_' + window.localStorage['theme'];
+            } else {
+               document.body.parentElement.className += ' theme_light';
+            }
+         }
+
+         if ( window.matchMedia ) {
+
+             var listener = window.matchMedia('(prefers-color-scheme: dark)').addEventListener;
+
+             if ( listener ) {
+                listener('change', e => {
+                  updateTheme();
+                });               
+             }
+         }
+      </script>
+      <div id="top" class="breadcrumb_section_marker anchor"></div><script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                window.dom_loaded = true;
+      
+             console.log('DOM loaded');
+             if ( typeof (_adjustFillerColumns) !== 'undefined' ) {
+                _adjustFillerColumns() 
+             }
+
+             setTimeout(function () { 
+               if ( typeof (_closeAllStickyAds) !== 'undefined' ) {
+                  _closeAllStickyAds() 
+               }
+
+             }, 5000);
+         
+  
+         });
+      console.log('Enabling connatix testcase B');
+            rymQ(function() { updateStyleThemeLabels() });
+         </script>
+      
+<header id="page_header">
+<div class="header_inner logged_in">
+
+
+
+   <div onclick="RYMheader.onClickBars()" id="header_icon_link_bars" class="header_icon_link">
+      <i class="fa fa-bars"></i>
+      <span class="show-for-small">
+      </span>
+   <div id="header_extended_section" class="header_extended_section header_extended_more_menu">
+            <a href="/~mattmurphy" class="header_item">
+               Profile
+            </a>
+
+            <a href="/collection/mattmurphy/" class="header_item">
+              Music Collection
+            </a>
+
+            <a href="/recommendations/mattmurphy/music/" class="header_item">
+             Recommendations
+                   <div class="badge_count_bubble messages">
+                      <span class="profile_num_messages" style="">New</span>
+                   </div>
+            </a>
+
+            <a href="/film_collection/mattmurphy/" class="header_item">
+              Film Collection
+            </a>
+            <a href="/list/mattmurphy/" class="header_item">
+              Lists
+            </a>
+            <br>
+            <a href="/messages/inbox" class="header_item">
+              Messaging
+            </a>
+            <a href="/account/mentions" class="header_item">
+              Mentions
+            </a>
+
+            <a href="/account/preferences" class="header_item">
+               Settings
+            </a>
+
+            <a href="/submissions/" class="header_item">
+               Submissions
+            </a>
+
+            <div class="header_items_spillover">
+
+
+
+
+
+            </div>
+
+
+           <div class="header_theme_buttons">
+    
+                 <div onclick="switchSizeMode(event);return false;" class="header_theme_button">
+                    <div class="header_theme_button_label">Text</div>
+                    <div class="header_theme_button_mode" id="page_frame_size_mode_switch">Aa</div>
+                 </div>
+
+                 <div onclick="switchTheme(event);return false;" class="header_theme_button">
+                    <div class="header_theme_button_label">Theme</div>
+                    <div class="header_theme_button_mode" id="page_frame_theme_switch">Light</div>
+                 </div>
+
+                 <div class="clearfix"></div>
+
+           </div>
+
+
+            
+           <span onclick="if ( confirm('Are you sure you want to log out?') ) { window.location = '/account/logout'; }" class="header_item">
+              Log out
+           </span>
+
+        </div>
+     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="header_profile">
+       <div class="header_profile_logged_in">
+           <a href="/~mattmurphy" title="Your profile page" class="header_profile_main">
+              <span id="header_user_img" class="header_user_img" style="background-image:url('//e.snmc.io/i/75/s/d4a84f700e16e0d752ef8835cf87c96c/12062443')"></span>
+              <span id="header_profile_username" class="header_profile_link user header_item">mattmurphy</span>
+           </a>
+       </div>
+
+</div>
+
+
+<div class="header_logo">
+  <a class="main header_item sonemic" href="/">
+     <div class="logo_header"></div>
+     <span class="logo_name">RYM</span>
+  </a>
+
+</div>
+
+
+
+<div class="header_links">
+  <div class="header_links_inner">
+      <div class="divider"></div>
+      <a class="header_item" href="/new-music/">new music</a>
+      <a class="header_item" href="/genres/">genres</a>
+      <div class="header_charts">
+      <a class="header_charts header_item" href="/charts/">charts</a>
+      </div>
+      <a class="header_item" href="/lists/">lists</a>
+         <a class="header_item" href="https://rym.fm/">forums</a>
+
+
+
+
+
+         <a class="header_item has_tip" data-tiptip="Thank you for being a subscriber!" href="/subscribe/" style="xline-height:1.9">
+            <span class="subscribe_label_fundraiser" style="font-size:0.8em;font-weight:bold;"><i class="fa fa-check-circle"></i></span>
+            
+         </a>         
+
+      
+
+      <div class="divider"></div>
+    </div>
+  </div>
+  <div class="header_search">
+  <div id="ui_search_frame_outer_main_search" class="ui_search_frame_outer"> <div id="ui_search_frame_main_search" class="ui_search_frame"> <div onclick="rymQ(function() {RYMsearch.onClickClose(event, 'main_search');})" class="ui_search_close"> <div class="ui_search_close_bar"> <i class="fa fa-times"></i> Close</div> <div id="ui_search_context_indicator_main_search" class="ui_search_context_indicator"> <div id="ui_search_context_indicator_inner_main_search" class="ui_search_context_indicator_inner"></div> </div> </div> <div class="ui_search_clear"></div> <div class="ui_search_frame_inner"> <div id="ui_search_main_search" class="ui_search" data-default-scope="music" data-callback="" data-callback-id=""> <i style="cursor:pointer" onclick="RYMsearch.redirSearch(event, 'main_search');" id="ui_search_icon_main_search" class="fa fa-search ui_search_icon"></i> <i id="ui_clear_icon_main_search" onclick="rymQ(function() {RYMsearch.onClickClearSearch(event, 'main_search');})" class="fa fa-times-circle ui_clear_icon"></i>
+
+
+   <form onsubmit="event.preventDefault(); RYMsearch.redirSearch(event, 'main_search');">
+   <input autocomplete="off" aria-label="Search" value="" id="ui_search_input_main_search" placeholder="Search..." class="ui_search_input" onfocus="rymQ(function() {RYMsearch.onFocus(event, 'main_search')})" onblur="rymQ(function() {RYMsearch.onBlur(event, 'main_search')})" onkeydown="rymQ(function() {RYMsearch.onKeyDown(event, 'main_search')})" oninput="rymQ(function() {RYMsearch.onInput(event, 'main_search')})">
+   </form> </div> <div class="ui_search_rest"> <div class="ui_search_type"> <div id="ui_search_debug_main_search" class="ui_search_debug"></div> <span class="ui_search_object_label">Search:</span> <span id="ui_search_scope_selector_main_search" class="ui_search_object_selector"> <input type="hidden" name="ui_search_scope_main_search" id="ui_search_scope_main_search" value="music"> <span id="ui_search_scope_selector_music_main_search" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'music');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_music selected"> Music
+  </span> <span id="ui_search_scope_selector_film_main_search" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'film');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_film"> Film
+  </span> <span id="ui_search_scope_selector_games_main_search" style="display:none" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'games');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_games"> Games
+  </span> </span> <span class="ui_search_object_label">for:</span> <span id="ui_search_object_select_frame_main_search" class="ui_search_object_select_frame selected"> <select onchange="rymQ(function() {RYMsearch.onChangeObject(event, 'main_search')})" id="ui_search_object_select_main_search" class="ui_search_object_select"> </select> </span>  </div> <div id="ui_search_info_frame_main_search" class="ui_search_info_frame"> </div> <div id="ui_search_results_frame_main_search" class="ui_search_results_frame"> <div id="ui_search_results_main_search" class="ui_search_results"> </div> </div> </div> </div> </div>
+  </div>
+
+</div>   
+
+
+
+
+</div>
+
+</header>
+
+
+<div class="header_error" onclick="$(this).fadeOut();" id="header_error">
+   <div class="header_error_close"><i class="fa fa-times-circle"></i></div>
+   <div id="header_error_text"></div>
+</div>
+
+<div class="header_message" onclick="$(this).fadeOut();" id="header_message">
+   <div class="header_message_close"><i class="fa fa-times-circle"></i></div>
+   <div id="header_message_text"></div>
+</div>
+
+<div id="mobile_header_menu" class="mobile_header_menu has_forum_link"><a href="/new-music/" class="mobile_header_menu_item mobile_header_menu_item_new_music">
+      <span>New Music</span>
+</a><a href="/genres/" class="mobile_header_menu_item mobile_header_menu_item_genres">
+      <span>Genres</span>
+</a><a href="/charts/" class="mobile_header_menu_item mobile_header_menu_item_charts">
+      <span>Charts</span>
+</a><a href="/lists/" class="mobile_header_menu_item mobile_header_menu_item_lists">
+   <span>Lists</span> 
+</a><a href="https://rym.fm/" class="mobile_header_menu_item mobile_header_menu_item_community">
+   <span>Forums</span>
+</a></div>
+        
+
+            <div id="content_wrapper_outer" class="content_wrapper_outer">
+            <div id="content_wrapper" class="content_wrapper">
+            <div id="content">
+            <div id="content_cover"></div>
+            <div id="precontent" class="precontent lazyload" data-bkg="//e.snmc.io/i/25/s/cfd16e63fda1a72e022eec57c3a242a1/10091008"></div>
+         <div id="total_cover"></div>
+         <div id="content_total_cover"></div>          
+      
+         <style>
+            #end_of_year_banner {
+
+               background:var(--mono-f);
+               border-radius:5px;
+               max-width:50em;
+               text-align:center;
+               margin:0 auto;
+               padding:0.6em 3em;
+               border-radius:5px;
+               border:2px solid var(--gen-blue-dark);
+               color:var(--mono-0);
+               position:relative;
+               font-size:1.1em;
+            }
+
+         </style>
+      
+
+         <script>
+              try {
+                new Function('import("")');
+              } catch (err) {
+                document.write('<div class=note style="margin-bottom:1em;"><b>Note:</b> Not all scripts could be loaded. You may need to upgrade to a newer browser version in order to use this site.</div>');
+              }
+         </script>
+      
+<script>
+   var token = 'LwAd4aIllOQQpjQKLATQyUYIViIiEwP7MJdDE8TDznicyUm5WxL1WNE96DUGXgOC1513469849444945';
+</script>
+<style>
+  #content { padding:0 }
+  .cookie_consent { padding-top:1em;padding-left:2em;padding-right:2em;}
+</style>
+
+   <div class="artist_page scope_music" itemscope="" itemtype="http://schema.org/MusicGroup">
+         <meta content="Deafheaven" itemprop="name">
+         <meta content="/artist/deafheaven/" itemprop="url">
+         <div class="row" style="background:var(--mono-f0);">
+            
+               <div id="column_container_left" class="large-8 push-4 columns">
+               <div class="artist_left_col"><div class="section_artist_name">
+
+
+     <div class="hide-for-small" style="float:right;padding:1em"><input class="rym_shortcut" readonly="" aria-label="shortcut" onclick="focus();select();" value="[Artist627560]"></div><div class="artist_name" style="border:none !important;margin-top:0 !important;"><h1 class="artist_name_hdr">Deafheaven</h1> 
+                  <div style="clear:both;"></div>
+                  </div>
+
+                  </div><div class="show-for-small" style="text-align:right;padding:1em"><input class="rym_shortcut" readonly="" aria-label="shortcut" onclick="focus();select();" value="[Artist627560]"></div><div class="section_artist_info"><div class="show-for-small" style="padding-bottom:10px;"><div class="section_artist_image"><style>
+            div.coverart_627560 {
+               position:relative;
+               padding-bottom:calc( 100% / (1.0));
+            }
+            div.coverart_627560 img {
+               position:absolute;
+               width:100%;
+               top:0;
+               left:0;
+            }
+
+
+         </style>
+            <div><div class="coverart_627560">
+             <a href="//e.snmc.io/i/fullres/s/4451fa532dc43550607d1914bf07bd9c/10091008">
+             <img srcset="//e.snmc.io/i/600/s/b365dd956fbcb9db2460fc8b2db9961c/10091008/deafheaven-10-years-gone-cover-art.jpg,
+                     //e.snmc.io/i/600/s/b365dd956fbcb9db2460fc8b2db9961c/10091008/deafheaven-10-years-gone-cover-art.jpg 2x" src="//e.snmc.io/i/600/s/b365dd956fbcb9db2460fc8b2db9961c/10091008/deafheaven-10-years-gone-cover-art.jpg" alt="Cover art for 10 Years Gone by Deafheaven"></a>
+
+            <!-- <meta itemprop="image" content="//e.snmc.io/i/300/s/dda1b4677ee27775b7aa8dbad749f970/10091008" /> -->
+          </div></div></div></div><style>.info_content { margin-bottom:1em; } </style>
+         <div class="artist_info">
+            <div class="artist_info_main"><div class="info_hdr">Formed</div><div class="info_content"> February 2010, <a class="location" href="/location/San Francisco/CA/United States">San Francisco, CA, United States</a></div><div class="info_hdr">Members</div><div class="info_content"><span class="rendered_text"><a title="[Artist1217537]" href="/artist/kerry-mccoy" class="artist">Kerry McCoy</a> (guitar, bass), <a title="[Artist1251788]" href="/artist/george-clarke" class="artist">George Clarke</a> (vocals), <a title="[Artist1959321]" href="/artist/trevor-deschryver" class="artist">Trevor Deschryver</a> (drums, 2010-11), <a title="[Artist1598721]" href="/artist/nick-bassett" class="artist">Nick Bassett</a> (guitar, 2010-12), <a title="[Artist1959326]" href="/artist/derek-prine" class="artist">Derek Prine</a> (bass, 2010-13), <a title="[Artist1959340]" href="/artist/korey-severson" class="artist">Korey Severson</a> (drums, 2011-12), <a title="[Artist1414412]" href="/artist/daniel-tracy" class="artist">Daniel Tracy</a> (drums, 2012-present), <a title="[Artist1414413]" href="/artist/stephen-lee-clark" class="artist">Stephen Lee Clark</a> (bass, 2013-17), <a title="[Artist1414410]" href="/artist/shiv-mehra" class="artist">Shiv Mehra</a> (guitar, keyboards, backing vocals, 2013-present), <a title="[Artist1414416]" href="/artist/chris-johnson-4" class="artist">Chris Johnson</a> (bass, backing vocals, 2017-present)</span></div><div class="info_hdr">Related Artists</div><div class="info_content"><span class="rendered_text"><a title="[Artist1056852]" href="/artist/creepers-1" class="artist">Creepers</a>, <a title="[Artist1414228]" href="/artist/heavens-club-1" class="artist">Heaven's Club</a>, <a title="[Artist339789]" href="/artist/rise-of-caligula" class="artist">Rise of Caligula</a></span></div><div class="info_hdr">Genres</div><div class="info_content"><a title="[Genre29682]" class="genre" href="/genre/blackgaze/">Blackgaze</a>, <a title="[Genre41581]" class="genre" href="/genre/post-metal/">Post-Metal</a>, <a title="[Genre98]" class="genre" href="/genre/shoegaze/">Shoegaze</a>, <a title="[Genre20943]" class="genre" href="/genre/atmospheric-black-metal/">Atmospheric Black Metal</a>, <a title="[Genre371]" class="genre" href="/genre/dream-pop/">Dream Pop</a>, <a title="[Genre189]" class="genre" href="/genre/black-metal/">Black Metal</a></div>
+               <div class="info_hdr">Share</div><div class="info_content" style="min-height:1em;margin-top:0.25em;">
+                     
+
+            <div style="float:left;">
+               <a href="https://twitter.com/share" class="twitter-share-button" style="margin-top:2px;" data-hashtags="sonemic">Tweet</a>
+               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div></div></div></div></div></div></div></div></div></div></div></div></body>

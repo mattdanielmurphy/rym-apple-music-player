@@ -1,0 +1,573 @@
+<!-- Source URL: https://rateyourmusic.com/search?searchterm=query&searchtype= -->
+<body id="page_body" class="">
+
+            <script>
+               window.themes = ['light', 'eve', 'night', 'lightgray', 'darkgray', 'pink', 'classic'];
+               window.themes_label = ['Light', 'Evening', 'Night', 'Light gray', 'Dark gray', 'Pink', 'Classic'];
+            </script><div id="tauri-toast"></div><div id="tauri-tabs"><button class="tauri-tab-btn">Music</button><button class="tauri-tab-btn active">RYM</button></div>
+          
+      <script>
+         if ( window.localStorage['size_mode'] ) {
+            document.body.parentElement.className += ' size_mode_' + window.localStorage['size_mode'];
+         }
+
+         if ( !window.localStorage['theme'] && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ) {
+            document.body.parentElement.className += ' theme_eve';
+         } else if ( !window.localStorage['theme'] || window.localStorage['theme'] === 'day') {
+            document.body.parentElement.className += ' theme_light';
+         } else {
+            if ( -1 != window.themes.indexOf(window.localStorage['theme']) ) {
+               document.body.parentElement.className += ' theme_' + window.localStorage['theme'];
+            } else {
+               document.body.parentElement.className += ' theme_light';
+            }
+         }
+
+         if ( window.matchMedia ) {
+
+             var listener = window.matchMedia('(prefers-color-scheme: dark)').addEventListener;
+
+             if ( listener ) {
+                listener('change', e => {
+                  updateTheme();
+                });               
+             }
+         }
+      </script>
+      <div id="top" class="breadcrumb_section_marker anchor"></div><script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                window.dom_loaded = true;
+      
+             console.log('DOM loaded');
+             if ( typeof (_adjustFillerColumns) !== 'undefined' ) {
+                _adjustFillerColumns() 
+             }
+
+             setTimeout(function () { 
+               if ( typeof (_closeAllStickyAds) !== 'undefined' ) {
+                  _closeAllStickyAds() 
+               }
+
+             }, 5000);
+         
+  
+         });
+      
+            rymQ(function() { updateStyleThemeLabels() });
+         </script>
+      
+<header id="page_header">
+<div class="header_inner logged_in">
+
+
+
+   <div onclick="RYMheader.onClickBars()" id="header_icon_link_bars" class="header_icon_link">
+      <i class="fa fa-bars"></i>
+      <span class="show-for-small">
+      </span>
+   <div id="header_extended_section" class="header_extended_section header_extended_more_menu">
+            <a href="/~mattmurphy" class="header_item">
+               Profile
+            </a>
+
+            <a href="/collection/mattmurphy/" class="header_item">
+              Music Collection
+            </a>
+
+            <a href="/recommendations/mattmurphy/music/" class="header_item">
+             Recommendations
+                   <div class="badge_count_bubble messages">
+                      <span class="profile_num_messages" style="">New</span>
+                   </div>
+            </a>
+
+            <a href="/film_collection/mattmurphy/" class="header_item">
+              Film Collection
+            </a>
+            <a href="/list/mattmurphy/" class="header_item">
+              Lists
+            </a>
+            <br>
+            <a href="/messages/inbox" class="header_item">
+              Messaging
+            </a>
+            <a href="/account/mentions" class="header_item">
+              Mentions
+            </a>
+
+            <a href="/account/preferences" class="header_item">
+               Settings
+            </a>
+
+            <a href="/submissions/" class="header_item">
+               Submissions
+            </a>
+
+            <div class="header_items_spillover">
+
+
+
+
+
+            </div>
+
+
+           <div class="header_theme_buttons">
+    
+                 <div onclick="switchSizeMode(event);return false;" class="header_theme_button">
+                    <div class="header_theme_button_label">Text</div>
+                    <div class="header_theme_button_mode" id="page_frame_size_mode_switch">Aa</div>
+                 </div>
+
+                 <div onclick="switchTheme(event);return false;" class="header_theme_button">
+                    <div class="header_theme_button_label">Theme</div>
+                    <div class="header_theme_button_mode" id="page_frame_theme_switch">Light</div>
+                 </div>
+
+                 <div class="clearfix"></div>
+
+           </div>
+
+
+            
+           <span onclick="if ( confirm('Are you sure you want to log out?') ) { window.location = '/account/logout'; }" class="header_item">
+              Log out
+           </span>
+
+        </div>
+     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="header_profile">
+       <div class="header_profile_logged_in">
+           <a href="/~mattmurphy" title="Your profile page" class="header_profile_main">
+              <span id="header_user_img" class="header_user_img" style="background-image:url('//e.snmc.io/i/75/s/d4a84f700e16e0d752ef8835cf87c96c/12062443')"></span>
+              <span id="header_profile_username" class="header_profile_link user header_item">mattmurphy</span>
+           </a>
+       </div>
+
+</div>
+
+
+<div class="header_logo">
+  <a class="main header_item sonemic" href="/">
+     <div class="logo_header"></div>
+     <span class="logo_name">RYM</span>
+  </a>
+
+</div>
+
+
+
+<div class="header_links">
+  <div class="header_links_inner">
+      <div class="divider"></div>
+      <a class="header_item" href="/new-music/">new music</a>
+      <a class="header_item" href="/genres/">genres</a>
+      <div class="header_charts">
+      <a class="header_charts header_item" href="/charts/">charts</a>
+      </div>
+      <a class="header_item" href="/lists/">lists</a>
+         <a class="header_item" href="https://rym.fm/">forums</a>
+
+
+
+
+
+         <a class="header_item has_tip" data-tiptip="Thank you for being a subscriber!" href="/subscribe/" style="xline-height:1.9">
+            <span class="subscribe_label_fundraiser" style="font-size:0.8em;font-weight:bold;"><i class="fa fa-check-circle"></i></span>
+            
+         </a>         
+
+      
+
+      <div class="divider"></div>
+    </div>
+  </div>
+  <div class="header_search">
+  <div id="ui_search_frame_outer_main_search" class="ui_search_frame_outer"> <div id="ui_search_frame_main_search" class="ui_search_frame"> <div onclick="rymQ(function() {RYMsearch.onClickClose(event, 'main_search');})" class="ui_search_close"> <div class="ui_search_close_bar"> <i class="fa fa-times"></i> Close</div> <div id="ui_search_context_indicator_main_search" class="ui_search_context_indicator"> <div id="ui_search_context_indicator_inner_main_search" class="ui_search_context_indicator_inner"></div> </div> </div> <div class="ui_search_clear"></div> <div class="ui_search_frame_inner"> <div id="ui_search_main_search" class="ui_search" data-default-scope="music" data-callback="" data-callback-id=""> <i style="cursor:pointer" onclick="RYMsearch.redirSearch(event, 'main_search');" id="ui_search_icon_main_search" class="fa fa-search ui_search_icon"></i> <i id="ui_clear_icon_main_search" onclick="rymQ(function() {RYMsearch.onClickClearSearch(event, 'main_search');})" class="fa fa-times-circle ui_clear_icon"></i>
+
+
+   <form onsubmit="event.preventDefault(); RYMsearch.redirSearch(event, 'main_search');">
+   <input autocomplete="off" aria-label="Search" value="query" id="ui_search_input_main_search" placeholder="Search..." class="ui_search_input" onfocus="rymQ(function() {RYMsearch.onFocus(event, 'main_search')})" onblur="rymQ(function() {RYMsearch.onBlur(event, 'main_search')})" onkeydown="rymQ(function() {RYMsearch.onKeyDown(event, 'main_search')})" oninput="rymQ(function() {RYMsearch.onInput(event, 'main_search')})">
+   </form> </div> <div class="ui_search_rest"> <div class="ui_search_type"> <div id="ui_search_debug_main_search" class="ui_search_debug"></div> <span class="ui_search_object_label">Search:</span> <span id="ui_search_scope_selector_main_search" class="ui_search_object_selector"> <input type="hidden" name="ui_search_scope_main_search" id="ui_search_scope_main_search" value="music"> <span id="ui_search_scope_selector_music_main_search" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'music');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_music selected"> Music
+  </span> <span id="ui_search_scope_selector_film_main_search" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'film');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_film"> Film
+  </span> <span id="ui_search_scope_selector_games_main_search" style="display:none" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'games');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_games"> Games
+  </span> </span> <span class="ui_search_object_label">for:</span> <span id="ui_search_object_select_frame_main_search" class="ui_search_object_select_frame selected"> <select onchange="rymQ(function() {RYMsearch.onChangeObject(event, 'main_search')})" id="ui_search_object_select_main_search" class="ui_search_object_select"> </select> </span>  </div> <div id="ui_search_info_frame_main_search" class="ui_search_info_frame"> </div> <div id="ui_search_results_frame_main_search" class="ui_search_results_frame"> <div id="ui_search_results_main_search" class="ui_search_results"> </div> </div> </div> </div> </div>
+  </div>
+
+</div>   
+
+
+
+
+</div>
+
+</header>
+
+
+<div class="header_error" onclick="$(this).fadeOut();" id="header_error">
+   <div class="header_error_close"><i class="fa fa-times-circle"></i></div>
+   <div id="header_error_text"></div>
+</div>
+
+<div class="header_message" onclick="$(this).fadeOut();" id="header_message">
+   <div class="header_message_close"><i class="fa fa-times-circle"></i></div>
+   <div id="header_message_text"></div>
+</div>
+
+<div id="mobile_header_menu" class="mobile_header_menu has_forum_link"><a href="/new-music/" class="mobile_header_menu_item mobile_header_menu_item_new_music">
+      <span>New Music</span>
+</a><a href="/genres/" class="mobile_header_menu_item mobile_header_menu_item_genres">
+      <span>Genres</span>
+</a><a href="/charts/" class="mobile_header_menu_item mobile_header_menu_item_charts">
+      <span>Charts</span>
+</a><a href="/lists/" class="mobile_header_menu_item mobile_header_menu_item_lists">
+   <span>Lists</span> 
+</a><a href="https://rym.fm/" class="mobile_header_menu_item mobile_header_menu_item_community">
+   <span>Forums</span>
+</a></div>
+        
+
+            <div id="content_wrapper_outer" class="content_wrapper_outer">
+            <div id="content_wrapper" class="content_wrapper">
+            <div id="content_cover"></div>
+            <div id="content">
+            <div id="precontent" class="precontent"></div>
+
+         
+         <div id="total_cover"></div>
+         <div id="content_total_cover"></div>          
+      
+         <style>
+            #end_of_year_banner {
+
+               background:var(--mono-f);
+               border-radius:5px;
+               max-width:50em;
+               text-align:center;
+               margin:0 auto;
+               padding:0.6em 3em;
+               border-radius:5px;
+               border:2px solid var(--gen-blue-dark);
+               color:var(--mono-0);
+               position:relative;
+               font-size:1.1em;
+            }
+
+         </style>
+      
+
+         <script>
+              try {
+                new Function('import("")');
+              } catch (err) {
+                document.write('<div class=note style="margin-bottom:1em;"><b>Note:</b> Not all scripts could be loaded. You may need to upgrade to a newer browser version in order to use this site.</div>');
+              }
+         </script>
+      <div class="row"><div id="column_container_left" class="large-8 columns"><!-- begin search -->
+            <div class="page_search_results"><table style="width:100%;padding:0;margin:0;"><tbody><tr><td style="padding:0;margin:0;vertical-align:top;"><div style="padding-left:0.8em;font-size:1.3em;margin-top:1em;margin-bottom:1em;color:var(--mono-9);">Search results for <b>query</b></div>
+
+<!--a-->
+<div class="clear"> </div><h3>Artists</h3><table style="margin-bottom:0.5em;"><tbody><tr class="infobox">
+            <td class="page_search_img_cell"><div style="position:relative;width:100%;padding-bottom:calc( min( 8em, 100% / 1.0));">
+                              <div style="position:absolute;top:0;left:0;">
+                                 <a href="/artist/query"><img class="page_search_img lazyload" data-src="//e.snmc.io/i/150/s/f843caa129d1609586eb62347a639321/11164902"></a>
+                              </div>
+                             </div>
+
+            </td><td style="padding-left:18px;"><table><tbody><tr><!--m--><td style="padding:0;"><b><a href="/artist/query" class="searchpage artist" title="[Artist1733198]">query</a></b></td><td style="text-align:right;"><span class="smallgray">[Artist1733198]</span></td></tr></tbody></table><!--n--><span class="subinfo">
+       a.k.a: Jaiden Macintosh<br>
+        <a title="[Genre90]" class="smallgreen" href="/genre/idm/">IDM</a>, <a title="[Genre106]" class="smallgreen" href="/genre/glitch/">Glitch</a>, <a title="[Genre84]" class="smallgreen" href="/genre/ambient/">Ambient</a><br>
+       <div style="margin-top:7px;"> &nbsp;
+       </div>
+
+       <div style="margin-top:0.7em; font-size:0.9em; color:var(--mono-8)"><i class="far fa-question-circle"></i> Experimental electronic project from Michigan</div></span></td></tr></tbody></table><table style="margin-bottom:0.5em;"><tbody><tr class="infobox">
+            <td class="page_search_img_cell"><div style="position:relative;width:100%;padding-bottom:calc( min( 8em, 100% / 1.0));">
+                              <div style="position:absolute;top:0;left:0;">
+                                 <a href="/artist/jaiden-macintosh"><img class="page_search_img lazyload" data-src="//e.snmc.io/i/150/s/5efeae01baea5d8b0f9aecd5ef486c4a/9517205"></a>
+                              </div>
+                             </div>
+
+            </td><td style="padding-left:18px;"><table><tbody><tr><!--m--><td style="padding:0;"><b><a href="/artist/jaiden-macintosh" class="searchpage artist" title="[Artist1521634]">Jaiden Macintosh</a></b></td><td style="text-align:right;"><span class="smallgray">[Artist1521634]</span></td></tr></tbody></table><!--n--><span class="subinfo">
+       a.k.a: Jaiden Morgan Macintosh, Jaiden Morg Macintosh, Jaiden M. Macintosh, Jaiden, JMM, J Macintosh, J Morgan Macintosh, Jai, _|卂1D3N /\/\4č1ntØ$h, )))))))))))))))))))), ********************, ... / ... / ... / ... / ... / ... / ... / ... /, &amp;student, ___ Turntable, 0_0, 01001010 01000100, 494, Acid Devouring Crushed Decomposing Human Remains, Blåhaj Noise Wall, bnuy, Carved Wounds That Tell a Story Reminiscent of Emo Poetry, CDRW, chibimon, color status, Claustra, cocoabun, Column Space, Control V, Dark Orange Fuzzbox, Digital Life, DJ Awawa, dj calliope, emetra, Field Recordings Artist, First Quarter Moon, Free Robux Working Glitch 2024, fuckfuckkillkill, Gaped Anuses Stretched Out and Filled With Sperm, Haruhuna, Heaven's Wall of Sound, im back, install, issho ni yumewomiru, Lake Michigan, Lil USB X, Meditating, Miles "Tails" Prower, New crystals Horizon, N.F.T., noisehz, Notification, Null of Limbo, Pill, Pjca, pure ♡ gaze, Q#, Qet, query, Real Photo of the Big Bang 13.8 Billion Years Ago, remixer00, ซากปรักหักพัง [Ruins], Shadow in the Reflection of God, sleep, snowing, Orange Country Road, Tamagokuri, Taumatawhakatangi­hangakoauauotamatea­turipukakapikimaunga­horonukupokaiwhen­uakitanatahu, The bbbbbbbbbbbbbbbbbbbb, Tiny Sounds, Theresa Prada, The Venezuelan Buses, train, Tribute, Tsuki, raine, renamon, RobloxSk8er2002, Ubis, untitled, Untitled Noise Project, user-709104806, videoplayback, white !! noise, White Label, x❤️, 불 [Fire], 彁 [Ka], 極簡主義是關鍵 [Ji Jian Zhu Yi Shi Guan Jian], ᐛ⠳⠳⡹บ๕ᐂ⢗ΔΔ⡣⣟ᐛᐛ, ⊂(´･◠･⊂ )∘˚˳°, 𒄆𒀱𒂝𒀱 [...], ☃, ☎️, 🌎🌐😍😉🎹🎶🔜💿, ✉, ☽, 🐰, ⬛<br>
+        <a title="[Genre84]" class="smallgreen" href="/genre/ambient/">Ambient</a>, <a title="[Genre246]" class="smallgreen" href="/genre/drone/">Drone</a>, <a title="[Genre32334]" class="smallgreen" href="/genre/harsh-noise-wall/">Harsh Noise Wall</a><br>
+       <div style="margin-top:7px;"> &nbsp;
+       </div>
+
+       <div style="margin-top:0.7em; font-size:0.9em; color:var(--mono-8)"><i class="far fa-question-circle"></i> Electronic and experimental musician from Michigan</div></span></td></tr></tbody></table><table style="margin-bottom:0.5em;"><tbody><tr class="infobox">
+            <td class="page_search_img_cell">
+
+            </td><td style="padding-left:18px;"><table><tbody><tr><!--m--><td style="padding:0;"><b><a href="/artist/querq" class="searchpage artist" title="[Artist1899643]">Querq</a></b></td><td style="text-align:right;"><span class="smallgray">[Artist1899643]</span></td></tr></tbody></table><!--n--><span class="subinfo">
+       
+       
+       <div style="margin-top:7px;"> &nbsp;
+       </div>
+
+       <div style="margin-top:0.7em; font-size:0.9em; color:var(--mono-8)"><i class="far fa-question-circle"></i> Electronic musician</div></span></td></tr></tbody></table><table style="margin-bottom:0.5em;"><tbody><tr class="infobox">
+            <td class="page_search_img_cell"><div style="position:relative;width:100%;padding-bottom:calc( min( 8em, 100% / 1.0));">
+                              <div style="position:absolute;top:0;left:0;">
+                                 <a href="/artist/j__query"><img class="page_search_img lazyload" data-src="//e.snmc.io/i/150/s/5ab5ac9b9a34fedd553f3cb3d81a21fb/5763324"></a>
+                              </div>
+                             </div>
+
+            </td><td style="padding-left:18px;"><table><tbody><tr><!--m--><td style="padding:0;"><b><a href="/artist/j__query" class="searchpage artist" title="[Artist1117736]">J. Query</a></b></td><td style="text-align:right;"><span class="smallgray">[Artist1117736]</span></td></tr></tbody></table><!--n--><span class="subinfo">
+       
+        <a title="[Genre36055]" class="smallgreen" href="/genre/bubblegum-bass/">Bubblegum Bass</a><br>
+       <div style="margin-top:7px;"> &nbsp;
+       </div>
+
+       </span></td></tr></tbody></table><a class="expand_button" href="/search?searchterm=query&amp;searchtype=a">Search only Artists</a><br><br><h3>Songs</h3><table style="margin-bottom:0.5em;"><tbody><tr class="infobox">
+            <td class="page_search_img_cell"><div style="position:relative;width:100%;padding-bottom:calc( min( 8em, 100% / 0.9929166666666667));">
+                              <div style="position:absolute;top:0;left:0;">
+                                 <a href="/song/herbie-nichols/query/"><img class="page_search_img lazyload" data-src="//e.snmc.io/i/150/s/20226ec3a635e28b3c58d9a0b8c8e390/12135305"></a>
+                              </div>
+                             </div>
+
+            </td><td style="padding-left:18px;">
+
+<table><tbody><tr><td style="padding:0;"><b><a href="/song/herbie-nichols/query/" class="searchpage">
+<span class="ui_name_locale ">
+<span class="ui_name_locale_original">Query</span>
+</span>
+</a></b></td><td style="text-align:right;"><span class="smallgray">[Song3264598]</span></td></tr></tbody></table><span style="margin-top:0.25em;font-size:1em;">
+   <b style="color:var(--text-secondary);font-weight:bold">
+
+
+                  <span>
+   <span class="ui_name_locale">Herbie Nichols Trio</span>
+</span> 
+
+
+</b>
+            <div style="margin-top:0.43em;font-size:0.925em;color:var(--text-secondary)">
+                  <span class="genre comma_separated first">Bebop</span>
+            </div>
+
+       <div style="margin-top:7px;"> </div>
+
+
+</span></td></tr></tbody></table><table style="margin-bottom:0.5em;"><tbody><tr class="infobox">
+            <td class="page_search_img_cell"><div style="position:relative;width:100%;padding-bottom:calc( min( 8em, 100% / 1.0));">
+                              <div style="position:absolute;top:0;left:0;">
+                                 <a href="/song/afterglow-studios/query/"><img class="page_search_img lazyload" data-src="//e.snmc.io/i/150/s/b4b90202be77fa9c4606eafd469d86a3/13197879"></a>
+                              </div>
+                             </div>
+
+            </td><td style="padding-left:18px;">
+
+<table><tbody><tr><td style="padding:0;"><b><a href="/song/afterglow-studios/query/" class="searchpage">
+<span class="ui_name_locale ">
+<span class="ui_name_locale_original">Query</span>
+</span>
+</a></b></td><td style="text-align:right;"><span class="smallgray">[Song25521192]</span></td></tr></tbody></table><span style="margin-top:0.25em;font-size:1em;">
+   <b style="color:var(--text-secondary);font-weight:bold">
+
+
+                  <span>
+   <span class="ui_name_locale"> Rhinestone Roundup</span>
+</span> 
+
+
+</b>
+
+       <div style="margin-top:7px;"> </div>
+
+
+</span></td></tr></tbody></table><table style="margin-bottom:0.5em;"><tbody><tr class="infobox">
+            <td class="page_search_img_cell"><div style="position:relative;width:100%;padding-bottom:calc( min( 8em, 100% / 1.0));">
+                              <div style="position:absolute;top:0;left:0;">
+                                 <a href="/song/later-days/query/"><img class="page_search_img lazyload" data-src="//e.snmc.io/i/150/s/5c5545bc943ae3e3a3fdef716a470166/2625962"></a>
+                              </div>
+                             </div>
+
+            </td><td style="padding-left:18px;">
+
+<table><tbody><tr><td style="padding:0;"><b><a href="/song/later-days/query/" class="searchpage">
+<span class="ui_name_locale ">
+<span class="ui_name_locale_original">Query</span>
+</span>
+</a></b></td><td style="text-align:right;"><span class="smallgray">[Song18033908]</span></td></tr></tbody></table><span style="margin-top:0.25em;font-size:1em;">
+   <b style="color:var(--text-secondary);font-weight:bold">
+
+
+                  <span>
+<span class="ui_name_locale ">
+<span class="ui_name_locale_original">Later Days</span>
+</span>
+</span> 
+
+
+</b>
+
+       <div style="margin-top:7px;"> </div>
+
+
+</span></td></tr></tbody></table><table style="margin-bottom:0.5em;"><tbody><tr class="infobox">
+            <td class="page_search_img_cell"><div style="position:relative;width:100%;padding-bottom:calc( min( 8em, 100% / 1.0));">
+                              <div style="position:absolute;top:0;left:0;">
+                                 <a href="/song/彩冷える/query/"><img class="page_search_img lazyload" data-src="//e.snmc.io/i/150/s/a6b7726b551494bfc37d8ef900aa76b8/8409133"></a>
+                              </div>
+                             </div>
+
+            </td><td style="padding-left:18px;">
+
+<table><tbody><tr><td style="padding:0;"><b><a href="/song/彩冷える/query/" class="searchpage">
+<span class="ui_name_locale ">
+<span class="ui_name_locale_original">Query</span>
+</span>
+</a></b></td><td style="text-align:right;"><span class="smallgray">[Song8077785]</span></td></tr></tbody></table><span style="margin-top:0.25em;font-size:1em;">
+   <b style="color:var(--text-secondary);font-weight:bold">
+
+
+                  <span>
+<span class="ui_name_locale has_locale_name">
+<span class="ui_name_locale_language"> Ayabie</span>
+<span class="ui_name_locale_original">彩冷える</span>
+</span>
+</span> 
+
+
+</b>
+            <div style="margin-top:0.43em;font-size:0.925em;color:var(--text-secondary)">
+                  <span class="genre comma_separated first">Alternative Rock</span>
+            </div>
+
+       <div style="margin-top:7px;"> </div>
+
+
+</span></td></tr></tbody></table><a class="expand_button" href="/search?searchterm=query&amp;searchtype=z">Search only Songs</a><br><br><h3>Releases</h3><table style="margin-bottom:0.5em;"><tbody><tr class="infobox">
+            <td class="page_search_img_cell"><div style="position:relative;width:100%;padding-bottom:calc( min( 8em, 100% / 1.0));">
+                              <div style="position:absolute;top:0;left:0;">
+                                 <a href="/release/album/mais-uma/quero-quero-quero-quero/"><img class="page_search_img lazyload" data-src="//e.snmc.io/i/150/s/e7fafc70afb8f7c42a618d8dadc60dfe/9134518"></a>
+                              </div>
+                             </div>
+
+            </td><td style="padding-left:18px;"><table width="100%"><tbody><tr><td><a title="[Artist1533734]" href="/artist/mais-uma" class="artist">Mais Uma</a> - <i><a title="[Album12165331]" href="/release/album/mais-uma/quero-quero-quero-quero/" class="searchpage">QUERO QUERO QUERO QUERO</a></i><br><div class="clear"> </div><table class="mbgen" style="border:none;padding:0;margin-left:-0.25em;margin-top:0.5em;border-top:1px solid var(--mono-e)"><tbody><tr>
+           
+                     <td style="width:4em;">2020</td>
+                     <td style="width:5em;"></td>
+                     <td style="width:5em;">Digital File </td>
+
+                     <td style="width:9em;"><a title="[Label1350]" href="/label/tratore/" class="label">Tratore</a></td>
+                     <td style="width:6em;"></td></tr><tr><td colspan="5"><b>Tracks:</b> <span class="rendered_text">Quero quero</span>, <span class="rendered_text">Súbita alma</span>, <span class="rendered_text">O médico ou o monstro</span>, <span class="rendered_text">Te amo</span>, <span class="rendered_text">Fugindo da canção</span>, <span class="rendered_text">Livros &amp; abelhas</span>, <span class="rendered_text">Enquanto a chuva lá fora caía sem molhar</span>, <span class="rendered_text">Aroeira</span>, <span class="rendered_text">Talvez fosse diferente</span>, <span class="rendered_text">Não tente mudar amanhã</span> </td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table style="margin-bottom:0.5em;"><tbody><tr class="infobox">
+            <td class="page_search_img_cell"><div style="position:relative;width:100%;padding-bottom:calc( min( 8em, 100% / 1.0));">
+                              <div style="position:absolute;top:0;left:0;">
+                                 <a href="/release/single/lamp-dx/query/"><img class="page_search_img lazyload" data-src="//e.snmc.io/i/150/s/9f746346225d36cdc539c03bc7a78ae8/11443395"></a>
+                              </div>
+                             </div>
+
+            </td><td style="padding-left:18px;"><table width="100%"><tbody><tr><td><a title="[Artist1648722]" href="/artist/lamp-dx" class="artist">Lamp DX</a> - <i><a title="[Album15520451]" href="/release/single/lamp-dx/query/" class="searchpage">Query:</a></i><br><div class="clear"> </div><table class="mbgen" style="border:none;padding:0;margin-left:-0.25em;margin-top:0.5em;border-top:1px solid var(--mono-e)"><tbody><tr>
+           
+                     <td style="width:4em;">2019</td>
+                     <td style="width:5em;"></td>
+                     <td style="width:5em;">Digital File </td>
+
+                     <td style="width:9em;"><a title="[Label897]" href="/label/_no_label_/" class="label">(No Label)</a></td>
+                     <td style="width:6em;">n/a</td></tr><tr><td colspan="5"><b>Tracks:</b> <span class="rendered_text">Query:</span> </td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table style="margin-bottom:0.5em;"><tbody><tr class="infobox">
+            <td class="page_search_img_cell"><div style="position:relative;width:100%;padding-bottom:calc( min( 8em, 100% / 1.0217113665389528));">
+                              <div style="position:absolute;top:0;left:0;">
+                                 <a href="/release/album/mais-uma/quero-quero-quero-quero-1/"><img class="page_search_img lazyload" data-src="//e.snmc.io/i/150/s/01e5e64856db3a9e95b4752f524031c6/10305591"></a>
+                              </div>
+                             </div>
+
+            </td><td style="padding-left:18px;"><table width="100%"><tbody><tr><td><a title="[Artist1533734]" href="/artist/mais-uma" class="artist">Mais Uma</a> - <i><a title="[Album14938209]" href="/release/album/mais-uma/quero-quero-quero-quero-1/" class="searchpage">Quero quero quero quero</a></i><br><div class="clear"> </div><table class="mbgen" style="border:none;padding:0;margin-left:-0.25em;margin-top:0.5em;border-top:1px solid var(--mono-e)"><tbody><tr>
+           
+                     <td style="width:4em;">2022</td>
+                     <td style="width:5em;"></td>
+                     <td style="width:5em;">CD </td>
+
+                     <td style="width:9em;"></td>
+                     <td style="width:6em;"></td></tr><tr><td colspan="5"><b>Tracks:</b> <span class="rendered_text">Quero Quero</span>, <span class="rendered_text">Súbita Alma</span>, <span class="rendered_text">O Médico ou o Monstro</span>, <span class="rendered_text">Te Amo</span>, <span class="rendered_text">Fugindo da Canção</span>, <span class="rendered_text">Livros &amp; Abelhas</span>, <span class="rendered_text">Enquanto a Chuva Lá Fora Caía Sem Molhar</span>, <span class="rendered_text">Aroeira</span>, <span class="rendered_text">Talvez Fosse Diferente</span>, <span class="rendered_text">Não Tente Mudar Amanhã</span>, <span class="rendered_text">Espelho Quebrado</span> ...</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><table style="margin-bottom:0.5em;"><tbody><tr class="infobox">
+            <td class="page_search_img_cell"><div style="position:relative;width:100%;padding-bottom:calc( min( 8em, 100% / 0.9921465968586387));">
+                              <div style="position:absolute;top:0;left:0;">
+                                 <a href="/release/ep/privacy/default-query/"><img class="page_search_img lazyload" data-src="//e.snmc.io/i/150/s/1af0cb4bfa34aa115eb0957075ce826a/6093106"></a>
+                              </div>
+                             </div>
+
+            </td><td style="padding-left:18px;"><table width="100%"><tbody><tr><td><a title="[Artist1126880]" href="/artist/privacy-1" class="artist">Privacy</a> - <i><a title="[Album7332672]" href="/release/ep/privacy/default-query/" class="searchpage">Default Query</a></i><br><div class="clear"> </div><table class="mbgen" style="border:none;padding:0;margin-left:-0.25em;margin-top:0.5em;border-top:1px solid var(--mono-e)"><tbody><tr>
+           
+                     <td style="width:4em;">2016</td>
+                     <td style="width:5em;"><span class="ui_flag" title="United States"><img alt="United States" src="https://e.snmc.io/3.0/img/flags/4x3/us.svg"></span> </td>
+                     <td style="width:5em;">Vinyl </td>
+
+                     <td style="width:9em;"><a title="[Label109777]" href="/label/valcrond_video/" class="label">Valcrond Video</a></td>
+                     <td style="width:6em;">VV-019</td></tr><tr><td colspan="5"><b>Tracks:</b> <span class="rendered_text">Query A</span>, <span class="rendered_text">Query B</span>, <span class="rendered_text">Query C</span>, <span class="rendered_text">Query D</span> </td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table><a class="expand_button" href="/search?searchterm=query&amp;searchtype=l">Search only Releases</a><br><br><h3>Labels</h3><table style="margin-bottom:0.5em;"><tbody><tr class="infobox">
+            <td class="page_search_img_cell"><div style="position:relative;width:100%;padding-bottom:calc( min( 8em, 100% / 1.0));">
+                              <div style="position:absolute;top:0;left:0;">
+                                 <a href=""><img class="page_search_img lazyload" data-src="//e.snmc.io/i/150/s/ff48b6f39ca685687a0fda3f7583e4a9/12644299"></a>
+                              </div>
+                             </div>
+
+            </td><td style="padding-left:18px;"><a title="[Label200766]" href="/label/quern/" class="label">Quern</a> <br><div class="small">
+                           <br> Montréal, QC, Canada
+                           <div class="shortcut" style="text-align:right;">[Label200766]</div></div></td></tr></tbody></table><div style="text-align:right"><a id="search_morelink" style="margin-right:1em;" href="/search?searchterm=query&amp;searchtype=music&amp;page=2">More Results</a><br><br></div><!--z--><div style="padding:1em;"><br><br>If the label you're looking for isn't listed, go here: <b><a href="/labels/label_ac">Add label</a></b></div></td></tr></tbody></table>
+               
+            </div>
+           <!-- end search --><div class="column_filler" id="column_filler_left"></div></div>
+           <div id="column_container_right" class="large-4 columns"><div class="column_filler" id="column_filler_right"></div></div></div>
+         <div class="clearfix"></div>
+         <!-- end content and content_wrapper -->
+               </div>
+             </div>
+          </div>
+
+
+
+          <div class="overlay_invisible" id="overlay_invisible"></div>
+
+          <div class="ui_cropper_frame" id="ui_cropper_frame"></div>
+
+          <div class="modal_parent_frame" id="modal_parent_frame">
+             <div onclick="rym.closeModal();" id="modal_overlay" class="modal_overlay" style="">Close <i class="fa fa-times"></i></div>
+             <div onclick="rym.closeModal();" id="modal_overlay_invisible" class="modal_overlay_invisible" style=""></div>
+             <div id="modal_parent_frame_inner" class="modal_parent_frame_inner">
+                    <div id="modal_content" class="modal_content">
+                    </div>
+             </div>
+          </div>
+
+          <div class="modal_parent_frame_level_2" id="modal_parent_frame_level_2">
+             <div onclick="rym.closeModal2();" id="modal_overlay_level_2" class="modal_overlay" style="">Close <i class="fa fa-times"></i></div>
+             <div onclick="rym.closeModal2();" id="modal_overlay_invisible_level_2" class="modal_overlay_invisible" style=""></div>
+             <div id="modal_parent_frame_inner_level_2" class="modal_parent_frame_inner_level_2">
+                    <div id="modal_content_level_2" class="modal_content">
+                    </div>
+             </div>
+          </div>
+
+
+
+             <!-- ~~~~~~~~ end content ~~~~~~~~~~~~~~~ -->
+            <div class="ui_chooser_results_frame" id="ui_chooser_results_frame">
+                <div class="ui_chooser_results bg-fff alternate" id="ui_chooser_results">
+                </div>
+            </div>  
+
+
+
+             <div id="voting_ui_frame"></div>
+
+          <div style="clear:both;"></div>
+      
+               <script> 
+                   document.querySelectorAll('.mobile-sticky-ad').forEach( item => {
+                     console.log ('setting sticky timer for ' + item.id)
+                     setTimeout(function () {
+                        item.classList.add('seen')
+                     }, 2000);
+                   });
+               </script></body>

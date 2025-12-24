@@ -1,0 +1,1503 @@
+<!-- Source URL: https://rateyourmusic.com/lists/ -->
+<body id="page_body" class="">
+	<script>
+		window.themes = ["light", "eve", "night", "lightgray", "darkgray", "pink", "classic"]
+		window.themes_label = ["Light", "Evening", "Night", "Light gray", "Dark gray", "Pink", "Classic"]
+	</script>
+	<div id="tauri-toast"></div>
+	<div id="tauri-tabs"><button class="tauri-tab-btn">Music</button><button class="tauri-tab-btn active">RYM</button></div>
+
+	<script>
+		if (window.localStorage["size_mode"]) {
+			document.body.parentElement.className += " size_mode_" + window.localStorage["size_mode"]
+		}
+
+		if (!window.localStorage["theme"] && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			document.body.parentElement.className += " theme_eve"
+		} else if (!window.localStorage["theme"] || window.localStorage["theme"] === "day") {
+			document.body.parentElement.className += " theme_light"
+		} else {
+			if (-1 != window.themes.indexOf(window.localStorage["theme"])) {
+				document.body.parentElement.className += " theme_" + window.localStorage["theme"]
+			} else {
+				document.body.parentElement.className += " theme_light"
+			}
+		}
+
+		if (window.matchMedia) {
+			var listener = window.matchMedia("(prefers-color-scheme: dark)").addEventListener
+
+			if (listener) {
+				listener("change", (e) => {
+					updateTheme()
+				})
+			}
+		}
+	</script>
+	<div id="top" class="breadcrumb_section_marker anchor"></div>
+	<script>
+		window.addEventListener("DOMContentLoaded", (event) => {
+			window.dom_loaded = true
+
+			console.log("DOM loaded")
+			if (typeof _adjustFillerColumns !== "undefined") {
+				_adjustFillerColumns()
+			}
+
+			setTimeout(function () {
+				if (typeof _closeAllStickyAds !== "undefined") {
+					_closeAllStickyAds()
+				}
+			}, 5000)
+		})
+		console.log("Enabling connatix testcase B")
+		rymQ(function () {
+			updateStyleThemeLabels()
+		})
+	</script>
+
+	<header id="page_header">
+		<div class="header_inner logged_in">
+			<div onclick="RYMheader.onClickBars()" id="header_icon_link_bars" class="header_icon_link">
+				<i class="fa fa-bars"></i>
+				<span class="show-for-small"> </span>
+				<div id="header_extended_section" class="header_extended_section header_extended_more_menu">
+					<a href="/~mattmurphy" class="header_item"> Profile </a>
+
+					<a href="/collection/mattmurphy/" class="header_item"> Music Collection </a>
+
+					<a href="/recommendations/mattmurphy/music/" class="header_item">
+						Recommendations
+						<div class="badge_count_bubble messages">
+							<span class="profile_num_messages" style="">New</span>
+						</div>
+					</a>
+
+					<a href="/film_collection/mattmurphy/" class="header_item"> Film Collection </a>
+					<a href="/list/mattmurphy/" class="header_item"> Lists </a>
+					<br />
+					<a href="/messages/inbox" class="header_item"> Messaging </a>
+					<a href="/account/mentions" class="header_item"> Mentions </a>
+
+					<a href="/account/preferences" class="header_item"> Settings </a>
+
+					<a href="/submissions/" class="header_item"> Submissions </a>
+
+					<div class="header_items_spillover"></div>
+
+					<div class="header_theme_buttons">
+						<div onclick="switchSizeMode(event);return false;" class="header_theme_button">
+							<div class="header_theme_button_label">Text</div>
+							<div class="header_theme_button_mode" id="page_frame_size_mode_switch">Aa</div>
+						</div>
+
+						<div onclick="switchTheme(event);return false;" class="header_theme_button">
+							<div class="header_theme_button_label">Theme</div>
+							<div class="header_theme_button_mode" id="page_frame_theme_switch">Light</div>
+						</div>
+
+						<div class="clearfix"></div>
+					</div>
+
+					<span onclick="if ( confirm('Are you sure you want to log out?') ) { window.location = '/account/logout'; }" class="header_item"> Log out </span>
+				</div>
+			</div>
+
+			<div class="header_profile">
+				<div class="header_profile_logged_in">
+					<a href="/~mattmurphy" title="Your profile page" class="header_profile_main">
+						<span id="header_user_img" class="header_user_img" style="background-image: url('//e.snmc.io/i/75/s/d4a84f700e16e0d752ef8835cf87c96c/12062443')"></span>
+						<span id="header_profile_username" class="header_profile_link user header_item">mattmurphy</span>
+					</a>
+				</div>
+			</div>
+
+			<div class="header_logo">
+				<a class="main header_item sonemic" href="/">
+					<div class="logo_header"></div>
+					<span class="logo_name">RYM</span>
+				</a>
+			</div>
+
+			<div class="header_links">
+				<div class="header_links_inner">
+					<div class="divider"></div>
+					<a class="header_item" href="/new-music/">new music</a>
+					<a class="header_item" href="/genres/">genres</a>
+					<div class="header_charts">
+						<a class="header_charts header_item" href="/charts/">charts</a>
+					</div>
+					<a class="header_item" href="/lists/">lists</a>
+					<a class="header_item" href="https://rym.fm/">forums</a>
+
+					<a class="header_item has_tip" data-tiptip="Thank you for being a subscriber!" href="/subscribe/" style="xline-height: 1.9">
+						<span class="subscribe_label_fundraiser" style="font-size: 0.8em; font-weight: bold"><i class="fa fa-check-circle"></i></span>
+					</a>
+
+					<div class="divider"></div>
+				</div>
+			</div>
+			<div class="header_search">
+				<div id="ui_search_frame_outer_main_search" class="ui_search_frame_outer">
+					<div id="ui_search_frame_main_search" class="ui_search_frame">
+						<div onclick="rymQ(function() {RYMsearch.onClickClose(event, 'main_search');})" class="ui_search_close">
+							<div class="ui_search_close_bar"><i class="fa fa-times"></i> Close</div>
+							<div id="ui_search_context_indicator_main_search" class="ui_search_context_indicator">
+								<div id="ui_search_context_indicator_inner_main_search" class="ui_search_context_indicator_inner"></div>
+							</div>
+						</div>
+						<div class="ui_search_clear"></div>
+						<div class="ui_search_frame_inner">
+							<div id="ui_search_main_search" class="ui_search" data-default-scope="music" data-callback="" data-callback-id="">
+								<i style="cursor: pointer" onclick="RYMsearch.redirSearch(event, 'main_search');" id="ui_search_icon_main_search" class="fa fa-search ui_search_icon"></i>
+								<i id="ui_clear_icon_main_search" onclick="rymQ(function() {RYMsearch.onClickClearSearch(event, 'main_search');})" class="fa fa-times-circle ui_clear_icon"></i>
+
+								<form onsubmit="event.preventDefault(); RYMsearch.redirSearch(event, 'main_search');">
+									<input
+										autocomplete="off"
+										aria-label="Search"
+										value=""
+										id="ui_search_input_main_search"
+										placeholder="Search..."
+										class="ui_search_input"
+										onfocus="rymQ(function() {RYMsearch.onFocus(event, 'main_search')})"
+										onblur="rymQ(function() {RYMsearch.onBlur(event, 'main_search')})"
+										onkeydown="rymQ(function() {RYMsearch.onKeyDown(event, 'main_search')})"
+										oninput="rymQ(function() {RYMsearch.onInput(event, 'main_search')})"
+									/>
+								</form>
+							</div>
+							<div class="ui_search_rest">
+								<div class="ui_search_type">
+									<div id="ui_search_debug_main_search" class="ui_search_debug"></div>
+									<span class="ui_search_object_label">Search:</span>
+									<span id="ui_search_scope_selector_main_search" class="ui_search_object_selector">
+										<input type="hidden" name="ui_search_scope_main_search" id="ui_search_scope_main_search" value="music" />
+										<span
+											id="ui_search_scope_selector_music_main_search"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'music');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_music selected"
+										>
+											Music
+										</span>
+										<span
+											id="ui_search_scope_selector_film_main_search"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'film');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_film"
+										>
+											Film
+										</span>
+										<span
+											id="ui_search_scope_selector_games_main_search"
+											style="display: none"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'games');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_games"
+										>
+											Games
+										</span>
+									</span>
+									<span class="ui_search_object_label">for:</span>
+									<span id="ui_search_object_select_frame_main_search" class="ui_search_object_select_frame selected">
+										<select onchange="rymQ(function() {RYMsearch.onChangeObject(event, 'main_search')})" id="ui_search_object_select_main_search" class="ui_search_object_select"></select>
+									</span>
+								</div>
+								<div id="ui_search_info_frame_main_search" class="ui_search_info_frame"></div>
+								<div id="ui_search_results_frame_main_search" class="ui_search_results_frame"><div id="ui_search_results_main_search" class="ui_search_results"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="header_error" onclick="$(this).fadeOut();" id="header_error">
+		<div class="header_error_close"><i class="fa fa-times-circle"></i></div>
+		<div id="header_error_text"></div>
+	</div>
+
+	<div class="header_message" onclick="$(this).fadeOut();" id="header_message">
+		<div class="header_message_close"><i class="fa fa-times-circle"></i></div>
+		<div id="header_message_text"></div>
+	</div>
+
+	<div id="mobile_header_menu" class="mobile_header_menu has_forum_link">
+		<a href="/new-music/" class="mobile_header_menu_item mobile_header_menu_item_new_music">
+			<span>New Music</span> </a
+		><a href="/genres/" class="mobile_header_menu_item mobile_header_menu_item_genres">
+			<span>Genres</span> </a
+		><a href="/charts/" class="mobile_header_menu_item mobile_header_menu_item_charts">
+			<span>Charts</span> </a
+		><a href="/lists/" class="mobile_header_menu_item mobile_header_menu_item_lists">
+			<span>Lists</span> </a
+		><a href="https://rym.fm/" class="mobile_header_menu_item mobile_header_menu_item_community">
+			<span>Forums</span>
+		</a>
+	</div>
+
+	<div id="content_wrapper_outer" class="content_wrapper_outer">
+		<div id="content_wrapper" class="content_wrapper">
+			<div id="content_cover"></div>
+			<div id="content">
+				<div id="precontent" class="precontent"></div>
+
+				<div id="total_cover"></div>
+				<div id="content_total_cover"></div>
+
+				<style>
+					#end_of_year_banner {
+						background: var(--mono-f);
+						border-radius: 5px;
+						max-width: 50em;
+						text-align: center;
+						margin: 0 auto;
+						padding: 0.6em 3em;
+						border-radius: 5px;
+						border: 2px solid var(--gen-blue-dark);
+						color: var(--mono-0);
+						position: relative;
+						font-size: 1.1em;
+					}
+				</style>
+
+				<script>
+					try {
+						new Function('import("")')
+					} catch (err) {
+						document.write(
+							'<div class=note style="margin-bottom:1em;"><b>Note:</b> Not all scripts could be loaded. You may need to upgrade to a newer browser version in order to use this site.</div>'
+						)
+					}
+				</script>
+
+				<div class="listportal_page_container">
+					<div class="listportal_mobile_header">
+						<div class="listportal_sidebar_togglebtn_open">
+							<i class="fa fa-bars"></i>
+						</div>
+						<div class="listportal header_text">
+							<h1>Lists</h1>
+						</div>
+					</div>
+
+					<div class="listportal_links">
+						<span class="listportal_link_item nolink">Featured lists</span>
+
+						<a href="/lists/popular/" class="listportal_link_item">Popular lists</a>
+
+						<a href="/list_classifier/" class="listportal_link_item">By category</a>
+
+						<a href="/lists/recent/" class="listportal_link_item">Recently updated</a>
+
+						<a onclick="rym.nextSearchType='s';$('#ui_search_input_main_search').focus();" class="listportal_link_item">Search Lists</a>
+					</div>
+
+					<div class="listportal_main_content">
+						<div class="listportal_nav"></div>
+						<div class="clearfix"></div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="RYM25" href="/list/MarilynRoxie/rym25/"><img alt="List image" class="listportal_item_art" src="//e.snmc.io/i/150/s/355264c3506ef0b2f408833a5c1cf882/14064021" /></a>
+
+								<a title="Profile page for MarilynRoxie" href="/~MarilynRoxie"
+									><img alt="profile image for MarilynRoxie" class="listportal_item_profilepic" src="//e.snmc.io/i/75/s/bce63850b1c7f59b051707bf10fc90e4/10153676"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/MarilynRoxie/rym25/" class="listportal_item_title" title="RYM25">RYM25</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~MarilynRoxie" class="listportal_item_author" title="RYM25">MarilynRoxie</a>
+									<span class="listportal_item_numitems">25 items</span>
+									<span class="listportal_item_date">07 December, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>We have just launched our <a rel="nofollow noopener" target="_blank" href="https://rateyourmusic.com/giveaway-2025/">Best of 2025</a> giveaway.<br /><br /><b
+													>To celebrate 25 years of RYM, we are giving out 25 of the best albums of 2025 to our users and 1 grand prize of a pair of Sony WH-1000XM6 headphones, and a runner-up prize
+													of a $100 Bandcamp gift card!<br /><br />There are nine ways to enter - check them out
+													<a rel="nofollow noopener" target="_blank" href="https://rateyourmusic.com/giveaway-2025/">here</a>.<br /><br />One of the entry methods is to create a RYM list of your
+													favorite songs from 2001-2025, like the one you're reading now.<br /><br /><a rel="nofollow noopener" target="_blank" href="https://rateyourmusic.com/giveaway-2025/#rym25"
+														>Click here to read the instructions for how to create a valid list for this type of entry</a
+													>.</b
+												><br /><br />Visit <a rel="nofollow noopener" target="_blank" href="https://rateyourmusic.com/list_classifier/RYM25/">the list classifier page</a> to see the community's
+												picks!<br /><br /><a rel="nofollow noopener" target="_blank" href="https://open.spotify.com/playlist/5GHh3H7L793QpDsBJzORZH">Spotify Playlist</a> | Photo from The Temple Of
+												Bellona at Kew Gardens</span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Songs Featuring Bird Sounds" href="/list/MagicalRose/songs-featuring-bird-sounds/"
+									><img alt="List image" class="listportal_item_art" src="//e.snmc.io/i/150/s/2817c998ea857132aeef961ab47a7707/13638180"
+								/></a>
+
+								<a title="Profile page for MagicalRose" href="/~MagicalRose"
+									><img alt="profile image for MagicalRose" class="listportal_item_profilepic" src="//e.snmc.io/i/75/s/25a06ea441386cf0e907a3c56094eef3/13990273"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/MagicalRose/songs-featuring-bird-sounds/" class="listportal_item_title" title="Songs Featuring Bird Sounds">Songs Featuring Bird Sounds</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~MagicalRose" class="listportal_item_author" title="Songs Featuring Bird Sounds">MagicalRose</a>
+									<span class="listportal_item_numitems">383 items</span>
+									<span class="listportal_item_date">23 December, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>What can I say? I love birds.<br /><br />Not in any order and quality doesn't matter. As long as I hear birds in it, it's fair game. Feel free to suggest some songs!<br /><br />I
+												don't like having the same artist's songs right next to each other so I add them in different spots. So there might be new ones added, just not always at the end.<br /><br />If
+												you wanna listen to a playlist with these songs in them, here's my
+												<a rel="nofollow noopener" target="_blank" href="https://open.spotify.com/playlist/3oy0tSJyiECWkrl0rnavQt?si=Ec9qN97oROe1YmWeVHlWeQ"> Spotify playlist </a>. It's a WIP, not all
+												the songs are in it yet and there's some that aren't on this list because I couldn't find them on here or haven't added to this list yet. I'll try to add as many of them to it
+												as I can.</span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Sonemic Interview Series" href="/list/MarilynRoxie/sonemic-interview-series/"
+									><img alt="List image" class="listportal_item_art" src="//e.snmc.io/i/150/s/7d58b0cb5556ba9ca9f59be8a5a4120d/7695130"
+								/></a>
+
+								<a title="Profile page for MarilynRoxie" href="/~MarilynRoxie"
+									><img alt="profile image for MarilynRoxie" class="listportal_item_profilepic" src="//e.snmc.io/i/75/s/bce63850b1c7f59b051707bf10fc90e4/10153676"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/MarilynRoxie/sonemic-interview-series/" class="listportal_item_title" title="Sonemic Interview Series">Sonemic Interview Series</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~MarilynRoxie" class="listportal_item_author" title="Sonemic Interview Series">MarilynRoxie</a>
+									<span class="listportal_item_numitems">1194 items</span>
+									<span class="listportal_item_date">19 December, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>Artists, label owners, producers, and RYM / Sonemic members that have been interviewed for the Sonemic Interview series and the releases they have chosen to highlight.<br /><br />Have
+												a suggestion for someone we should interview? Let us know!<br /><br />Most recent interviews:<br /><br /><a
+													rel="nofollow noopener"
+													target="_blank"
+													href="https://rateyourmusic.com/feature/sonemic-interview-luke-laurila-t-e-l-e-p-a-t-h-%E3%83%86%E3%83%AC%E3%83%91%E3%82%B7%E3%83%BC%E8%83%BD%E5%8A%9B%E8%80%85-starlight-temple"
+													>Sonemic Interview: Luke Laurila | t e l e p a t h テレパシー能力者 | Starlight Temple</a
+												>
+												(December 2025)<br /><a rel="nofollow noopener" target="_blank" href="https://rateyourmusic.com/feature/sonemic-interview-daniel-avery">Sonemic Interview: Daniel Avery</a>
+												(December 2025)<br /><a rel="nofollow noopener" target="_blank" href="https://rateyourmusic.com/feature/sonemic-interview-devyn-smith/"
+													>Sonemic Interview: Devyn Smith (Coin locker kid, C'est la key)</a
+												>
+												(September 2025)</span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Ice and Glacier Sounds [Field Recordings]" href="/list/Traz/ice-and-glacier-sounds-field-recordings/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/fe9ea21a5e97cadcf81b587a03e00495/8649560"
+								/></a>
+
+								<a title="Profile page for Traz" href="/~Traz"
+									><img alt="profile image for Traz" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/8cffd8f1b18b124234594b8618663c7d/9235736"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/Traz/ice-and-glacier-sounds-field-recordings/" class="listportal_item_title" title="Ice and Glacier Sounds [Field Recordings]"
+									>Ice and Glacier Sounds [Field Recordings]</a
+								>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~Traz" class="listportal_item_author" title="Ice and Glacier Sounds [Field Recordings]">Traz</a>
+									<span class="listportal_item_numitems">31 items</span>
+									<span class="listportal_item_date">28 October, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>TL;DR: This list is a collection of field recordings with ice melting and glacier sounds.<br /><br />Thanks to RYM I found a few lists regrouping hydrophones Field Recordings
+												(F.R) or Cold Arctic Ambient music, but since we're here to specialize F.R lists and I couldn't find any list accurate enough to my taste, I'm making one. <br />Of course use
+												the comment box to rec more stuff so the list can evolve (I'm dying to hear more field recordings like this). <br /><br />The list is sorted by the amount of melting ice sounds
+												you'll find in each, and the top ones are also the personal favorite for this particular genre, if we can call it so. The last ones only have one or a few tracks with what
+												we're looking for, some of them might even be off-topic (with spoken words, more drone and ambient and less F.R, etc).<br /><br />Rules below</span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="cold hands on waves" href="/list/Teleguide/cold-hands-on-waves/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/cf09e277ca11328318870f5fcb1400b3/6361003"
+								/></a>
+
+								<a title="Profile page for Teleguide" href="/~Teleguide"
+									><img alt="profile image for Teleguide" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/4c76c11e3b2e012071c0e99587b778df/9251968"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/Teleguide/cold-hands-on-waves/" class="listportal_item_title" title="cold hands on waves">cold hands on waves</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~Teleguide" class="listportal_item_author" title="cold hands on waves">Teleguide</a>
+									<span class="listportal_item_numitems">342 items</span>
+									<span class="listportal_item_date">29 November, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												><span style="color: pink" class="rendered_text_color"><span class="rendered_text_color_inner">[ __ ] - wave</span></span
+												><br />companion list <a class="list" href="/list/Teleguide/coldest-hand-waves/">coldest hand-waves</a><br />- - - <br /><br />1) tapes<br />2) other [c. page 29]
+												<br /><br />Genres included:<br /><span
+													><span class="spoiler" onclick="$(this).parent().html($(this).children('.spoiler_inner').html());refreshLazyLoadList()"
+														>spoiler: click to read<span class="spoiler_inner" style="display: none"
+															><br /><a title="[Genre20730]" class="genre" href="/genre/minimal-wave/">Minimal Wave</a><br /><a title="[Genre20942]" class="genre" href="/genre/minimal-synth/"
+																>Minimal Synth</a
+															><br /><a title="[Genre338]" class="genre" href="/genre/coldwave/">Coldwave</a><br /><a title="[Genre10191]" class="genre" href="/genre/darkwave/">Darkwave</a><br /><a
+																title="[Genre595]"
+																class="genre"
+																href="/genre/gothic-rock/"
+																>Gothic Rock</a
+															><br /><a title="[Genre371]" class="genre" href="/genre/dream-pop/">Dream Pop</a><br /><a title="[Genre84]" class="genre" href="/genre/ambient/">Ambient</a
+															><br /></span></span></span
+											></span>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Front Page Reviews: May 20th, 2018 - Present" href="/list/MarilynRoxie/front-page-reviews-may-20th-2018-present/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/8044cc6f93727a1565babf836272f2bf/14049363"
+								/></a>
+
+								<a title="Profile page for MarilynRoxie" href="/~MarilynRoxie"
+									><img alt="profile image for MarilynRoxie" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/bce63850b1c7f59b051707bf10fc90e4/10153676"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/MarilynRoxie/front-page-reviews-may-20th-2018-present/" class="listportal_item_title" title="Front Page Reviews: May 20th, 2018 - Present"
+									>Front Page Reviews: May 20th, 2018 - Present</a
+								>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~MarilynRoxie" class="listportal_item_author" title="Front Page Reviews: May 20th, 2018 - Present">MarilynRoxie</a>
+									<span class="listportal_item_numitems">3416 items</span>
+									<span class="listportal_item_date">21 December, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												><b
+													>Sonemic Selects: Front Page Features Playlist:<br /><br /><a rel="nofollow noopener" target="_blank" href="https://open.spotify.com/playlist/1pFS1lpklMj10fvsOziZ6S"
+														>Spotify</a
+													>
+													| <a rel="nofollow noopener" target="_blank" href="https://music.apple.com/us/playlist/front-page-features-sonemic-selects/pl.u-xlyNNxPCJrA7DlN">Apple Music</a></b
+												><br /><br />These are the reviews I've selected for the front page here at RYM, from May 20th, 2018, to the present week (with a few exceptions chosen by others).<br /><br /><b
+													>You can recommend reviews as a comment, PM, or by using
+													<a rel="nofollow noopener" target="_blank" href="https://rateyourmusic.com/lists/suggest?list_id=671924">the suggest an addition button on this list</a>. Please recommend
+													well-written reviews of new releases or older albums, preferably published within the past month, though older reviews will also be considered.</b
+												><br /><br />Reviews appear throughout the week, but the final order of each week's front page reviews is finalized every Saturday night or early Sunday morning (Pacific). 8
+												reviews are generally chosen each week, 4 current-year releases and 4-5 older releases, though this is subject to change. Follow my profile page if you'd like to get a
+												notification of when the week's reviews are finalized!<br /><br />See also
+												<a class="list" href="/list/Osohe/the-front-page-music-reviews-archive/">The Front Page Music Reviews Archive</a> (September 1st, 2011 - January 4th, 2017)</span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="The Incomplete Guide to Avant-Folk Sufficiency" href="/list/SketchUp18/the-incomplete-guide-to-avant-folk-sufficiency/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/524c2a65ba8c90912b01f55f3a9477bd/6672496"
+								/></a>
+
+								<a title="Profile page for SketchUp18" href="/~SketchUp18"
+									><img alt="profile image for SketchUp18" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/307c8e952ec8fb801678408b044f046d/6479285"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/SketchUp18/the-incomplete-guide-to-avant-folk-sufficiency/" class="listportal_item_title" title="The Incomplete Guide to Avant-Folk Sufficiency"
+									>The Incomplete Guide to Avant-Folk Sufficiency</a
+								>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~SketchUp18" class="listportal_item_author" title="The Incomplete Guide to Avant-Folk Sufficiency">SketchUp18</a>
+									<span class="listportal_item_numitems">146 items</span>
+									<span class="listportal_item_date">25 July, 2023</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>This lis a listener's diary of all the avant-folk albums I've listened to, which I will update with short 2/3 sentence '''reviews'''. I follow RYM's genre descriptors here,
+												even though I don't always agree with them.</span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="slushwave deep cuts" href="/list/scyphozoa/slushwave-deep-cuts/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/c7d829abda752804f678e84bbe3f9c64/8622094"
+								/></a>
+
+								<a title="Profile page for scyphozoa" href="/~scyphozoa"
+									><img alt="profile image for scyphozoa" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/aa2a05081f9498c6c996077e14df1787/11169094"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/scyphozoa/slushwave-deep-cuts/" class="listportal_item_title" title="slushwave deep cuts">slushwave deep cuts</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~scyphozoa" class="listportal_item_author" title="slushwave deep cuts">scyphozoa</a>
+									<span class="listportal_item_numitems">39 items</span>
+									<span class="listportal_item_date">31 March, 2022</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div><span class="rendered_text">do you like like telepath? want to listen to more slushwave? check these artists out!</span></div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Contemporary Grungegaze" href="/list/Nativesprague/contemporary-grungegaze/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/4e43809aec8b55b1340444fa20ba62e9/11902109"
+								/></a>
+
+								<a title="Profile page for Nativesprague" href="/~Nativesprague"
+									><img alt="profile image for Nativesprague" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/6888084b73cc0953087d944b2aa0fcb0/10364739"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/Nativesprague/contemporary-grungegaze/" class="listportal_item_title" title="Contemporary Grungegaze">Contemporary Grungegaze</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~Nativesprague" class="listportal_item_author" title="Contemporary Grungegaze">Nativesprague</a>
+									<span class="listportal_item_numitems">193 items</span>
+									<span class="listportal_item_date">08 December, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												><b>_______________________________________</b><br /><br /><b
+													><tt
+														>Dedicated to the mid-2010s to 2020’s generation of
+														<span style="color: aquamarine" class="rendered_text_color"><span class="rendered_text_color_inner">Grungegaze</span></span> and beyond.</tt
+													></b
+												><br /><b>_______________________________________</b><br /><br />Grungegaze can be described as a broad amalgamation of
+												<a title="[Genre98]" class="genre" href="/genre/shoegaze/">Shoegaze</a> and a range of “murky” 90’s alternative genres. Despite the name, it’s apparent that it’s not restricted
+												to a blend of <a title="[Genre47]" class="genre" href="/genre/grunge/">Grunge</a> and <a title="[Genre98]" class="genre" href="/genre/shoegaze/">Shoegaze</a>. Rather, the
+												“grunge” designation acts more as an overall label to the gloomy 90’s alternative sound. <br /><br /><a title="[Genre491]" class="genre" href="/genre/alternative-metal/"
+													>Alternative Metal</a
+												>, <a title="[Genre391]" class="genre" href="/genre/noise-pop/">Noise Pop</a>, <a title="[Genre405]" class="genre" href="/genre/noise-rock/">Noise Rock</a>,
+												<a title="[Genre221]" class="genre" href="/genre/slacker-rock/">Slacker Rock</a>, <a title="[Genre48]" class="genre" href="/genre/emo/">Emo</a>,
+												<a title="[Genre595]" class="genre" href="/genre/gothic-rock/">Gothic Rock</a>, <a title="[Genre478]" class="genre" href="/genre/slowcore/">Slowcore</a>, and more, are often
+												present in different grungegazers’ repertoires. <br /><br /><b>_______________________________________</b><br /><br />WIP - If an album or EP has only one or two songs that
+												could be described as grungegaze, the track(s) will be individually listed.<br /><br />Note: tapping the “—ALBUM—“ text below a release sends you to its Spotify page :)</span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Halloween Nuggets: Original Artyfacts from the Bloodsucking Era" href="/list/mahoneychops/halloween-nuggets-original-artyfacts-from-the-bloodsucking-era/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/c6742d772a83c0e1c2be882420f76f0d/12562413"
+								/></a>
+
+								<a title="Profile page for mahoneychops" href="/~mahoneychops"
+									><img alt="profile image for mahoneychops" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/45bf0081fd18424b2319cccdc9018283/6240460"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a
+									href="/list/mahoneychops/halloween-nuggets-original-artyfacts-from-the-bloodsucking-era/"
+									class="listportal_item_title"
+									title="Halloween Nuggets: Original Artyfacts from the Bloodsucking Era"
+									>Halloween Nuggets: Original Artyfacts from the Bloodsucking Era</a
+								>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~mahoneychops" class="listportal_item_author" title="Halloween Nuggets: Original Artyfacts from the Bloodsucking Era">mahoneychops</a>
+									<span class="listportal_item_numitems">197 items</span>
+									<span class="listportal_item_date">22 April, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>Halloween themed nuggets. <br /><br />Lots of Garage/Rockabilly/Rhythm &amp; Blues but also some Soul/Funk, Rock &amp; Pop.<br /><br />Playlist:
+												<a rel="nofollow noopener" target="_blank" href="https://open.spotify.com/playlist/2oPY7cma3Dw7e28vmLJ4vi?si=fd021077c1824360"
+													><span class="rendered_text_url_pre_hidden">https://open.spotify.com/p</span
+													><span class="rendered_text_url_hidden">laylist/2oPY7cma3Dw7e28vmLJ4vi?si=f</span>d021077c1824360</a
+												></span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Utopian Scholastic Vibes" href="/list/Turn3Karn/utopian-scholastic-vibes/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/694de29d24e47fa4ddc5f9c9cda6cb25/13877195"
+								/></a>
+
+								<a title="Profile page for Turn3Karn" href="/~Turn3Karn"
+									><img alt="profile image for Turn3Karn" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/f35f2c2f07b94de5c3361c1c2b1edbb0/13106371"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/Turn3Karn/utopian-scholastic-vibes/" class="listportal_item_title" title="Utopian Scholastic Vibes">Utopian Scholastic Vibes</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~Turn3Karn" class="listportal_item_author" title="Utopian Scholastic Vibes">Turn3Karn</a>
+									<span class="listportal_item_numitems">64 items</span>
+									<span class="listportal_item_date">17 December, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>Releases that are evocative of the utopian scholastic aesthetic. Music that evokes edutainment, surrealism, juxtaposition of the past with the present, curiosity, visions of a
+												utopian future through knowledge of the past.<br /><br />Suggestions are encouraged!<br /><br />Huge thanks to the creators of the following lists, through which I found a lot
+												of this sort of music:<br /><a class="list" href="/list/DubaiDreamTone/vaporlike-music-1/">Vaporlike Music</a><br /><a
+													class="list"
+													href="/list/alans_gingerale/digital-future-library/"
+													>digital future library</a
+												><br /><a class="list" href="/list/shadowsys/uncanny-electronic-digital-synthesizers-and-midi-sounds-from-1985-to-1993/"
+													>Uncanny Electronic: Digital Synthesizers &amp; MIDI Sounds from 1985 to 1993</a
+												><br /><a class="list" href="/list/prepaid_V/new-age-music-disc-guide-ambient-minimalism-balearic-fourth-world-kankyo-ongaku/"
+													>New Age Music Disc Guide // Ambient, Minimalism, Balearic, Fourth World, Kankyo Ongaku</a
+												><br /><a class="list" href="/list/Cubbierill/new-age-for-hipster-millennial-soccer-mom-wannabes/">New Age for hipster millennial soccer-mom wannabes</a><br /><a
+													class="list"
+													href="/list/HTravas/𝐛𝐥𝐢𝐬𝐬𝐟𝐮𝐥-𝐦𝐨𝐫𝐧𝐢𝐧𝐠𝐬-˖-✿-˖-comfort-music-to-start-your-day/"
+													>𝐛𝐥𝐢𝐬𝐬𝐟𝐮𝐥 𝐦𝐨𝐫𝐧𝐢𝐧𝐠𝐬 °˖ ✿ ˖° comfort music to start your day.</a
+												><br /><a class="list" href="/list/lecoledulibertinage/deep-new-age/">Deep New Age</a></span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Gong-Chime Music Exploration" href="/list/DolphinLaugh/gong-chime-music-exploration/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/a379d79c30ce66938b5c198de1b239b8/11829487"
+								/></a>
+
+								<a title="Profile page for DolphinLaugh" href="/~DolphinLaugh"
+									><img alt="profile image for DolphinLaugh" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/29e5fe2f5e487d5b87a04b7a05ef0647/12958491"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/DolphinLaugh/gong-chime-music-exploration/" class="listportal_item_title" title="Gong-Chime Music Exploration">Gong-Chime Music Exploration</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~DolphinLaugh" class="listportal_item_author" title="Gong-Chime Music Exploration">DolphinLaugh</a>
+									<span class="listportal_item_numitems">141 items</span>
+									<span class="listportal_item_date">17 May, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div></div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Aesthetics of the Dark" href="/list/Ryoanji/aesthetics-of-the-dark/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/b3ca4e1c63ff3124fa6f5c4676b4771e/12778981"
+								/></a>
+
+								<a title="Profile page for Ryoanji" href="/~Ryoanji"
+									><img alt="profile image for Ryoanji" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/9902c7c895c730df87c0fc289f92be86/14002252"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/Ryoanji/aesthetics-of-the-dark/" class="listportal_item_title" title="Aesthetics of the Dark">Aesthetics of the Dark</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~Ryoanji" class="listportal_item_author" title="Aesthetics of the Dark">Ryoanji</a>
+									<span class="listportal_item_numitems">109 items</span>
+									<span class="listportal_item_date">01 October, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text">[...]<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />[...]</span>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Autumn" href="/list/kikiMaxx/autumn-1/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/b94557678a71ea7217a04f8cb335f768/12567348"
+								/></a>
+
+								<a title="Profile page for kikiMaxx" href="/~kikiMaxx"
+									><img alt="profile image for kikiMaxx" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/4d9d5af4991e0147d68c09012315c969/8396077"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/kikiMaxx/autumn-1/" class="listportal_item_title" title="Autumn">Autumn</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~kikiMaxx" class="listportal_item_author" title="Autumn">kikiMaxx</a>
+									<span class="listportal_item_numitems">138 items</span>
+									<span class="listportal_item_date">17 October, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>Autumn always stirs up a sense of nostalgia in me—there’s this strange but positive melancholy that comes with it. This year, I decided to lean into that mood and create a
+												list of albums that capture (my) essence of autumn.<br />My categorization may be a bit unconventional (e.g. Carissa’s Wierd could easily fit under the Autumnal Folk category
+												too), but the main goal was to include the right albums in the list, the categorization is just to easily find what I'm looking for. Hopefully, this list resonates with someone
+												else, not just me.</span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Obscure shoegaze" href="/list/doorshlaq/obscure-shoegaze/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/6f1b9b3da77c6cec5e8938dbc27ca6a7/4240619"
+								/></a>
+
+								<a title="Profile page for doorshlaq" href="/~doorshlaq"
+									><img alt="profile image for doorshlaq" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/480f7c9d8df31c881d71cccb31d95f12/4190492"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/doorshlaq/obscure-shoegaze/" class="listportal_item_title" title="Obscure shoegaze">Obscure shoegaze</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~doorshlaq" class="listportal_item_author" title="Obscure shoegaze">doorshlaq</a>
+									<span class="listportal_item_numitems">183 items</span>
+									<span class="listportal_item_date">29 August, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>obscure shoegaze bands (good albums and EPs with &lt;150 ratings)<br /><br />work in progress, of course<br /><br />recommendations are welcome<br /><br /><br />thanks:
+												<a class="user" href="/~qbshtall">qbshtall</a>, <a class="user" href="/~MarchewaSoler">MarchewaSoler</a>, <a class="user" href="/~bamburyla">bamburyla</a>,
+												<a class="user" href="/~maara">maara</a>, <a class="user" href="/~Gololedz">Gololedz</a>, <a class="user" href="/~Mallkorr">Mallkorr</a>,
+												<a class="user" href="/~lawrance92">lawrance92</a>, <a class="user" href="/~ASpiritualMoon">ASpiritualMoon</a>, <a class="user" href="/~Goltzman">Goltzman</a>,
+												<a class="user" href="/~wilczur">wilczur</a>, <a class="user" href="/~adik3003">adik3003</a>, <a class="user" href="/~TheAlex">TheAlex</a></span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a
+									title="existential loops... hazy NTSC dreams... the city comes alive at midnight..."
+									href="/list/psychedelicnightmare/existential-loops-hazy-ntsc-dreams-the-city-comes-alive-at-midnight/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/d397e458ca43170d9f57c894814e56d9/6487077"
+								/></a>
+
+								<a title="Profile page for psychedelicnightmare" href="/~psychedelicnightmare"
+									><img alt="profile image for psychedelicnightmare" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/244149345f8744d25fad1f82b2893ed5/5577209"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a
+									href="/list/psychedelicnightmare/existential-loops-hazy-ntsc-dreams-the-city-comes-alive-at-midnight/"
+									class="listportal_item_title"
+									title="existential loops... hazy NTSC dreams... the city comes alive at midnight..."
+									>existential loops... hazy NTSC dreams... the city comes alive at midnight...</a
+								>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~psychedelicnightmare" class="listportal_item_author" title="existential loops... hazy NTSC dreams... the city comes alive at midnight...">psychedelicnightmare</a>
+									<span class="listportal_item_numitems">96 items</span>
+									<span class="listportal_item_date">19 September, 2023</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>a long list of stuff that may or may not (subjectively) contain aural or visual elements that some people would argue attribute to a lineage of things which ultimately led to
+												the so-called "vapor~ aesthetic".<br /><br />stay wavy kids.</span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="brutalist music" href="/list/hollohead/brutalist-music/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/209b6c8130fdad26d6f185dad7d80761/8053155"
+								/></a>
+
+								<a title="Profile page for swagpetey" href="/~swagpetey"
+									><img alt="profile image for swagpetey" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/d4eb855d15c891f3e9f66c93697247f2/11476825"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/hollohead/brutalist-music/" class="listportal_item_title" title="brutalist music">brutalist music</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~swagpetey" class="listportal_item_author" title="brutalist music">swagpetey</a>
+									<span class="listportal_item_numitems">33 items</span>
+									<span class="listportal_item_date">16 September, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>music that evokes imagery of cold, gray, concrete landscapes.<br /><br />will attempt to limit the amount of obvious stuff like
+												<a title="[Genre584]" class="genre" href="/genre/experimental/">Experimental</a> (like <a title="[Genre336]" class="genre" href="/genre/industrial/">Industrial</a>),
+												<a title="[Genre332]" class="genre" href="/genre/post-punk/">Post-Punk</a> (especially <a title="[Genre338]" class="genre" href="/genre/coldwave/">Coldwave</a>), and
+												<a title="[Genre271]" class="genre" href="/genre/minimal-techno/">Minimal Techno</a>/<a title="[Genre33631]" class="genre" href="/genre/industrial-techno/">Industrial Techno</a
+												><br /><br />will also limit stuff from <a title="[Label2128]" href="/label/modern-love/" class="label">Modern Love</a>,
+												<a title="[Label97843]" href="/label/total-black/" class="label">Total Black</a>, <a title="[Label69197]" href="/label/posh-isolation/" class="label">Posh Isolation</a></span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Chill-Out Atmospherics" href="/list/Bladonski/chill-out-atmospherics/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/278915403ec8bb303057f33fd7ed22e7/12334814"
+								/></a>
+
+								<a title="Profile page for Bladonski" href="/~Bladonski"
+									><img alt="profile image for Bladonski" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/14efe0ed3a29a71b2a37002873b5726d/10360126"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/Bladonski/chill-out-atmospherics/" class="listportal_item_title" title="Chill-Out Atmospherics">Chill-Out Atmospherics</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~Bladonski" class="listportal_item_author" title="Chill-Out Atmospherics">Bladonski</a>
+									<span class="listportal_item_numitems">44 items</span>
+									<span class="listportal_item_date">17 October, 2024</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>The sister list to <a rel="nofollow noopener" target="_blank" href="https://rateyourmusic.com/list/Bladonski/darkside-atmospherics/"> Darkside Atmospherics</a>, read that
+												list's description if you'd like a little history. Long story short, these two lists exist to show what I see as a difference in sound between two styles of
+												<a title="[Genre256]" class="genre" href="/genre/atmospheric-drum-and-bass/">Atmospheric Drum and Bass</a>. One style which was more ruff and hardcore influenced produced
+												generally from 1993-1996, and another which we will be covering in this list, that is more Chill-Out and jazzy. This style drops a lot of the ruff break choppage and production
+												styles for something thats more "truely" atmospheric, with cleaner mixed breaks, and more focus of melody and atmosphere.<br /><br />This list, like the other will be ordered
+												by year of release to hopefully show an evolution in sound. The name of the tune(s) in focus from the release will be included and coloured based off my personal rating:<br /><br /><br /><b
+													><span style="color: red" class="rendered_text_color"><span class="rendered_text_color_inner">great tune</span></span
+													><br /><span style="color: orange" class="rendered_text_color"><span class="rendered_text_color_inner">amazing tune</span></span
+													><br /><span style="color: yellow" class="rendered_text_color"><span class="rendered_text_color_inner">perfect tune</span></span></b
+												></span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="When Light Will Dawn: Melodic Doom Metal" href="/list/dantedagger/when-light-will-dawn-melodic-doom-metal/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/888cf725c796ebf3df83b9fdd855726d/11254510"
+								/></a>
+
+								<a title="Profile page for dantedagger" href="/~dantedagger"
+									><img alt="profile image for dantedagger" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/80463cc2e69f4f7f46f89dd17caf8d39/11293339"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/dantedagger/when-light-will-dawn-melodic-doom-metal/" class="listportal_item_title" title="When Light Will Dawn: Melodic Doom Metal"
+									>When Light Will Dawn: Melodic Doom Metal</a
+								>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~dantedagger" class="listportal_item_author" title="When Light Will Dawn: Melodic Doom Metal">dantedagger</a>
+									<span class="listportal_item_numitems">77 items</span>
+									<span class="listportal_item_date">07 September, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>Laidback, lead melody-driven doom metal with pleasant clean vocals. Little to no harsh vocals or aggressive riffage, and keyboards are either not featured or take a very
+												subtle back seat in the mix. Early-The 3rd and the Mortal and late-90's/early-2000's era Funeral are my primary references for this list.</span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Space is love ~ ambient, drone, progressive electronic music" href="/list/dreamfolk/space-is-love-ambient-drone-progressive-electronic-music/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/00b78e7f7d7555441349ae12e373bf39/3755784"
+								/></a>
+
+								<a title="Profile page for dreamfolk" href="/~dreamfolk"
+									><img alt="profile image for dreamfolk" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/1463ce4c00ea2d58219947eb847b4464/5667181"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/dreamfolk/space-is-love-ambient-drone-progressive-electronic-music/" class="listportal_item_title" title="Space is love ~ ambient, drone, progressive electronic music"
+									>Space is love ~ ambient, drone, progressive electronic music</a
+								>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~dreamfolk" class="listportal_item_author" title="Space is love ~ ambient, drone, progressive electronic music">dreamfolk</a>
+									<span class="listportal_item_numitems">104 items</span>
+									<span class="listportal_item_date">22 January, 2021</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>A selection of ambient music in a broad sense: mostly beatless, atmospheric, sometimes sequenced and always cosmic, from the early days up to present day in chronological
+												order. Just my favourites.</span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Heavy into Dreaming: A Personal Compendium of Warm Drone" href="/list/ourladyskimmington/heavy-into-dreaming-a-personal-compendium-of-warm-drone/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/a6ca49188cd0a90d21bb0912f5216793/10948991"
+								/></a>
+
+								<a title="Profile page for ourladyskimmington" href="/~ourladyskimmington"
+									><img alt="profile image for ourladyskimmington" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/8f5f8b0b33a7e6c8fcee03d1a5d7f5e8/7462720"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a
+									href="/list/ourladyskimmington/heavy-into-dreaming-a-personal-compendium-of-warm-drone/"
+									class="listportal_item_title"
+									title="Heavy into Dreaming: A Personal Compendium of Warm Drone"
+									>Heavy into Dreaming: A Personal Compendium of Warm Drone</a
+								>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~ourladyskimmington" class="listportal_item_author" title="Heavy into Dreaming: A Personal Compendium of Warm Drone">ourladyskimmington</a>
+									<span class="listportal_item_numitems">53 items</span>
+									<span class="listportal_item_date">15 November, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>“What might in conventional circumstances be the epitome of boredom or mania is here the central issue: reiteration. This is not a sad story, or any other type of story. It is
+												a clinical rehearsal of melancholic musical conventions. Melancholy is sadness without reason. Narrative imputes causality; causality is a web of reasons and their causes. So
+												narrative is not the best vehicle for conveying melancholy. A melancholic artwork will take melancholy apart to consider it from different angles and in various lights. Without
+												the demands of narrative and teleology, the melancholic work wallows and feeds its neurosis.”<br />Joanna Demers, on William Basinski’s
+												<a title="[Album400071]" href="/release/album/william-basinski/melancholia/" class="album">Melancholia</a>. from “Manifest.” Drone and Apocalypse: An Exhibit Catalog for the
+												End of the World, Zero Books, 2015, p. 39. <br /><br /><br />
+												Drenched in sweat with bedsores simmering; duvet thoroughly damped. A dawn piled upon a night I bear unfortunate witness to through eyes pried open, blinds serving little more
+												purpose than this slumping slouch through daylight forward. There is no company, and there hasn’t been for a while. Sole witness is the Bluetooth speaker sighing that subtle,
+												gentle sound I hear repeat over and over, in and out of consciousness, night and night again. Having become an essence of the environment, it undulates soft and slow, no rhythm
+												or dissonance (if those friends make themselves guests they appear so without notice, creeping dainty through pressing harmony and singing sine). Occasional dynamic shift marks
+												the end and beginning of songs, but it all moves as a mass, not as typical motion of tracks listing. Oh, gentle, dreamlike wraith, beckon me back to sleep, will you? Bounce me
+												against your gentle electronically produced acoustic, delay me like the day ought to have done, morph me unnoticed between prancing oscillations that feed the creative of my
+												manifest. I live and lie heavy into dreaming day by day.<br /><br />............................................................................................................................................................................................................................<br /><br />
+												Music itself may not have the power to directly enact social change; more so, it is an essential meditation on the now. It documents due reflection, allowing us to critique,
+												understand, and relish ourselves; and by clarifying the current, it permits us to build a brighter future (or at least with ornamentation etch a decline). Every genre or music
+												movement represents a particular cultural flash, an almost imprint of imminence. But can we within this niche, somewhat of a subgenre grasp ideology? Elaine Radigue or Harold
+												Budd may have pioneered the simple sound via recorded synth compositions in the 80s/early 90s with works like
+												<a title="[Album122603]" href="/release/album/eliane-radigue/kyema-intermediate-states/" class="album">Kyema, Intermediate States</a> and
+												<a title="[Album28990]" href="/release/album/harold-budd/abandoned-cities/" class="album">Abandoned Cities</a>, but what explains the explosion of releases that inhabit this
+												soothing, sad unease in the late 00s and beyond? As this list examples, the majority of work produced in this style has come about only in the past 15 or so years. Artists who
+												mainstay it like <a title="[Artist180411]" href="/artist/celer" class="artist">Celer</a>,
+												<a title="[Artist112286]" href="/artist/chihei-hatakeyama" class="artist">Chihei Hatakeyama</a>, and
+												<a title="[Artist291488]" href="/artist/kyle-bobby-dunn" class="artist">Kyle Bobby Dunn</a> come to mind. Even ambient genre legend
+												<a title="[Artist2627]" href="/artist/steve_roach" class="artist">Steve Roach</a> shifted towards this approach in the early aughts.<br /><br />
+												One may consider the growing popularity of the genre as a meditation and as a protest against the inferno of the same. Byung Chul Han decries the present tendency to seek
+												what’s similar when attempting to find love. The rupture of the other, of the new, of the different has potential to bring about great sadness and discomfort, but it is only
+												through an embrace of this rupture that we discover ourselves truly. So what am I doing when my only company is
+												<a title="[Artist340865]" href="/artist/chubby-wolf" class="artist">Chubby Wolf</a>? I’m often sitting within my sorrows, obsessing over the self when I find friend in the wash
+												of reiteration that is warm drone (it certainly isn’t much of a socially stimulating sound). What rupture, what new can occur in a genre defined by its lack thereof? From this
+												perspective, we may evidence the genre as a pitiful, cultural echo of rumination. The tone of these works, more often than not, exudes utter melancholy and introspection. By
+												forcing the listener to contend with the stolidly sidling same, it brings about acute awareness of one’s own stagnant position of timidity. And yet, warm drone leaves no choice
+												but for the listener to thoroughly contend with one’s loneliness. Unlike the zoomer’s tendency to zoom, scrolling listless through a feed of dreadfully boring hedonia, warm
+												drone makes us face the casual complacency of our self-imposed isolation. Burgeoning repetition, lulling us into dreams: it commands us to fall into our true, contemporary
+												companion, the self reflected in the uncensored, sometimes nightmarish, surreal unconscious. Where we build from here is yet to bludgeon, so let us sink into untimely sleep:
+												hopeful hum and unbecoming.</span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="~ memory in a bottle ~" href="/list/dreamfortress/-memory-in-a-bottle-/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/db64afbdb04b14977aeda3447f64e092/13592076"
+								/></a>
+
+								<a title="Profile page for desertkiss" href="/~desertkiss"
+									><img alt="profile image for desertkiss" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/f3cb50620d20c899277964775472baed/13931611"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/dreamfortress/-memory-in-a-bottle-/" class="listportal_item_title" title="~ memory in a bottle ~">~ memory in a bottle ~</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~desertkiss" class="listportal_item_author" title="~ memory in a bottle ~">desertkiss</a>
+									<span class="listportal_item_numitems">24 items</span>
+									<span class="listportal_item_date">25 July, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>Chillwave at it's most haunting, happy-sad and/or melancholy<br /><br /><a
+													rel="nofollow noopener"
+													target="_blank"
+													href="https://www.mixcloud.com/desertkiss/memory-in-a-bottle/"
+												>
+													Listen</a
+												></span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Dreamy, Nostalgic House Music." href="/list/ASpiritualMoon/dreamy-nostalgic-house-music/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/ff68c28e153a7849453f1dd2ce27b873/13499022"
+								/></a>
+
+								<a title="Profile page for ASpiritualMoon" href="/~ASpiritualMoon"
+									><img alt="profile image for ASpiritualMoon" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/f27c30646bf6e34f39500dc533a14cd6/14003411"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/ASpiritualMoon/dreamy-nostalgic-house-music/" class="listportal_item_title" title="Dreamy, Nostalgic House Music.">Dreamy, Nostalgic House Music.</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~ASpiritualMoon" class="listportal_item_author" title="Dreamy, Nostalgic House Music.">ASpiritualMoon</a>
+									<span class="listportal_item_numitems">453 items</span>
+									<span class="listportal_item_date">22 December, 2025</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>House music characterised by a feeling of nostalgia. I love that type of house music, so I thought I'd share some of my favourites. Before you complain, this is subjective.
+												You may not think it fits but I do.<br /><br />I've come across many personal favourites whilst making this, some of which are extremely underrated, like
+												<a title="[Album3213794]" href="/release/comp/kevin-yost/fundamentals-best-of-the-early-years/" class="album">Fundamentals: Best of the Early Years</a> by
+												<a title="[Artist8963]" href="/artist/kevin-yost" class="artist">Kevin Yost</a>. Wall to wall house hits and filled with that nostalgic feeling I'm constantly searching for.
+												How that slipped through the cracks, I do not know. As far as dreamy house comps go, it's up there with the best.<br /><br /><a
+													title="[Artist182427]"
+													href="/artist/callisto-1"
+													class="artist"
+													>Callisto</a
+												>
+												are another artist I've continued to push. The back catalog is littered with gems, including the compilations included on this list. I need to work through those EPs at some
+												point as they all look fantastic, especially <a title="[Album759704]" href="/release/ep/callisto/the-paradigm-ep/" class="album">The Paradigm EP</a>,
+												<a title="[Album759705]" href="/release/ep/callisto/nether-world-ep/" class="album">Nether-World EP</a> and
+												<a title="[Album759709]" href="/release/ep/callisto/bruised-knuckles-e_p/" class="album">Bruised Knuckles E.P.</a>. Love
+												<a title="[Artist182427]" href="/artist/callisto-1" class="artist">Callisto</a>. RIP.<br /><br />For something more recent, I thought
+												<a title="[Album16294765]" href="/release/album/real-lies/we-will-annihilate-our-enemies/" class="album">We Will Annihilate Our Enemies</a> was pretty damn enjoyable.<br /><br />Words
+												cannot describe how much I love <a title="[Album11338620]" href="/release/comp/derek-carr/pursuit/" class="album">Pursuit</a>. More people ought to know about
+												<a title="[Artist111118]" href="/artist/rick_wade" class="artist">Rick Wade</a> as well. He put out some class EPs in the 90s, including the dreamy and hazy
+												<a title="[Album7849455]" href="/release/ep/rick-wade/quantum-expression/" class="album">Quantum Expression</a>.<br /><br />
+												<div class="youtube_container" id="youtube_container_0f98d132f30343d51e1f53101a3af236" data-youtube-id="KOD-PS4VM7o">
+													<a
+														class="youtube_embed"
+														id="youtube_video_0f98d132f30343d51e1f53101a3af236"
+														target="_blank"
+														rel="nofollow noopener"
+														data-youtube-id="KOD-PS4VM7o"
+														href="//www.youtube.com/watch?v=KOD-PS4VM7o"
+													>
+														<div class="youtube_img lazyload" data-bkg="//img.youtube.com/vi/KOD-PS4VM7o/hqdefault.jpg" data-bkg2x="//img.youtube.com/vi/KOD-PS4VM7o/hqdefault.jpg"></div>
+														<div class="youtube_playbutton"></div>
+														<div class="youtube_title">Soshi Takeda - Secret Communication (Full Album)</div>
+													</a>
+												</div>
+												<br /><br /><a rel="nofollow noopener" target="_blank" href="https://open.spotify.com/playlist/5C78odkfBeXnKfBt6jFN5Z?si=MN0ZgTChQxSQR388OllSDw"> Playlist.</a><br /><br />See
+												also: <br /><br />- <a class="list" href="/list/ASpiritualMoon/dreamy-garage-music/">Dreamy Garage Music.</a><br /><br />-
+												<a class="list" href="/list/ASpiritualMoon/hypnotic-house-music-2/">Hypnotic House Music.</a><br /><br />-
+												<a class="list" href="/list/ASpiritualMoon/hypnotic-repetition/">Hypnotic Repetition.</a><br /><br />-
+												<a class="list" href="/list/ASpiritualMoon/mechanical-party-music/">Mechanical Party Music.</a><br /><br />-
+												<a class="list" href="/list/ASpiritualMoon/mechanical-electronic-music/">Mechanical Electronic Music.</a></span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Wishful Thinking // Wistful Emo" href="/list/sam_dsc/wishful-thinking-wistful-emo/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/9189b7f451a5cff4bd11dada5a44e319/11746445"
+								/></a>
+
+								<a title="Profile page for sam_dsc" href="/~sam_dsc"
+									><img alt="profile image for sam_dsc" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/8f49ea0e72e187332c94a47a76a48f77/12006496"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/sam_dsc/wishful-thinking-wistful-emo/" class="listportal_item_title" title="Wishful Thinking // Wistful Emo">Wishful Thinking // Wistful Emo</a>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~sam_dsc" class="listportal_item_author" title="Wishful Thinking // Wistful Emo">sam_dsc</a>
+									<span class="listportal_item_numitems">131 items</span>
+									<span class="listportal_item_date">25 September, 2024</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												><span style="color: #d3bd97" class="rendered_text_color"
+													><span class="rendered_text_color_inner"><b>Wishful Thinking Keeps Me Awake At Night;⠀</b></span></span
+												>
+												<span style="color: #d3bd97" class="rendered_text_color"
+													><span class="rendered_text_color_inner"><i>or, my playlist of wistful Emo music.</i></span></span
+												><br /><tt
+													><span style="color: #b5c6e8" class="rendered_text_color"
+														><span class="rendered_text_color_inner"
+															>{
+															<span style="color: #beb5e8" class="rendered_text_color"
+																><span class="rendered_text_color_inner"> lo-fi, melancholic, longing - midwest emo, tweemo, post-hardcore</span></span
+															>
+															}</span
+														></span
+													></tt
+												><br /><br /><span style="color: #e8b5c6" class="rendered_text_color"
+													><span class="rendered_text_color_inner"
+														>❦ <a rel="nofollow noopener" target="_blank" href="https://open.spotify.com/playlist/6J2yjh0DaWBCOb8uZyf0PN?si=19f1c03aa488450b"> spotify playlist</a></span
+													></span
+												><br /><br /><span style="color: #e8d7b5" class="rendered_text_color"><span class="rendered_text_color_inner">˚　. </span></span
+												><span style="color: #e8beb5" class="rendered_text_color"><span class="rendered_text_color_inner">° ⊹</span></span>
+												<span style="color: #97d3bd" class="rendered_text_color"><span class="rendered_text_color_inner">♡</span></span></span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="listportal_itembox">
+							<div class="listportal_item_artbox">
+								<a title="Video Game Inspired Vaporwave Releases" href="/list/channelsurfing/video-game-inspired-vaporwave-releases/"
+									><img alt="List image" class="listportal_item_art lazyload" data-src="//e.snmc.io/i/150/s/8c9645570047cf2ce1fada394e804dca/7955818"
+								/></a>
+
+								<a title="Profile page for channelsurfing" href="/~channelsurfing"
+									><img alt="profile image for channelsurfing" class="listportal_item_profilepic lazyload" data-src="//e.snmc.io/i/75/s/cec0c6c1a41cd70a511ad31bd03ae713/13880972"
+								/></a>
+							</div>
+
+							<div class="listportal_textbox">
+								<a href="/list/channelsurfing/video-game-inspired-vaporwave-releases/" class="listportal_item_title" title="Video Game Inspired Vaporwave Releases"
+									>Video Game Inspired Vaporwave Releases</a
+								>
+
+								<div class="listportal_item_authorbox">
+									<a href="/~channelsurfing" class="listportal_item_author" title="Video Game Inspired Vaporwave Releases">channelsurfing</a>
+									<span class="listportal_item_numitems">131 items</span>
+									<span class="listportal_item_date">15 December, 2022</span>
+								</div>
+
+								<div class="listportal_item_description">
+									<div class="page_section_dynamic_fade height_mobile_20em height_20em">
+										<div>
+											<span class="rendered_text"
+												>This is an ever-growing list of video-game inspired vaporwave releases. <br />All release are sorted by date.<br /><br />Feel free to recommend a release.</span
+											>
+										</div>
+										<div class="page_section_dynamic_fade_cover"></div>
+										<div class="page_section_dynamic_fade_expand_button ui_button button_expand"><span class="expand_text">Expand description</span> <span class="hide_text">Hide</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="listportal_nav"></div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+			<!-- end content and content_wrapper -->
+		</div>
+	</div>
+
+	<div class="overlay_invisible" id="overlay_invisible"></div>
+
+	<div class="ui_cropper_frame" id="ui_cropper_frame"></div>
+
+	<div class="modal_parent_frame" id="modal_parent_frame">
+		<div onclick="rym.closeModal();" id="modal_overlay" class="modal_overlay" style="">Close <i class="fa fa-times"></i></div>
+		<div onclick="rym.closeModal();" id="modal_overlay_invisible" class="modal_overlay_invisible" style=""></div>
+		<div id="modal_parent_frame_inner" class="modal_parent_frame_inner">
+			<div id="modal_content" class="modal_content"></div>
+		</div>
+	</div>
+
+	<div class="modal_parent_frame_level_2" id="modal_parent_frame_level_2">
+		<div onclick="rym.closeModal2();" id="modal_overlay_level_2" class="modal_overlay" style="">Close <i class="fa fa-times"></i></div>
+		<div onclick="rym.closeModal2();" id="modal_overlay_invisible_level_2" class="modal_overlay_invisible" style=""></div>
+		<div id="modal_parent_frame_inner_level_2" class="modal_parent_frame_inner_level_2">
+			<div id="modal_content_level_2" class="modal_content"></div>
+		</div>
+	</div>
+
+	<!-- ~~~~~~~~ end content ~~~~~~~~~~~~~~~ -->
+	<div class="ui_chooser_results_frame" id="ui_chooser_results_frame">
+		<div class="ui_chooser_results bg-fff alternate" id="ui_chooser_results"></div>
+	</div>
+
+	<div id="voting_ui_frame"></div>
+
+	<div style="clear: both"></div>
+
+	<footer>
+		<div class="footer_inner">
+			<div class="footer_main_section">
+				<div class="minilogo_frame">
+					<div class="minilogo">
+						<div class="logo_sonemic_bw_24"></div>
+						<span class="minilogo_text">Rate Your Music</span>
+					</div>
+				</div>
+
+				<div class="copyright">© 2000-2025 Sonemic, Inc.</div>
+
+				<div class="clearfix"></div>
+
+				<div class="clearfix"></div>
+
+				<div class="social_icons">
+					<a rel="noopener" title="Follow us on Facebook" href="https://facebook.com/sonemic.network/" target="_blank"><i class="fab fa-facebook-square"></i></a>
+					<a rel="noopener" title="Follow us on Twitter" href="https://twitter.com/sonemic/" target="_blank"><i class="fab fa-twitter-square"></i></a>
+					<a rel="noopener" title="Follow us on Instagram" href="https://instagram.com/sonemic/" target="_blank"><i class="fab fa-instagram-square"></i></a>
+					<a rel="noopener" title="Follow us on Spotify" href="https://open.spotify.com/user/sonemic.com" target="_blank"><i class="fab fa-spotify"></i></a>
+					<a rel="noopener" title="Subscribe to our weekly newsletter" href="https://mailchi.mp/sonemic-selects/newsletter" target="_blank"><i class="fa fa-envelope"></i></a>
+				</div>
+			</div>
+
+			<div id="expand_full_footer" class="mobile_expandable_full mobile_expand_footer">
+				<div id="expand_full_header_footer" class="mobile_expandable_full_header" onclick="RYMmobile.mobileExpand.toggleFull('footer');">
+					<div class="mobile_expandable_full_icons">
+						<div class="mobile_expandable_full_expand_icon_expanded">
+							<i class="fa fa-caret-down"></i>
+						</div>
+						<div class="mobile_expandable_full_expand_icon_hidden">
+							<i class="fa fa-caret-right"></i>
+						</div>
+					</div>
+
+					<div id="expand_full_name_footer" class="mobile_expandable_full_name">Site links</div>
+				</div>
+
+				<div id="expand_full_content_footer" class="mobile_expandable_full_content">
+					<div class="footer_sections">
+						<div class="footer_section" id="section_network">
+							<div class="footer_header">RYM Network</div>
+							<div class="footer_sub_links">
+								<a class="asonemic" href="https://rateyourmusic.com/">
+									RYM
+
+									<span class="sub">music</span></a
+								>
+								<a class="asonemic" href="https://sonemic.com/">Sonemic <span class="sub">roadmap</span></a>
+								<a class="aglitchwave" href="https://glitchwave.com/">Glitchwave <span class="sub">video games (beta)</span></a>
+								<a class="aforum" href="https://rym.fm/">Discussion <span class="sub">rym.fm</span></a>
+							</div>
+						</div>
+						<div class="footer_section">
+							<div class="footer_header">Info</div>
+							<div class="footer_sub_links">
+								<a href="/wiki/RYM:FAQ">FAQ</a>
+								<a href="/development/">Development status</a>
+								<a href="/rymzilla/" class="has_tip" data-tiptip="Report bugs and request features">RYMzilla</a>
+								<a href="/submissions/">Submissions</a>
+								<a href="/data-access/register-interest/">Data access / API</a>
+							</div>
+						</div>
+						<div class="footer_section">
+							<div class="footer_header">Policy</div>
+							<div class="footer_sub_links">
+								<a href="/wiki/">Database standards</a>
+								<a class="" href="/privacy"
+									>Privacy <span style="font-size: 0.875em"><br />(Updated: 29 Sep 2025)</span></a
+								>
+								<a class="" href="/tos">Terms of service <span style="display: none; font-size: 0.875em">(Updated: 12 Aug 2024)</span></a>
+							</div>
+						</div>
+						<div class="footer_section">
+							<div class="footer_header">Contact us</div>
+							<div class="footer_sub_links">
+								<a href="/contact">Support / Feedback</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div style="clear: both"></div>
+		</div>
+	</footer>
+	<script src="https://e.snmc.io/2.5/js/jquery.min.2.js"></script>
+</body>

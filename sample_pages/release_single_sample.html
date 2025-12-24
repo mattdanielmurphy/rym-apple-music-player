@@ -1,0 +1,548 @@
+<!-- Source URL: https://rateyourmusic.com/release/single/brenda-lee/rockin-around-the-christmas-tree-papa-noel/ -->
+<body id="page_body" class="has_background_image " style="background-image:url('//e.snmc.io/i/25/s/c86c82d588c33939488d1c973286cd76/2081888'); background-size:cover;">
+
+            <script>
+               window.themes = ['light', 'eve', 'night', 'lightgray', 'darkgray', 'pink', 'classic'];
+               window.themes_label = ['Light', 'Evening', 'Night', 'Light gray', 'Dark gray', 'Pink', 'Classic'];
+            </script><div id="tauri-toast"></div><div id="tauri-tabs"><button class="tauri-tab-btn">Music</button><button class="tauri-tab-btn active">RYM</button></div>
+          
+      <script>
+         if ( window.localStorage['size_mode'] ) {
+            document.body.parentElement.className += ' size_mode_' + window.localStorage['size_mode'];
+         }
+
+         if ( !window.localStorage['theme'] && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ) {
+            document.body.parentElement.className += ' theme_eve';
+         } else if ( !window.localStorage['theme'] || window.localStorage['theme'] === 'day') {
+            document.body.parentElement.className += ' theme_light';
+         } else {
+            if ( -1 != window.themes.indexOf(window.localStorage['theme']) ) {
+               document.body.parentElement.className += ' theme_' + window.localStorage['theme'];
+            } else {
+               document.body.parentElement.className += ' theme_light';
+            }
+         }
+
+         if ( window.matchMedia ) {
+
+             var listener = window.matchMedia('(prefers-color-scheme: dark)').addEventListener;
+
+             if ( listener ) {
+                listener('change', e => {
+                  updateTheme();
+                });               
+             }
+         }
+      </script>
+      <div id="top" class="breadcrumb_section_marker anchor"></div><script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                window.dom_loaded = true;
+      
+             console.log('DOM loaded');
+             if ( typeof (_adjustFillerColumns) !== 'undefined' ) {
+                _adjustFillerColumns() 
+             }
+
+             setTimeout(function () { 
+               if ( typeof (_closeAllStickyAds) !== 'undefined' ) {
+                  _closeAllStickyAds() 
+               }
+
+             }, 5000);
+         
+  
+         });
+      
+            rymQ(function() { updateStyleThemeLabels() });
+         </script>
+      
+<header id="page_header">
+<div class="header_inner logged_in">
+
+
+
+   <div onclick="RYMheader.onClickBars()" id="header_icon_link_bars" class="header_icon_link">
+      <i class="fa fa-bars"></i>
+      <span class="show-for-small">
+      </span>
+   <div id="header_extended_section" class="header_extended_section header_extended_more_menu">
+            <a href="/~mattmurphy" class="header_item">
+               Profile
+            </a>
+
+            <a href="/collection/mattmurphy/" class="header_item">
+              Music Collection
+            </a>
+
+            <a href="/recommendations/mattmurphy/music/" class="header_item">
+             Recommendations
+                   <div class="badge_count_bubble messages">
+                      <span class="profile_num_messages" style="">New</span>
+                   </div>
+            </a>
+
+            <a href="/film_collection/mattmurphy/" class="header_item">
+              Film Collection
+            </a>
+            <a href="/list/mattmurphy/" class="header_item">
+              Lists
+            </a>
+            <br>
+            <a href="/messages/inbox" class="header_item">
+              Messaging
+            </a>
+            <a href="/account/mentions" class="header_item">
+              Mentions
+            </a>
+
+            <a href="/account/preferences" class="header_item">
+               Settings
+            </a>
+
+            <a href="/submissions/" class="header_item">
+               Submissions
+            </a>
+
+            <div class="header_items_spillover">
+
+
+
+
+
+            </div>
+
+
+           <div class="header_theme_buttons">
+    
+                 <div onclick="switchSizeMode(event);return false;" class="header_theme_button">
+                    <div class="header_theme_button_label">Text</div>
+                    <div class="header_theme_button_mode" id="page_frame_size_mode_switch">Aa</div>
+                 </div>
+
+                 <div onclick="switchTheme(event);return false;" class="header_theme_button">
+                    <div class="header_theme_button_label">Theme</div>
+                    <div class="header_theme_button_mode" id="page_frame_theme_switch">Light</div>
+                 </div>
+
+                 <div class="clearfix"></div>
+
+           </div>
+
+
+            
+           <span onclick="if ( confirm('Are you sure you want to log out?') ) { window.location = '/account/logout'; }" class="header_item">
+              Log out
+           </span>
+
+        </div>
+     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="header_profile">
+       <div class="header_profile_logged_in">
+           <a href="/~mattmurphy" title="Your profile page" class="header_profile_main">
+              <span id="header_user_img" class="header_user_img" style="background-image:url('//e.snmc.io/i/75/s/d4a84f700e16e0d752ef8835cf87c96c/12062443')"></span>
+              <span id="header_profile_username" class="header_profile_link user header_item">mattmurphy</span>
+           </a>
+       </div>
+
+</div>
+
+
+<div class="header_logo">
+  <a class="main header_item sonemic" href="/">
+     <div class="logo_header"></div>
+     <span class="logo_name">RYM</span>
+  </a>
+
+</div>
+
+
+
+<div class="header_links">
+  <div class="header_links_inner">
+      <div class="divider"></div>
+      <a class="header_item" href="/new-music/">new music</a>
+      <a class="header_item" href="/genres/">genres</a>
+      <div class="header_charts">
+      <a class="header_charts header_item" href="/charts/">charts</a>
+      </div>
+      <a class="header_item" href="/lists/">lists</a>
+         <a class="header_item" href="https://rym.fm/">forums</a>
+
+
+
+
+
+         <a class="header_item has_tip" data-tiptip="Thank you for being a subscriber!" href="/subscribe/" style="xline-height:1.9">
+            <span class="subscribe_label_fundraiser" style="font-size:0.8em;font-weight:bold;"><i class="fa fa-check-circle"></i></span>
+            
+         </a>         
+
+      
+
+      <div class="divider"></div>
+    </div>
+  </div>
+  <div class="header_search">
+  <div id="ui_search_frame_outer_main_search" class="ui_search_frame_outer"> <div id="ui_search_frame_main_search" class="ui_search_frame"> <div onclick="rymQ(function() {RYMsearch.onClickClose(event, 'main_search');})" class="ui_search_close"> <div class="ui_search_close_bar"> <i class="fa fa-times"></i> Close</div> <div id="ui_search_context_indicator_main_search" class="ui_search_context_indicator"> <div id="ui_search_context_indicator_inner_main_search" class="ui_search_context_indicator_inner"></div> </div> </div> <div class="ui_search_clear"></div> <div class="ui_search_frame_inner"> <div id="ui_search_main_search" class="ui_search" data-default-scope="music" data-callback="" data-callback-id=""> <i style="cursor:pointer" onclick="RYMsearch.redirSearch(event, 'main_search');" id="ui_search_icon_main_search" class="fa fa-search ui_search_icon"></i> <i id="ui_clear_icon_main_search" onclick="rymQ(function() {RYMsearch.onClickClearSearch(event, 'main_search');})" class="fa fa-times-circle ui_clear_icon"></i>
+
+
+   <form onsubmit="event.preventDefault(); RYMsearch.redirSearch(event, 'main_search');">
+   <input autocomplete="off" aria-label="Search" value="" id="ui_search_input_main_search" placeholder="Search..." class="ui_search_input" onfocus="rymQ(function() {RYMsearch.onFocus(event, 'main_search')})" onblur="rymQ(function() {RYMsearch.onBlur(event, 'main_search')})" onkeydown="rymQ(function() {RYMsearch.onKeyDown(event, 'main_search')})" oninput="rymQ(function() {RYMsearch.onInput(event, 'main_search')})">
+   </form> </div> <div class="ui_search_rest"> <div class="ui_search_type"> <div id="ui_search_debug_main_search" class="ui_search_debug"></div> <span class="ui_search_object_label">Search:</span> <span id="ui_search_scope_selector_main_search" class="ui_search_object_selector"> <input type="hidden" name="ui_search_scope_main_search" id="ui_search_scope_main_search" value="music"> <span id="ui_search_scope_selector_music_main_search" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'music');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_music selected"> Music
+  </span> <span id="ui_search_scope_selector_film_main_search" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'film');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_film"> Film
+  </span> <span id="ui_search_scope_selector_games_main_search" style="display:none" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'games');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_games"> Games
+  </span> </span> <span class="ui_search_object_label">for:</span> <span id="ui_search_object_select_frame_main_search" class="ui_search_object_select_frame selected"> <select onchange="rymQ(function() {RYMsearch.onChangeObject(event, 'main_search')})" id="ui_search_object_select_main_search" class="ui_search_object_select"> </select> </span>  </div> <div id="ui_search_info_frame_main_search" class="ui_search_info_frame"> </div> <div id="ui_search_results_frame_main_search" class="ui_search_results_frame"> <div id="ui_search_results_main_search" class="ui_search_results"> </div> </div> </div> </div> </div>
+  </div>
+
+</div>   
+
+
+
+
+</div>
+
+</header>
+
+
+<div class="header_error" onclick="$(this).fadeOut();" id="header_error">
+   <div class="header_error_close"><i class="fa fa-times-circle"></i></div>
+   <div id="header_error_text"></div>
+</div>
+
+<div class="header_message" onclick="$(this).fadeOut();" id="header_message">
+   <div class="header_message_close"><i class="fa fa-times-circle"></i></div>
+   <div id="header_message_text"></div>
+</div>
+
+<div id="mobile_header_menu" class="mobile_header_menu has_forum_link"><a href="/new-music/" class="mobile_header_menu_item mobile_header_menu_item_new_music">
+      <span>New Music</span>
+</a><a href="/genres/" class="mobile_header_menu_item mobile_header_menu_item_genres">
+      <span>Genres</span>
+</a><a href="/charts/" class="mobile_header_menu_item mobile_header_menu_item_charts">
+      <span>Charts</span>
+</a><a href="/lists/" class="mobile_header_menu_item mobile_header_menu_item_lists">
+   <span>Lists</span> 
+</a><a href="https://rym.fm/" class="mobile_header_menu_item mobile_header_menu_item_community">
+   <span>Forums</span>
+</a></div>
+        
+
+            <div id="content_wrapper_outer" class="content_wrapper_outer">
+            <div id="content_wrapper" class="content_wrapper">
+            <div id="content">
+            <div id="content_cover"></div>
+            <div id="precontent" class="precontent lazyload" data-bkg="//e.snmc.io/i/25/s/c86c82d588c33939488d1c973286cd76/2081888"></div>
+         <div id="total_cover"></div>
+         <div id="content_total_cover"></div>          
+      
+         <style>
+            #end_of_year_banner {
+
+               background:var(--mono-f);
+               border-radius:5px;
+               max-width:50em;
+               text-align:center;
+               margin:0 auto;
+               padding:0.6em 3em;
+               border-radius:5px;
+               border:2px solid var(--gen-blue-dark);
+               color:var(--mono-0);
+               position:relative;
+               font-size:1.1em;
+            }
+
+         </style>
+      
+
+         <script>
+              try {
+                new Function('import("")');
+              } catch (err) {
+                document.write('<div class=note style="margin-bottom:1em;"><b>Note:</b> Not all scripts could be loaded. You may need to upgrade to a newer browser version in order to use this site.</div>');
+              }
+         </script>
+      <style>div.prev_image img, div.next_image img {
+    width: 3em;
+}
+div.list_image {
+   background-size:cover !important;
+   background-position:center center !important;
+}
+</style>
+   <div id="dropheader" style="display:none;"> </div>
+   <div id="shortcut" style="display:none;">
+    <div id="shortcutshell">
+      <div id="shortcutinner">
+         <div class="small">
+         <table><tbody><tr><td>
+<div class="musictoolbar"> <a id="btnshortcutartist" href="#shortcutartist" onclick="viewshortcut('shortcutartist', '');return false;">artist</a>
+             
+             <a id="btnshortcutrelease" href="#shortcutrelease" onclick="viewshortcut('shortcutrelease', '');return false;">release</a>
+             <a id="btnshortcutlabel" href="#shortcutlabel" onclick="viewshortcut('shortcutlabel', '');return false;">label</a>
+             <a id="btnshortcutwork" href="#shortcutwork" onclick="viewshortcut('shortcutwork', '');return false;">work</a>
+             <a id="btnshortcutfilm" href="#shortcutfilm" onclick="viewshortcut('shortcutfilm', '');return false;">film</a>
+             <a id="btnshortcutvideo" href="#shortcutvideo" onclick="viewshortcut('shortcutvideo', '');return false;">video</a>
+             <a id="btnshortcutpicture" href="#shortcutpicture" onclick="viewshortcut('shortcutpicture', '');return false;">pic</a>
+             
+            </div>
+
+  </td><td style="text-align:right;"><a href="javascript:closeShortcut();" class="btn darkred_btn btn_small">x</a></td></tr></tbody></table>
+         </div>
+         <div id="shortcutsearch">
+            <iframe src="about:blank" name="shortcutsearchframe" id="shortcutsearchframe" width="99%" height="99%"></iframe>
+         </div>
+      </div>
+      
+    </div>
+   
+   </div>
+   
+   <script type="text/javascript">var shortcut_first_sc='shortcutartist', shortcut_first_func = '';</script> 
+<div id="searchsuggestions" style="visibility:hidden;position:absolute;z-index:500;max-height:150px;overflow-y:scroll"></div>
+<script>
+  function openShortcut(element)
+  {
+      currentElement = element;
+      var pos = $(element).position();
+      var shortcutWidth = $('#shortcut').outerWidth();
+      var windowWidth = $(window).outerWidth();
+      var left = pos.left + $(element).outerWidth();
+
+      if ( (left + shortcutWidth) > windowWidth ) {
+         left = windowWidth - shortcutWidth;
+      }
+
+      $('#shortcut').css('top', pos.top + 'px').css('left', left + 'px').show();;
+      if ( shortcut_first_sc && shortcut_first_sc != "") {
+        viewshortcut(shortcut_first_sc, shortcut_first_func);
+      }
+
+ }
+ </script><style>
+      div.coverart_415716 {
+         position:relative;
+         padding-bottom:calc( 100% / 1.0071942446043165);
+      }
+
+      div.coverart_415716 img {
+         position:absolute;
+         top:0;
+         left:0;
+         width:100%
+      }
+
+   </style>
+
+<div class="release_page" itemprop="mainEntity" itemscope="" itemtype="http://schema.org/MusicAlbum">
+     <div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+     <meta itemprop="ratingValue" content="3.48">
+     <meta itemprop="bestRating" content="5.0">
+     <meta itemprop="worstRating" content="0.5">
+     <meta itemprop="ratingCount" content="506"><meta itemprop="reviewCount" content="9"></div>
+   <meta content="Rockin' Around the Christmas Tree / Papa Noël" itemprop="name">
+   
+      <meta content="/release/single/brenda-lee/rockin-around-the-christmas-tree-papa-noel/" itemprop="url">
+   
+   <div style="max-width:1700px; margin: 0px auto;">
+   <div class="row">
+
+    <div id="column_container_right" class="large-8 push-4 columns release_right_column">  <div class="section_main_info section_outer"><div class="page_section">          
+         <div class="album_title">Rockin' Around the Christmas Tree / Papa Noël 
+               <input aria-label="album shortcut" class="album_shortcut" readonly="" onclick="focus();select();" value="[Album415716]">
+               <div class="show-for-small album_artist_small">By <a title="[Artist16634]" href="/artist/brenda-lee" class="artist">Brenda Lee</a></div>
+            </div>
+
+         <table class="color_bar" style="xborder:1px #6d7e22 solid; width:100%;height:2px;font-size:1px;padding:0;"><tbody><tr style="height:2px;padding:0;"><td style="background:#6d7e22;height:2px;padding:0px;color:#6d7e22">.</td><td style="background:#5c834a;height:2px;padding:0px;color:#5c834a">.</td><td style="background:#759f33;height:2px;padding:0px;color:#759f33">.</td><td style="background:#589947;height:2px;padding:0px;color:#589947">.</td><td style="background:#959688;height:2px;padding:0px;color:#959688">.</td><td style="background:#a0af8e;height:2px;padding:0px;color:#a0af8e">.</td><td style="background:#7b971e;height:2px;padding:0px;color:#7b971e">.</td><td style="background:#c26738;height:2px;padding:0px;color:#c26738">.</td><td style="background:#f99e41;height:2px;padding:0px;color:#f99e41">.</td><td style="background:#a05430;height:2px;padding:0px;color:#a05430">.</td></tr></tbody></table>
+
+         <div class="show-for-small" style="text-align:center;">
+            <div style="padding-top:0.3em;"> <a href="buy/">
+      <div class="coverart_415716" style="position:relative;">
+      
+      <img srcset="//e.snmc.io/i/600/s/cb350a165ac2a85ca06e4625ab20aba0/2081888/brenda-lee-rockin-around-the-christmas-tree-papa-noel-Cover-Art.jpg,
+                     //e.snmc.io/i/600/s/cb350a165ac2a85ca06e4625ab20aba0/2081888/brenda-lee-rockin-around-the-christmas-tree-papa-noel-Cover-Art.jpg 2x" src="//e.snmc.io/i/600/s/cb350a165ac2a85ca06e4625ab20aba0/2081888/brenda-lee-rockin-around-the-christmas-tree-papa-noel-Cover-Art.jpg" alt="Cover art for Rockin' Around the Christmas Tree / Papa Noël by Brenda Lee">
+      <!-- <meta itemprop="image" content="//e.snmc.io/i/300/s/52a5764cf56e1cc2daa7a0ce4cd60b90/2081888" /> -->
+    </div></a>
+    
+            <div id="media_link_button_container_top" data-medialink="true" data-support-open="true" data-artists="Brenda Lee" data-albums="Rockin' Around the Christmas Tree / Papa Noël" data-links="{&quot;youtube&quot;:{&quot;kJTi-xqngls&quot;:{&quot;default&quot;:true}}}" data-placement="top" class="media_link_container link_sonemic  support_open lazyload">
+            </div>
+      <div style="text-align:center;max-width:100%;margin:0 auto;margin-top:0.5em;"><a href="/submit_media_link?object=release&amp;assoc_id=415716" style="text-align:center;font-size:0.9em;color:var(--gen-blue-darker);text-decoration:none;">Submit media links</a></div> </div>
+         </div>
+         <table class="album_info_outer">
+         <tbody><tr><td style="vertical-align:top;">
+            <table class="album_info">
+               <tbody><tr class="hide-for-small"><th class="info_hdr">Artist</th><td colspan="2"><span itemprop="byArtist" itemscope="" itemtype="http://schema.org/MusicGroup"><a title="[Artist16634]" itemprop="name" href="/artist/brenda-lee" class="artist">Brenda Lee</a></span>
+               <span class="release_info_classifiers"></span></td></tr>
+               <tr><th class="info_hdr">Type</th><td colspan="2">Single</td></tr>
+                  <tr><th class="info_hdr">Released</th><td colspan="2">17 November <a style="text-decoration:none;" href="/charts/top/single/1958/"><b>1958</b></a></td></tr><tr><th class="info_hdr">Recorded</th><td colspan="2">19 October 1958</td></tr>
+               <tr><th class="info_hdr">RYM Rating</th><td colspan="2" style="padding:4px;">
+                <span>
+                  <span class="avg_rating">
+                     3.48
+                  </span> 
+                  <span class="max_rating">/ <span>5.0</span><span style="display:none">0.5</span></span>
+                  <span class="num_ratings">
+                     from <b><span>506</span></b> ratings
+                  </span>
+               </span>
+               </td></tr>
+               <tr><th class="info_hdr">Friends</th><td colspan="2">
+                  <span class="avg_rating_friends">
+                     4.00
+                  </span> 
+                  <span class="num_ratings">
+                     from <b><span>1</span></b> rating
+                  </span>
+               </td></tr>
+               <tr><th class="info_hdr">Ranked</th><td colspan="2">#<b>47</b> for <a href="/charts/top/single/1958/#pos47">1958</a>, #<b>9,063</b> <a href="/charts/top/single/all-time/91/#pos9063">overall</a></td></tr><tr class="release_genres">
+                        <th class="info_hdr">
+                           Genres
+                        </th>
+                        <td>   <div style="float:left;">
+                           <span class="release_pri_genres"><a title="[Genre597]" class="genre" href="/genre/christmas-music/">Christmas Music</a>, <a title="[Genre55]" class="genre" href="/genre/rock-and-roll/">Rock &amp; Roll</a>, <a title="[Genre630]" class="genre" href="/genre/pop-rock/">Pop Rock</a></span>
+                           <br><span class="release_sec_genres"><a title="[Genre60]" class="genre" href="/genre/rockabilly/">Rockabilly</a>, <a title="[Genre424]" class="genre" href="/genre/standards/">Standards</a></span>
+                           </div>
+                           </td>
+	
+                     <td style="text-align:center;padding:0">
+                        <a href="/rgenre/set?album_id=415716" class="genre_descriptor_vote_btn has_tip" title="vote for genres" data-tiptip="Vote for genres"><i class="fa fa-check"></i></a>
+                     </td>
+                        </tr><tr class="release_descriptors">
+                        <th class="info_hdr">
+                           Descriptors
+                        </th>
+                        <td><meta content="Christmas"><meta content=" female vocalist"><meta content=" happy"><meta content=" uplifting"><meta content=" melodic"><meta content=" playful"><meta content=" party"><meta content=" rhythmic"><meta content=" soft">   <div style="float:left;">
+                           <span class="release_pri_descriptors">Christmas,  female vocalist,  happy,  uplifting,  melodic,  playful,  party,  rhythmic,  soft</span>
+                           </div>
+                           </td>
+                           <td style="text-align:center;padding:0">
+                              <a href="/rdescriptor/set?album_id=415716" class="genre_descriptor_vote_btn has_tip" title="vote for descriptors" data-tiptip="Vote for descriptors"><i class="fa fa-check"></i></a>
+                           </td>                
+           
+                        </tr><tr><th class="info_hdr">Language </th><td style="font-size:0.9em;color:var(--mono-5);" colspan="2">English</td></tr></tbody></table></td></tr></tbody></table></div></div><div class="show-for-small"><div class="section_tracklisting"><div class="release_page_header"><h2>Track listing</h2>
+            <div id="track_credit_show_link_tracks_mobile" class="track_credit_show_link" onclick="rymQ( function() { RYMmediaPage.toggleTrackCredits('tracks_mobile'); });">Show track credits</div>
+         </div>
+            <span id="track_credit_show_msg_tracks_mobile" style="display:none;">Show track credits</span>
+            <span id="track_credit_hide_msg_tracks_mobile" style="display:none;">Hide track credits</span>
+          
+       <table class="color_bar" style="xborder:1px #6d7e22 solid; width:100%;height:1px;font-size:1px;padding:0;"><tbody><tr style="height:1px;padding:0;"></tr></tbody></table>
+       <ul id="tracks_mobile" class="tracks tracklisting"><li class="track"><div class="tracklist_line" style="width:100%;">
+<span data-tiptip="3.53 from 79
+       ratings
+     " class="has_tip page_release_section_tracks_songs_song_stats  significant">
+
+      <span class="page_release_section_tracks_track_stats_scores ">
+         <span class="page_release_section_tracks_track_stats_score_star pipe_separated">
+           <img alt="star" class="metadata-star">
+           <div class="page_release_section_tracks_track_stats_rating pipe_separated">
+              3.5
+           </div>
+         </span>
+        <div class="page_release_section_tracks_track_stats_count pipe_separated">
+           79
+        </div>
+     </span>
+</span>
+<span class="tracklist_num">
+                     A
+                  </span>
+                  <span class="tracklist_title"><span><a class="song " href="/song/brenda-lee/rockin-around-the-christmas-tree/" itemprop="name">Rockin' Around the Christmas Tree</a><span class="tracklist_duration" data-inseconds="122">
+                     2:02
+                  </span>
+                  </span><div style="clear:both;"></div></span></div>
+         <div style="width:300px;padding-left:23px;"><ul class="credits">
+             <li class="credits non_featured_credit">
+               <div class="credits_artist "><a title="[Artist504721]" href="/artist/johnny-marks" class="artist">Johnny Marks</a></div>
+               <div class="credits_roles">writer</div></li></ul></div>                  
+               </li><li class="track"><div class="tracklist_line" style="width:100%;">
+<span data-tiptip="3.20 from 18
+       ratings
+     " class="has_tip page_release_section_tracks_songs_song_stats  significant">
+
+      <span class="page_release_section_tracks_track_stats_scores ">
+         <span class="page_release_section_tracks_track_stats_score_star pipe_separated">
+           <img alt="star" class="metadata-star">
+           <div class="page_release_section_tracks_track_stats_rating pipe_separated">
+              3.2
+           </div>
+         </span>
+        <div class="page_release_section_tracks_track_stats_count pipe_separated">
+           18
+        </div>
+     </span>
+</span>
+<span class="tracklist_num">
+                     B
+                  </span>
+                  <span class="tracklist_title"><span><a class="song " href="/song/brenda-lee/papa-noel/" itemprop="name">Papa Noël</a><a href="/song/brenda-lee/papa-noel/#lyrics" class="tracks_lyric_link">lyrics</a><span class="tracklist_duration" data-inseconds="145">
+                     2:25
+                  </span>
+                  </span><div style="clear:both;"></div></span></div>
+         <div style="width:300px;padding-left:23px;"><ul class="credits">
+             <li class="credits non_featured_credit">
+               <div class="credits_artist "><a title="[Artist1150252]" href="/artist/roy_botkin" class="artist">Roy Botkin</a></div>
+               <div class="credits_roles">writer</div></li></ul></div>                  
+               </li><li class="track" style="text-align:right;padding-top:0.25em"><span style="line-height: 2.6em;color: var(--mono-6);margin-right:0.8em;" class="tracklist_total">Total length: 4:27</span></li></ul><div id="track_preview_tracks_mobile">
+            
+         </div> </div></div><div class="show-for-small"><div class="section_release_navigation"><div class="release_navigation"><div class="release_navigation_guidance">
+                    <div class="release_nav_guidance_artist">
+                     <div class="release_nav_guidance_left">
+                      <a href="/release/single/brenda-lee/ring-a-my-phone-little-jonah-rock-on-your-steel-guitar/"><i class="fa fa-caret-left"></i>
+                      Previous</a>
+                     </div>                     
+                     <div class="release_nav_guidance_right">
+                     <a href="/release/single/brenda-lee/bill-bailey-wont-you-please-come-home-hummin-the-blues-over-you/">Next
+                      <i class="fa fa-caret-right"></i></a>
+                      
+                     </div></div>
+                     <div style="clear:both;"></div>
+                  </div>
+               
+                                 
+                  <div class="release_navigation_links">
+                    <div class="prev_image">
+                       <a href="/release/single/brenda-lee/ring-a-my-phone-little-jonah-rock-on-your-steel-guitar/"><img alt="Previous in discography: Ring-a-My-Phone / Little Jonah (Rock on Your Steel Guitar)" src="//e.snmc.io/i/75/s/3e921a774ec1d08cfe73cb3b9a1a8a89/5273333"></a>
+                    </div>
+                    <div class="prev_link">
+                       <a title="[Album422311]" href="/release/single/brenda-lee/ring-a-my-phone-little-jonah-rock-on-your-steel-guitar/" class="small">Ring-a-My-Phone / Little Jonah (Rock on Your Steel Guitar)</a>
+                    </div>
+                    <div class="next_link">
+                       <a title="[Album422312]" href="/release/single/brenda-lee/bill-bailey-wont-you-please-come-home-hummin-the-blues-over-you/" class="small">Bill Bailey Won't You Please Come Home / Hummin' the Blues Over You</a>
+                    </div>
+                    <div class="next_image">
+                       <a href="/release/single/brenda-lee/bill-bailey-wont-you-please-come-home-hummin-the-blues-over-you/"><img alt="Next in discography: Ring-a-My-Phone / Little Jonah (Rock on Your Steel Guitar)" src="//e.snmc.io/i/75/s/7db0290c8015b2c8d82f3dd2945a8400/3160909"></a>
+                    </div>
+                    <div style="clear:both;"></div>
+                  </div>                
+               
+            </div></div></div><div class="section_my_catalog section_outer" style="padding-bottom: 5px;"><div class="page_section"><div id="my_catalog">
+      <div class="release_page_header"><h2>Rate/Catalog 
+      </h2></div>
+       <table class="color_bar" style="xborder:1px #6d7e22 solid; width:100%;height:1px;font-size:1px;padding:0;"><tbody><tr style="height:1px;padding:0;"></tr></tbody></table>
+            <div class="release_my_catalog">
+               <div id="my_catalog_rating_l_415716" tabindex="0" class="my_catalog_rating" onmousemove="rating_l_415716.onMouseMove(event,this);" onmouseover="rating_l_415716.onMouseOver(event,this);" onmouseout="rating_l_415716.onMouseOut(event,this);" ontouchstart="rating_l_415716.onTouchStart(event,this);" ontouchmove="rating_l_415716.onTouchMove(event,this);" ontouchend="rating_l_415716.onTouchEnd(event,this);" onclick="rating_l_415716.onClick(event,this);">
+               <div id="rating_stars_l_415716" class="rating_stars star-0m">
+               </div>
+               <div class="rating_loading">Saving...
+               </div>
+               <div id="rating_num_l_415716" class="rating_num">
+                  0.0
+               </div>
+            </div>
+            <script>
+              rymQ(function() {window.rating_l_415716 = new RYMrating('l', 415716, 0 );});
+            </script></div></div></div></div></div></div></div></div></div></div></div></body>

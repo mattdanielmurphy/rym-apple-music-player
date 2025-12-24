@@ -1,0 +1,39 @@
+[[permission]]
+identifier = "allow-show-music"
+description = "Allows showing the music window"
+commands.allow = ["show_music"]
+
+[[permission]]
+identifier = "allow-show-rym"
+description = "Allows showing the rym window"
+commands.allow = ["show_rym"]
+
+[[permission]]
+identifier = "allow-sync-to-rym"
+description = "Allows syncing musical info to rym"
+commands.allow = ["sync_to_rym"]
+
+[[permission]]
+identifier = "allow-save-sample-html"
+description = "Allows saving HTML samples"
+commands.allow = ["save_sample_html"]
+
+[[permission]]
+identifier = "allow-set-pending-music-url"
+description = "Allows setting pending music url"
+commands.allow = ["set_pending_music_url"]
+
+[[permission]]
+identifier = "allow-navigation"
+description = "Allows browser-style navigation"
+commands.allow = ["go_back", "go_forward"]
+
+[[permission]]
+identifier = "allow-rating"
+description = "Allows getting and saving RYM ratings"
+commands.allow = ["get_rym_rating", "save_rym_rating"]
+
+[[permission]]
+identifier = "allow-start-drag"
+description = "Allows manual window dragging"
+commands.allow = ["start_drag"]

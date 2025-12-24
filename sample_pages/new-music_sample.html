@@ -1,0 +1,2499 @@
+<!-- Source URL: https://rateyourmusic.com/new-music/ -->
+<body id="page_body" class="">
+	<script>
+		window.themes = ["light", "eve", "night", "lightgray", "darkgray", "pink", "classic"]
+		window.themes_label = ["Light", "Evening", "Night", "Light gray", "Dark gray", "Pink", "Classic"]
+	</script>
+	<div id="tauri-toast"></div>
+	<div id="tauri-tabs"><button class="tauri-tab-btn">Music</button><button class="tauri-tab-btn active">RYM</button></div>
+
+	<script>
+		if (window.localStorage["size_mode"]) {
+			document.body.parentElement.className += " size_mode_" + window.localStorage["size_mode"]
+		}
+
+		if (!window.localStorage["theme"] && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+			document.body.parentElement.className += " theme_eve"
+		} else if (!window.localStorage["theme"] || window.localStorage["theme"] === "day") {
+			document.body.parentElement.className += " theme_light"
+		} else {
+			if (-1 != window.themes.indexOf(window.localStorage["theme"])) {
+				document.body.parentElement.className += " theme_" + window.localStorage["theme"]
+			} else {
+				document.body.parentElement.className += " theme_light"
+			}
+		}
+
+		if (window.matchMedia) {
+			var listener = window.matchMedia("(prefers-color-scheme: dark)").addEventListener
+
+			if (listener) {
+				listener("change", (e) => {
+					updateTheme()
+				})
+			}
+		}
+	</script>
+	<div id="top" class="breadcrumb_section_marker anchor"></div>
+	<script>
+		window.addEventListener("DOMContentLoaded", (event) => {
+			window.dom_loaded = true
+
+			console.log("DOM loaded")
+			if (typeof _adjustFillerColumns !== "undefined") {
+				_adjustFillerColumns()
+			}
+
+			setTimeout(function () {
+				if (typeof _closeAllStickyAds !== "undefined") {
+					_closeAllStickyAds()
+				}
+			}, 5000)
+		})
+		console.log("Enabling connatix testcase B")
+		rymQ(function () {
+			updateStyleThemeLabels()
+		})
+	</script>
+
+	<header id="page_header">
+		<div class="header_inner logged_in">
+			<div onclick="RYMheader.onClickBars()" id="header_icon_link_bars" class="header_icon_link">
+				<i class="fa fa-bars"></i>
+				<span class="show-for-small"> </span>
+				<div id="header_extended_section" class="header_extended_section header_extended_more_menu">
+					<a href="/~mattmurphy" class="header_item"> Profile </a>
+
+					<a href="/collection/mattmurphy/" class="header_item"> Music Collection </a>
+
+					<a href="/recommendations/mattmurphy/music/" class="header_item">
+						Recommendations
+						<div class="badge_count_bubble messages">
+							<span class="profile_num_messages" style="">New</span>
+						</div>
+					</a>
+
+					<a href="/film_collection/mattmurphy/" class="header_item"> Film Collection </a>
+					<a href="/list/mattmurphy/" class="header_item"> Lists </a>
+					<br />
+					<a href="/messages/inbox" class="header_item"> Messaging </a>
+					<a href="/account/mentions" class="header_item"> Mentions </a>
+
+					<a href="/account/preferences" class="header_item"> Settings </a>
+
+					<a href="/submissions/" class="header_item"> Submissions </a>
+
+					<div class="header_items_spillover"></div>
+
+					<div class="header_theme_buttons">
+						<div onclick="switchSizeMode(event);return false;" class="header_theme_button">
+							<div class="header_theme_button_label">Text</div>
+							<div class="header_theme_button_mode" id="page_frame_size_mode_switch">Aa</div>
+						</div>
+
+						<div onclick="switchTheme(event);return false;" class="header_theme_button">
+							<div class="header_theme_button_label">Theme</div>
+							<div class="header_theme_button_mode" id="page_frame_theme_switch">Light</div>
+						</div>
+
+						<div class="clearfix"></div>
+					</div>
+
+					<span onclick="if ( confirm('Are you sure you want to log out?') ) { window.location = '/account/logout'; }" class="header_item"> Log out </span>
+				</div>
+			</div>
+
+			<div class="header_profile">
+				<div class="header_profile_logged_in">
+					<a href="/~mattmurphy" title="Your profile page" class="header_profile_main">
+						<span id="header_user_img" class="header_user_img" style="background-image: url('//e.snmc.io/i/75/s/d4a84f700e16e0d752ef8835cf87c96c/12062443')"></span>
+						<span id="header_profile_username" class="header_profile_link user header_item">mattmurphy</span>
+					</a>
+				</div>
+			</div>
+
+			<div class="header_logo">
+				<a class="main header_item sonemic" href="/">
+					<div class="logo_header"></div>
+					<span class="logo_name">RYM</span>
+				</a>
+			</div>
+
+			<div class="header_links">
+				<div class="header_links_inner">
+					<div class="divider"></div>
+					<a class="header_item" href="/new-music/">new music</a>
+					<a class="header_item" href="/genres/">genres</a>
+					<div class="header_charts">
+						<a class="header_charts header_item" href="/charts/">charts</a>
+					</div>
+					<a class="header_item" href="/lists/">lists</a>
+					<a class="header_item" href="https://rym.fm/">forums</a>
+
+					<a class="header_item has_tip" data-tiptip="Thank you for being a subscriber!" href="/subscribe/" style="xline-height: 1.9">
+						<span class="subscribe_label_fundraiser" style="font-size: 0.8em; font-weight: bold"><i class="fa fa-check-circle"></i></span>
+					</a>
+
+					<div class="divider"></div>
+				</div>
+			</div>
+			<div class="header_search">
+				<div id="ui_search_frame_outer_main_search" class="ui_search_frame_outer">
+					<div id="ui_search_frame_main_search" class="ui_search_frame">
+						<div onclick="rymQ(function() {RYMsearch.onClickClose(event, 'main_search');})" class="ui_search_close">
+							<div class="ui_search_close_bar"><i class="fa fa-times"></i> Close</div>
+							<div id="ui_search_context_indicator_main_search" class="ui_search_context_indicator">
+								<div id="ui_search_context_indicator_inner_main_search" class="ui_search_context_indicator_inner"></div>
+							</div>
+						</div>
+						<div class="ui_search_clear"></div>
+						<div class="ui_search_frame_inner">
+							<div id="ui_search_main_search" class="ui_search" data-default-scope="music" data-callback="" data-callback-id="">
+								<i style="cursor: pointer" onclick="RYMsearch.redirSearch(event, 'main_search');" id="ui_search_icon_main_search" class="fa fa-search ui_search_icon"></i>
+								<i id="ui_clear_icon_main_search" onclick="rymQ(function() {RYMsearch.onClickClearSearch(event, 'main_search');})" class="fa fa-times-circle ui_clear_icon"></i>
+
+								<form onsubmit="event.preventDefault(); RYMsearch.redirSearch(event, 'main_search');">
+									<input
+										autocomplete="off"
+										aria-label="Search"
+										value=""
+										id="ui_search_input_main_search"
+										placeholder="Search..."
+										class="ui_search_input"
+										onfocus="rymQ(function() {RYMsearch.onFocus(event, 'main_search')})"
+										onblur="rymQ(function() {RYMsearch.onBlur(event, 'main_search')})"
+										onkeydown="rymQ(function() {RYMsearch.onKeyDown(event, 'main_search')})"
+										oninput="rymQ(function() {RYMsearch.onInput(event, 'main_search')})"
+									/>
+								</form>
+							</div>
+							<div class="ui_search_rest">
+								<div class="ui_search_type">
+									<div id="ui_search_debug_main_search" class="ui_search_debug"></div>
+									<span class="ui_search_object_label">Search:</span>
+									<span id="ui_search_scope_selector_main_search" class="ui_search_object_selector">
+										<input type="hidden" name="ui_search_scope_main_search" id="ui_search_scope_main_search" value="music" />
+										<span
+											id="ui_search_scope_selector_music_main_search"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'music');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_music selected"
+										>
+											Music
+										</span>
+										<span
+											id="ui_search_scope_selector_film_main_search"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'film');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_film"
+										>
+											Film
+										</span>
+										<span
+											id="ui_search_scope_selector_games_main_search"
+											style="display: none"
+											onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'games');})"
+											class="ui_search_scope_selector_item ui_search_scope_selector_item_games"
+										>
+											Games
+										</span>
+									</span>
+									<span class="ui_search_object_label">for:</span>
+									<span id="ui_search_object_select_frame_main_search" class="ui_search_object_select_frame selected">
+										<select onchange="rymQ(function() {RYMsearch.onChangeObject(event, 'main_search')})" id="ui_search_object_select_main_search" class="ui_search_object_select"></select>
+									</span>
+								</div>
+								<div id="ui_search_info_frame_main_search" class="ui_search_info_frame"></div>
+								<div id="ui_search_results_frame_main_search" class="ui_search_results_frame"><div id="ui_search_results_main_search" class="ui_search_results"></div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="header_error" onclick="$(this).fadeOut();" id="header_error">
+		<div class="header_error_close"><i class="fa fa-times-circle"></i></div>
+		<div id="header_error_text"></div>
+	</div>
+
+	<div class="header_message" onclick="$(this).fadeOut();" id="header_message">
+		<div class="header_message_close"><i class="fa fa-times-circle"></i></div>
+		<div id="header_message_text"></div>
+	</div>
+
+	<div id="mobile_header_menu" class="mobile_header_menu has_forum_link">
+		<a href="/new-music/" class="mobile_header_menu_item mobile_header_menu_item_new_music">
+			<span>New Music</span> </a
+		><a href="/genres/" class="mobile_header_menu_item mobile_header_menu_item_genres">
+			<span>Genres</span> </a
+		><a href="/charts/" class="mobile_header_menu_item mobile_header_menu_item_charts">
+			<span>Charts</span> </a
+		><a href="/lists/" class="mobile_header_menu_item mobile_header_menu_item_lists">
+			<span>Lists</span> </a
+		><a href="https://rym.fm/" class="mobile_header_menu_item mobile_header_menu_item_community">
+			<span>Forums</span>
+		</a>
+	</div>
+
+	<div id="content_wrapper_outer" class="content_wrapper_outer">
+		<div id="content_wrapper" class="content_wrapper">
+			<div id="content_cover"></div>
+			<div id="content">
+				<div id="precontent" class="precontent"></div>
+
+				<div id="total_cover"></div>
+				<div id="content_total_cover"></div>
+
+				<style>
+					#end_of_year_banner {
+						background: var(--mono-f);
+						border-radius: 5px;
+						max-width: 50em;
+						text-align: center;
+						margin: 0 auto;
+						padding: 0.6em 3em;
+						border-radius: 5px;
+						border: 2px solid var(--gen-blue-dark);
+						color: var(--mono-0);
+						position: relative;
+						font-size: 1.1em;
+					}
+				</style>
+
+				<script>
+					try {
+						new Function('import("")')
+					} catch (err) {
+						document.write(
+							'<div class=note style="margin-bottom:1em;"><b>Note:</b> Not all scripts could be loaded. You may need to upgrade to a newer browser version in order to use this site.</div>'
+						)
+					}
+				</script>
+
+				<div id="page_new_release_overlay" onclick="$(this).hide();$('.page_new_releases_list_item_info_options_frame').hide();" class="page_new_release_overlay"></div>
+				<div class="newmusic_main_container">
+					<div id="newmusic_sections_container">
+						<div class="newmusic_sections_left">
+							<a id="newreleases" class="newmusic_anchor"></a>
+							<div id="newreleases_container">
+								<div class="section_header">
+									<h2 class="section_heading_primary">New Releases</h2>
+									<div class="section_header_selectorline">
+										<div class="subsection_selector">
+											<div class="subsection_selector_btn subsection_selector_btn_active" id="selector_new_releases_all" onclick="RYMnewMusic.onClick_selectorNewReleases('all');">
+												All New Releases
+											</div>
+											<div class="subsection_selector_btn" id="selector_new_releases_personal" onclick="RYMnewMusic.onClick_selectorNewReleases('personal');">My New Releases</div>
+										</div>
+										<a class="newreleases_settings_btn" href="/account/newmusic" title="New music update settings...">
+											<i class="fa fa-cog"></i>
+										</a>
+									</div>
+								</div>
+
+								<div class="newreleases_content">
+									<div class="newreleases_info_headers">
+										<div class="newreleases_info_header_items_left">
+											Sort by:
+											<span id="newreleases_sort_btn_container_recommended"
+												><div class="newreleases_sort_btn newreleases_sort_btn_recommended newreleases_sort_btn_active" onclick="RYMnewMusic.onClick_sortItems( 'recommended' );">recommended</div>
+												|
+											</span>
+											<div class="newreleases_sort_btn newreleases_sort_btn_date" onclick="RYMnewMusic.onClick_sortItems( 'date' );">
+												date <i class="fa fa-caret-up" style="display: none"></i><i class="fa fa-caret-down" style="display: none"></i>
+											</div>
+										</div>
+
+										<div class="newreleases_info_header_items_right">
+											<span class="newreleases_info_header_item">Average</span>
+											<span class="newreleases_info_header_item">Rated</span>
+											<span class="newreleases_info_header_item">Wants</span>
+										</div>
+									</div>
+
+									<div id="newreleases_container_all">
+										<div id="newreleases_items_container_new_releases_all">
+											<div class="newreleases_itembox excl_item release_16713225 artist_351103 genre_10035 genre_84 genre_10439">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/oneohtrix-point-never/tranquilizer/" title="Tranquilizer"
+														><img alt="Tranquilizer cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/244e596e556cd7139f4975d3e359f532/13867378"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/oneohtrix-point-never/tranquilizer/" class="album newreleases_item_title" title="[Album16713225]">Tranquilizer</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist351103]" href="/artist/oneohtrix-point-never" class="artist">Oneohtrix Point Never</a></span>
+
+														<div class="newreleases_item_releasedate">21 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Progressive Electronic, </span>
+															<span class="newreleases_item_genres">Ambient, </span>
+
+															<span class="newreleases_item_genres">Sound Collage</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.84</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">8,396</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">1153</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16713225 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16713225"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16696709 artist_264 genre_452 genre_129">
+												<div class="newreleases_item_artbox">
+													<a href="/release/additional/talking-heads/tentative-decisions-demos-and-live/" title="Tentative Decisions: Demos &amp; Live"
+														><img alt="Tentative Decisions: Demos &amp; Live cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/ee930f5505ee6f39f418b19f493f1912/13831685"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/additional/talking-heads/tentative-decisions-demos-and-live/" class="album newreleases_item_title" title="[Album16696709]"
+															>Tentative Decisions: Demos &amp; Live</a
+														>
+
+														<span class="newreleases_item_artist"><a title="[Artist264]" href="/artist/talking-heads" class="artist">Talking Heads</a></span>
+
+														<div class="newreleases_item_releasedate">28 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Art Punk, </span>
+
+															<span class="newreleases_item_genres">New Wave</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.18</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">10</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">21</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16696709 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16696709"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16804540 artist_784276 genre_65 genre_390">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/mac-demarco/seven-off-the-two/" title="Seven Off the Two"
+														><img alt="Seven Off the Two cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/8bd9898da24dab595103ae54d127e390/14047627"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/mac-demarco/seven-off-the-two/" class="album newreleases_item_title" title="[Album16804540]">Seven Off the Two</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist784276]" href="/artist/mac-demarco" class="artist">Mac DeMarco</a></span>
+
+														<div class="newreleases_item_releasedate">4 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Soft Rock, </span>
+
+															<span class="newreleases_item_genres">Indie Pop</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">2.85</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">20</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">13</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16804540 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16804540"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16727573 artist_224941">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/vampire-weekend/frog-on-the-bass-drum-vol-03-weekend-at-the-garden/" title="Frog on the Bass Drum Vol. 03: Weekend at the Garden"
+														><img alt="Frog on the Bass Drum Vol. 03: Weekend at the Garden cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/3e56f50b6843869440012dcc14ff4836/13876764"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/vampire-weekend/frog-on-the-bass-drum-vol-03-weekend-at-the-garden/" class="album newreleases_item_title" title="[Album16727573]"
+															>Frog on the Bass Drum Vol. 03: Weekend at the Garden</a
+														>
+
+														<span class="newreleases_item_artist"><a title="[Artist224941]" href="/artist/vampire-weekend" class="artist">Vampire Weekend</a></span>
+
+														<div class="newreleases_item_releasedate">December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre"></div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">-</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">-</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">9</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16727573 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16727573"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16764328 artist_1396203 artist_1542480">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/tobi-real-bad-man/the-perfect-blue/" title="The Perfect Blue"
+														><img alt="The Perfect Blue cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/10450a5a79629f9b64f090c944222470/13951422"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/tobi-real-bad-man/the-perfect-blue/" class="album newreleases_item_title" title="[Album16764328]">The Perfect Blue</a>
+
+														<span class="newreleases_item_artist"
+															><a title="[Artist1396203]" href="/artist/tobi-2" class="artist">TOBi</a> &amp;
+															<a title="[Artist1542480]" href="/artist/real-bad-man" class="artist">Real Bad Man</a></span
+														>
+
+														<div class="newreleases_item_releasedate">14 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre"></div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.15</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">38</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">3</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16764328 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16764328"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16815921 artist_32862 genre_84 genre_201">
+												<div class="newreleases_item_artbox">
+													<a href="/release/video/max-richter/live-at-cercle-odyssey-paris-france/" title="Live at Cercle Odyssey, Paris, France"
+														><img alt="Live at Cercle Odyssey, Paris, France cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/d2a1c331be1b324e12f7dac7f9f32731/14058845"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/video/max-richter/live-at-cercle-odyssey-paris-france/" class="album newreleases_item_title" title="[Album16815921]"
+															>Live at Cercle Odyssey, Paris, France</a
+														>
+
+														<span class="newreleases_item_artist"><a title="[Artist32862]" href="/artist/max_richter" class="artist">Max Richter</a></span>
+
+														<div class="newreleases_item_releasedate">12 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Ambient, </span>
+
+															<span class="newreleases_item_genres">Modern Classical</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">4.04</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">5</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">4</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16815921 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16815921"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16800935 artist_606639 genre_108">
+												<div class="newreleases_item_artbox">
+													<a href="/release/video/earl-sweatshirt/camp-flog-gnaw-2025/" title="Camp Flog Gnaw 2025"
+														><img alt="Camp Flog Gnaw 2025 cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/981c6ef743ac4aafd85230b1df16fd98/14025662"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/video/earl-sweatshirt/camp-flog-gnaw-2025/" class="album newreleases_item_title" title="[Album16800935]">Camp Flog Gnaw 2025</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist606639]" href="/artist/earl-sweatshirt" class="artist">Earl Sweatshirt</a></span>
+
+														<div class="newreleases_item_releasedate">4 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Abstract Hip Hop</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">4.27</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">11</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">3</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16800935 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16800935"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16822615 artist_395512">
+												<div class="newreleases_item_artbox">
+													<a href="/release/video/danny-brown/elevator-music/" title="Elevator Music"
+														><img alt="Elevator Music cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/832242237491ef1ff741fdd95298280a/14072241"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/video/danny-brown/elevator-music/" class="album newreleases_item_title" title="[Album16822615]">Elevator Music</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist395512]" href="/artist/danny-brown" class="artist">Danny Brown</a></span>
+
+														<div class="newreleases_item_releasedate">19 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre"></div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.39</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">5</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">3</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16822615 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16822615"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16822643 artist_395512">
+												<div class="newreleases_item_artbox">
+													<a href="/release/additional/danny-brown/elevator-music/" title="Elevator Music"
+														><img alt="Elevator Music cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/9f9c08a9e6238f72c77807a312caaddd/14072307"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/additional/danny-brown/elevator-music/" class="album newreleases_item_title" title="[Album16822643]">Elevator Music</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist395512]" href="/artist/danny-brown" class="artist">Danny Brown</a></span>
+
+														<div class="newreleases_item_releasedate">19 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre"></div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.40</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">3</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">4</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16822643 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16822643"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16764533 artist_1545323 genre_90 genre_10013">
+												<div class="newreleases_item_artbox">
+													<a href="/release/ep/katia-krow/kats-krow/" title="Kats Krow"
+														><img alt="Kats Krow cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/4d3627bba2f35556415732ab8e514fa6/13951761"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/ep/katia-krow/kats-krow/" class="album newreleases_item_title" title="[Album16764533]">Kats Krow</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist1545323]" href="/artist/katia-krow" class="artist">Katia Krow</a></span>
+
+														<div class="newreleases_item_releasedate">2 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">IDM, </span>
+
+															<span class="newreleases_item_genres">Downtempo</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.59</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">15</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">3</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16764533 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16764533"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16770998 artist_784276 genre_65 genre_558">
+												<div class="newreleases_item_artbox">
+													<a href="/release/video/mac-demarco/live-on-kexp-2/" title="Live on KEXP"
+														><img alt="Live on KEXP cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/20bb34d0e388ae0f5da4cad4da9ef806/13964137"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/video/mac-demarco/live-on-kexp-2/" class="album newreleases_item_title" title="[Album16770998]">Live on KEXP</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist784276]" href="/artist/mac-demarco" class="artist">Mac DeMarco</a></span>
+
+														<div class="newreleases_item_releasedate">13 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Soft Rock, </span>
+
+															<span class="newreleases_item_genres">Singer-Songwriter</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.77</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">12</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">3</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16770998 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16770998"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16817960 artist_705707 genre_390">
+												<div class="newreleases_item_artbox">
+													<a href="/release/video/youth-lagoon/primavera-sound-2025/" title="Primavera Sound 2025"
+														><img alt="Primavera Sound 2025 cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/e5ee49ad0a5b868e5e451d2c29ee9339/14062047"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/video/youth-lagoon/primavera-sound-2025/" class="album newreleases_item_title" title="[Album16817960]">Primavera Sound 2025</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist705707]" href="/artist/youth-lagoon" class="artist">Youth Lagoon</a></span>
+
+														<div class="newreleases_item_releasedate">16 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Indie Pop</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">-</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">1</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">-</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16817960 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16817960"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16819634 artist_784276">
+												<div class="newreleases_item_artbox">
+													<a href="/release/video/mac-demarco/6-music-live-session/" title="6 Music Live Session"
+														><img alt="6 Music Live Session cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/e06502edb4816d2cfa5a9583cff4f844/14065701"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/video/mac-demarco/6-music-live-session/" class="album newreleases_item_title" title="[Album16819634]">6 Music Live Session</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist784276]" href="/artist/mac-demarco" class="artist">Mac DeMarco</a></span>
+
+														<div class="newreleases_item_releasedate">18 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre"></div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">-</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">-</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">-</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16819634 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16819634"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16632596 artist_857569 genre_31431 genre_35856">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/fka-twigs/eusexua-afterglow/" title="Eusexua Afterglow"
+														><img alt="Eusexua Afterglow cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/599ffac4e19dc2115850ccef9998a3ef/13948721"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/fka-twigs/eusexua-afterglow/" class="album newreleases_item_title" title="[Album16632596]">Eusexua Afterglow</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist857569]" href="/artist/fka-twigs" class="artist">FKA twigs</a></span>
+
+														<div class="newreleases_item_releasedate">14 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Electronic Dance Music, </span>
+
+															<span class="newreleases_item_genres">Alternative R&amp;B</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.71</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">5,985</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">523</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16632596 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16632596"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16712674 artist_2589 genre_14 genre_18">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/de-la-soul/cabin-in-the-sky/" title="Cabin in the Sky"
+														><img alt="Cabin in the Sky cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/26e0ea98519caf4ea674ff254cde4c7a/13926910"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/de-la-soul/cabin-in-the-sky/" class="album newreleases_item_title" title="[Album16712674]">Cabin in the Sky</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist2589]" href="/artist/de-la-soul" class="artist">De La Soul</a></span>
+
+														<div class="newreleases_item_releasedate">21 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Conscious Hip Hop, </span>
+
+															<span class="newreleases_item_genres">Jazz Rap</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.65</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">2,041</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">383</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16712674 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16712674"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16570178 artist_6545 genre_20943">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/blut-aus-nord/ethereal-horizons/" title="Ethereal Horizons"
+														><img alt="Ethereal Horizons cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/090ee115808f57b0350499cf6d76a6e8/13983365"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/blut-aus-nord/ethereal-horizons/" class="album newreleases_item_title" title="[Album16570178]">Ethereal Horizons</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist6545]" href="/artist/blut-aus-nord" class="artist">Blut aus Nord</a></span>
+
+														<div class="newreleases_item_releasedate">28 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Atmospheric Black Metal</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.71</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">1,605</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">320</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16570178 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16570178"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16798073 artist_1529005 genre_35856 genre_541">
+												<div class="newreleases_item_artbox">
+													<a href="/release/ep/jane-remover/♡/" title="♡"
+														><img alt="♡ cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/bc14b83d1a29481fdbea0d34aa9d296b/14018755"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/ep/jane-remover/♡/" class="album newreleases_item_title" title="[Album16798073]">♡</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist1529005]" href="/artist/jane-remover" class="artist">Jane Remover</a></span>
+
+														<div class="newreleases_item_releasedate">5 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Alternative R&amp;B, </span>
+
+															<span class="newreleases_item_genres">Glitch Pop</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.97</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">4,831</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">304</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16798073 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16798073"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_15679596 artist_627507">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/lana-del-rey/stove/" title="Stove"
+														><img alt="blocked cover art" class="newreleases_item_art lazyload" data-src="https://e.snmc.io/2.5/img/artwork_missing150x150.png"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/lana-del-rey/stove/" class="album newreleases_item_title" title="[Album15679596]">Stove</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist627507]" href="/artist/lana-del-rey" class="artist">Lana Del Rey</a></span>
+
+														<div class="newreleases_item_releasedate">January 2026</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre"></div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">-</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">-</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">494</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 15679596 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_15679596"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16662508 artist_1164279 genre_480 genre_402">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/the-hellp/riviera/" title="Riviera"
+														><img alt="Riviera cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/50456406942bea449429b34ca13ebf9f/13980164"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/the-hellp/riviera/" class="album newreleases_item_title" title="[Album16662508]">Riviera</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist1164279]" href="/artist/the-hellp" class="artist">The Hellp</a></span>
+
+														<div class="newreleases_item_releasedate">21 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Indietronica, </span>
+
+															<span class="newreleases_item_genres">Electropop</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.46</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">1,624</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">231</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16662508 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16662508"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16811683 artist_1234582 genre_463">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/dj-sabrina-the-teenage-dj/fantasy/" title="Fantasy"
+														><img alt="Fantasy cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/8044cc6f93727a1565babf836272f2bf/14049363"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/dj-sabrina-the-teenage-dj/fantasy/" class="album newreleases_item_title" title="[Album16811683]">Fantasy</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist1234582]" href="/artist/dj-sabrina-the-teenage-dj" class="artist">DJ Sabrina the Teenage DJ</a></span>
+
+														<div class="newreleases_item_releasedate">12 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">House</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.81</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">355</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">273</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16811683 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16811683"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16692955 artist_825989 genre_366">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/melodys-echo-chamber/unclouded/" title="Unclouded"
+														><img alt="Unclouded cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/2f2ec70b321d501556868dffcfd0d1a1/13804219"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/melodys-echo-chamber/unclouded/" class="album newreleases_item_title" title="[Album16692955]">Unclouded</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist825989]" href="/artist/melodys-echo-chamber" class="artist">Melody's Echo Chamber</a></span>
+
+														<div class="newreleases_item_releasedate">5 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Neo-Psychedelia</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.24</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">743</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">159</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16692955 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16692955"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16661848 artist_746325 genre_269">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/voices-from-the-lake/ii/" title="II"
+														><img alt="II cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/e3c1cdc145e4f3e9881f4b38063ceef1/13738914"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/voices-from-the-lake/ii/" class="album newreleases_item_title" title="[Album16661848]">II</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist746325]" href="/artist/voices_from_the_lake" class="artist">Voices From the Lake</a></span>
+
+														<div class="newreleases_item_releasedate">5 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Ambient Techno</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.54</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">431</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">184</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16661848 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16661848"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16708228 artist_1408269 genre_468">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/أحمد/سماع/" title="سماع [Sama'a (Audition)]"
+														><img alt="سماع [Sama'a (Audition)] cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/7edc4f5a83eb4c8f2ce8554d33121df2/13837019"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/أحمد/سماع/" class="album newreleases_item_title" title="[Album16708228]">سماع [Sama'a (Audition)]</a>
+
+														<span class="newreleases_item_artist"
+															><a title="[Artist1408269]" href="/artist/أحمد" class="artist">أحمد <span class="subtext">[Ahmed]</span></a></span
+														>
+
+														<div class="newreleases_item_releasedate">21 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Free Jazz</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.70</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">462</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">173</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16708228 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16708228"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16776204 artist_2019876 genre_48 genre_103">
+												<div class="newreleases_item_artbox">
+													<a href="/release/ep/mount-junior/forever-always-never-ending/" title="Forever, Always, Never-Ending"
+														><img alt="Forever, Always, Never-Ending cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/dc377a08d1498ecabb8a54a39b296dae/13974324"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/ep/mount-junior/forever-always-never-ending/" class="album newreleases_item_title" title="[Album16776204]">Forever, Always, Never-Ending</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist2019876]" href="/artist/mount-junior" class="artist">mount junior</a></span>
+
+														<div class="newreleases_item_releasedate">5 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Emo, </span>
+
+															<span class="newreleases_item_genres">Indie Rock</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.44</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">429</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">203</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16776204 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16776204"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16741127 artist_1966095 genre_558 genre_25388 genre_372">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/dove-ellis/blizzard/" title="Blizzard"
+														><img alt="Blizzard cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/03bde3482e92f93bbd7fdebe46d0ed53/14018962"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/dove-ellis/blizzard/" class="album newreleases_item_title" title="[Album16741127]">Blizzard</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist1966095]" href="/artist/dove-ellis" class="artist">Dove Ellis</a></span>
+
+														<div class="newreleases_item_releasedate">5 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Singer-Songwriter, </span>
+															<span class="newreleases_item_genres">Indie Folk, </span>
+
+															<span class="newreleases_item_genres">Folk Pop</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.52</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">890</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">147</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16741127 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16741127"></div>
+												</div>
+											</div>
+										</div>
+
+										<div
+											id="view_more_new_releases_all"
+											class="view_more"
+											onclick="RYMnewMusic.onClick_viewMoreItems('new_releases_all', $(this));"
+											data-page="1"
+											data-sort="recommended"
+											data-sortdir="a"
+										>
+											View More...
+										</div>
+									</div>
+
+									<div id="newreleases_container_personal" style="display: none">
+										<div id="newreleases_items_container_new_releases_personal">
+											<div class="newreleases_itembox excl_item release_16822643 artist_395512">
+												<div class="newreleases_item_artbox">
+													<a href="/release/additional/danny-brown/elevator-music/" title="Elevator Music"
+														><img alt="Elevator Music cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/9f9c08a9e6238f72c77807a312caaddd/14072307"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/additional/danny-brown/elevator-music/" class="album newreleases_item_title" title="[Album16822643]">Elevator Music</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist395512]" href="/artist/danny-brown" class="artist">Danny Brown</a></span>
+
+														<div class="newreleases_item_releasedate">19 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre"></div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.40</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">3</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">4</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16822643 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16822643"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16822615 artist_395512">
+												<div class="newreleases_item_artbox">
+													<a href="/release/video/danny-brown/elevator-music/" title="Elevator Music"
+														><img alt="Elevator Music cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/832242237491ef1ff741fdd95298280a/14072241"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/video/danny-brown/elevator-music/" class="album newreleases_item_title" title="[Album16822615]">Elevator Music</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist395512]" href="/artist/danny-brown" class="artist">Danny Brown</a></span>
+
+														<div class="newreleases_item_releasedate">19 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre"></div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.39</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">5</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">3</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16822615 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16822615"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16817960 artist_705707 genre_390">
+												<div class="newreleases_item_artbox">
+													<a href="/release/video/youth-lagoon/primavera-sound-2025/" title="Primavera Sound 2025"
+														><img alt="Primavera Sound 2025 cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/e5ee49ad0a5b868e5e451d2c29ee9339/14062047"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/video/youth-lagoon/primavera-sound-2025/" class="album newreleases_item_title" title="[Album16817960]">Primavera Sound 2025</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist705707]" href="/artist/youth-lagoon" class="artist">Youth Lagoon</a></span>
+
+														<div class="newreleases_item_releasedate">16 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Indie Pop</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">-</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">1</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">-</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16817960 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16817960"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16815921 artist_32862 genre_84 genre_201">
+												<div class="newreleases_item_artbox">
+													<a href="/release/video/max-richter/live-at-cercle-odyssey-paris-france/" title="Live at Cercle Odyssey, Paris, France"
+														><img alt="Live at Cercle Odyssey, Paris, France cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/d2a1c331be1b324e12f7dac7f9f32731/14058845"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/video/max-richter/live-at-cercle-odyssey-paris-france/" class="album newreleases_item_title" title="[Album16815921]"
+															>Live at Cercle Odyssey, Paris, France</a
+														>
+
+														<span class="newreleases_item_artist"><a title="[Artist32862]" href="/artist/max_richter" class="artist">Max Richter</a></span>
+
+														<div class="newreleases_item_releasedate">12 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Ambient, </span>
+
+															<span class="newreleases_item_genres">Modern Classical</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">4.04</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">5</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">4</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16815921 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16815921"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16804540 artist_784276 genre_65 genre_390">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/mac-demarco/seven-off-the-two/" title="Seven Off the Two"
+														><img alt="Seven Off the Two cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/8bd9898da24dab595103ae54d127e390/14047627"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/mac-demarco/seven-off-the-two/" class="album newreleases_item_title" title="[Album16804540]">Seven Off the Two</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist784276]" href="/artist/mac-demarco" class="artist">Mac DeMarco</a></span>
+
+														<div class="newreleases_item_releasedate">4 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Soft Rock, </span>
+
+															<span class="newreleases_item_genres">Indie Pop</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">2.85</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">20</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">13</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16804540 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16804540"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16800935 artist_606639 genre_108">
+												<div class="newreleases_item_artbox">
+													<a href="/release/video/earl-sweatshirt/camp-flog-gnaw-2025/" title="Camp Flog Gnaw 2025"
+														><img alt="Camp Flog Gnaw 2025 cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/981c6ef743ac4aafd85230b1df16fd98/14025662"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/video/earl-sweatshirt/camp-flog-gnaw-2025/" class="album newreleases_item_title" title="[Album16800935]">Camp Flog Gnaw 2025</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist606639]" href="/artist/earl-sweatshirt" class="artist">Earl Sweatshirt</a></span>
+
+														<div class="newreleases_item_releasedate">4 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Abstract Hip Hop</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">4.27</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">11</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">3</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16800935 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16800935"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16764533 artist_1545323 genre_90 genre_10013">
+												<div class="newreleases_item_artbox">
+													<a href="/release/ep/katia-krow/kats-krow/" title="Kats Krow"
+														><img alt="Kats Krow cover art" class="newreleases_item_art" src="//e.snmc.io/i/150/s/4d3627bba2f35556415732ab8e514fa6/13951761"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/ep/katia-krow/kats-krow/" class="album newreleases_item_title" title="[Album16764533]">Kats Krow</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist1545323]" href="/artist/katia-krow" class="artist">Katia Krow</a></span>
+
+														<div class="newreleases_item_releasedate">2 December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">IDM, </span>
+
+															<span class="newreleases_item_genres">Downtempo</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.59</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">15</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">3</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16764533 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16764533"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16727573 artist_224941">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/vampire-weekend/frog-on-the-bass-drum-vol-03-weekend-at-the-garden/" title="Frog on the Bass Drum Vol. 03: Weekend at the Garden"
+														><img
+															alt="Frog on the Bass Drum Vol. 03: Weekend at the Garden cover art"
+															class="newreleases_item_art lazyload"
+															data-src="//e.snmc.io/i/150/s/3e56f50b6843869440012dcc14ff4836/13876764"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/vampire-weekend/frog-on-the-bass-drum-vol-03-weekend-at-the-garden/" class="album newreleases_item_title" title="[Album16727573]"
+															>Frog on the Bass Drum Vol. 03: Weekend at the Garden</a
+														>
+
+														<span class="newreleases_item_artist"><a title="[Artist224941]" href="/artist/vampire-weekend" class="artist">Vampire Weekend</a></span>
+
+														<div class="newreleases_item_releasedate">December 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre"></div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">-</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">-</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">9</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16727573 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16727573"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16696709 artist_264 genre_452 genre_129">
+												<div class="newreleases_item_artbox">
+													<a href="/release/additional/talking-heads/tentative-decisions-demos-and-live/" title="Tentative Decisions: Demos &amp; Live"
+														><img alt="Tentative Decisions: Demos &amp; Live cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/ee930f5505ee6f39f418b19f493f1912/13831685"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/additional/talking-heads/tentative-decisions-demos-and-live/" class="album newreleases_item_title" title="[Album16696709]"
+															>Tentative Decisions: Demos &amp; Live</a
+														>
+
+														<span class="newreleases_item_artist"><a title="[Artist264]" href="/artist/talking-heads" class="artist">Talking Heads</a></span>
+
+														<div class="newreleases_item_releasedate">28 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Art Punk, </span>
+
+															<span class="newreleases_item_genres">New Wave</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.18</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">10</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">21</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16696709 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16696709"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16819634 artist_784276">
+												<div class="newreleases_item_artbox">
+													<a href="/release/video/mac-demarco/6-music-live-session/" title="6 Music Live Session"
+														><img alt="6 Music Live Session cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/e06502edb4816d2cfa5a9583cff4f844/14065701"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/video/mac-demarco/6-music-live-session/" class="album newreleases_item_title" title="[Album16819634]">6 Music Live Session</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist784276]" href="/artist/mac-demarco" class="artist">Mac DeMarco</a></span>
+
+														<div class="newreleases_item_releasedate">18 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre"></div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">-</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">-</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">-</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16819634 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16819634"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16764328 artist_1396203 artist_1542480">
+												<div class="newreleases_item_artbox">
+													<a href="/release/album/tobi-real-bad-man/the-perfect-blue/" title="The Perfect Blue"
+														><img alt="The Perfect Blue cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/10450a5a79629f9b64f090c944222470/13951422"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/album/tobi-real-bad-man/the-perfect-blue/" class="album newreleases_item_title" title="[Album16764328]">The Perfect Blue</a>
+
+														<span class="newreleases_item_artist"
+															><a title="[Artist1396203]" href="/artist/tobi-2" class="artist">TOBi</a> &amp;
+															<a title="[Artist1542480]" href="/artist/real-bad-man" class="artist">Real Bad Man</a></span
+														>
+
+														<div class="newreleases_item_releasedate">14 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre"></div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.15</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">38</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">3</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16764328 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16764328"></div>
+												</div>
+											</div>
+
+											<div class="newreleases_itembox excl_item release_16770998 artist_784276 genre_65 genre_558">
+												<div class="newreleases_item_artbox">
+													<a href="/release/video/mac-demarco/live-on-kexp-2/" title="Live on KEXP"
+														><img alt="Live on KEXP cover art" class="newreleases_item_art lazyload" data-src="//e.snmc.io/i/150/s/20bb34d0e388ae0f5da4cad4da9ef806/13964137"
+													/></a>
+												</div>
+
+												<div class="newreleases_text_stats_container">
+													<div class="newreleases_item_textbox_artistalbum">
+														<a href="/release/video/mac-demarco/live-on-kexp-2/" class="album newreleases_item_title" title="[Album16770998]">Live on KEXP</a>
+
+														<span class="newreleases_item_artist"><a title="[Artist784276]" href="/artist/mac-demarco" class="artist">Mac DeMarco</a></span>
+
+														<div class="newreleases_item_releasedate">13 November 2025</div>
+													</div>
+
+													<div class="newreleases_itembox_genres_stats">
+														<div class="newreleases_item_textbox_genre">
+															<span class="newreleases_item_genres">Soft Rock, </span>
+
+															<span class="newreleases_item_genres">Singer-Songwriter</span>
+														</div>
+
+														<div class="newreleases_item_statbox">
+															<span class="newreleases_stat newreleases_avg_rating_stat">3.77</span>
+
+															<span class="newreleases_stat newreleases_ratings_stat">12</span>
+
+															<span class="newreleases_stat newreleases_wishlist_stat">3</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="newreleases_item_filterbtn">
+													<a title="Open exclusion options" onclick="RYMnewMusic.onClick_exclusionOptions( 16770998 ); return false;"><i class="fas fa-ellipsis-v"></i></a>
+													<div class="page_new_releases_list_item_info_options_frame page_new_releases_list_item_info_options_frame_16770998"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="newmusic_sections_right">
+							<a id="mostlistened" class="newmusic_anchor"></a>
+							<div id="mostlistened_container">
+								<div class="section_header">
+									<h2 class="section_heading_primary">Top listening</h2>
+								</div>
+								<div class="section_header">
+									<div class="subsection_selector">
+										<div class="subsection_selector_btn subsection_selector_btn_active" id="selector_top_listening_releases" onclick="RYMnewMusic.onClick_selectorTopListening('releases');">
+											Releases
+										</div>
+										<div class="subsection_selector_btn" id="selector_top_listening_songs" onclick="RYMnewMusic.onClick_selectorTopListening('songs');">Songs</div>
+									</div>
+								</div>
+
+								<div class="mostlistened_content">
+									<div id="mostlistened_container_releases">
+										<div id="mostlistened_items_container_top_listening_releases">
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">1</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/boris/flood/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/d94d4b80a54b71d33aaa2dfcbee79e8c/8412761"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/album/boris/flood/" class="album mostlistened_item_title" title="[Album124755]">Flood</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist12118]" href="/artist/boris" class="artist">Boris</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">29 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">2</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/geese/getting-killed/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/840153ca669496f1db689915cb474b34/13592904"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/album/geese/getting-killed/" class="album mostlistened_item_title" title="[Album16542709]">Getting Killed</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1608662]" href="/artist/geese-2" class="artist">Geese</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">20 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">3</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/dj-sabrina-the-teenage-dj/fantasy/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/8044cc6f93727a1565babf836272f2bf/14049363"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/album/dj-sabrina-the-teenage-dj/fantasy/" class="album mostlistened_item_title" title="[Album16811683]">Fantasy</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1234582]" href="/artist/dj-sabrina-the-teenage-dj" class="artist">DJ Sabrina the Teenage DJ</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">19 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">4</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/ep/jane-remover/♡/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/bc14b83d1a29481fdbea0d34aa9d296b/14018755"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/ep/jane-remover/♡/" class="album mostlistened_item_title" title="[Album16798073]">♡</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1529005]" href="/artist/jane-remover" class="artist">Jane Remover</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">13 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">5</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/nourished-by-time/the-passionate-ones/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/cc2be1bded479f318f87f9cfc2ff28ee/13324520"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/album/nourished-by-time/the-passionate-ones/" class="album mostlistened_item_title" title="[Album15380788]">The Passionate Ones</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1694408]" href="/artist/nourished-by-time" class="artist">Nourished by Time</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">13 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">6</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/ninajirachi/i-love-my-computer/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/79bcbef81f6a1aec5d2fdd7cef2ca3ef/13935208"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/album/ninajirachi/i-love-my-computer/" class="album mostlistened_item_title" title="[Album16524012]">I Love My Computer</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1248859]" href="/artist/ninajirachi" class="artist">Ninajirachi</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">12 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">7</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/oneohtrix-point-never/tranquilizer/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/244e596e556cd7139f4975d3e359f532/13867378"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/album/oneohtrix-point-never/tranquilizer/" class="album mostlistened_item_title" title="[Album16713225]">Tranquilizer</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist351103]" href="/artist/oneohtrix-point-never" class="artist">Oneohtrix Point Never</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">11 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">8</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/candelabro/deseo-carne-y-voluntad/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/dacf563fe95199517e11920f549471fb/13882217"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/album/candelabro/deseo-carne-y-voluntad/" class="album mostlistened_item_title" title="[Album16370676]">Deseo, carne y voluntad</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1822604]" href="/artist/candelabro-1" class="artist">Candelabro</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">11 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">9</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/cameron-winter/heavy-metal/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/eb43fd84d04b4abe59ece2a63a2d5269/13814960"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/album/cameron-winter/heavy-metal/" class="album mostlistened_item_title" title="[Album16150076]">Heavy Metal</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1846749]" href="/artist/cameron-winter" class="artist">Cameron Winter</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">10 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">10</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/have-a-nice-life/deathconsciousness/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/0de37886a2b03529178071dfc8453806/10669900"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/album/have-a-nice-life/deathconsciousness/" class="album mostlistened_item_title" title="[Album1206880]">Deathconsciousness</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist273798]" href="/artist/have-a-nice-life" class="artist">Have a Nice Life</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">8 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">11</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/maruja/pain-to-power/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/4542eb2f9e11ba2f1d5a3628ef929770/13331297"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/album/maruja/pain-to-power/" class="album mostlistened_item_title" title="[Album16466556]">Pain to Power</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1531305]" href="/artist/maruja-1" class="artist">Maruja</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">7 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">12</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/mixtape/lucy-bedroque/unmusique/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/840437d307faa14cbadebbba85f9b802/13352288"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/mixtape/lucy-bedroque/unmusique/" class="album mostlistened_item_title" title="[Album16245156]">Unmusique</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1682553]" href="/artist/lucy-bedroque" class="artist">Lucy Bedroque</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">7 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">13</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/oklou/choke-enough/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/05f9195106ffb1fca7e692e2239a8b52/13017818"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/album/oklou/choke-enough/" class="album mostlistened_item_title" title="[Album16164728]">Choke Enough</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1039185]" href="/artist/oklou-1" class="artist">Oklou</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">7 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">14</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/ep/ethel-cain/perverts/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/c574986735a8b04174e7dcefe0931444/12907862"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/ep/ethel-cain/perverts/" class="album mostlistened_item_title" title="[Album16099438]">Perverts</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1444487]" href="/artist/ethel-cain" class="artist">Ethel Cain</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">7 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">15</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/mixtape/jim-legxacy/black-british-music-2025/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/acb6bf185655ffb97ea402716ff88eb3/13533965"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<a href="/release/mixtape/jim-legxacy/black-british-music-2025/" class="album mostlistened_item_title" title="[Album15975524]">Black British Music (2025)</a>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1727764]" href="/artist/jim-legxacy" class="artist">Jim Legxacy</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">7 listeners</div>
+												</div>
+											</div>
+										</div>
+
+										<div id="view_more_top_listening_releases" class="view_more" onclick="RYMnewMusic.onClick_viewMoreItems('top_listening_releases', $(this));" data-page="1">View More...</div>
+									</div>
+
+									<div id="mostlistened_container_songs" style="display: none">
+										<div id="mostlistened_items_container_top_listening_songs">
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">1</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/ep/jane-remover/♡/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/bc14b83d1a29481fdbea0d34aa9d296b/14018755"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">Music Baby</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1529005]" href="/artist/jane-remover" class="artist">Jane Remover</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">2 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">2</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/ninajirachi/i-love-my-computer/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/79bcbef81f6a1aec5d2fdd7cef2ca3ef/13935208"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">Infohazard</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1248859]" href="/artist/ninajirachi" class="artist">Ninajirachi</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">2 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">3</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/geese/3d-country/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/7398d6d880043b0c2a0779b17ef2dc6b/10816435"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">I See Myself</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1608662]" href="/artist/geese-2" class="artist">Geese</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">2 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">4</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/ep/fishmans/コーデュロイズ・ムード-気分はコール天/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/c99fd9de33cd8796e49d0486c9c8dd67/2611052"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">救われる気持ち</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist27979]" href="/artist/fishmans" class="artist">Fishmans</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">2 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">5</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/the-durutti-column/the-return-of-the-durutti-column/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/73b228ae39d75eabb00713a225879278/1426299"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">Sketch for Summer</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist3279]" href="/artist/the-durutti-column" class="artist">The Durutti Column</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">2 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">6</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/single/flavor-foley/human/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/4fc2deda86b522ed01d6a1146001bc43/14074045"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">Human</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1884196]" href="/artist/flavor-foley" class="artist">FLAVOR FOLEY</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">1 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">7</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/additional/natural-snow-buildings/the-winter-ray/"
+														><img alt="No cover art available" class="mostlistened_item_art lazyload" data-src="https://e.snmc.io/2.5/img/artwork_missing150x150.png"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">Ethyl Bromoacetate/Please, Hold My Hand in Darkness</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist165479]" href="/artist/natural-snow-buildings" class="artist">Natural Snow Buildings</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">1 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">8</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/ep/kenny-mason/pup-pack-2nd-shift/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/67cc0b018ffa8b34fab56e2db31f8149/14066918"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">Gorgeous</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1458044]" href="/artist/kenny-mason" class="artist">Kenny Mason</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">1 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">9</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/порез-на-собаке/предъявы-сверху/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/27086a983b0134f0d93cee8da5ee31a8/14064775"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">Рыжий Ферзь</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1190833]" href="/artist/порез-на-собаке" class="artist">Порез на Собаке <span class="subtext">[Porez na Sobake]</span></a>
+													</div>
+
+													<div class="mostlistened_item_numplays">1 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">10</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/weed420/esto-no-es-un-show/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/2c3c4214c82cbb11d9c54336cfa56f59/14061666"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">La guerra de los sexos</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1772556]" href="/artist/weed420" class="artist">Weed420</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">1 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">11</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/vitor-brauer/treinquinumpara-07-belem/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/f9b752dd67d690876f16b62ff229d029/14061070"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">Jambu</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist892876]" href="/artist/vitor-brauer" class="artist">Vitor Brauer</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">1 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">12</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/single/blackcode-nonik-jordan-grace/cant-back-down/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/7ef90f4e4dc02f66262b4075929559f7/14050636"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">Can't Back Down (Extended Mix)</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1453837]" href="/artist/blackcode" class="artist">Blackcode</a>, <a title="[Artist1826144]" href="/artist/nonik" class="artist">NONIK</a> &amp;
+														<a title="[Artist1528449]" href="/artist/jordan-grace" class="artist">Jordan Grace</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">1 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">13</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/dj-sabrina-the-teenage-dj/fantasy/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/8044cc6f93727a1565babf836272f2bf/14049363"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">Another Wall</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1234582]" href="/artist/dj-sabrina-the-teenage-dj" class="artist">DJ Sabrina the Teenage DJ</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">1 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">14</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/katmoji/into-the-tall-grass/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/26e1d324ba997f028f540774936a3d4b/14047327"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">Powder</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1988408]" href="/artist/katmoji" class="artist">katmoji</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">1 listeners</div>
+												</div>
+											</div>
+
+											<div class="mostlistened_itembox">
+												<div class="mostlistened_position">15</div>
+
+												<div class="mostlistened_item_artbox">
+													<a href="/release/album/chris-patrick/pray-4-me/"
+														><img alt=" - cover art" class="mostlistened_item_art lazyload" data-src="//e.snmc.io/i/150/s/1ab0e1404e0b03679ea56213e2a1efd0/14045589"
+													/></a>
+												</div>
+
+												<div class="mostlistened_item_textbox">
+													<span class="rendered_text">Patience</span>
+
+													<div class="mostlistened_item_artist">
+														<a title="[Artist1504389]" href="/artist/chris-patrick-1" class="artist">Chris Patrick</a>
+													</div>
+
+													<div class="mostlistened_item_numplays">1 listeners</div>
+												</div>
+											</div>
+										</div>
+
+										<div id="view_more_top_listening_songs" class="view_more" onclick="RYMnewMusic.onClick_viewMoreItems('top_listening_songs', $(this));" data-page="1">View More...</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+					<!-- end content and content_wrapper -->
+				</div>
+			</div>
+		</div>
+
+		<div class="overlay_invisible" id="overlay_invisible"></div>
+
+		<div class="ui_cropper_frame" id="ui_cropper_frame"></div>
+
+		<div class="modal_parent_frame" id="modal_parent_frame">
+			<div onclick="rym.closeModal();" id="modal_overlay" class="modal_overlay" style="">Close <i class="fa fa-times"></i></div>
+			<div onclick="rym.closeModal();" id="modal_overlay_invisible" class="modal_overlay_invisible" style=""></div>
+			<div id="modal_parent_frame_inner" class="modal_parent_frame_inner">
+				<div id="modal_content" class="modal_content"></div>
+			</div>
+		</div>
+
+		<div class="modal_parent_frame_level_2" id="modal_parent_frame_level_2">
+			<div onclick="rym.closeModal2();" id="modal_overlay_level_2" class="modal_overlay" style="">Close <i class="fa fa-times"></i></div>
+			<div onclick="rym.closeModal2();" id="modal_overlay_invisible_level_2" class="modal_overlay_invisible" style=""></div>
+			<div id="modal_parent_frame_inner_level_2" class="modal_parent_frame_inner_level_2">
+				<div id="modal_content_level_2" class="modal_content"></div>
+			</div>
+		</div>
+
+		<!-- ~~~~~~~~ end content ~~~~~~~~~~~~~~~ -->
+		<div class="ui_chooser_results_frame" id="ui_chooser_results_frame">
+			<div class="ui_chooser_results bg-fff alternate" id="ui_chooser_results"></div>
+		</div>
+
+		<div id="voting_ui_frame"></div>
+
+		<div style="clear: both"></div>
+
+		<footer>
+			<div class="footer_inner">
+				<div class="footer_main_section">
+					<div class="minilogo_frame">
+						<div class="minilogo">
+							<div class="logo_sonemic_bw_24"></div>
+							<span class="minilogo_text">Rate Your Music</span>
+						</div>
+					</div>
+
+					<div class="copyright">© 2000-2025 Sonemic, Inc.</div>
+
+					<div class="clearfix"></div>
+
+					<div class="clearfix"></div>
+
+					<div class="social_icons">
+						<a rel="noopener" title="Follow us on Facebook" href="https://facebook.com/sonemic.network/" target="_blank"><i class="fab fa-facebook-square"></i></a>
+						<a rel="noopener" title="Follow us on Twitter" href="https://twitter.com/sonemic/" target="_blank"><i class="fab fa-twitter-square"></i></a>
+						<a rel="noopener" title="Follow us on Instagram" href="https://instagram.com/sonemic/" target="_blank"><i class="fab fa-instagram-square"></i></a>
+						<a rel="noopener" title="Follow us on Spotify" href="https://open.spotify.com/user/sonemic.com" target="_blank"><i class="fab fa-spotify"></i></a>
+						<a rel="noopener" title="Subscribe to our weekly newsletter" href="https://mailchi.mp/sonemic-selects/newsletter" target="_blank"><i class="fa fa-envelope"></i></a>
+					</div>
+				</div>
+
+				<div id="expand_full_footer" class="mobile_expandable_full mobile_expand_footer">
+					<div id="expand_full_header_footer" class="mobile_expandable_full_header" onclick="RYMmobile.mobileExpand.toggleFull('footer');">
+						<div class="mobile_expandable_full_icons">
+							<div class="mobile_expandable_full_expand_icon_expanded">
+								<i class="fa fa-caret-down"></i>
+							</div>
+							<div class="mobile_expandable_full_expand_icon_hidden">
+								<i class="fa fa-caret-right"></i>
+							</div>
+						</div>
+
+						<div id="expand_full_name_footer" class="mobile_expandable_full_name">Site links</div>
+					</div>
+
+					<div id="expand_full_content_footer" class="mobile_expandable_full_content">
+						<div class="footer_sections">
+							<div class="footer_section" id="section_network">
+								<div class="footer_header">RYM Network</div>
+								<div class="footer_sub_links">
+									<a class="asonemic" href="https://rateyourmusic.com/">
+										RYM
+
+										<span class="sub">music</span></a
+									>
+									<a class="asonemic" href="https://sonemic.com/">Sonemic <span class="sub">roadmap</span></a>
+									<a class="aglitchwave" href="https://glitchwave.com/">Glitchwave <span class="sub">video games (beta)</span></a>
+									<a class="aforum" href="https://rym.fm/">Discussion <span class="sub">rym.fm</span></a>
+								</div>
+							</div>
+							<div class="footer_section">
+								<div class="footer_header">Info</div>
+								<div class="footer_sub_links">
+									<a href="/wiki/RYM:FAQ">FAQ</a>
+									<a href="/development/">Development status</a>
+									<a href="/rymzilla/" class="has_tip" data-tiptip="Report bugs and request features">RYMzilla</a>
+									<a href="/submissions/">Submissions</a>
+									<a href="/data-access/register-interest/">Data access / API</a>
+								</div>
+							</div>
+							<div class="footer_section">
+								<div class="footer_header">Policy</div>
+								<div class="footer_sub_links">
+									<a href="/wiki/">Database standards</a>
+									<a class="" href="/privacy"
+										>Privacy <span style="font-size: 0.875em"><br />(Updated: 29 Sep 2025)</span></a
+									>
+									<a class="" href="/tos">Terms of service <span style="display: none; font-size: 0.875em">(Updated: 12 Aug 2024)</span></a>
+								</div>
+							</div>
+							<div class="footer_section">
+								<div class="footer_header">Contact us</div>
+								<div class="footer_sub_links">
+									<a href="/contact">Support / Feedback</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div style="clear: both"></div>
+			</div>
+		</footer>
+		<script src="https://e.snmc.io/2.5/js/jquery.min.2.js"></script>
+	</div>
+</body>
