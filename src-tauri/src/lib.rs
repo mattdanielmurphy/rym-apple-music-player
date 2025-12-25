@@ -287,7 +287,10 @@ async fn proxy_play(url: String, aria_label: String, app: tauri::AppHandle) -> R
     if let Some(player) = app.get_webview_window("player") {
         let player_url = player.url().map(|u| u.to_string()).unwrap_or_default();
         
-        if url != player_url {
+        let norm_url = url.replace("geo.music.apple.com", "music.apple.com");
+        let norm_player_url = player_url.replace("geo.music.apple.com", "music.apple.com");
+        
+        if norm_url != norm_player_url {
             println!("RYM-PROXY-PLAY: Navigating player to match browser URL...");
             player.navigate(url.parse().unwrap()).map_err(|e| e.to_string())?;
         }
@@ -509,8 +512,12 @@ fn set_pending_music_url(url: String, artist: Option<String>, album: Option<Stri
              println!("RYM-APPLE-MUSIC: Checking against current URL: {}", current_url);
              println!("RYM-APPLE-MUSIC: Incoming URL: {}", url);
              
-            if current_url == &url {
-                 println!("RYM-APPLE-MUSIC: ❌ Ignoring sync request - URLs match exactly");
+             // Normalize check: handle geo.music vs music.apple
+            let normalized_current = current_url.replace("geo.music.apple.com", "music.apple.com");
+            let normalized_incoming = url.replace("geo.music.apple.com", "music.apple.com");
+            
+            if normalized_current == normalized_incoming {
+                 println!("RYM-APPLE-MUSIC: ❌ Ignoring sync request - URLs match after normalization");
                  return;
             }
         }
@@ -1216,13 +1223,21 @@ pub fn run() {
                             const container = document.querySelector('#media_link_button_container_top[data-medialink="true"]');
                             if (!container) return null;
                             
+                            // Helper to ensure 'geo.' prefix
+                            const ensureGeo = (u) => {
+                                if (u && u.includes('music.apple.com') && !u.includes('geo.music.apple.com')) {
+                                    return u.replace('music.apple.com', 'geo.music.apple.com');
+                                }
+                                return u;
+                            };
+
                             // Try to find an actual link rendered by RYM first
                             const renderedLink = container.querySelector('a[href*="apple.com"]');
                             if (renderedLink && renderedLink.href) {
                                 return { 
                                     artist: container.getAttribute('data-artists'), 
                                     album: container.getAttribute('data-albums'), 
-                                    url: renderedLink.href 
+                                    url: ensureGeo(renderedLink.href)
                                 };
                             }
 
@@ -1235,13 +1250,13 @@ pub fn run() {
                                 if (links.applemusic) {
                                     const amId = Object.keys(links.applemusic)[0];
                                     const amData = links.applemusic[amId];
-                                    if (amData.url) return { artist: artists, album: albums, url: amData.url };
+                                    if (amData.url) return { artist: artists, album: albums, url: ensureGeo(amData.url) };
                                     
-                                    const loc = amData.loc || 'us'; // Fallback to us only if absolutely necessary
+                                    const loc = amData.loc || 'us'; 
                                     const albumSlug = amData.album || 'album';
                                     
                                     if (amId) {
-                                        const amUrl = `https://music.apple.com/${loc}/album/${albumSlug}/${amId}`;
+                                        const amUrl = `https://geo.music.apple.com/${loc}/album/${albumSlug}/${amId}`;
                                         return { artist: artists, album: albums, url: amUrl };
                                     }
                                 }
