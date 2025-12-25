@@ -1027,12 +1027,17 @@ pub fn run() {
                                       '#tauri-toast.show { visibility: visible; opacity: 1; } ';
 
                             if (IS_PLAYER) {
-                                css += '#apple-music-player, .player-bar, amp-chrome-player { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 54px !important; margin: 0 !important; z-index: 2147483647 !important; visibility: visible !important; opacity: 1 !important; background: #14141a !important; } ' +
+                                css += '#apple-music-player, .player-bar, amp-chrome-player { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 54px !important; margin: 0 !important; z-index: 2147483647 !important; visibility: visible !important; opacity: 1 !important; background: #14141a !important; -webkit-app-region: drag !important; } ' +
+                                       '#apple-music-player *, .player-bar *, amp-chrome-player * { -webkit-app-region: no-drag !important; } ' +
                                        'html, body { background: transparent !important; overflow: hidden !important; } ' +
                                        '.sidebar, .header, .web-navigation, .web-nav-logo, .logo, .nav-header { display: none !important; } ';
                             }
 
                             if (IS_BROWSER) {
+                                if (IS_MUSIC_HOST) {
+                                    css += '.logo, .web-nav-logo, .nav-header, .logo a { display: none !important; } ';
+                                }
+                                css += '#tauri-tabs { position: fixed !important; bottom: 20px !important; left: 50% !important; transform: translateX(-50%) !important; z-index: 2147483647 !important; display: flex !important; gap: 8px !important; background: rgba(20, 20, 20, 0.6) !important; padding: 6px 12px !important; border-radius: 20px !important; border: 1px solid rgba(251, 35, 59, 0.5) !important; backdrop-filter: blur(15px) !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important; -webkit-app-region: no-drag !important; pointer-events: auto !important; opacity: 0.8 !important; transition: all 0.3s ease !important; } ';
                                 css += '#tauri-tabs { position: fixed !important; bottom: 20px !important; left: 50% !important; transform: translateX(-50%) !important; z-index: 2147483647 !important; display: flex !important; gap: 8px !important; background: rgba(20, 20, 20, 0.6) !important; padding: 6px 12px !important; border-radius: 20px !important; border: 1px solid rgba(251, 35, 59, 0.5) !important; backdrop-filter: blur(15px) !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important; -webkit-app-region: no-drag !important; pointer-events: auto !important; opacity: 0.8 !important; transition: all 0.3s ease !important; } ' +
                                        '#tauri-tabs:hover { opacity: 1; transform: translateX(-50%) translateY(-2px); background: rgba(30,30,30,0.9); } ' +
                                        '.tauri-tab-btn { all: unset !important; display: inline-block !important; box-sizing: border-box !important; background: transparent !important; color: white !important; padding: 4px 12px !important; border-radius: 12px !important; cursor: pointer !important; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; font-size: 11px !important; font-weight: 700 !important; opacity: 0.5; transition: all 0.2s ease !important; } ' +
