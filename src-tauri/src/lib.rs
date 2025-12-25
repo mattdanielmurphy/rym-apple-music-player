@@ -1201,23 +1201,47 @@ pub fn run() {
             player_window.open_devtools();
 
             let rym_window_clone = rym_window.clone();
+            let player_window_for_music = player_window.clone();
             let music_window_for_event = music_window.clone();
             music_window.on_window_event(move |event| {
                 if !music_window_for_event.is_visible().unwrap_or(false) { return; }
                 match event {
-                    tauri::WindowEvent::Resized(size) => { let _ = rym_window_clone.set_size(*size); }
-                    tauri::WindowEvent::Moved(pos) => { let _ = rym_window_clone.set_position(*pos); }
+                    tauri::WindowEvent::Resized(size) => { 
+                        let _ = rym_window_clone.set_size(*size);
+                        let _ = player_window_for_music.set_size(tauri::Size::Logical(tauri::LogicalSize { width: size.width as f64, height: 54.0 }));
+                    }
+                    tauri::WindowEvent::Moved(pos) => { 
+                        let _ = rym_window_clone.set_position(*pos); 
+                        if let Ok(size) = music_window_for_event.inner_size() {
+                            let _ = player_window_for_music.set_position(tauri::Position::Physical(tauri::PhysicalPosition { 
+                                x: pos.x, 
+                                y: pos.y + size.height as i32 
+                            }));
+                        }
+                    }
                     _ => {}
                 }
             });
 
             let music_window_clone2 = music_window.clone();
+            let player_window_for_rym = player_window.clone();
             let rym_window_for_event = rym_window.clone();
             rym_window.on_window_event(move |event| {
                 if !rym_window_for_event.is_visible().unwrap_or(false) { return; }
                 match event {
-                    tauri::WindowEvent::Resized(size) => { let _ = music_window_clone2.set_size(*size); }
-                    tauri::WindowEvent::Moved(pos) => { let _ = music_window_clone2.set_position(*pos); }
+                    tauri::WindowEvent::Resized(size) => { 
+                        let _ = music_window_clone2.set_size(*size); 
+                        let _ = player_window_for_rym.set_size(tauri::Size::Logical(tauri::LogicalSize { width: size.width as f64, height: 54.0 }));
+                    }
+                    tauri::WindowEvent::Moved(pos) => { 
+                        let _ = music_window_clone2.set_position(*pos); 
+                        if let Ok(size) = rym_window_for_event.inner_size() {
+                            let _ = player_window_for_rym.set_position(tauri::Position::Physical(tauri::PhysicalPosition { 
+                                x: pos.x, 
+                                y: pos.y + size.height as i32 
+                            }));
+                        }
+                    }
                     _ => {}
                 }
             });
