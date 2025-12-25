@@ -1215,19 +1215,35 @@ pub fn run() {
                         window.extractRYMInfo = function() {
                             const container = document.querySelector('#media_link_button_container_top[data-medialink="true"]');
                             if (!container) return null;
+                            
+                            // Try to find an actual link rendered by RYM first
+                            const renderedLink = container.querySelector('a[href*="apple.com"]');
+                            if (renderedLink && renderedLink.href) {
+                                return { 
+                                    artist: container.getAttribute('data-artists'), 
+                                    album: container.getAttribute('data-albums'), 
+                                    url: renderedLink.href 
+                                };
+                            }
+
                             const artists = container.getAttribute('data-artists');
                             const albums = container.getAttribute('data-albums');
                             const linksStr = container.getAttribute('data-links');
-                            if (!linksStr || (!artists && !albums)) return null;
+                            if (!linksStr) return null;
                             try {
                                 const links = JSON.parse(linksStr);
                                 if (links.applemusic) {
                                     const amId = Object.keys(links.applemusic)[0];
                                     const amData = links.applemusic[amId];
-                                    const loc = amData.loc || 'us';
+                                    if (amData.url) return { artist: artists, album: albums, url: amData.url };
+                                    
+                                    const loc = amData.loc || 'us'; // Fallback to us only if absolutely necessary
                                     const albumSlug = amData.album || 'album';
-                                    const amUrl = `https://music.apple.com/${loc}/album/${albumSlug}/${amId}`;
-                                    return { artist: artists, album: albums, url: amUrl };
+                                    
+                                    if (amId) {
+                                        const amUrl = `https://music.apple.com/${loc}/album/${albumSlug}/${amId}`;
+                                        return { artist: artists, album: albums, url: amUrl };
+                                    }
                                 }
                             } catch (e) {}
                             return null;
