@@ -1208,11 +1208,15 @@ pub fn run() {
                 match event {
                     tauri::WindowEvent::Resized(size) => { 
                         let _ = rym_window_clone.set_size(*size);
-                        let _ = player_window_for_music.set_size(tauri::Size::Logical(tauri::LogicalSize { width: size.width as f64, height: 54.0 }));
+                        let sf = music_window_for_event.scale_factor().unwrap_or(1.0);
+                        let _ = player_window_for_music.set_size(tauri::Size::Physical(tauri::PhysicalSize { 
+                            width: size.width, 
+                            height: (54.0 * sf) as u32 
+                        }));
                     }
                     tauri::WindowEvent::Moved(pos) => { 
                         let _ = rym_window_clone.set_position(*pos); 
-                        if let Ok(size) = music_window_for_event.inner_size() {
+                        if let Ok(size) = music_window_for_event.outer_size() {
                             let _ = player_window_for_music.set_position(tauri::Position::Physical(tauri::PhysicalPosition { 
                                 x: pos.x, 
                                 y: pos.y + size.height as i32 
@@ -1231,11 +1235,15 @@ pub fn run() {
                 match event {
                     tauri::WindowEvent::Resized(size) => { 
                         let _ = music_window_clone2.set_size(*size); 
-                        let _ = player_window_for_rym.set_size(tauri::Size::Logical(tauri::LogicalSize { width: size.width as f64, height: 54.0 }));
+                        let sf = rym_window_for_event.scale_factor().unwrap_or(1.0);
+                        let _ = player_window_for_rym.set_size(tauri::Size::Physical(tauri::PhysicalSize { 
+                            width: size.width, 
+                            height: (54.0 * sf) as u32 
+                        }));
                     }
                     tauri::WindowEvent::Moved(pos) => { 
                         let _ = music_window_clone2.set_position(*pos); 
-                        if let Ok(size) = rym_window_for_event.inner_size() {
+                        if let Ok(size) = rym_window_for_event.outer_size() {
                             let _ = player_window_for_rym.set_position(tauri::Position::Physical(tauri::PhysicalPosition { 
                                 x: pos.x, 
                                 y: pos.y + size.height as i32 
