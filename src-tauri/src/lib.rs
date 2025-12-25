@@ -287,10 +287,7 @@ async fn proxy_play(url: String, aria_label: String, app: tauri::AppHandle) -> R
     if let Some(player) = app.get_webview_window("player") {
         let player_url = player.url().map(|u| u.to_string()).unwrap_or_default();
         
-        let norm_url = url.replace("geo.music.apple.com", "music.apple.com");
-        let norm_player_url = player_url.replace("geo.music.apple.com", "music.apple.com");
-        
-        if norm_url != norm_player_url {
+        if url != player_url {
             println!("RYM-PROXY-PLAY: Navigating player to match browser URL...");
             player.navigate(url.parse().unwrap()).map_err(|e| e.to_string())?;
         }
@@ -512,12 +509,8 @@ fn set_pending_music_url(url: String, artist: Option<String>, album: Option<Stri
              println!("RYM-APPLE-MUSIC: Checking against current URL: {}", current_url);
              println!("RYM-APPLE-MUSIC: Incoming URL: {}", url);
              
-             // Normalize check: handle geo.music vs music.apple
-            let normalized_current = current_url.replace("geo.music.apple.com", "music.apple.com");
-            let normalized_incoming = url.replace("geo.music.apple.com", "music.apple.com");
-            
-            if normalized_current == normalized_incoming {
-                 println!("RYM-APPLE-MUSIC: ❌ Ignoring sync request - URLs match after normalization");
+            if current_url == &url {
+                 println!("RYM-APPLE-MUSIC: ❌ Ignoring sync request - URLs match exactly");
                  return;
             }
         }
