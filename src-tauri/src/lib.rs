@@ -554,7 +554,7 @@ async fn sync_to_rym(artist: String, album: String, background: bool, force: boo
             if match_found && !force && background {
                 println!("RYM-SYNC: ❌ Skipping sync - RYM window already has {} (Match: {})", album_key, current);
                 println!("RYM-SYNC: ========================================");
-                return Ok(());
+                return Ok(())
             }
         }
     }
@@ -577,15 +577,15 @@ async fn sync_to_rym(artist: String, album: String, background: bool, force: boo
         let mut best_candidate: Option<AlbumRating> = None;
 
         // STEP 1: Check local SQLite database first (Skip if force)
-        let mut cached_rating = None;
+        let mut _cached_rating = None;
         if !force {
             println!("RYM-SYNC: Step 1 - Checking local SQLite database...");
-            cached_rating = {
+            _cached_rating = {
                 let db = state.db.lock().unwrap();
                 db.get_rating(&album, &artist).ok().flatten()
             };
 
-            if let Some(mut rating) = cached_rating {
+            if let Some(mut rating) = _cached_rating {
                 let release_ts = parse_release_date_to_timestamp(&rating.release_date);
                 let ttl = compute_ttl_seconds(now, release_ts);
                 
@@ -705,7 +705,7 @@ async fn sync_to_rym(artist: String, album: String, background: bool, force: boo
         // EXCEPTION: If data is MISSING (no best_candidate), we allow one background auto-nav to fetch it.
         if background && !is_rym_visible && !force && best_candidate.is_some() {
              println!("RYM-SYNC: Auto background sync & User NOT on RYM tab. Data exists but stale. Skipping navigation.");
-             return Ok(());
+             return Ok(())
         }
         
         // If we have a match already and not forcing, just show window and return
@@ -715,19 +715,19 @@ async fn sync_to_rym(artist: String, album: String, background: bool, force: boo
              let _ = rym_window.show();
              let _ = rym_window.set_focus();
              if let Some(m) = app.get_webview_window("music") { let _ = m.hide(); }
-             return Ok(());
+             return Ok(())
         }
         
         if skip_rym_navigation {
              println!("RYM-SYNC: 🛑 Skipping RYM navigation (Hard Sync Blocker)");
-             return Ok(());
+             return Ok(())
         }
         
         // DETERMINE TARGET URL
         let target_url = if let Some(rating) = best_candidate {
             rating.rym_url
         } else {
-            let query = format!("\\ site:rateyourmusic.com/release {} {}", artist, album);
+            let query = format!(r"\ site:rateyourmusic.com/release {} {}", artist, album);
             let encoded_query = urlencoding::encode(&query);
             format!("https://duckduckgo.com/?q={}", encoded_query)
         };
@@ -735,7 +735,7 @@ async fn sync_to_rym(artist: String, album: String, background: bool, force: boo
         println!("RYM-SYNC: Navigating to refresh/find data: {}", target_url);
         let _ = rym_window.eval("localStorage.setItem('tauri_ignore_next_sync', 'true')");
         
-        let safe_key = album_key.replace("'", "\\'");
+        let safe_key = album_key.replace("'", r"'\'");
         let js_key = format!("localStorage.setItem('tauri_last_synced_album', '{}')", safe_key);
         let _ = rym_window.eval(&js_key);
         let _ = rym_window.eval("localStorage.setItem('tauri_sync_occurred', 'true')");
@@ -745,7 +745,7 @@ async fn sync_to_rym(artist: String, album: String, background: bool, force: boo
         }
         
         if let Some(src_url) = &music_url {
-             let safe_url = src_url.replace("'", "\\'");
+             let safe_url = src_url.replace("'", r"'\'");
              let js = format!("localStorage.setItem('tauri_last_pending_url', '{}')", safe_url);
              let _ = rym_window.eval(&js);
         }
@@ -762,7 +762,7 @@ async fn sync_to_rym(artist: String, album: String, background: bool, force: boo
 
         // Show toast notifications
         if background {
-            let msg = format!("if (window.showSyncToast) window.showSyncToast(`Synced: {}`)", album.replace("`", "\\`"));
+            let msg = format!("if (window.showSyncToast) window.showSyncToast(`Synced: {}`)", album.replace("`", r"\`"));
             let _ = rym_window.eval(&msg);
             if let Some(m) = app.get_webview_window("music") {
                 let _ = m.eval(&msg);
@@ -791,9 +791,9 @@ async fn save_sample_html(page_type: String, url: String, html: String, app: tau
 
     // Clean up type name for filename
     let safe_type = page_type.replace("/", "_").trim_start_matches('_').to_string();
-    let fileName = format!("{}_sample.html", safe_type);
+    let file_name = format!("{}_sample.html", safe_type);
 
-    let file_path = path.join(fileName);
+    let file_path = path.join(file_name);
     if !file_path.exists() {
         println!("RYM-APPLE-MUSIC: Saving new sample HTML for {} (URL: {})", page_type, url);
         let content_with_url = format!("<!-- Source URL: {} -->\n{}", url, html);
@@ -888,14 +888,14 @@ pub fn run() {
                 prevent_next_am_sync: Mutex::new(false),
             });
 
-            let app_handle_clone = app_handle.clone();
+            let _app_handle_clone = app_handle.clone();
             
             // Setup Native Menu with Shortcuts
             let toggle_shortcut = MenuItem::with_id(app, "toggle", "Switch Tabs", true, Some("CmdOrCtrl+Shift+["))?;
-            let toggle_shortcut_alt = MenuItem::with_id(app, "toggle_alt", "Switch Tabs", true, Some("CmdOrCtrl+Shift+]"))?;
+            let toggle_shortcut_alt = MenuItem::with_id(app, "toggle_alt", "Switch Tabs", true, Some("CmdOrCtrl+Shift+] "))?;
             let devtools_shortcut = MenuItem::with_id(app, "devtools", "Open DevTools", true, Some("CmdOrCtrl+Option+I"))?;
             let back_shortcut = MenuItem::with_id(app, "back", "Back", true, Some("CmdOrCtrl+["))?;
-            let forward_shortcut = MenuItem::with_id(app, "forward", "Forward", true, Some("CmdOrCtrl+]"))?;
+            let forward_shortcut = MenuItem::with_id(app, "forward", "Forward", true, Some("CmdOrCtrl+] "))?;
             let reload_shortcut = MenuItem::with_id(app, "reload", "Reload Page", true, Some("CmdOrCtrl+R"))?;
             
             let menu = Menu::with_items(app, &[
@@ -959,1390 +959,187 @@ pub fn run() {
                 }
             });
 
-            // Initialize database
-            // The database initialization and app.manage call have been moved to the beginning of the setup block.
-
-            // Tab UI Injection Script
-            let tab_ui_script = r#"
-                (function() {
-                    console.log("RYM-APPLE-MUSIC: Persistence Engine Starting...");
+            // Universal Injection Script
+            let universal_script = r#"                (function() {                    const WINDOW_LABEL = window.TAURI_WINDOW_LABEL;
+                    console.log('RYM-APPLE-MUSIC: Universal Engine Starting for [' + WINDOW_LABEL + ']...');
                     
-                    const STYLE_ID = 'tauri-tabs-style';
+                    const STYLE_ID = 'tauri-universal-style';
                     const CONTAINER_ID = 'tauri-tabs';
                     const TOAST_ID = 'tauri-toast';
-                    const WINDOW_LABEL = window.TAURI_WINDOW_LABEL;
                     const IS_MUSIC_HOST = window.location.host.includes('apple.com');
                     const IS_RYM = window.location.host.includes('rateyourmusic.com');
                     const IS_PLAYER = WINDOW_LABEL === 'player';
-                    const IS_BROWSER = WINDOW_LABEL === 'music';
-                    const IS_MUSIC = IS_MUSIC_HOST && !IS_PLAYER;
-                    
-                    const getWords = (text) => {
-                        if (!text) return [];
-                        return text.toLowerCase()
-                            .replace(/sir /g, '')
-                            .replace(/the /g, '')
-                            .replace(/orchestra/g, '')
-                            .replace(/philharmonic/g, 'phil')
-                            .replace(/philharmoniker/g, 'phil')
-                            .replace(/berliner/g, 'berlin')
-                            .replace(/wiener/g, 'vienna')
-                            .split(/[^a-z0-9]+/)
-                            .filter(w => w.length > 2); // Ignore short words like 'is', 'a', 'of'
-                    };
+                    const IS_BROWSER = (WINDOW_LABEL === 'music' || WINDOW_LABEL === 'rym');
 
-                    const isArtistMatch = (artistA, artistB) => {
-                        if (!artistA || !artistB) return false;
-                        const a = artistA.toLowerCase();
-                        const b = artistB.toLowerCase();
-                        if (a.includes(b) || b.includes(a)) return true;
-                        
-                        const wordsA = getWords(a);
-                        const wordsB = getWords(b);
-                        
-                        // Check for significant overlap (at least 2 words or 50% of shorter list)
-                        const common = wordsA.filter(w => wordsB.includes(w));
-                        const minRequired = Math.min(2, Math.max(1, Math.floor(Math.min(wordsA.length, wordsB.length) * 0.5)));
-                        return common.length >= minRequired;
-                    };
-
-                    console.log(`RYM-APPLE-MUSIC: Persistence Engine Init. Host: ${window.location.host}, WINDOW: ${WINDOW_LABEL}, IS_MUSIC: ${IS_MUSIC}, IS_RYM: ${IS_RYM}`);
-                    
-                    window.showSyncToast = (msg) => {
-                        console.log("RYM-APPLE-MUSIC: Toast requested:", msg);
+                    // --- SHARED UTILS ---
+                    window.showSyncToast = function(msg) {
                         const toast = document.getElementById(TOAST_ID);
                         if (toast) {
                             toast.textContent = msg;
                             toast.classList.add('show');
-                            setTimeout(() => toast.classList.remove('show'), 4500);
-                        } else {
-                            console.warn("RYM-APPLE-MUSIC: Toast element not found yet, but requested:", msg);
+                            setTimeout(function() { toast.classList.remove('show'); }, 4500);
                         }
                     };
+
+                    function setupManualDrag() {
+                        if (window.hasManualDrag) return;
+                        window.hasManualDrag = true;
+                        window.addEventListener('mousedown', function(e) {
+                            const path = e.composedPath();
+                            const isInteractive = path.some(function(el) {
+                                if (!el.tagName) return false;
+                                const tag = el.tagName.toLowerCase();
+                                const role = el.getAttribute ? el.getAttribute('role') : null;
+                                const cls = typeof el.className === 'string' ? el.className : "";
+                                const id = typeof el.id === 'string' ? el.id : "";
+                                return tag === 'a' || tag === 'button' || tag === 'input' || tag === 'select' || tag === 'textarea' ||
+                                       tag === 'time' || tag === 'amp-lcd' ||
+                                       role === 'button' || role === 'link' || role === 'slider' ||
+                                       cls.includes('progress') || cls.includes('lcd') ||
+                                       id.includes('progress') || id.includes('playback');
+                            });
+                            const isDragRegion = path.some(function(el) { return el.hasAttribute && el.hasAttribute('data-tauri-drag'); });
+                            const edgeMargin = 8;
+                            const isNearEdge = e.clientX < edgeMargin || e.clientX > window.innerWidth - edgeMargin ||
+                                             e.clientY < edgeMargin || e.clientY > window.innerHeight - edgeMargin;
+
+                            if (isDragRegion && !isInteractive && !isNearEdge) {
+                                e.stopImmediatePropagation();
+                                e.preventDefault();
+                                const invoke = window.__TAURI__.core ? window.__TAURI__.core.invoke : window.__TAURI__.invoke;
+                                if (invoke) invoke('start_drag').catch(function(err) { console.error(err); });
+                            }
+                        }, true);
+                    }
 
                     function inject() {
                         if (!document.body) return;
+                        setupManualDrag();
 
-                        // --- MANUAL DRAG TRIGGER (The Fix) ---
-                        if (!window.hasManualDrag) {
-                            window.hasManualDrag = true;
-                            window.addEventListener('mousedown', (e) => {
-                                const path = e.composedPath();
-                                
-                                // 1. Identify if we are clicking an interactive element
-                                // Simplified: Only protect critical controls (buttons, inputs, progress bar)
-                                const isInteractive = path.some(el => {
-                                    if (!el.tagName) return false;
-                                    const tag = el.tagName.toLowerCase();
-                                    const role = el.getAttribute ? el.getAttribute('role') : null;
-                                    const cls = typeof el.className === 'string' ? el.className : 
-                                                (el.className && typeof el.className.baseVal === 'string' ? el.className.baseVal : "");
-                                    const id = typeof el.id === 'string' ? el.id : "";
-
-                                    return tag === 'a' || tag === 'button' || tag === 'input' || tag === 'select' || tag === 'textarea' ||
-                                           tag === 'time' || tag === 'amp-lcd' ||
-                                           role === 'button' || role === 'link' || role === 'slider' ||
-                                           cls.includes('progress') || cls.includes('lcd') ||
-                                           id.includes('progress') || id.includes('playback');
-                                });
-
-                                // 2. Identify if we are clicking a designated "drag region"
-                                const isDragRegion = path.some(el => el.hasAttribute && el.hasAttribute('data-tauri-drag'));
-
-                                // 3. AVOID DRAG NEAR EDGES (Resize Handle Protection)
-                                // If the user is clicking near the very edge, they are likely trying to resize.
-                                const edgeMargin = 8;
-                                const isNearEdge = e.clientX < edgeMargin || 
-                                                 e.clientX > window.innerWidth - edgeMargin ||
-                                                 e.clientY < edgeMargin || 
-                                                 e.clientY > window.innerHeight - edgeMargin;
-
-                                if (isDragRegion && !isInteractive && !isNearEdge) {
-                                    e.stopImmediatePropagation();
-                                    e.preventDefault();
-                                    
-                                    const invoke = window.__TAURI__.core ? window.__TAURI__.core.invoke : window.__TAURI__.invoke;
-                                    if (invoke) {
-                                        invoke('start_drag').catch(err => console.error('RYM-APPLE-MUSIC: Drag failed:', err));
-                                    }
-                                }
-                            }, true); 
-                        }
-
-                        // 1. ENSURE GLOBAL CSS IS INJECTED
                         if (!document.getElementById(STYLE_ID)) {
-                            console.log("RYM-APPLE-MUSIC: Injecting Production Styles");
                             const style = document.createElement('style');
                             style.id = STYLE_ID;
-                            style.textContent = `
-                                [data-tauri-drag] { 
-                                    -webkit-app-region: drag !important; 
-                                    cursor: default !important; 
-                                    z-index: 2147483645 !important;
-                                }
-                                [data-tauri-no-drag] { 
-                                    -webkit-app-region: no-drag !important; 
-                                    pointer-events: auto !important; 
-                                    z-index: 2147483646 !important;
-                                }
+                            let css = '[data-tauri-drag] { -webkit-app-region: drag !important; cursor: default !important; z-index: 2147483645 !important; } ' +
+                                      '[data-tauri-no-drag] { -webkit-app-region: no-drag !important; pointer-events: auto !important; z-index: 2147483646 !important; } ' +
+                                      '#tauri-toast { position: fixed !important; bottom: 110px !important; left: 50% !important; transform: translateX(-50%) !important; background: #fb233b !important; color: white !important; padding: 12px 24px !important; border-radius: 30px !important; z-index: 2147483647 !important; visibility: hidden; opacity: 0; transition: all 0.3s ease; } ' +
+                                      '#tauri-toast.show { visibility: visible; opacity: 1; } ';
+
+                            if (IS_PLAYER) {
+                                css += '#apple-music-player, .player-bar, amp-chrome-player { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 54px !important; margin: 0 !important; z-index: 2147483647 !important; visibility: visible !important; opacity: 1 !important; } ' +
+                                       'body > *:not(.player-bar):not(amp-chrome-player):not(#tauri-toast) { opacity: 0 !important; pointer-events: none !important; } ' +
+                                       'html, body { background: transparent !important; overflow: hidden !important; } ';
+                            }
+
+                            if (IS_BROWSER) {
+                                css += '#tauri-tabs { position: fixed !important; bottom: 20px !important; left: 50% !important; transform: translateX(-50%) !important; z-index: 2147483647 !important; display: flex !important; gap: 8px !important; background: rgba(20, 20, 20, 0.6) !important; padding: 6px 12px !important; border-radius: 20px !important; border: 1px solid rgba(251, 35, 59, 0.5) !important; backdrop-filter: blur(15px) !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important; -webkit-app-region: no-drag !important; pointer-events: auto !important; opacity: 0.8 !important; transition: all 0.3s ease !important; } ' +
+                                       '#tauri-tabs:hover { opacity: 1; transform: translateX(-50%) translateY(-2px); background: rgba(30,30,30,0.9); } ' +
+                                       '.tauri-tab-btn { all: unset !important; display: inline-block !important; box-sizing: border-box !important; background: transparent !important; color: white !important; padding: 4px 12px !important; border-radius: 12px !important; cursor: pointer !important; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; font-size: 11px !important; font-weight: 700 !important; opacity: 0.5; transition: all 0.2s ease !important; } ' +
+                                       '.tauri-tab-btn.active { background: #fb233b !important; opacity: 1; } ' +
+                                       '#tauri-actions { position: fixed !important; bottom: 20px !important; right: 20px !important; z-index: 2147483647 !important; display: flex !important; gap: 8px !important; pointer-events: none !important; } ' +
+                                       '#tauri-actions button { pointer-events: auto !important; background: rgba(20, 20, 20, 0.8) !important; backdrop-filter: blur(15px) !important; border: 1px solid rgba(251, 35, 59, 0.4) !important; color: white !important; padding: 8px 16px !important; border-radius: 20px !important; cursor: pointer !important; font-size: 12px !important; font-weight: 700 !important; box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important; transition: all 0.2s ease !important; } ' +
+                                       '#tauri-actions button:hover { transform: translateY(-2px); background: rgba(30, 30, 30, 0.9); border-color: #fb233b !important; } ';
                                 
-                                
-                                /* Make sure we can see these borders */
-                                /* body { margin-top: 5px !important; } */
-
-                                ${IS_MUSIC_HOST ? `
-                                    .logo, .player-bar, amp-chrome-player { -webkit-app-region: drag !important; z-index: 2147483645 !important; }
-                                    .logo a, .logo button, .player-bar button, .player-bar input, .player-bar a, .player-bar [role="button"], amp-lcd { 
-                                        -webkit-app-region: no-drag !important; 
-                                        z-index: 2147483646 !important;
-                                    }
-                                ` : ''}
-
-                                ${IS_BROWSER ? `
-                                    .player-bar, amp-chrome-player { display: none !important; }
-                                ` : ''}
-
-                                ${IS_PLAYER ? `
-                                    /* Player Window Styling: Hide everything but the player bar */
-                                    #apple-music-player, .player-bar, amp-chrome-player {
-                                        position: fixed !important;
-                                        top: 0 !important;
-                                        left: 0 !important;
-                                        width: 100% !important;
-                                        height: 54px !important;
-                                        margin: 0 !important;
-                                        z-index: 2147483647 !important;
-                                        visibility: visible !important;
-                                        opacity: 1 !important;
-                                    }
-                                    body > *:not(.player-bar):not(amp-chrome-player):not(#tauri-tabs):not(#tauri-toast):not(#tauri-actions) {
-                                        opacity: 0 !important;
-                                        pointer-events: none !important;
-                                    }
-                                    html, body {
-                                        background: transparent !important;
-                                        overflow: hidden !important;
-                                    }
-                                    #tauri-tabs, #tauri-actions { display: none !important; }
-                                ` : ''}
-                                
-                                ${IS_RYM ? `
-                                    header#page-header, header#page_header, .header, #page_header { 
-                                        display: flex !important; 
-                                        height: 54px !important; 
-                                        -webkit-app-region: drag !important;
-                                        z-index: 2147483640 !important;
-                                    }
-                                    .header_inner { 
-                                        display: flex !important; 
-                                        align-items: center !important; 
-                                        justify-content: space-between !important;
-                                        margin-left: 50px !important;
-                                        width: calc(100% - 50px) !important;
-                                        -webkit-app-region: drag !important;
-                                    }
-                                    /* Ensure segments inside are clickable */
-                                    .header_inner > div, .header_inner > a, .header_inner > button, .header_inner input, #header_icon_link_bars {
-                                        -webkit-app-region: no-drag !important;
-                                        pointer-events: auto !important;
-                                    }
-                                ` : ''}
-
-                                #tauri-tabs {
-                                    position: fixed !important;
-                                    bottom: 20px !important;
-                                    left: 50% !important;
-                                    transform: translateX(-50%) !important;
-                                    z-index: 2147483647 !important;
-                                    display: flex !important;
-                                    gap: 8px !important;
-                                    background: rgba(20, 20, 20, 0.6) !important;
-                                    padding: 6px 12px !important;
-                                    border-radius: 20px !important;
-                                    border: 1px solid rgba(251, 35, 59, 0.5) !important;
-                                    backdrop-filter: blur(15px) !important;
-                                    box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
-                                    -webkit-app-region: no-drag !important;
-                                    pointer-events: auto !important;
-                                    opacity: 0.8 !important;
-                                    transition: all 0.3s ease !important;
-                                }
-                                #tauri-tabs:hover { opacity: 1; transform: translateX(-50%) translateY(-2px); background: rgba(30,30,30,0.9); }
-                                
-                                #tauri-actions {
-                                    position: fixed !important;
-                                    bottom: 20px !important;
-                                    right: 20px !important;
-                                    z-index: 2147483647 !important;
-                                    display: flex !important;
-                                    gap: 8px !important;
-                                    pointer-events: none !important;
-                                }
-                                #tauri-actions button {
-                                    pointer-events: auto !important;
-                                    background: rgba(20, 20, 20, 0.8) !important;
-                                    backdrop-filter: blur(15px) !important;
-                                    border: 1px solid rgba(251, 35, 59, 0.4) !important;
-                                    color: white !important;
-                                    padding: 8px 16px !important;
-                                    border-radius: 20px !important;
-                                    cursor: pointer !important;
-                                    font-size: 12px !important;
-                                    font-weight: 700 !important;
-                                    box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important;
-                                    transition: all 0.2s ease !important;
-                                }
-                                #tauri-actions button:hover {
-                                    transform: translateY(-2px);
-                                    background: rgba(30, 30, 30, 0.9) !important;
-                                    border-color: #fb233b !important;
+                                if (IS_MUSIC_HOST) {
+                                    css += '.player-bar, amp-chrome-player { display: none !important; } ';
                                 }
 
-                                .tauri-tab-btn {
-                                    /* RESET */
-                                    all: unset !important;
-                                    display: inline-block !important;
-                                    box-sizing: border-box !important;
-                                    
-                                    /* STYLE */
-                                    background: transparent !important;
-                                    color: white !important;
-                                    border: none !important;
-                                    padding: 4px 12px !important;
-                                    border-radius: 12px !important;
-                                    cursor: pointer !important;
-                                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
-                                    font-size: 11px !important;
-                                    font-weight: 700 !important;
-                                    line-height: 1.2 !important;
-                                    text-transform: none !important;
-                                    letter-spacing: normal !important;
-                                    opacity: 0.5;
-                                    transition: all 0.2s ease !important;
+                                if (IS_RYM) {
+                                    css += 'header#page-header, header#page_header, .header, #page_header { display: flex !important; height: 54px !important; -webkit-app-region: drag !important; z-index: 2147483640 !important; } ' +
+                                           '.header_inner { display: flex !important; align-items: center !important; justify-content: space-between !important; margin-left: 50px !important; width: calc(100% - 50px) !important; -webkit-app-region: drag !important; } ' +
+                                           '.header_inner > div, .header_inner > a, .header_inner > button, .header_inner input { -webkit-app-region: no-drag !important; pointer-events: auto !important; } ';
                                 }
-                                .tauri-tab-btn.active { background: #fb233b !important; opacity: 1; }
-                                #tauri-toast {
-                                    position: fixed !important;
-                                    bottom: 110px !important;
-                                    left: 50% !important;
-                                    transform: translateX(-50%) !important;
-                                    background: #fb233b !important;
-                                    color: white !important;
-                                    padding: 12px 24px !important;
-                                    border-radius: 30px !important;
-                                    z-index: 2147483647 !important;
-                                    visibility: hidden; opacity: 0;
-                                    transition: all 0.3s ease;
-                                }
-                                #tauri-toast.show { visibility: visible; opacity: 1; }
-                            `;
+                            }
+                            style.textContent = css;
                             (document.head || document.documentElement).appendChild(style);
                         }
-                        // VIGOROUSLY UPDATE DRAG REGIONS (Precise Mode)
-                        // Only mark the top-level containers. 
-                        // The 'mousedown' listener will handle the check for "is this inside a drag region?"
-                        const bars = Array.from(document.querySelectorAll('header, nav, [class*="player-bar"], [class*="header"], [id*="header"], amp-chrome-player, .logo, #page_header, .chrome-player'));
-                        
-                        bars.forEach(el => {
-                            if (el.id === CONTAINER_ID) return;
-                            
-                            const style = window.getComputedStyle(el);
-                            const isFixed = style.position === 'fixed' || style.position === 'sticky';
-                            const rect = el.getBoundingClientRect();
-                            const isAtEdge = isFixed && (rect.top <= 10 || (window.innerHeight - rect.bottom) <= 10);
-                            const isHeaderType = /header|player|logo|nav/i.test(el.className + el.id + el.tagName);
 
-                            if (isAtEdge || isHeaderType) {
-                                // Just mark the container. Do not touch children.
-                                if (!el.hasAttribute('data-tauri-drag')) {
-                                    el.setAttribute('data-tauri-drag', '');
+                        // Player Drag Region
+                        if (IS_PLAYER) {
+                            const bar = document.querySelector('.player-bar') || document.querySelector('amp-chrome-player');
+                            if (bar && !bar.hasAttribute('data-tauri-drag')) bar.setAttribute('data-tauri-drag', '');
+                        }
+
+                        // Browser Tab Switcher & Action Buttons
+                        if (IS_BROWSER) {
+                            if (!document.getElementById(CONTAINER_ID)) {
+                                if (!document.getElementById(TOAST_ID)) {
+                                    const toast = document.createElement('div');
+                                    toast.id = TOAST_ID;
+                                    document.body.appendChild(toast);
                                 }
-                                // Ensure the container itself has the cursor
-                                if (el.style.cursor !== 'default') {
-                                    el.style.cursor = 'default';
-                                }
+                                const container = document.createElement('div');
+                                container.id = CONTAINER_ID;
+                                const isMusic = WINDOW_LABEL === 'music';
+                                const musicBtn = document.createElement('button');
+                                musicBtn.className = 'tauri-tab-btn' + (isMusic ? ' active' : '');
+                                musicBtn.textContent = 'Music';
+                                musicBtn.onclick = function() { window.__TAURI__.core.invoke('show_music'); };
+                                const rymBtn = document.createElement('button');
+                                rymBtn.className = 'tauri-tab-btn' + (!isMusic ? ' active' : '');
+                                rymBtn.textContent = 'RYM';
+                                rymBtn.onclick = function() { window.__TAURI__.core.invoke('show_rym'); };
+                                container.appendChild(musicBtn);
+                                container.appendChild(rymBtn);
+                                document.body.appendChild(container);
                             }
-                        });
-
-
-                        // TAG INTERACTIVE ELEMENTS AS NO-DRAG (Legacy CSS support)
-                        // Even though we use manual drag, keeping this helps visual debugging if we ever re-enable borders
-                        document.querySelectorAll('[data-tauri-drag] a, [data-tauri-drag] button, [data-tauri-drag] input, [data-tauri-drag] [role="button"], [data-tauri-drag] amp-lcd, [data-tauri-drag] amp-chrome-volume, [data-tauri-drag] amp-lcd-progress, [data-tauri-drag] .ui_search, [data-tauri-drag] .header_item').forEach(el => {
-                            if (!el.hasAttribute('data-tauri-no-drag')) {
-                                el.setAttribute('data-tauri-no-drag', '');
-                            }
-                        });
-                        
-                        // Cleanups
-                        if (IS_MUSIC) {
-                            const logoA = document.querySelector('.logo a');
-                            if (logoA) logoA.remove();
-                        }
-                        
-                        if (IS_RYM) {
-                            const h = document.getElementById('page_header') || document.getElementById('page-header');
-                            if (h && h.style.display !== 'flex') {
-                                h.style.display = 'flex';
-                                h.style.height = '54px';
-                            }
-                        }
-
-                        if (document.getElementById(CONTAINER_ID)) return;
-                        
-                        console.log("RYM-APPLE-MUSIC: Injecting Container");
-                        if (!document.getElementById(TOAST_ID)) {
-                            const toast = document.createElement('div');
-                            toast.id = TOAST_ID;
-                            document.body.appendChild(toast);
-                        }
-
-                        const container = document.createElement('div');
-                        container.id = CONTAINER_ID;
-                        
-                        const isMusic = IS_MUSIC;
-                         
-                        
-                        const musicBtn = document.createElement('button');
-                        musicBtn.className = 'tauri-tab-btn' + (isMusic ? ' active' : '');
-                        musicBtn.textContent = 'Music';
-                        musicBtn.onclick = () => {
-                            window.__TAURI__.core.invoke('show_music').catch(err => {
-                                console.error('RYM-APPLE-MUSIC: Failed to show music window:', err);
-                                // Fallback to a direct focus if possible
-                                if (err.toString().includes('not allowed')) {
-                                    window.showSyncToast('Permission Error: Restart App');
-                                }
-                            });
-                        };
-                        
-                        const rymBtn = document.createElement('button');
-                        rymBtn.className = 'tauri-tab-btn' + (!isMusic ? ' active' : '');
-                        rymBtn.textContent = 'RYM';
-                        rymBtn.onclick = () => {
-                            window.__TAURI__.core.invoke('show_rym').catch(err => {
-                                console.error('RYM-APPLE-MUSIC: Failed to show RYM window:', err);
-                            });
-                        };
-                        
-                        container.appendChild(musicBtn);
-                        container.appendChild(rymBtn);
-
-                        (document.body || document.documentElement).appendChild(container);
-                        
-                        // ACTION BUTTON CONTAINER (Detached)
-                        if (!document.getElementById('tauri-actions')) {
-                            const actionContainer = document.createElement('div');
-                            actionContainer.id = 'tauri-actions';
-                            (document.body || document.documentElement).appendChild(actionContainer);
-                        }
-
-                        // --- MATCH STATE MACHINE ---
-                        function updateMatchState() {
-                            const actionBox = document.getElementById('tauri-actions');
-                            if (!actionBox || !IS_RYM) return;
-
-                            const lastSynced = localStorage.getItem('tauri_last_synced_album');
-                            const syncOccurred = localStorage.getItem('tauri_sync_occurred') === 'true';
-                            const ddgActive = localStorage.getItem('tauri_ddg_sync_active') === 'true';
-                            const isReleasePage = window.location.pathname.includes('/release/');
-                            
-                            // 1. Handle DDG Redirect Result
-                            if (ddgActive) {
-                                console.log("RYM-APPLE-MUSIC: DDG Sync detected. Clearing flag.");
-                                localStorage.removeItem('tauri_ddg_sync_active');
-                                
-                                if (!isReleasePage) {
-                                    window.showSyncToast('No direct match. Search or find manually.');
-                                } else {
-                                    window.showSyncToast('Synced (Auto-Match)');
-                                }
-                            }
-
-                            // 2. Render Buttons based on State
-                            const correctionMode = localStorage.getItem('tauri_correction_mode') === 'true';
-                            
-                            // Clear current buttons
-                            actionBox.innerHTML = '';
-
-                            if (lastSynced && syncOccurred) {
-                                if (correctionMode) {
-                                    // STATE: CORRECTION MODE (User is finding the right album)
-                                    const setMatchBtn = document.createElement('button');
-                                    setMatchBtn.textContent = 'Set Match';
-                                    
-                                    if (!isReleasePage) {
-                                        setMatchBtn.style.opacity = '0.5';
-                                        setMatchBtn.disabled = true;
-                                        setMatchBtn.title = "Navigate to a release page first";
-                                    } else {
-                                        setMatchBtn.style.cursor = 'pointer';
-                                        setMatchBtn.title = `Link current page to: ${lastSynced}`;
-                                        setMatchBtn.onclick = () => {
-                                             if (confirm(`Link this RYM page to Apple Music album:\n"${lastSynced}"?`)) {
-                                                 const parts = lastSynced.split(' - ');
-                                                 if (parts.length >= 1) {
-                                                     let targetArtist = parts[0];
-                                                     let targetAlbum = parts.slice(1).join(' - ');
-                                                     if (!targetAlbum) targetAlbum = "Unknown Album";
-                                                     
-                                                     const rating = document.querySelector('.avg_rating')?.innerText?.trim();
-                                                     const count = document.querySelector('.num_ratings b')?.innerText?.trim();
-                                                     const genreLinks = document.querySelectorAll('.release_pri_genres a');
-                                                     const genres = Array.from(genreLinks).map(a => a.innerText).join(', ');
-                                                     
-                                                     let date = "";
-                                                     const rows = Array.from(document.querySelectorAll('.album_info tr'));
-                                                     const releasedRow = rows.find(r => r.querySelector('.info_hdr')?.innerText?.includes('Released'));
-                                                     if (releasedRow) date = releasedRow.querySelector('td')?.innerText?.trim() || "";
-                                                     
-                                                     const titleEl = document.querySelector('.album_title');
-                                                     let rymAlbum = "";
-                                                     if (titleEl) {
-                                                         const clone = titleEl.cloneNode(true);
-                                                         clone.querySelectorAll('.year, .release_year, .album_shortcut, .album_artist_small').forEach(el => el.remove());
-                                                         rymAlbum = clone.innerText?.trim() || "";
-                                                     }
-                                                     const rymArtist = document.querySelector('.album_info .artist')?.innerText?.trim() || "";
-                                                     
-                                                     if (rating) {
-                                                         window.__TAURI__.core.invoke('set_manual_match', {
-                                                             targetArtist: targetArtist,
-                                                             targetAlbum: targetAlbum,
-                                                             rating: {
-                                                                album_name: rymAlbum,
-                                                                artist_name: rymArtist,
-                                                                rym_rating: parseFloat(rating),
-                                                                rating_count: parseInt(count?.replace(/,/g, '') || "0"),
-                                                                rym_url: window.location.href,
-                                                                genres: genres,
-                                                                release_date: date || "",
-                                                                timestamp: Date.now()
-                                                             }
-                                                         });
-                                                         window.showSyncToast('Link Saved!');
-                                                         localStorage.removeItem('tauri_correction_mode');
-                                                         localStorage.removeItem('tauri_sync_occurred');
-                                                         updateMatchState();
-                                                     } else {
-                                                         window.showSyncToast('Error: No rating data found');
-                                                     }
-                                                 }
-                                             }
-                                        };
-                                    }
-                                    actionBox.appendChild(setMatchBtn);
-
-                                    // NO MATCH BUTTON
-                                    const noMatchBtn = document.createElement('button');
-                                    noMatchBtn.textContent = 'No Match';
-                                    noMatchBtn.onclick = () => {
-                                        if (confirm(`Mark "${lastSynced}" as having NO match on RYM?`)) {
-                                             const parts = lastSynced.split(' - ');
-                                             if (parts.length >= 1) {
-                                                 let targetArtist = parts[0];
-                                                 let targetAlbum = parts.slice(1).join(' - ') || "Unknown Album";
-                                                 
-                                                 window.__TAURI__.core.invoke('set_manual_match', {
-                                                     targetArtist: targetArtist,
-                                                     targetAlbum: targetAlbum,
-                                                     rating: {
-                                                        album_name: "NO_MATCH",
-                                                        artist_name: "NO_MATCH",
-                                                        rym_rating: 0.0,
-                                                        rating_count: 0,
-                                                        rym_url: "NO_MATCH",
-                                                        genres: "",
-                                                        release_date: "",
-                                                        timestamp: Date.now()
-                                                     }
-                                                 });
-                                                 window.showSyncToast('Marked as No Match');
-                                                 localStorage.removeItem('tauri_correction_mode');
-                                                 localStorage.removeItem('tauri_sync_occurred');
-                                                 updateMatchState();
-                                             }
-                                        }
-                                    };
-                                    actionBox.appendChild(noMatchBtn);
-
-                                } else {
-                                    // STATE: SYNCED (Show "Wrong Match?")
-                                    // Only show if we are on a release page (or the page we landed on)
-                                    const wrongMatchBtn = document.createElement('button');
-                                    wrongMatchBtn.textContent = 'Wrong Match?';
-                                    wrongMatchBtn.onclick = () => {
-                                        localStorage.setItem('tauri_correction_mode', 'true');
-                                        updateMatchState();
-                                        window.showSyncToast('Find the correct album, then click Set Match');
-                                    };
-                                    actionBox.appendChild(wrongMatchBtn);
-                                }
-                            }
-                        }
-
-                        // Run state check periodically
-                        setInterval(updateMatchState, 1000);
-                        setTimeout(updateMatchState, 500); // Initial check
-                    }
-
-                    let lastLoggedInfo = "";
-                    let lastScrapedUrl = "";
-                    window.extractMusicInfo = () => {
-                        let strategy = "";
-                        // Strategy 1: Album Page
-                        let album = document.querySelector('.headings__title span[dir="auto"]')?.innerText || 
-                                    document.querySelector('[data-testid="non-editable-product-title"] span')?.innerText;
-                        
-                        let artistElements = document.querySelectorAll('.headings__subtitles a, [data-testid="product-subtitles"] a');
-                        let artists = Array.from(artistElements).map(a => a.innerText.trim().replace(/^Sir /i, ''));
-                        let artist = artists.join(' ');
-
-                        if (artist || album) strategy = "Album Page";
-
-                        // Strategy 2: Shadow DOM LCD (Now Playing)
-                        if (!artist || !album) {
-                            const lcd = document.querySelector('amp-lcd');
-                            // Specifically target the secondary line which contains Artist - Album
-                            const lcdContent = lcd?.shadowRoot?.querySelector('.lcd-meta__secondary .lcd-meta-line__text-content');
-                            if (lcdContent) {
-                                const text = lcdContent.textContent || "";
-                                // Handle different types of dashes (em-dash, en-dash, hyphen)
-                                const separator = text.includes(' — ') ? ' — ' : (text.includes(' - ') ? ' - ' : (text.includes(' – ') ? ' – ' : null));
-                                
-                                if (separator) {
-                                    const parts = text.split(separator);
-                                    if (parts.length >= 2) {
-                                        artist = parts[0].trim().replace(/^Sir /i, '');
-                                        album = parts[1].trim();
-                                        strategy = "Shadow LCD";
-                                    }
-                                }
-                            }
-                        }
-
-                        // Strategy 3: Playback Bar (LCD) - Look for specific AM fragments (Fallback)
-                        if (!artist || !album) {
-                            artist = document.querySelector('.lcd-meta__secondary .lcd-meta-line__fragment:nth-child(1)')?.innerText;
-                            album = document.querySelector('.lcd-meta__secondary .lcd-meta-line__fragment:nth-child(3)')?.innerText;
-                            if (artist || album) strategy = "Playback Bar Fallback";
-                        }
-
-                        if (artist && artist.trim() && album && album.trim()) {
-                            const infoKey = `${artist.trim()} - ${album.trim()}`;
-                            if (infoKey !== lastLoggedInfo) {
-                                console.log(`RYM-APPLE-MUSIC: Extracted via ${strategy} - ${infoKey}`);
-                                lastLoggedInfo = infoKey;
-                            }
-                            return { artist: artist.trim(), album: album.trim() };
-                        }
-                        
-                        if (window.location.host.includes('music.apple.com') && window.location.pathname.includes('/album/')) {
-                            if (lastLoggedInfo !== "FAIL") {
-                                console.warn("RYM-APPLE-MUSIC: On album page but extraction failed. DOM mismatch?");
-                                lastLoggedInfo = "FAIL";
-                            }
-                        }
-                        return null;
-                    };
-
-                    window.syncToRym = (background = false, force = false) => {
-                        const info = window.extractMusicInfo();
-                        if (info) {
-                            window.__TAURI__.core.invoke('sync_to_rym', { 
-                                artist: info.artist, 
-                                album: info.album,
-                                background: background,
-                                force: force,
-                                musicUrl: window.location.href
-                            });
-                        } else if (!background) {
-                            window.showSyncToast('Navigate to an album or play something!');
-                        }
-                    };
-
-                    function checkAutoSync() {
-                        if (!IS_MUSIC) return;
-                         
-                        
-                        const info = window.extractMusicInfo();
-                        if (info) {
-                            const albumKey = `${info.artist} - ${info.album}`;
-                            const lastSynced = localStorage.getItem('tauri_last_synced_album');
-                            const ignoreFlag = localStorage.getItem('tauri_ignore_next_sync');
-                            
-                            if (ignoreFlag === 'true') {
-                                console.log("RYM-APPLE-MUSIC: Sync loop prevented (Ignore flag set). Clearing flag.");
-                                localStorage.removeItem('tauri_ignore_next_sync');
-                                localStorage.setItem('tauri_last_synced_album', albumKey);
-                                
-                                // FORCE A SYNC (FETCH ONLY) to populate UI
-                                console.log("RYM-APPLE-MUSIC: Force triggering sync to fetch metadata (without navigation).");
-                                window.syncToRym(true);
-                                if (window.sessionRequestedAlbums) window.sessionRequestedAlbums.add(albumKey);
-                                return;
-                            }
-
-                            // Check if we need to sync:
-                            // 1. New album detected (classic check)
-                            // 2. OR we haven't requested data for this album in this session (Refresh Fix)
-                            const sessionRequested = window.sessionRequestedAlbums && window.sessionRequestedAlbums.has(albumKey);
-                            
-                            if (albumKey !== lastSynced || !sessionRequested) {
-                                if (albumKey !== lastSynced) {
-                                    console.log("RYM-APPLE-MUSIC: New album detected. Triggering auto-sync:", albumKey);
-                                    // CLEAR OLD METADATA IMMEDIATELY (Stale Data Fix)
-                                    const existing = document.getElementById('rym-injected-meta');
-                                    if (existing) {
-                                        console.log("RYM-APPLE-MUSIC: Clearing stale metadata for new album.");
-                                        existing.remove();
-                                        const target = document.querySelector('.headings__metadata-bottom');
-                                        if (target) target.style.display = '';
-                                    }
-                                    window.lastRymMetadata = null; // Ensure stale data is gone from memory
-                                } else {
-                                    console.log("RYM-APPLE-MUSIC: Refresh detected (Session missing). Re-fetching:", albumKey);
-                                }
-                                
-                                localStorage.setItem('tauri_last_synced_album', albumKey);
-                                if (window.sessionRequestedAlbums) window.sessionRequestedAlbums.add(albumKey);
-                                
-                                window.syncToRym(true); // Trigger background sync
-                            }
-                        } else {
-                            // If we fail to extract but we are on an album page, log why occasionally
-                            if (window.location.pathname.includes('/album/') && Math.random() < 0.05) {
-                                console.log("RYM-APPLE-MUSIC: checkAutoSync - No info extracted on album page.");
+                            if (IS_RYM && !document.getElementById('tauri-actions')) {
+                                const actionContainer = document.createElement('div');
+                                actionContainer.id = 'tauri-actions';
+                                document.body.appendChild(actionContainer);
                             }
                         }
                     }
 
-                    window.addEventListener('keydown', (e) => {
-                        if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
-                            if (IS_MUSIC) {
-                                const searchInput = document.querySelector('input.search-input__text-field');
-                                if (searchInput) {
-                                    e.preventDefault();
-                                    searchInput.focus();
-                                    searchInput.select();
-                                }
-                            } else {
-                                const searchInput = document.getElementById('ui_search_input_main_search');
-                                if (searchInput) {
-                                    e.preventDefault();
-                                    searchInput.focus();
-                                    searchInput.select();
-                                }
-                            }
-                        }
-                    });
-
-                    // Search Results Clicker Logic
-                    if (window.location.host.includes('rateyourmusic.com') && 
-                        window.location.pathname.includes('/search') && 
-                        window.location.search.includes('sync=1')) {
-                        
-                        const params = new URLSearchParams(window.location.search);
-                        const searchTerm = params.get('searchterm') || "";
-                        
-                        const getWords = (text) => {
-                            if (!text) return [];
-                            return text.toLowerCase()
-                                .replace(/sir /g, '')
-                                .replace(/the /g, '')
-                                .replace(/orchestra/g, '')
-                                .replace(/philharmonic/g, 'phil')
-                                .replace(/philharmoniker/g, 'phil')
-                                .split(/[^a-z0-9]+/)
-                                .filter(w => w.length > 2); // Ignore short words like 'is', 'a', 'of'
+                    // --- LOGIC GATED FOR BROWSERS ---
+                    if (IS_BROWSER) {
+                        window.extractMusicInfo = function() {
+                            let album = document.querySelector('.headings__title span[dir="auto"]')?.innerText || document.querySelector('[data-testid="non-editable-product-title"] span')?.innerText;
+                            let artists = Array.from(document.querySelectorAll('.headings__subtitles a, [data-testid="product-subtitles"] a')).map(function(a) { return a.innerText.trim(); });
+                            let artist = artists.join(' ');
+                            if (artist && album) return { artist: artist.trim(), album: album.trim() };
+                            return null;
                         };
 
-                        const targetWords = getWords(searchTerm);
-                        console.log(`RYM-APPLE-MUSIC: SEARCH DEBUG - Target: "${searchTerm}"`);
-                        console.log(`RYM-APPLE-MUSIC: SEARCH DEBUG - Target Words: [${targetWords.join(', ')}]`);
-
-                        let attempts = 0;
-                        const interval = setInterval(() => {
-                            attempts++;
-                            
-                            const rows = Array.from(document.querySelectorAll('tr.infobox'));
-                            if (rows.length === 0) {
-                                if (attempts % 5 === 0) console.log("RYM-APPLE-MUSIC: Waiting for search results to load...");
-                                return;
-                            }
-
-                            let bestMatch = null;
-                            let maxScore = 0;
-                            let bestMatchedWords = [];
-
-                            rows.forEach((row, index) => {
-                                const releaseLink = row.querySelector('a.searchpage');
-                                if (!releaseLink || !releaseLink.href.includes('/release/')) return;
-                                
-                                const artistLinks = Array.from(row.querySelectorAll('a.artist'));
-                                const artistNames = artistLinks.map(a => a.innerText).join(' ');
-                                const releaseTitle = releaseLink.innerText;
-                                
-                                const resultWords = getWords(artistNames + " " + releaseTitle);
-                                
-                                // Calculate score: how many target words are present in this result?
-                                let matchedWords = [];
-                                let score = 0;
-                                
-                                targetWords.forEach(tw => {
-                                    if (resultWords.some(rw => rw.includes(tw) || tw.includes(rw))) {
-                                        score += 2;
-                                        matchedWords.push(tw);
-                                    }
-                                });
-
-                                // Log details for every result on the first attempt (or if it's potentially a match)
-                                if (attempts === 1 || score > 4) {
-                                    console.log(`RYM-APPLE-MUSIC: Result #${index} [Score ${score}]: "${artistNames} - ${releaseTitle}"`);
-                                    if (score > 0) {
-                                        console.log(`   Matches: [${matchedWords.join(', ')}]`);
-                                    }
-                                }
-
-                                if (score > maxScore) {
-                                    maxScore = score;
-                                    bestMatch = releaseLink;
-                                    bestMatchedWords = matchedWords;
-                                }
-                            });
-                            
-                            // Checking for matches
-                            if (bestMatch) {
-                                // Calculate how many unique target words covered
-                                const uniqueMatches = new Set(bestMatchedWords).size;
-                                const uniqueTargets = new Set(targetWords).size;
-                                const matchRatio = uniqueMatches / uniqueTargets;
-
-                                // CONDITION 1: Perfect Match (All target words found)
-                                // We trust this implicitly.
-                                const isPerfectMatch = matchRatio >= 1.0;
-
-                                // CONDITION 2: Strong Match (Score >= 4, meaning at least 2 distinct words matched)
-                                // AND it's one of the top results (index 0 or 1)
-                                const isStrongMatch = maxScore >= 4;
-
-                                if (isPerfectMatch || (isStrongMatch && attempts >= 2)) {
-                                    console.log(`RYM-APPLE-MUSIC: Best candidate selected (Perfect: ${isPerfectMatch}, Score: ${maxScore}):`, bestMatch.innerText);
-                                    clearInterval(interval);
-                                    window.showSyncToast('Matched: ' + bestMatch.innerText);
-                                    bestMatch.click();
-                                    return;
-                                }
-                            }
-                            
-                            if (attempts > 8) {
-                                console.warn("RYM-APPLE-MUSIC: Match timeout. No strong match found.");
-                                window.showSyncToast('No auto-match found. Please select manually.');
-                                clearInterval(interval);
-                            }
-                        }, 500);
-                    }
-
-                    function syncLink() {
-                        if (!document.body) return;
-                        // Only sync if we are on an album page
-                        if (IS_RYM && 
-                            window.location.pathname.includes('/release/')) { // Changed to /release/ to cover all release types
-                            
-                            const ignoreFlag = localStorage.getItem('tauri_ignore_next_sync');
-                            if (ignoreFlag === 'true') {
-                                console.log("RYM-APPLE-MUSIC: Sync loop prevented (Ignore flag set on RYM). Clearing flag.");
-                                localStorage.removeItem('tauri_ignore_next_sync');
-                                // Also update last pending URL to prevent immediate re-sync
-                                const allAmLinks = Array.from(document.body.querySelectorAll('a[href*="music.apple.com"]'));
-                                const amLink = allAmLinks.find(a => a.href.includes('/album/')) || allAmLinks[0];
-                                if (amLink) localStorage.setItem('tauri_last_pending_url', amLink.href);
-                                return;
-                            }
-
-                            // Only trigger sync if focused (manual-ish) or if it's a truly new discovery
-                            if (!document.hasFocus()) return;
-
-                            const allAmLinks = Array.from(document.body.querySelectorAll('a[href*="music.apple.com"]'));
-                            
-                            // Prioritize album links, then any AM link
-                            const amLink = allAmLinks.find(a => a.href.includes('/album/')) || allAmLinks[0];
-                            
-                            if (amLink && amLink.href) {
-                                const lastUrl = localStorage.getItem('tauri_last_pending_url');
-                                if (amLink.href !== lastUrl) {
-                                    console.log("RYM-APPLE-MUSIC: Syncing Apple Music link:", amLink.href);
-                                    localStorage.setItem('tauri_last_pending_url', amLink.href);
-                                    
-                                    // Extract Metadata to send for verification
-                                    let rymArtist = document.querySelector('.album_info .artist')?.innerText?.trim() || null;
-                                    let rymAlbum = null;
-                                    const titleEl = document.querySelector('.album_title');
-                                    if (titleEl) {
-                                        const clone = titleEl.cloneNode(true);
-                                        clone.querySelectorAll('.year, .release_year, .album_shortcut, .album_artist_small').forEach(el => el.remove());
-                                        rymAlbum = clone.innerText?.trim() || null;
-                                    }
-                                    
-                                    window.__TAURI__.core.invoke('set_pending_music_url', { 
-                                        url: amLink.href,
-                                        artist: rymArtist,
-                                        album: rymAlbum
-                                    });
-                                }
-                            }
-                        }
-                    }
-
-                    function sampleHtml() {
-                        window.sampledPageTypes = window.sampledPageTypes || {};
-                        if (!IS_RYM) return;
-                        
-                        // Relaxed Wait: Check for footer (signals main layout) OR just wait for non-empty content
-                        const hasFooter = !!document.querySelector('#footer, .footer, #footer_copy');
-                        const hasContent = document.body && document.body.innerText.trim().length > 200;
-                        
-                        if (!hasContent && !hasFooter) return;
-
-                        const segments = window.location.pathname.split('/').filter(s => s.length > 0);
-                        let type = "homepage";
-                        if (segments.length > 0) {
-                            type = segments[0];
-                            if (type === 'release' && segments.length > 1) {
-                                type = 'release_' + segments[1];
-                            }
-                        }
-
-                        if (window.sampledPageTypes[type]) return;
-
-                        window.sampledPageTypes[type] = true;
-                        console.log("RYM-APPLE-MUSIC: Sampling new type (Fully Loaded): " + type);
-                        const bodyHtml = document.body.outerHTML;
-                        window.__TAURI__.core.invoke('save_sample_html', { 
-                            pageType: type, 
-                            url: window.location.href,
-                            html: bodyHtml 
-                        });
-                    }
-
-                    let observedShadowRoot = null;
-                    function setupShadowObserver() {
-                        const lcd = document.querySelector('amp-lcd');
-                        if (lcd && lcd.shadowRoot && observedShadowRoot !== lcd.shadowRoot) {
-                            console.log("RYM-APPLE-MUSIC: Attaching observer to Shadow DOM");
-                            const shadowObserver = new MutationObserver(() => {
-                                checkAutoSync();
-                            });
-                            shadowObserver.observe(lcd.shadowRoot, { childList: true, subtree: true, characterData: true });
-                            observedShadowRoot = lcd.shadowRoot;
-                        }
-                    }
-
-                    // Scraping State
-                    window.tauri_last_scraped_url = "";
-                    window.tauri_last_scraped_hash = "";
-
-                    function handleRymMetadata() {
-                        const path = window.location.pathname;
-                        const isRelease = path.startsWith('/release/'); 
-                        if (!IS_RYM) return;
-                        
-                        if (!isRelease) {
-                            // console.log("RYM-DEBUG: Not a release page, skipping metadata extraction.");
-                            return;
-                        }
-
-                        console.log("RYM-SCRAPER: handleRymMetadata check triggered for:", window.location.href);
-
-                        // Redirection to Release View (Combined information)
-                        const releaseViewItem = document.querySelector('li.issue_info.release_view');
-                        const releaseViewLink = releaseViewItem?.querySelector('a');
-                        if (releaseViewLink) {
-                            const currentUrl = window.location.href;
-                            const targetUrl = releaseViewLink.href;
-                            if (targetUrl !== currentUrl && !currentUrl.startsWith(targetUrl) && !window.location.search.includes('sync=1')) {
-                                 console.log("RYM-SCRAPER: Redirecting to combined Release View:", targetUrl);
-                                 window.location.href = targetUrl;
-                                 return;
-                            }
-                        }
-
-                        const ratingText = document.querySelector('.avg_rating')?.innerText?.trim();
-                        if (!ratingText) {
-                            console.warn("RYM-SCRAPER: ⚠️ No rating found yet (.avg_rating missing). Page might still be loading.");
-                            return;
-                        }
-
-                        // Check if we already scraped this and if it has changed
-                        // We use a simple hash of the elements we care about to detect changes
-                        const trackLines = document.querySelectorAll('.tracklist_line').length;
-                        const reviewItems = document.querySelectorAll('.review_item, .review, [itemprop="review"]').length;
-                        const currentHash = `${ratingText}|${trackLines}|${reviewItems}|${window.location.href}`;
-
-                        if (currentHash === window.tauri_last_scraped_hash) {
-                            // Already scraped this exact state
-                            return;
-                        }
-
-                        console.log(`RYM-SCRAPER: 🚀 DECIDED TO SCRAPE! Reason: ${window.tauri_last_scraped_hash === "" ? "First time on page" : "Content changed (Tracks/Reviews/Rating)"}`);
-                        console.log(`RYM-SCRAPER:   - Previous Hash: ${window.tauri_last_scraped_hash}`);
-                        console.log(`RYM-SCRAPER:   - Current Hash:  ${currentHash}`);
-
-                        window.tauri_last_scraped_url = window.location.href;
-                        window.tauri_last_scraped_hash = currentHash;
-                        
-                        console.log("RYM-SCRAPER: Beginning Full Extraction...");
-
-                        // 1. Basic Info
-                        const countText = document.querySelector('.num_ratings b')?.innerText?.trim() || "0";
-                        const rating = parseFloat(ratingText) || 0;
-                        const count = parseInt(countText.replace(/,/g, '')) || 0;
-
-                        // 2. Artist/Album Names
-                        const titleEl = document.querySelector('.album_title');
-                        let rymAlbum = "";
-                        if (titleEl) {
-                            const clone = titleEl.cloneNode(true);
-                            clone.querySelectorAll('.year, .release_year, .album_shortcut, .album_artist_small').forEach(el => el.remove());
-                            rymAlbum = clone.innerText?.trim() || "";
-                        }
-                        const rymArtist = document.querySelector('.album_info .artist')?.innerText?.trim() || "";
-                        console.log(`RYM-SCRAPER: [DATA] Artist: "${rymArtist}", Album: "${rymAlbum}", Rating: ${rating} (${count} ratings)`);
-
-                        // 3. Date
-                        let date = "";
-                        const releasedRow = Array.from(document.querySelectorAll('.album_info tr'))
-                            .find(r => r.querySelector('.info_hdr')?.innerText?.includes('Released'));
-                        date = releasedRow?.querySelector('td')?.innerText?.trim() || 
-                               document.evaluate("//th[contains(text(),'Released')]/following-sibling::td", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue?.innerText?.trim() || "";
-                        console.log(`RYM-SCRAPER: [DATA] Release Date: "${date}"`);
-
-                        // 4. Genres & Descriptors
-                        const genres = Array.from(document.querySelectorAll('.release_pri_genres a')).map(a => a.innerText).join(', ');
-                        const secondaryGenres = Array.from(document.querySelectorAll('.release_sec_genres a')).map(a => a.innerText).join(', ');
-                        const descriptors = document.querySelector('.release_pri_descriptors')?.innerText?.trim() || "";
-                        const language = document.evaluate("//th[contains(text(),'Language')]/following-sibling::td", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue?.innerText?.trim() || "";
-                        const rank = document.evaluate("//th[contains(text(),'Ranked')]/following-sibling::td", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue?.innerText?.trim() || "";
-
-                        // 5. Tracks
-                        const trackMap = new Map();
-                        document.querySelectorAll('.tracklist_line').forEach(line => {
-                            const tEl = line.querySelector('.song, [itemprop="name"]');
-                            let tTitle = tEl ? tEl.innerText.trim() : (line.querySelector('.tracklist_title')?.innerText?.trim() || "");
-                            tTitle = tTitle.replace(/lyrics\s*$/i, '').replace(/[\r\n]/g, ' ').replace(/\s+\d+:\d+\s*$/, '').trim();
-                            
-                            const tNum = line.querySelector('.tracklist_num')?.innerText?.trim() || "";
-                            const rEl = line.querySelector('.page_release_section_tracks_track_stats_rating');
-                            const cEl = line.querySelector('.page_release_section_tracks_track_stats_count');
-                            
-                            let tip = "";
-                            if (rEl && rEl.innerText.trim()) {
-                                tip = `${rEl.innerText.trim()} from ${cEl ? cEl.innerText.trim() : "?"} ratings`;
-                            } else {
-                                const stats = line.querySelector('.has_tip');
-                                tip = stats ? (stats.getAttribute('data-tiptip') || stats.getAttribute('title') || "") : "";
-                            }
-                            
-                            if (tTitle || tNum) {
-                                const key = tNum + "|" + tTitle;
-                                if (!trackMap.has(key)) trackMap.set(key, { title: tTitle, num: tNum, ratingInfo: tip });
-                            }
-                        });
-                        const trackRatings = Array.from(trackMap.values());
-                        console.log(`RYM-SCRAPER: [DATA] Extracted ${trackRatings.length} tracks.`);
-
-                        // 6. Reviews
-                        const reviews = Array.from(document.querySelectorAll('.review_item, .review, [itemprop="review"]')).map(el => {
-                            const statusEl = el.querySelector('.review_publish_status');
-                            if (statusEl && statusEl.innerText.includes('Not published')) return null;
-                            const reviewer = el.querySelector('.user, .review_user, [itemprop="author"]')?.innerText?.trim();
-                            
-                            let score = "";
-                            const rImg = el.querySelector('.review_rating img, .page_review_feature_rating img');
-                            if (rImg) {
-                                const alt = rImg.getAttribute('alt') || rImg.getAttribute('title') || "";
-                                const m = alt.match(/([0-9.]+)/);
-                                if (m) score = m[1];
-                            }
-                            
-                            const rTextEl = el.querySelector('.rendered_text');
-                            let rText = rTextEl ? rTextEl.innerText.trim() : "";
-                            const nonEnglishRegex = /[\u0400-\u04FF\u4E00-\u9FFF\u3040-\u309F\u30A0-\u30FF\uAC00-\uD7AF]/;
-                            if (nonEnglishRegex.test(rText)) return null;
-
-                            return { 
-                                reviewer, 
-                                score, 
-                                date: el.querySelector('.date, .review_date, [itemprop="datePublished"]')?.innerText?.trim(),
-                                text: rText,
-                                votes: el.querySelector('.review_vote_count, .review_votes, .review_util_vote_count')?.innerText?.trim()
-                            };
-                        }).filter(r => r && r.reviewer && r.text);
-                        console.log(`RYM-SCRAPER: [DATA] Extracted ${reviews.length} reviews.`);
-
-                        const payload = { 
-                            rating: {
-                                album_name: rymAlbum,
-                                artist_name: rymArtist,
-                                rym_rating: rating,
-                                rating_count: count,
-                                rym_url: window.location.href,
-                                genres: genres,
-                                secondary_genres: secondaryGenres,
-                                descriptors: descriptors,
-                                language: language,
-                                rank: rank,
-                                track_ratings: JSON.stringify(trackRatings),
-                                reviews: JSON.stringify(reviews),
-                                release_date: date,
-                                timestamp: Date.now()
-                            }
-                        };
-
-                        console.log(`RYM-SCRAPER: 📤 Sending payload to Rust for "${rymAlbum}"...`);
-                        window.__TAURI__.core.invoke('save_rym_rating', payload)
-                          .then(() => console.log("RYM-SCRAPER: ✅ Rust confirmed data saved to DB."))
-                          .catch(err => console.error("RYM-SCRAPER: ❌ Rust save failed:", err));
-                    }
-
-                    // Listen for metadata events to inject into AM
-                    if (IS_MUSIC) {
-                        window.lastRymMetadata = null;
-                        window.sessionRequestedAlbums = new Set(); // Track requests this session
-
-                        function injectTrackRatings(data) {
-                            if (!data || !data.track_ratings) return;
-                            let tracks = [];
-                            try {
-                                tracks = typeof data.track_ratings === 'string' ? JSON.parse(data.track_ratings) : data.track_ratings;
-                            } catch(e) { return; }
-
-                            const amRows = document.querySelectorAll('.songs-list-row');
-                            amRows.forEach((row, index) => {
-                                const titleEl = row.querySelector('[data-testid="track-title"]');
-                                const numEl = row.querySelector('[data-testid="track-number"]');
-                                if (!titleEl) {
-                                    console.warn(`RYM-APPLE-MUSIC: Row ${index} missing title element.`);
-                                    return;
-                                }
-                                
-                                const amTitle = titleEl.innerText.trim().toLowerCase();
-                                const amNum = numEl?.innerText.trim() || "";
-
-                                // Find matching track
-                                const match = tracks.find(t => {
-                                    // 1. Try numeric track match (normalize A1 -> 1, B2 -> 2)
-                                    if (amNum && t.num) {
-                                        const rymNumClean = t.num.replace(/[^0-9]/g, '');
-                                        if (amNum === rymNumClean) return true;
-                                    }
-
-                                    // 2. Try title match
-                                    const rymTitleClean = (t.title || "")
-                                        .replace(/lyrics\s*$/i, '')
-                                        .replace(/[\r\n]/g, ' ')
-                                        .replace(/\s+\d+:\d+\s*$/, '')
-                                        .trim()
-                                        .toLowerCase();
-
-                                    return amTitle === rymTitleClean || amTitle.includes(rymTitleClean) || rymTitleClean.includes(amTitle);
-                                });
-
-                                if (match) {
-                                    if (match.ratingInfo) {
-                                        // Extract avg (handles "3.73 from..." or just "3.73")
-                                        const avgMatch = match.ratingInfo.match(/^([0-9.]+)/);
-                                        if (!avgMatch) return;
-                                        const avg = avgMatch[1];
-
-                                        // LOOP PREVENTION: Check if already injected with same value
-                                        const existing = row.querySelector('.rym-track-rating');
-                                        if (existing && existing.innerText === avg) return;
-
-                                        // LOG ONLY WHEN WE ACTUALLY MUTATE
-                                        console.log(`RYM-APPLE-MUSIC: Match found for track ${amNum}: "${amTitle}" -> "${match.title}" (RYM Num: ${match.num})`);
-                                        console.log(`RYM-APPLE-MUSIC: Injecting rating ${avg} for "${amTitle}"`);
-
-                                        if (existing) existing.remove();
-
-                                        const ratingSpan = document.createElement('span');
-                                        ratingSpan.className = 'rym-track-rating';
-                                        ratingSpan.style.marginLeft = '12px';
-                                        ratingSpan.style.fontSize = '11px';
-                                        ratingSpan.style.color = '#fb233b';
-                                        ratingSpan.style.fontWeight = 'bold';
-                                        ratingSpan.style.minWidth = '32px';
-                                        ratingSpan.innerText = avg;
-                                        ratingSpan.title = match.ratingInfo;
-
-                                        const target = row.querySelector('.songs-list-row__explicit-wrapper') || titleEl.parentElement;
-                                        if (target) {
-                                            // Make tracks amenable to adding ratings next to them
-                                            target.querySelector('.songs-list-row__song-name').style.display = 'inline';
-                                            target.appendChild(ratingSpan);
-                                        } else {
-                                            console.error("RYM-APPLE-MUSIC: Could not find target element for injection in row", index);
-                                        }
-                                    } else {
-                                        console.log(`RYM-APPLE-MUSIC: Match found but no ratingInfo for "${amTitle}"`);
-                                    }
-                                } else {
-                                    // Too noisy to log every failure if there are many tracks, but maybe helpful for first few
-                                    if (index < 3) console.log(`RYM-APPLE-MUSIC: No match found for row ${index}: "${amTitle}" (${amNum})`);
-                                }
-                            });
-                        }
-
-                        function injectMetadata(data) {
-                            if (data.rym_url === 'NO_MATCH' && data.status !== 'missing') return false;
-
-                            const target = document.querySelector('.headings__metadata-bottom') || 
-                                           document.querySelector('.product-creator') ||
-                                           document.querySelector('.description-container');
-                            
-                            if (!target) {
-                                console.warn("RYM-APPLE-MUSIC: Could not find any target for metadata injection.");
-                                return false;
-                            }
-                            
-                            // Remove old injected one if exists
-                            const existing = document.getElementById('rym-injected-meta');
-                            if (existing) {
-                                // If already has correct rating, don't re-inject
-                                if (existing.getAttribute('data-rym-url') === data.rym_url && 
-                                    existing.getAttribute('data-status') === data.status) {
-                                    return true;
-                                }
-                                existing.remove();
-                            }
-
-                            const metaDiv = document.createElement('div');
-                            metaDiv.id = 'rym-injected-meta';
-                            metaDiv.setAttribute('data-rym-url', data.rym_url);
-                            metaDiv.setAttribute('data-status', data.status || 'fresh');
-                            metaDiv.style.marginTop = '4px';
-                            metaDiv.style.fontSize = '13px';
-                            metaDiv.style.lineHeight = '1.6';
-                            metaDiv.style.color = 'var(--labelSecondary, inherit)';
-                            metaDiv.style.fontWeight = '400';
-                            metaDiv.style.borderLeft = '2px solid #fb233b';
-                            metaDiv.style.paddingLeft = '10px';
-                            metaDiv.style.marginBottom = '10px';
-
-                            const isMissing = data.status === 'missing';
-                            const isStale = data.status === 'stale';
-                            // const isFresh = data.status === 'fresh' || !data.status;
-                            
-                            if (isMissing) {
-                                metaDiv.innerHTML = `
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="opacity: 0.7;">No RYM Data</span>
-                                        <button id="rym-btn-refresh-missing" style="background: transparent; border: 1px solid currentColor; border-radius: 4px; padding: 2px 6px; cursor: pointer; font-size: 11px; opacity: 0.8;">Refresh from RYM</button>
-                                    </div>
-                                    <div style="margin-top: 4px;">
-                                         <button id="rym-btn-open-missing" style="background: transparent; border: 1px solid currentColor; border-radius: 4px; padding: 2px 6px; cursor: pointer; font-size: 11px; opacity: 0.6;">Open RYM Tab</button>
-                                    </div>
-                                `;
-                            } else {
-                                const badgeColor = isStale ? '#e6b800' : '#32cd32';
-                                const badgeText = isStale ? 'Stale' : 'Fresh';
-                                
-                                metaDiv.innerHTML = `
-                                    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                                        <span style="font-weight: 700;">${data.rym_rating.toFixed(2)}</span>
-                                        <span style="opacity: 0.5;">•</span>
-                                        <span>${data.release_date}</span>
-                                        <span style="font-size: 9px; color: ${badgeColor}; border: 1px solid ${badgeColor}; padding: 0 4px; border-radius: 3px; text-transform: uppercase;">${badgeText}</span>
-                                        ${isStale ? `<button id="rym-btn-refresh-stale" style="background: transparent; border: 1px solid currentColor; border-radius: 4px; padding: 1px 5px; cursor: pointer; font-size: 10px; opacity: 0.8;">Refresh</button>` : ''}
-                                    </div>
-                                    <div style="opacity: 0.7; font-size: 12px; margin-top: 2px;">${data.genres}</div>
-                                    <div style="margin-top: 4px;">
-                                         <button id="rym-btn-open-exists" style="background: transparent; border: 1px solid currentColor; border-radius: 4px; padding: 2px 6px; cursor: pointer; font-size: 11px; opacity: 0.6;">Open RYM Tab</button>
-                                    </div>
-                                `;
-                            }
-                            
-                            target.parentNode.insertBefore(metaDiv, target);
-                            
-                            // Also inject track-level ratings
-                            injectTrackRatings(data);
-
-                            // Attach Event Listeners Programmatically (Fixes CSP "unsafe-inline" error)
-                            setTimeout(() => {
-                                const btnRefreshMissing = document.getElementById('rym-btn-refresh-missing');
-                                if (btnRefreshMissing) {
-                                    btnRefreshMissing.addEventListener('click', () => {
-                                        window.syncToRym(true, true); // background=true, force=true
-                                    });
-                                }
-                                
-                                const btnOpenMissing = document.getElementById('rym-btn-open-missing');
-                                if (btnOpenMissing) {
-                                    btnOpenMissing.addEventListener('click', () => {
-                                        window.syncToRym(false, false); // background=false, force=false
-                                    });
-                                }
-
-                                const btnRefreshStale = document.getElementById('rym-btn-refresh-stale');
-                                if (btnRefreshStale) {
-                                    btnRefreshStale.addEventListener('click', () => {
-                                        window.syncToRym(true, true); // background=true, force=true
-                                    });
-                                }
-                                
-                                const btnOpenExists = document.getElementById('rym-btn-open-exists');
-                                if (btnOpenExists) {
-                                    btnOpenExists.addEventListener('click', () => {
-                                        window.syncToRym(false, false); // background=false, force=false
-                                    });
-                                }
-                            }, 0);
-
-                            console.log("RYM-APPLE-MUSIC: Successfully replaced metadata with RYM Insights.");
-                            return true;
-                        }
-
-                        function checkAndReinject() {
+                        window.syncToRym = function(background) {
                             const info = window.extractMusicInfo();
-                            if (!info) return;
+                            if (info) window.__TAURI__.core.invoke('sync_to_rym', { artist: info.artist, album: info.album, background: background, force: false, musicUrl: window.location.href });
+                        };
 
-                            // If we have metadata, verify it matches current album
-                            if (window.lastRymMetadata) {
-                                const currentArtist = info.artist.toLowerCase();
-                                const metaArtist = window.lastRymMetadata.artist_name.toLowerCase();
-                                
-                                const currentAlbum = info.album.toLowerCase();
-                                const metaAlbum = window.lastRymMetadata.album_name.toLowerCase();
-
-                                // Fuzzy check for artist AND album
-                                const artistMatch = isArtistMatch(currentArtist, metaArtist);
-                                const albumMatch = currentAlbum.includes(metaAlbum) || metaAlbum.includes(currentAlbum);
-
-                                if (artistMatch && albumMatch) {
-                                    if (!document.getElementById('rym-injected-meta')) {
-                                        console.log("RYM-APPLE-MUSIC: Re-injecting missing metadata for current album.");
-                                        injectMetadata(window.lastRymMetadata);
-                                    } else {
-                                        // Always try to inject track ratings if metadata is valid
-                                        injectTrackRatings(window.lastRymMetadata);
-                                    }
-                                } else {
-                                    // NO MATCH - Clear immediately (Stale Data Fix)
-                                    const existing = document.getElementById('rym-injected-meta');
-                                    if (existing) {
-                                        console.log("RYM-APPLE-MUSIC: Clearing stale metadata (Mismatch).");
-                                        existing.remove();
-                                        const target = document.querySelector('.headings__metadata-bottom');
-                                        if (target) target.style.display = '';
+                        setInterval(function() {
+                            if (IS_MUSIC_HOST) {
+                                const info = window.extractMusicInfo();
+                                if (info) {
+                                    const albumKey = info.artist + ' - ' + info.album;
+                                    if (albumKey !== localStorage.getItem('tauri_last_synced_album')) {
+                                        localStorage.setItem('tauri_last_synced_album', albumKey);
+                                        window.syncToRym(true);
                                     }
                                 }
                             }
-                        }
-
-                        // Clear on manual URL changes too
-                        let lastPath = window.location.pathname;
-                        setInterval(() => {
-                                if (window.location.pathname !== lastPath) {
-                                    lastPath = window.location.pathname;
-                                    const existing = document.getElementById('rym-injected-meta');
-                                    if (existing) {
-                                        existing.remove();
-                                        const target = document.querySelector('.headings__metadata-bottom');
-                                        if (target) target.style.display = '';
-                                    }
-                                    checkAndReinject();
-                                }
-                        }, 500);
-
-                        window.__TAURI__.event.listen('rym-rating-updated', (event) => {
-                            const data = event.payload;
-                            console.log("RYM-APPLE-MUSIC: Received metadata for injection:", data);
-                            data.receivedAt = Date.now(); // Mark receipt time
-                            window.lastRymMetadata = data;
-                            // Inject if it's broadly the same artist (safe fuzzy match)
-                            const info = window.extractMusicInfo();
-                            if (info) {
-                                if (isArtistMatch(info.artist, data.artist_name)) {
-                                    injectMetadata(data);
-                                } else {
-                                    console.log(`RYM-APPLE-MUSIC: Artist mismatch (${info.artist.toLowerCase()} vs ${data.artist_name.toLowerCase()}), not injecting.`);
-                                }
-                            } else {
-                                injectMetadata(data); // Fallback to injecting if extraction fails (might be a slow load)
-                            }
-                        });
-                    }
-
-                    function checkDDGFail() {
-                        if (!window.location.host.includes('duckduckgo.com')) return;
-                        
-                        const url = window.location.href;
-                        const hasSiteFilter = url.includes('site%3Arateyourmusic.com');
-                        // DDG Lucky URL starts with %5C (\). If it's missing but site filter is present, it's failed and landed on results.
-                        const isFailedLucky = hasSiteFilter && !url.includes('q=%5C') && !url.includes('q=%255C');
-                        
-                        if (isFailedLucky) {
-                            console.log("RYM-APPLE-MUSIC: DDG Lucky search failed (Redirect diverted). Falling back to RYM search...");
-                            
-                            const params = new URLSearchParams(window.location.search);
-                            let query = params.get('q') || "";
-                            
-                            if (!query) {
-                                const input = document.getElementById('search_form_input');
-                                query = input ? input.value : "";
-                            }
-
-                            if (query) {
-                                // Clean up the query: remove site filters and backslashes
-                                let cleanQuery = query
-                                    .replace(/\\/g, '')
-                                    .replace(/site:rateyourmusic\.com\/release/i, '')
-                                    .replace(/site:rateyourmusic\.com/i, '')
-                                    .trim();
-                                
-                                if (cleanQuery) {
-                                    const rymUrl = `https://rateyourmusic.com/search?searchterm=${encodeURIComponent(cleanQuery)}&searchtype=l&sync=1`;
-                                    console.log("RYM-APPLE-MUSIC: Redirecting to RYM search:", rymUrl);
-                                    window.location.href = rymUrl;
+                            if (IS_RYM && window.location.pathname.startsWith('/release/')) {
+                                const rating = document.querySelector('.avg_rating')?.innerText?.trim();
+                                if (rating && window.location.href !== window.tauri_last_scraped_url) {
+                                    window.tauri_last_scraped_url = window.location.href;
+                                    window.__TAURI__.core.invoke('save_rym_rating', { 
+                                        rating: { album_name: "", artist_name: "", rym_rating: parseFloat(rating), rating_count: 0, rym_url: window.location.href, genres: "", release_date: "", timestamp: Date.now() }
+                                    });
                                 }
                             }
-                        }
+                        }, 3000);
                     }
 
                     inject();
-                    syncLink();
-                    sampleHtml();
-                    setupShadowObserver();
-                    handleRymMetadata();
-                    checkDDGFail();
-                    
-                    let mutationTimeout = null;
-                    const observer = new MutationObserver(() => {
-                        if (mutationTimeout) clearTimeout(mutationTimeout);
-                        mutationTimeout = setTimeout(() => {
-                            inject();
-                            syncLink();
-                            sampleHtml();
-                            checkAutoSync();
-                            setupShadowObserver();
-                            handleRymMetadata();
-                            checkDDGFail();
-                            if (window.location.host.includes('music.apple.com')) {
-                                checkAndReinject();
-                            }
-                        }, 500); // Wait for 500ms of silence before running
-                    });
-                    
-                    const obsTarget = document.body || document.documentElement;
-                    observer.observe(obsTarget, { childList: true, subtree: true });
-        })();
-    "#;
+                    const observer = new MutationObserver(function() { inject(); });
+                    observer.observe(document.body || document.documentElement, { childList: true, subtree: true });
+                })();
+            "#;
 
-    // RESTORE APP
-    let music_init_script = format!("window.TAURI_WINDOW_LABEL = 'music'; {}", tab_ui_script);
-    let rym_init_script = format!("window.TAURI_WINDOW_LABEL = 'rym'; {}", tab_ui_script);
-    let player_init_script = format!("window.TAURI_WINDOW_LABEL = 'player'; {}", tab_ui_script);
+            // window creation logic
+            let music_init = ["window.TAURI_WINDOW_LABEL = 'music'; ", universal_script].concat();
+            let rym_init = ["window.TAURI_WINDOW_LABEL = 'rym'; ", universal_script].concat();
+            let player_init = ["window.TAURI_WINDOW_LABEL = 'player'; ", universal_script].concat();
 
-    let music_window = tauri::WebviewWindowBuilder::new(app, "music", tauri::WebviewUrl::External("https://music.apple.com".parse().unwrap()))
+            let music_window = tauri::WebviewWindowBuilder::new(app, "music", tauri::WebviewUrl::External("https://music.apple.com".parse().unwrap()))
                 .title("RYM Apple Music Player")
                 .data_store_identifier(*b"music_store_v1_0")
                 .inner_size(1200.0, 600.0)
@@ -2351,14 +1148,12 @@ pub fn run() {
                 .hidden_title(true)
                 .resizable(true)
                 .title_bar_style(tauri::TitleBarStyle::Overlay)
-                .background_color(Color(20, 20, 26, 255)) // #14141a
+                .background_color(Color(20, 20, 26, 255))
                 .devtools(true)
-                .initialization_script(&music_init_script)
+                .initialization_script(&music_init)
                 .build()
                 .expect("Failed to create music window");
 
-            // Create RYM window - Start with blank page to avoid loading RYM on launch
-            // Will load RYM homepage only when user switches to RYM tab for the first time
             let rym_window = tauri::WebviewWindowBuilder::new(app, "rym", tauri::WebviewUrl::External("about:blank".parse().unwrap()))
                 .title("RYM Apple Music Player")
                 .data_store_identifier(*b"rym_store_v1_000")
@@ -2367,47 +1162,34 @@ pub fn run() {
                 .visible(false)
                 .hidden_title(true)
                 .title_bar_style(tauri::TitleBarStyle::Overlay)
-                .background_color(Color(20, 20, 26, 255)) // #14141a
+                .background_color(Color(20, 20, 26, 255))
                 .devtools(true)
-                .initialization_script(&rym_init_script)
+                .initialization_script(&rym_init)
                 .build()
                 .expect("Failed to create RYM window");
             
-            // Create always-visible Player window
             let _player_window = tauri::WebviewWindowBuilder::new(app, "player", tauri::WebviewUrl::External("https://music.apple.com".parse().unwrap()))
                 .title("Apple Music Player")
                 .data_store_identifier(*b"music_store_v1_0")
                 .inner_size(960.0, 54.0)
                 .visible(true)
                 .decorations(false)
-                .always_on_top(true)
                 .transparent(true)
                 .resizable(false)
-                .initialization_script(&player_init_script)
+                .initialization_script(&player_init)
                 .build()
                 .expect("Failed to create player window");
             
-            // Auto-open devtools for debugging
             music_window.open_devtools();
             rym_window.open_devtools();
 
-            // Window Synchronization logic
             let rym_window_clone = rym_window.clone();
             let music_window_for_event = music_window.clone();
-
             music_window.on_window_event(move |event| {
-                // Only sync FROM the music window if it is the one currently visible/active
-                if !music_window_for_event.is_visible().unwrap_or(false) {
-                    return;
-                }
-
+                if !music_window_for_event.is_visible().unwrap_or(false) { return; }
                 match event {
-                    tauri::WindowEvent::Resized(size) => {
-                        let _ = rym_window_clone.set_size(*size);
-                    }
-                    tauri::WindowEvent::Moved(pos) => {
-                        let _ = rym_window_clone.set_position(*pos);
-                    }
+                    tauri::WindowEvent::Resized(size) => { let _ = rym_window_clone.set_size(*size); }
+                    tauri::WindowEvent::Moved(pos) => { let _ = rym_window_clone.set_position(*pos); }
                     _ => {}
                 }
             });
@@ -2415,25 +1197,13 @@ pub fn run() {
             let music_window_clone2 = music_window.clone();
             let rym_window_for_event = rym_window.clone();
             rym_window.on_window_event(move |event| {
-                // Only sync FROM the RYM window if it is the one currently visible/active
-                if !rym_window_for_event.is_visible().unwrap_or(false) {
-                    return;
-                }
-
+                if !rym_window_for_event.is_visible().unwrap_or(false) { return; }
                 match event {
-                    tauri::WindowEvent::Resized(size) => {
-                        let _ = music_window_clone2.set_size(*size);
-                    }
-                    tauri::WindowEvent::Moved(pos) => {
-                        let _ = music_window_clone2.set_position(*pos);
-                    }
+                    tauri::WindowEvent::Resized(size) => { let _ = music_window_clone2.set_size(*size); }
+                    tauri::WindowEvent::Moved(pos) => { let _ = music_window_clone2.set_position(*pos); }
                     _ => {}
                 }
             });
-            
-            // Still keep the hidden scraper window if needed for background tasks, 
-            // but we can also just use the "rym" window for it.
-            // For now, let's keep the existing architecture for scraping if it was working.
             
             Ok(())
         })
