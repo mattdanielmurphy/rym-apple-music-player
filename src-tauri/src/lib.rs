@@ -1037,7 +1037,6 @@ pub fn run() {
                                 if (IS_MUSIC_HOST) {
                                     css += '.logo, .web-nav-logo, .nav-header, .logo a { display: none !important; } ';
                                 }
-                                css += '#tauri-tabs { position: fixed !important; bottom: 20px !important; left: 50% !important; transform: translateX(-50%) !important; z-index: 2147483647 !important; display: flex !important; gap: 8px !important; background: rgba(20, 20, 20, 0.6) !important; padding: 6px 12px !important; border-radius: 20px !important; border: 1px solid rgba(251, 35, 59, 0.5) !important; backdrop-filter: blur(15px) !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important; -webkit-app-region: no-drag !important; pointer-events: auto !important; opacity: 0.8 !important; transition: all 0.3s ease !important; } ';
                                 css += '#tauri-tabs { position: fixed !important; bottom: 20px !important; left: 50% !important; transform: translateX(-50%) !important; z-index: 2147483647 !important; display: flex !important; gap: 8px !important; background: rgba(20, 20, 20, 0.6) !important; padding: 6px 12px !important; border-radius: 20px !important; border: 1px solid rgba(251, 35, 59, 0.5) !important; backdrop-filter: blur(15px) !important; box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important; -webkit-app-region: no-drag !important; pointer-events: auto !important; opacity: 0.8 !important; transition: all 0.3s ease !important; } ' +
                                        '#tauri-tabs:hover { opacity: 1; transform: translateX(-50%) translateY(-2px); background: rgba(30,30,30,0.9); } ' +
                                        '.tauri-tab-btn { all: unset !important; display: inline-block !important; box-sizing: border-box !important; background: transparent !important; color: white !important; padding: 4px 12px !important; border-radius: 12px !important; cursor: pointer !important; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; font-size: 11px !important; font-weight: 700 !important; opacity: 0.5; transition: all 0.2s ease !important; } ' +
@@ -1059,6 +1058,26 @@ pub fn run() {
                             style.textContent = css;
                             (document.head || document.documentElement).appendChild(style);
                         }
+
+                        // VIGOROUSLY UPDATE DRAG REGIONS (Restore original robust logic)
+                        const bars = Array.from(document.querySelectorAll('header, nav, [class*="player-bar"], [class*="header"], [id*="header"], amp-chrome-player, .logo, #page_header, .chrome-player'));
+                        bars.forEach(el => {
+                            if (el.id === CONTAINER_ID) return;
+                            const style = window.getComputedStyle(el);
+                            const isFixed = style.position === 'fixed' || style.position === 'sticky';
+                            const rect = el.getBoundingClientRect();
+                            const isAtEdge = isFixed && (rect.top <= 10 || (window.innerHeight - rect.bottom) <= 10);
+                            const isHeaderType = /header|player|logo|nav/i.test(el.className + el.id + el.tagName);
+
+                            if (isAtEdge || isHeaderType) {
+                                if (!el.hasAttribute('data-tauri-drag')) el.setAttribute('data-tauri-drag', '');
+                                if (el.style.cursor !== 'default') el.style.cursor = 'default';
+                            }
+                        });
+
+                        document.querySelectorAll('[data-tauri-drag] a, [data-tauri-drag] button, [data-tauri-drag] input, [data-tauri-drag] [role="button"], [data-tauri-drag] amp-lcd, [data-tauri-drag] amp-chrome-volume, [data-tauri-drag] amp-lcd-progress, [data-tauri-drag] .ui_search, [data-tauri-drag] .header_item').forEach(el => {
+                            if (!el.hasAttribute('data-tauri-no-drag')) el.setAttribute('data-tauri-no-drag', '');
+                        });
 
                         if (IS_PLAYER) {
                             const bar = document.querySelector('.player-bar') || document.querySelector('amp-chrome-player');
