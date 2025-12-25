@@ -1219,6 +1219,27 @@ pub fn run() {
                             return null;
                         };
 
+                        window.extractRYMInfo = function() {
+                            const container = document.querySelector('#media_link_button_container_top[data-medialink="true"]');
+                            if (!container) return null;
+                            const artists = container.getAttribute('data-artists');
+                            const albums = container.getAttribute('data-albums');
+                            const linksStr = container.getAttribute('data-links');
+                            if (!linksStr || (!artists && !albums)) return null;
+                            try {
+                                const links = JSON.parse(linksStr);
+                                if (links.applemusic) {
+                                    const amId = Object.keys(links.applemusic)[0];
+                                    const amData = links.applemusic[amId];
+                                    const loc = amData.loc || 'us';
+                                    const albumSlug = amData.album || 'album';
+                                    const amUrl = `https://music.apple.com/${loc}/album/${albumSlug}/${amId}`;
+                                    return { artist: artists, album: albums, url: amUrl };
+                                }
+                            } catch (e) {}
+                            return null;
+                        };
+
                         setInterval(function() {
                             if (IS_MUSIC_HOST) {
                                 const info = window.extractMusicInfo();
@@ -1227,6 +1248,22 @@ pub fn run() {
                                     if (albumKey !== localStorage.getItem('tauri_last_synced_album')) {
                                         localStorage.setItem('tauri_last_synced_album', albumKey);
                                         window.__TAURI__.core.invoke('sync_to_rym', { artist: info.artist, album: info.album, background: true, force: false, musicUrl: window.location.href });
+                                    }
+                                }
+                            }
+
+                            if (IS_RYM) {
+                                const info = window.extractRYMInfo();
+                                if (info && info.url) {
+                                    const albumKey = info.artist + ' - ' + info.album;
+                                    if (albumKey !== localStorage.getItem('tauri_last_synced_album')) {
+                                        localStorage.setItem('tauri_last_synced_album', albumKey);
+                                        console.log('RYM-APPLE-MUSIC: Syncing RYM album to Apple Music:', albumKey);
+                                        window.__TAURI__.core.invoke('set_pending_music_url', { 
+                                            url: info.url, 
+                                            artist: info.artist, 
+                                            album: info.album 
+                                        });
                                     }
                                 }
                             }
