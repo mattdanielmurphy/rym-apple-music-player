@@ -34,6 +34,11 @@ description = "Allows getting and saving RYM ratings"
 commands.allow = ["get_rym_rating", "save_rym_rating"]
 
 [[permission]]
+identifier = "allow-proxy-play"
+description = "Allows proxying play button clicks"
+commands.allow = ["proxy_play"]
+
+[[permission]]
 identifier = "allow-start-drag"
 description = "Allows manual window dragging"
 commands.allow = ["start_drag"]

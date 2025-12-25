@@ -280,6 +280,53 @@ async fn set_manual_match(
     Ok(())
 }
 
+#[tauri::command]
+async fn proxy_play(url: String, aria_label: String, app: tauri::AppHandle) -> Result<(), String> {
+    println!("RYM-PROXY-PLAY: Request to play '{}' at URL: {}", aria_label, url);
+    
+    if let Some(player) = app.get_webview_window("player") {
+        let player_url = player.url().map(|u| u.to_string()).unwrap_or_default();
+        
+        let norm_url = url.replace("geo.music.apple.com", "music.apple.com");
+        let norm_player_url = player_url.replace("geo.music.apple.com", "music.apple.com");
+        
+        if norm_url != norm_player_url {
+            println!("RYM-PROXY-PLAY: Navigating player to match browser URL...");
+            player.navigate(url.parse().unwrap()).map_err(|e| e.to_string())?;
+        }
+        
+        let js = format!(r#"
+            (function() {{
+                let attempts = 0;
+                const targetLabel = "{}";
+                const altLabel = targetLabel.includes('Play') ? targetLabel.replace('Play', 'Pause') : targetLabel.replace('Pause', 'Play');
+                
+                function tryClick() {{
+                    const buttons = Array.from(document.querySelectorAll('button'));
+                    const btn = buttons.find(b => {{
+                        const label = b.getAttribute('aria-label');
+                        return label === targetLabel || label === altLabel;
+                    }});
+                                
+                    if (btn) {{
+                        console.log("RYM-PROXY: Found button (" + btn.getAttribute('aria-label') + "), clicking...");
+                        btn.click();
+                    }} else if (attempts < 20) {{
+                        attempts++;
+                        setTimeout(tryClick, 500);
+                    }} else {{
+                        console.log("RYM-PROXY: Button not found after 10 seconds. Target: " + targetLabel);
+                    }}
+                }}
+                tryClick();
+            }})();
+        "#, aria_label.replace("\"", "\\\""));
+        
+        player.eval(&js).map_err(|e| e.to_string())?;
+    }
+    Ok(())
+}
+
 
 #[tauri::command]
 fn start_drag(window: tauri::Window) {
@@ -983,6 +1030,50 @@ pub fn run() {
                         }
                     };
 
+                    function setupPlayButtonInterception() {
+                        if (window.hasPlayInterception) return;
+                        window.hasPlayInterception = true;
+                        
+                        function isPlayButton(el) {
+                            if (!el || !el.getAttribute) return null;
+                            let current = el;
+                            for (let i = 0; i < 5; i++) {
+                                if (!current || current === document.body) break;
+                                if (current.tagName === 'BUTTON') {
+                                    const ariaLabel = current.getAttribute('aria-label');
+                                    const testId = current.getAttribute('data-testid');
+                                    const isPlayBtn = (testId === 'play-button' || current.classList.contains('play-button'));
+                                    if (isPlayBtn && ariaLabel && (ariaLabel.includes('Play') || ariaLabel.includes('Pause'))) {
+                                        return { btn: current, ariaLabel };
+                                    }
+                                }
+                                current = current.parentElement;
+                            }
+                            return null;
+                        }
+
+                        function handleAction(e) {
+                            if (!IS_BROWSER || !IS_MUSIC_HOST) return;
+                            const match = isPlayButton(e.target);
+                            if (match) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                e.stopImmediatePropagation();
+                                
+                                if (e.type === 'click') {
+                                    const invoke = window.__TAURI__.core ? window.__TAURI__.core.invoke : window.__TAURI__.invoke;
+                                    invoke('proxy_play', { url: window.location.href, ariaLabel: match.ariaLabel })
+                                        .catch(err => console.error('Proxy play failed:', err));
+                                }
+                                return false;
+                            }
+                        }
+                        
+                        ['click', 'mousedown', 'mouseup', 'pointerdown', 'pointerup'].forEach(type => {
+                            document.addEventListener(type, handleAction, true);
+                        });
+                    }
+
                     function setupManualDrag() {
                         if (window.hasManualDrag) return;
                         window.hasManualDrag = true;
@@ -1017,12 +1108,13 @@ pub fn run() {
                     function inject() {
                         if (!document.body) return;
                         setupManualDrag();
+                        setupPlayButtonInterception();
 
                         if (!document.getElementById(STYLE_ID)) {
                             const style = document.createElement('style');
                             style.id = STYLE_ID;
-                            let css = '[data-tauri-drag] { -webkit-app-region: drag !important; cursor: default !important; z-index: 2147483645 !important; } ' +
-                                      '[data-tauri-no-drag] { -webkit-app-region: no-drag !important; pointer-events: auto !important; z-index: 2147483646 !important; } ' +
+                            let css = '[data-tauri-drag] { -webkit-app-region: drag !important; } ' +
+                                      '[data-tauri-no-drag] { -webkit-app-region: no-drag !important; } ' +
                                       '#tauri-toast { position: fixed !important; bottom: 110px !important; left: 50% !important; transform: translateX(-50%) !important; background: #fb233b !important; color: white !important; padding: 12px 24px !important; border-radius: 30px !important; z-index: 2147483647 !important; visibility: hidden; opacity: 0; transition: all 0.3s ease; } ' +
                                       '#tauri-toast.show { visibility: visible; opacity: 1; } ';
 
@@ -1093,8 +1185,6 @@ pub fn run() {
                                 const navHeader = document.querySelector('.nav-header');
                                 if (navHeader) navHeader.style.display = 'none';
                             }
-                            const bodyContainer = document.querySelector('.body-container');
-                            if (bodyContainer && !bodyContainer.hasAttribute('data-tauri-drag')) bodyContainer.setAttribute('data-tauri-drag', '');
 
                             if (!document.getElementById(CONTAINER_ID)) {
                                 if (!document.getElementById(TOAST_ID)) {
@@ -1219,6 +1309,9 @@ pub fn run() {
             music_window.on_window_event(move |event| {
                 if !music_window_for_event.is_visible().unwrap_or(false) { return; }
                 match event {
+                    tauri::WindowEvent::Focused(is_focused) => {
+                        let _ = player_window_for_music.set_always_on_top(*is_focused);
+                    }
                     tauri::WindowEvent::Resized(size) => { 
                         let _ = rym_window_clone.set_size(*size);
                         let sf = music_window_for_event.scale_factor().unwrap_or(1.0);
@@ -1246,6 +1339,9 @@ pub fn run() {
             rym_window.on_window_event(move |event| {
                 if !rym_window_for_event.is_visible().unwrap_or(false) { return; }
                 match event {
+                    tauri::WindowEvent::Focused(is_focused) => {
+                        let _ = player_window_for_rym.set_always_on_top(*is_focused);
+                    }
                     tauri::WindowEvent::Resized(size) => { 
                         let _ = music_window_clone2.set_size(*size); 
                         let sf = rym_window_for_event.scale_factor().unwrap_or(1.0);
@@ -1266,10 +1362,25 @@ pub fn run() {
                     _ => {}
                 }
             });
+
+            let music_window_for_player = music_window.clone();
+            let rym_window_for_player = rym_window.clone();
+            player_window.on_window_event(move |event| {
+                match event {
+                    tauri::WindowEvent::Focused(is_focused) => {
+                        if music_window_for_player.is_visible().unwrap_or(false) {
+                            let _ = music_window_for_player.set_always_on_top(*is_focused);
+                        } else if rym_window_for_player.is_visible().unwrap_or(false) {
+                            let _ = rym_window_for_player.set_always_on_top(*is_focused);
+                        }
+                    }
+                    _ => {}
+                }
+            });
             
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![get_rym_rating, save_rym_rating, show_music, show_rym, set_pending_music_url, sync_to_rym, go_back, go_forward, save_sample_html, start_drag, set_manual_match])
+        .invoke_handler(tauri::generate_handler![get_rym_rating, save_rym_rating, show_music, show_rym, set_pending_music_url, sync_to_rym, go_back, go_forward, save_sample_html, start_drag, set_manual_match, proxy_play])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

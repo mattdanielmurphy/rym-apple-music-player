@@ -1,0 +1,193 @@
+<!-- Source URL: https://rateyourmusic.com/account/login -->
+<body id="page_body" class="">
+
+            <script>
+               window.themes = ['light', 'eve', 'night'];
+               window.themes_label = ['Light', 'Evening', 'Night'];
+            </script><div id="tauri-toast"></div><div id="tauri-tabs"><button class="tauri-tab-btn">Music</button><button class="tauri-tab-btn active">RYM</button><div style="width: 1px; height: 16px; background: rgba(255, 255, 255, 0.2); margin: 0px 4px;"></div></div><div id="tauri-actions"></div>
+          
+      <script>
+         if ( window.localStorage['size_mode'] ) {
+            document.body.parentElement.className += ' size_mode_' + window.localStorage['size_mode'];
+         }
+
+         if ( !window.localStorage['theme'] && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ) {
+            document.body.parentElement.className += ' theme_eve';
+         } else if ( !window.localStorage['theme'] || window.localStorage['theme'] === 'day') {
+            document.body.parentElement.className += ' theme_light';
+         } else {
+            if ( -1 != window.themes.indexOf(window.localStorage['theme']) ) {
+               document.body.parentElement.className += ' theme_' + window.localStorage['theme'];
+            } else {
+               document.body.parentElement.className += ' theme_light';
+            }
+         }
+
+         if ( window.matchMedia ) {
+
+             var listener = window.matchMedia('(prefers-color-scheme: dark)').addEventListener;
+
+             if ( listener ) {
+                listener('change', e => {
+                  updateTheme();
+                });               
+             }
+         }
+      </script>
+      <div id="top" class="breadcrumb_section_marker anchor"></div><script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                window.dom_loaded = true;
+      
+             console.log('DOM loaded');
+             if ( typeof (_adjustFillerColumns) !== 'undefined' ) {
+                _adjustFillerColumns() 
+             }
+
+             setTimeout(function () { 
+               if ( typeof (_closeAllStickyAds) !== 'undefined' ) {
+                  _closeAllStickyAds() 
+               }
+
+             }, 5000);
+         
+  
+         });
+      
+            rymQ(function() { updateStyleThemeLabels() });
+         </script>
+      
+<header id="page_header" data-tauri-drag="" style="cursor: default; display: flex; height: 54px;">
+<div class="header_inner logged_in" data-tauri-drag="" style="cursor: default;">
+
+
+
+
+<div class="header_profile" data-tauri-drag="" style="cursor: default;">
+
+      <div class="header_profile_logged_out" data-tauri-drag="" style="cursor: default;">
+         <span>   
+            <a href="/account/login" class="header_item" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">sign in</a>
+         </span>
+      </div>
+</div>
+
+
+<div class="header_logo" data-tauri-drag="" style="cursor: default;">
+  <a class="main header_item sonemic" href="/" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+     <div class="logo_header" data-tauri-drag="" style="cursor: default;"></div>
+     <span class="logo_name">RYM</span>
+  </a>
+
+</div>
+
+
+
+<div class="header_links" data-tauri-drag="" style="cursor: default;">
+  <div class="header_links_inner" data-tauri-drag="" style="cursor: default;">
+      <div class="divider"></div>
+      <a class="header_item" href="/new-music/" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">new music</a>
+      <a class="header_item" href="/genres/" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">genres</a>
+      <div class="header_charts" data-tauri-drag="" style="cursor: default;">
+      <a class="header_charts header_item" href="/charts/" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">charts</a>
+      </div>
+      <a class="header_item" href="/lists/" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">lists</a>
+
+
+
+
+      
+
+      <div class="divider"></div>
+    </div>
+  </div>
+  <div class="header_search" data-tauri-drag="" style="cursor: default;">
+  <div id="ui_search_frame_outer_main_search" class="ui_search_frame_outer"> <div id="ui_search_frame_main_search" class="ui_search_frame"> <div onclick="rymQ(function() {RYMsearch.onClickClose(event, 'main_search');})" class="ui_search_close"> <div class="ui_search_close_bar"> <i class="fa fa-times"></i> Close</div> <div id="ui_search_context_indicator_main_search" class="ui_search_context_indicator"> <div id="ui_search_context_indicator_inner_main_search" class="ui_search_context_indicator_inner"></div> </div> </div> <div class="ui_search_clear"></div> <div class="ui_search_frame_inner"> <div id="ui_search_main_search" class="ui_search" data-default-scope="music" data-callback="" data-callback-id="" data-tauri-no-drag=""> <i style="cursor:pointer" onclick="RYMsearch.redirSearch(event, 'main_search');" id="ui_search_icon_main_search" class="fa fa-search ui_search_icon"></i> <i id="ui_clear_icon_main_search" onclick="rymQ(function() {RYMsearch.onClickClearSearch(event, 'main_search');})" class="fa fa-times-circle ui_clear_icon"></i>
+
+
+   <form onsubmit="event.preventDefault(); RYMsearch.redirSearch(event, 'main_search');">
+   <input autocomplete="off" aria-label="Search" value="" id="ui_search_input_main_search" placeholder="Search..." class="ui_search_input" onfocus="rymQ(function() {RYMsearch.onFocus(event, 'main_search')})" onblur="rymQ(function() {RYMsearch.onBlur(event, 'main_search')})" onkeydown="rymQ(function() {RYMsearch.onKeyDown(event, 'main_search')})" oninput="rymQ(function() {RYMsearch.onInput(event, 'main_search')})" data-tauri-no-drag="">
+   </form> </div> <div class="ui_search_rest"> <div class="ui_search_type"> <div id="ui_search_debug_main_search" class="ui_search_debug"></div> <span class="ui_search_object_label">Search:</span> <span id="ui_search_scope_selector_main_search" class="ui_search_object_selector"> <input type="hidden" name="ui_search_scope_main_search" id="ui_search_scope_main_search" value="music" data-tauri-no-drag=""> <span id="ui_search_scope_selector_music_main_search" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'music');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_music selected"> Music
+  </span> <span id="ui_search_scope_selector_film_main_search" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'film');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_film"> Film
+  </span> <span id="ui_search_scope_selector_games_main_search" style="display:none" onclick="rymQ(function() {RYMsearch.onClickSearchScope(event, 'main_search', 'games');})" class="ui_search_scope_selector_item ui_search_scope_selector_item_games"> Games
+  </span> </span> <span class="ui_search_object_label">for:</span> <span id="ui_search_object_select_frame_main_search" class="ui_search_object_select_frame selected"> <select onchange="rymQ(function() {RYMsearch.onChangeObject(event, 'main_search')})" id="ui_search_object_select_main_search" class="ui_search_object_select"> </select> </span>  </div> <div id="ui_search_info_frame_main_search" class="ui_search_info_frame"> </div> <div id="ui_search_results_frame_main_search" class="ui_search_results_frame"> <div id="ui_search_results_main_search" class="ui_search_results"> </div> </div> </div> </div> </div>
+  </div>
+
+</div>   
+
+
+
+
+</div>
+
+</header>
+
+
+<div class="header_error" onclick="$(this).fadeOut();" id="header_error" data-tauri-drag="" style="cursor: default;">
+   <div class="header_error_close" data-tauri-drag="" style="cursor: default;"><i class="fa fa-times-circle"></i></div>
+   <div id="header_error_text" data-tauri-drag="" style="cursor: default;"></div>
+</div>
+
+<div class="header_message" onclick="$(this).fadeOut();" id="header_message" data-tauri-drag="" style="cursor: default;">
+   <div class="header_message_close" data-tauri-drag="" style="cursor: default;"><i class="fa fa-times-circle"></i></div>
+   <div id="header_message_text" data-tauri-drag="" style="cursor: default;"></div>
+</div>
+
+<div id="mobile_header_menu" class="mobile_header_menu " data-tauri-drag="" style="cursor: default;"><a href="/new-music/" class="mobile_header_menu_item mobile_header_menu_item_new_music" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+      <span>New Music</span>
+</a><a href="/genres/" class="mobile_header_menu_item mobile_header_menu_item_genres" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+      <span>Genres</span>
+</a><a href="/charts/" class="mobile_header_menu_item mobile_header_menu_item_charts" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+      <span>Charts</span>
+</a><a href="/lists/" class="mobile_header_menu_item mobile_header_menu_item_lists" data-tauri-drag="" data-tauri-no-drag="" style="cursor: default;">
+   <span>Lists</span> 
+</a></div>
+        
+
+            <div id="content_wrapper_outer" class="content_wrapper_outer">
+            <div id="content_wrapper" class="content_wrapper">
+            <div id="content_cover"></div>
+            <div id="content">
+            <div id="precontent" class="precontent"></div>
+
+         
+         <div id="total_cover"></div>
+         <div id="content_total_cover"></div>          
+      
+         <style>
+            #end_of_year_banner {
+
+               background:var(--mono-f);
+               border-radius:5px;
+               max-width:50em;
+               text-align:center;
+               margin:0 auto;
+               padding:0.6em 3em;
+               border-radius:5px;
+               border:2px solid var(--gen-blue-dark);
+               color:var(--mono-0);
+               position:relative;
+               font-size:1.1em;
+            }
+
+         </style>
+      
+            <div style="padding:1em;padding-bottom:2em;">
+              <div data-nosnippet="" id="end_of_year_banner" class="">
+
+                  <p>In celebration of our 25th anniversary: enter the <a href="/giveaway-2025/"><b>Best of 2025 giveaway</b></a> for your chance to win one of the year’s best albums, a $100 Bandcamp gift card, or a new pair of headphones! </p>
+
+                  <p>Visit <b><a href="/feature/rate-your-music-best-of-2025/">RYM: Best of 2025</a></b> for our special year-end feature with member reviews.</p>
+
+                 <span style="cursor:pointer;margin-left:2em;color:var(--mono-6);padding:0.5em;float:right;right: 0.6em;top: 0.15em;position: absolute;" onclick="rym.request.post('DismissEndOfYearBanner', {}, null, 'script');"><i class="fa fa-times-circle"></i></span>
+             </div>
+
+            </div>
+         <div class="clear"></div>
+
+         <script>
+              try {
+                new Function('import("")');
+              } catch (err) {
+                document.write('<div class=note style="margin-bottom:1em;"><b>Note:</b> Not all scripts could be loaded. You may need to upgrade to a newer browser version in order to use this site.</div>');
+              }
+         </script></div></div></div></body>

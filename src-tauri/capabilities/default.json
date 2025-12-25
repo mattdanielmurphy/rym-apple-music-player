@@ -19,6 +19,7 @@
     "allow-navigation",
     "allow-rating",
     "allow-start-drag",
+    "allow-proxy-play",
     "core:window:allow-start-dragging"
   ],
   "remote": {

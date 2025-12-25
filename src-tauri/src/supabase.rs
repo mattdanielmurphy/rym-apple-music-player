@@ -11,6 +11,12 @@ struct SupabaseRating {
     rating_count: i32,
     rym_url: String,
     genres: String,
+    secondary_genres: Option<String>,
+    descriptors: Option<String>,
+    language: Option<String>,
+    rank: Option<String>,
+    track_ratings: Option<String>,
+    reviews: Option<String>,
     release_date: String,
 }
 
@@ -73,8 +79,15 @@ impl SupabaseClient {
             rating_count: r.rating_count,
             rym_url: r.rym_url,
             genres: r.genres,
+            secondary_genres: r.secondary_genres,
+            descriptors: r.descriptors,
+            language: r.language,
+            rank: r.rank,
+            track_ratings: r.track_ratings,
+            reviews: r.reviews,
             release_date: r.release_date,
             timestamp: chrono::Utc::now().timestamp(),
+            status: None,
         })
     }
 
@@ -89,6 +102,12 @@ impl SupabaseClient {
             rating_count: rating.rating_count,
             rym_url: rating.rym_url.clone(),
             genres: rating.genres.clone(),
+            secondary_genres: rating.secondary_genres.clone(),
+            descriptors: rating.descriptors.clone(),
+            language: rating.language.clone(),
+            rank: rating.rank.clone(),
+            track_ratings: rating.track_ratings.clone(),
+            reviews: rating.reviews.clone(),
             release_date: rating.release_date.clone(),
         };
 
