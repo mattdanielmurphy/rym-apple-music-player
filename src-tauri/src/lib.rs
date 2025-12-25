@@ -960,8 +960,10 @@ pub fn run() {
             });
 
             // Universal Injection Script
-            let universal_script = r#"                (function() {                    const WINDOW_LABEL = window.TAURI_WINDOW_LABEL;
-                    console.log('RYM-APPLE-MUSIC: Universal Engine Starting for [' + WINDOW_LABEL + ']...');
+            let universal_script = r#"
+                (function() {
+                    const WINDOW_LABEL = window.TAURI_WINDOW_LABEL;
+                    console.log('RYM-APPLE-MUSIC: Universal Engine Starting for [' + WINDOW_LABEL + ']');
                     
                     const STYLE_ID = 'tauri-universal-style';
                     const CONTAINER_ID = 'tauri-tabs';
@@ -971,7 +973,6 @@ pub fn run() {
                     const IS_PLAYER = WINDOW_LABEL === 'player';
                     const IS_BROWSER = (WINDOW_LABEL === 'music' || WINDOW_LABEL === 'rym');
 
-                    // --- SHARED UTILS ---
                     window.showSyncToast = function(msg) {
                         const toast = document.getElementById(TOAST_ID);
                         if (toast) {
@@ -1026,8 +1027,8 @@ pub fn run() {
 
                             if (IS_PLAYER) {
                                 css += '#apple-music-player, .player-bar, amp-chrome-player { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 54px !important; margin: 0 !important; z-index: 2147483647 !important; visibility: visible !important; opacity: 1 !important; } ' +
-                                       'body > *:not(.player-bar):not(amp-chrome-player):not(#tauri-toast) { opacity: 0 !important; pointer-events: none !important; } ' +
-                                       'html, body { background: transparent !important; overflow: hidden !important; } ';
+                                       'html, body { background: transparent !important; overflow: hidden !important; } ' +
+                                       '.sidebar, .header, .web-navigation, .web-nav-logo, .logo { display: none !important; } ';
                             }
 
                             if (IS_BROWSER) {
@@ -1053,14 +1054,21 @@ pub fn run() {
                             (document.head || document.documentElement).appendChild(style);
                         }
 
-                        // Player Drag Region
                         if (IS_PLAYER) {
                             const bar = document.querySelector('.player-bar') || document.querySelector('amp-chrome-player');
                             if (bar && !bar.hasAttribute('data-tauri-drag')) bar.setAttribute('data-tauri-drag', '');
                         }
 
-                        // Browser Tab Switcher & Action Buttons
                         if (IS_BROWSER) {
+                            if (IS_MUSIC_HOST) {
+                                const logo = document.querySelector('.logo') || document.querySelector('.web-nav-logo');
+                                if (logo) logo.style.display = 'none';
+                                const logoA = document.querySelector('.logo a');
+                                if (logoA) logoA.remove();
+                            }
+                            const bodyContainer = document.querySelector('.body-container');
+                            if (bodyContainer && !bodyContainer.hasAttribute('data-tauri-drag')) bodyContainer.setAttribute('data-tauri-drag', '');
+
                             if (!document.getElementById(CONTAINER_ID)) {
                                 if (!document.getElementById(TOAST_ID)) {
                                     const toast = document.createElement('div');
@@ -1082,15 +1090,9 @@ pub fn run() {
                                 container.appendChild(rymBtn);
                                 document.body.appendChild(container);
                             }
-                            if (IS_RYM && !document.getElementById('tauri-actions')) {
-                                const actionContainer = document.createElement('div');
-                                actionContainer.id = 'tauri-actions';
-                                document.body.appendChild(actionContainer);
-                            }
                         }
                     }
 
-                    // --- LOGIC GATED FOR BROWSERS ---
                     if (IS_BROWSER) {
                         window.extractMusicInfo = function() {
                             let album = document.querySelector('.headings__title span[dir="auto"]')?.innerText || document.querySelector('[data-testid="non-editable-product-title"] span')?.innerText;
@@ -1100,11 +1102,6 @@ pub fn run() {
                             return null;
                         };
 
-                        window.syncToRym = function(background) {
-                            const info = window.extractMusicInfo();
-                            if (info) window.__TAURI__.core.invoke('sync_to_rym', { artist: info.artist, album: info.album, background: background, force: false, musicUrl: window.location.href });
-                        };
-
                         setInterval(function() {
                             if (IS_MUSIC_HOST) {
                                 const info = window.extractMusicInfo();
@@ -1112,17 +1109,8 @@ pub fn run() {
                                     const albumKey = info.artist + ' - ' + info.album;
                                     if (albumKey !== localStorage.getItem('tauri_last_synced_album')) {
                                         localStorage.setItem('tauri_last_synced_album', albumKey);
-                                        window.syncToRym(true);
+                                        window.__TAURI__.core.invoke('sync_to_rym', { artist: info.artist, album: info.album, background: true, force: false, musicUrl: window.location.href });
                                     }
-                                }
-                            }
-                            if (IS_RYM && window.location.pathname.startsWith('/release/')) {
-                                const rating = document.querySelector('.avg_rating')?.innerText?.trim();
-                                if (rating && window.location.href !== window.tauri_last_scraped_url) {
-                                    window.tauri_last_scraped_url = window.location.href;
-                                    window.__TAURI__.core.invoke('save_rym_rating', { 
-                                        rating: { album_name: "", artist_name: "", rym_rating: parseFloat(rating), rating_count: 0, rym_url: window.location.href, genres: "", release_date: "", timestamp: Date.now() }
-                                    });
                                 }
                             }
                         }, 3000);
@@ -1168,7 +1156,7 @@ pub fn run() {
                 .build()
                 .expect("Failed to create RYM window");
             
-            let _player_window = tauri::WebviewWindowBuilder::new(app, "player", tauri::WebviewUrl::External("https://music.apple.com".parse().unwrap()))
+            let player_window = tauri::WebviewWindowBuilder::new(app, "player", tauri::WebviewUrl::External("https://music.apple.com".parse().unwrap()))
                 .title("Apple Music Player")
                 .data_store_identifier(*b"music_store_v1_0")
                 .inner_size(960.0, 54.0)
@@ -1176,12 +1164,14 @@ pub fn run() {
                 .decorations(false)
                 .transparent(true)
                 .resizable(false)
+                .devtools(true)
                 .initialization_script(&player_init)
                 .build()
                 .expect("Failed to create player window");
             
             music_window.open_devtools();
             rym_window.open_devtools();
+            player_window.open_devtools();
 
             let rym_window_clone = rym_window.clone();
             let music_window_for_event = music_window.clone();
