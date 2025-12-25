@@ -954,6 +954,7 @@ pub fn run() {
                 } else if event.id() == "devtools" {
                     if let Some(w) = app.get_webview_window("music") { if w.is_visible().unwrap_or(false) { let _ = w.open_devtools(); } }
                     if let Some(w) = app.get_webview_window("rym") { if w.is_visible().unwrap_or(false) { let _ = w.open_devtools(); } }
+                    if let Some(w) = app.get_webview_window("player") { let _ = w.open_devtools(); }
                 } else if event.id() == "quit" {
                     std::process::exit(0);
                 }
@@ -1026,9 +1027,9 @@ pub fn run() {
                                       '#tauri-toast.show { visibility: visible; opacity: 1; } ';
 
                             if (IS_PLAYER) {
-                                css += '#apple-music-player, .player-bar, amp-chrome-player { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 54px !important; margin: 0 !important; z-index: 2147483647 !important; visibility: visible !important; opacity: 1 !important; } ' +
+                                css += '#apple-music-player, .player-bar, amp-chrome-player { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 54px !important; margin: 0 !important; z-index: 2147483647 !important; visibility: visible !important; opacity: 1 !important; background: #14141a !important; } ' +
                                        'html, body { background: transparent !important; overflow: hidden !important; } ' +
-                                       '.sidebar, .header, .web-navigation, .web-nav-logo, .logo { display: none !important; } ';
+                                       '.sidebar, .header, .web-navigation, .web-nav-logo, .logo, .nav-header { display: none !important; } ';
                             }
 
                             if (IS_BROWSER) {
@@ -1065,6 +1066,8 @@ pub fn run() {
                                 if (logo) logo.style.display = 'none';
                                 const logoA = document.querySelector('.logo a');
                                 if (logoA) logoA.remove();
+                                const navHeader = document.querySelector('.nav-header');
+                                if (navHeader) navHeader.style.display = 'none';
                             }
                             const bodyContainer = document.querySelector('.body-container');
                             if (bodyContainer && !bodyContainer.hasAttribute('data-tauri-drag')) bodyContainer.setAttribute('data-tauri-drag', '');
