@@ -1186,7 +1186,7 @@ pub fn run() {
             let player_window = tauri::WebviewWindowBuilder::new(app, "player", tauri::WebviewUrl::External("https://music.apple.com".parse().unwrap()))
                 .title("Apple Music Player")
                 .data_store_identifier(*b"music_store_v1_0")
-                .inner_size(960.0, 54.0)
+                .inner_size(1200.0, 54.0)
                 .visible(true)
                 .decorations(false)
                 .transparent(true)
@@ -1199,6 +1199,19 @@ pub fn run() {
             music_window.open_devtools();
             rym_window.open_devtools();
             player_window.open_devtools();
+
+            // Initial alignment
+            if let (Ok(pos), Ok(size)) = (music_window.outer_position(), music_window.outer_size()) {
+                let _ = player_window.set_position(tauri::Position::Physical(tauri::PhysicalPosition { 
+                    x: pos.x, 
+                    y: pos.y + size.height as i32 
+                }));
+                let sf = music_window.scale_factor().unwrap_or(1.0);
+                let _ = player_window.set_size(tauri::Size::Physical(tauri::PhysicalSize { 
+                    width: size.width, 
+                    height: (54.0 * sf) as u32 
+                }));
+            }
 
             let rym_window_clone = rym_window.clone();
             let player_window_for_music = player_window.clone();
